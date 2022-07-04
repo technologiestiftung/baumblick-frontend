@@ -43,7 +43,7 @@ export const Head: FC<Partial<HeadPropType>> = ({
     'Birds on Mars',
     'CityLAB',
   ],
-  themeColor = colors['layer-turquoise']['300'],
+  themeColor = colors['scale']['3'],
   locales = ['de'],
   locale = 'de',
   twitterUsername = 'TSBBerlin',

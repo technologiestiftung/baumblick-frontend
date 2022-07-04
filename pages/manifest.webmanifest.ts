@@ -4,7 +4,7 @@ import colors from '../src/style/colors'
 
 const getManifest = ({
   siteTitle = 'Berliner Qtrees',
-  themeTextColor = colors['layer-turquoise']['300'],
+  themeTextColor = colors['scale']['3'],
   themeBackgroundColor = '#ffffff',
 }): string => `{
     "name": "${siteTitle}",

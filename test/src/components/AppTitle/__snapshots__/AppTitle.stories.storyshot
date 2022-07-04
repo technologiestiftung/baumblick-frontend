@@ -10,11 +10,8 @@ exports[`Storyshots UI Elements/AppTitle Default 1`] = `
     onClick={[Function]}
     onMouseEnter={[Function]}
   >
-    <span>
-      Berliner
-    </span>
     <span
-      className="text-layer-turquoise-300"
+      className="text-scale-3"
     >
       Qtrees
     </span>
