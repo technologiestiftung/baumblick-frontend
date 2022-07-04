@@ -12,10 +12,8 @@ describe('AppTitle', () => {
   test('should render the title', () => {
     render(<AppTitle />)
 
-    const berliner = screen.getByText('Berliner')
-    const erfrischungskarte = screen.getByText('Qtrees')
+    const qtrees = screen.getByText('Qtrees')
 
-    expect(berliner).toBeInTheDocument()
-    expect(erfrischungskarte).toBeInTheDocument()
+    expect(qtrees).toBeInTheDocument()
   })
 })

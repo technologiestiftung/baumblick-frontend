@@ -1,5 +1,4 @@
 import { render } from '@testing-library/react'
-import React from 'react'
 import * as nextRouter from 'next/router'
 import { Map } from '../../pages/map'
 

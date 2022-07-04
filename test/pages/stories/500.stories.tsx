@@ -1,6 +1,5 @@
 import { Sidebar } from '@components/Sidebar'
 import { Story, Meta } from '@storybook/react'
-import React from 'react'
 import { FiveHundred } from '../../../pages/500'
 
 export default {

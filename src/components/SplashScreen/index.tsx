@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { InternalLink } from '@components/InternalLink'
 import { CrossIcon, SunIcon } from '@components/Icons'
 import classNames from 'classnames'

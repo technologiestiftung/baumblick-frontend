@@ -1,6 +1,5 @@
-import React, { FC, useState } from 'react'
+import { FC, useState } from 'react'
 import { Map as MapRoot } from '@components/Map'
-import { Sidebar } from '@components/Sidebar'
 import { MapFilledPolygonLayer as FilledPolygonLayer } from '@components/MapFilledPolygonLayer'
 import { useHasMobileSize } from '@lib/hooks/useHasMobileSize'
 import { MapControls } from '@components/MapControls'
@@ -16,7 +15,6 @@ import {
 import { MapRasterLayer as RasterLayer } from '../../components/MapRasterLayer'
 import { MapExtrusionLayer as ExtrusionLayer } from '../../components/MapExtrusionLayer'
 import { MapPointLayer } from '@components/MapPointLayer'
-import { HourSelector } from '@components/HourSelector'
 import { useRouter } from 'next/router'
 import { SplashScreen } from './../../components/SplashScreen'
 import {
@@ -195,8 +193,6 @@ export const RefreshmentMap: FC<RefreshmentMapPropType> = (pageProps) => {
             className={pathname !== '/map' && hasMobileSize ? 'hidden' : ''}
           />
           <SharingOverlay />
-          <Sidebar {...pageProps} />
-          <HourSelector activeHourKey={activeHourKey} />
         </>
       )}
     </>
