@@ -28,7 +28,7 @@ export const SplashScreen: FC = () => {
           </div>
         </div>
         <p className="mt-4 md:mr-12 text-gray-500">
-          Die Berliner Erfrischungskarte zeigt
+          Die Berliner Qtrees zeigt
           <b className="text-layer-blue-300"> kühle</b>,
           <b className="text-layer-green-300"> windige</b> und
           <b className="text-gray-800"> schattige</b> Flächen in der Stadt, und

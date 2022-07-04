@@ -481,7 +481,7 @@ export const ABOUT_POINTS_TEXT = (
 export const ABOUT_ACCORDION_ITEMS = [
   {
     id: 'howto',
-    title: 'Wie liest man die Erfrischungskarte?',
+    title: 'Wie liest man die Qtrees?',
     content: ABOUT_HOW_TO,
   },
   {

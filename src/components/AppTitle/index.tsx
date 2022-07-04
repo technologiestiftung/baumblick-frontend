@@ -23,7 +23,7 @@ export const AppTitle: FC = () => (
       )}
     >
       <span>Berliner</span>
-      <span className="text-layer-turquoise-300">Erfrischungskarte</span>
+      <span className="text-layer-turquoise-300">Qtrees</span>
     </InternalLink>
   </div>
 )

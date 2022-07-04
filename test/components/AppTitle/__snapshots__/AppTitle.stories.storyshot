@@ -16,7 +16,7 @@ exports[`Storyshots UI Elements/AppTitle Default 1`] = `
     <span
       className="text-layer-turquoise-300"
     >
-      Erfrischungskarte
+      Qtrees
     </span>
   </a>
 </div>

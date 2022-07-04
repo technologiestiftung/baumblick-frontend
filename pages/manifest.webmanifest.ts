@@ -3,7 +3,7 @@ import { Component } from 'react'
 import colors from '../src/style/colors'
 
 const getManifest = ({
-  siteTitle = 'Berliner Erfrischungskarte',
+  siteTitle = 'Berliner Qtrees',
   themeTextColor = colors['layer-turquoise']['300'],
   themeBackgroundColor = '#ffffff',
 }): string => `{

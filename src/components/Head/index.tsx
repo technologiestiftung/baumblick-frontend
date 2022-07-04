@@ -28,7 +28,7 @@ interface HeadPropType {
 
 export const Head: FC<Partial<HeadPropType>> = ({
   description = '',
-  siteTitle = 'Berliner Erfrischungskarte',
+  siteTitle = 'Berliner Qtrees',
   pageTitle = 'Karte',
   fbAppId = '',
   keywords = [

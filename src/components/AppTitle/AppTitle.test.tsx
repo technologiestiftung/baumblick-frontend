@@ -13,7 +13,7 @@ describe('AppTitle', () => {
     render(<AppTitle />)
 
     const berliner = screen.getByText('Berliner')
-    const erfrischungskarte = screen.getByText('Erfrischungskarte')
+    const erfrischungskarte = screen.getByText('Qtrees')
 
     expect(berliner).toBeInTheDocument()
     expect(erfrischungskarte).toBeInTheDocument()
