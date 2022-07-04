@@ -1,6 +1,5 @@
 import { Sidebar } from '@components/Sidebar'
 import { Story, Meta } from '@storybook/react'
-import React from 'react'
 import { Search } from '../../../pages/search'
 
 export default {

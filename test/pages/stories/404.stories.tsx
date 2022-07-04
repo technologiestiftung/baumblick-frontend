@@ -1,6 +1,5 @@
 import { Sidebar } from '@components/Sidebar'
 import { Story, Meta } from '@storybook/react'
-import React from 'react'
 import { FourOFour } from '../../../pages/404'
 
 export default {

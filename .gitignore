@@ -37,6 +37,7 @@ yarn-error.log*
 
 # TSC Script
 .tsconfig-lint.json
+.tsconfig-lint.tsbuildinfo
 
 # Storybook
 storybook-static

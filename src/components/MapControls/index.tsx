@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { NavigationControl, GeolocateControl } from 'react-map-gl'
 
 export const MapControls: FC<{

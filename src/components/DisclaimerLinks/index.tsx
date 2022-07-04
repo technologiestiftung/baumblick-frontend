@@ -1,6 +1,6 @@
 import { useHasMobileSize } from '@lib/hooks/useHasMobileSize'
 import classNames from 'classnames'
-import React, { FC } from 'react'
+import { FC } from 'react'
 
 export const DisclaimerLinks: FC<{ className?: string }> = ({ className }) => {
   const hasMobileSize = useHasMobileSize()
