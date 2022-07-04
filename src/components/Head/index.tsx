@@ -33,15 +33,15 @@ export const Head: FC<Partial<HeadPropType>> = ({
   fbAppId = '',
   keywords = [
     'Berlin',
-    'Heatmap',
-    'Temperatur',
-    'Wind',
-    'Schwimmen',
-    'Schatten',
-    'Erfrischung',
-    'Baden',
-    'Bänke',
-    'Park',
+    'Trees',
+    'Climate',
+    'Thirty',
+    'Watering',
+    'Suction tenstion',
+    'AI',
+    'Artificial Intelligence',
+    'Birds on Mars',
+    'CityLAB',
   ],
   themeColor = colors['layer-turquoise']['300'],
   locales = ['de'],
@@ -50,7 +50,7 @@ export const Head: FC<Partial<HeadPropType>> = ({
   socialThumbnail = '',
 }) => {
   const { pathname } = useRouter()
-  const longTitle = [pageTitle, siteTitle].join(' ❄️ ')
+  const longTitle = [pageTitle, siteTitle].join(' – ')
   const formatedSocialImage = `${siteUrl}/social-image.jpg`
 
   return (

@@ -1,3 +1,4 @@
+import { RefreshmentMap, RefreshmentMapPropType } from '@modules/RefreshmentMap'
 import { GetServerSideProps } from 'next'
 import { FC } from 'react'
 
@@ -9,6 +10,8 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => ({
   },
 })
 
-export const Map: FC = () => null
+export const Home: FC<RefreshmentMapPropType> = (props) => (
+  <RefreshmentMap {...props} />
+)
 
-export default Map
+export default Home
