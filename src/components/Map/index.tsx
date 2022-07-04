@@ -17,6 +17,7 @@ interface MapProps {
     zoom: number
   }
   mapStyle?: string
+  onSelect?: (treeId: string) => void
 }
 
 type URLViewportType = Pick<ViewportProps, 'latitude' | 'longitude' | 'zoom'>
@@ -28,6 +29,7 @@ export const TreesMap: FC<MapProps> = ({
   initialViewportProps,
   staticViewportProps,
   mapStyle = process.env.NEXT_PUBLIC_MAPTILER_BASEMAP_URL || '',
+  onSelect = () => undefined,
 }) => {
   const { replace, query, pathname } = useRouter()
   const mappedQuery = mapRawQueryToState(query)
@@ -150,6 +152,14 @@ export const TreesMap: FC<MapProps> = ({
           ],
         },
       })
+    })
+
+    map.current.on('click', 'trees', function (e) {
+      if (!e.features) return
+
+      const features = e.features
+
+      onSelect(features[0].properties?.baumid)
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])

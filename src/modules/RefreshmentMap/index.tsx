@@ -40,6 +40,7 @@ export const RefreshmentMap: FC<RefreshmentMapPropType> = (pageProps) => {
           longitude: pageProps.query.longitude || MAP_CONFIG.defaultLongitude,
           zoom: pageProps.query.zoom || MAP_CONFIG.defaultZoom,
         }}
+        onSelect={(treeId) => console.log('Selected tree ID:', treeId)}
       />
       {pathname !== '/' && pathname !== '/social-image' && (
         <>
