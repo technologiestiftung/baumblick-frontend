@@ -77,6 +77,9 @@ export const TreesMap: FC<MapProps> = ({
     const nav = new maplibregl.NavigationControl({ showCompass: false })
     map.current.addControl(nav, 'bottom-right')
 
+    const geolocate = new maplibregl.GeolocateControl({})
+    map.current.addControl(geolocate, 'bottom-right')
+
     map.current.on('load', function () {
       if (!map.current) return
 
