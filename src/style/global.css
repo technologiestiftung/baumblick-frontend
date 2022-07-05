@@ -8,71 +8,43 @@
 }
 @layer base {
 	@font-face {
-		font-family: 'Asap';
+		font-family: 'PT Serif';
 		font-style:  normal;
 		font-weight: 400;
 		font-display: swap;
-		src: url("/fonts/asap/woff2/Asap-Regular.woff2?v=3.18") format("woff2"),
-				url("/fonts/asap/woff/Asap-Regular.woff?v=3.18") format("woff");
+		src: url("/fonts/PTSerif/PTSerif-Regular.woff2?v=3.18") format("woff2"),
+				url("/fonts/PTSerif/PTSerif-Regular.woff?v=3.18") format("woff");
 	}
 	@font-face {
-		font-family: 'Asap';
+		font-family: 'PT Serif';
 		font-style:  italic;
 		font-weight: 400;
 		font-display: swap;
-		src: url("/fonts/asap/woff2/Asap-Italic.woff2?v=3.18") format("woff2"),
-				url("/fonts/asap/woff/Asap-Italic.woff?v=3.18") format("woff");
-	}
-
-	@font-face {
-		font-family: 'Asap';
-		font-style:  normal;
-		font-weight: 500;
-		font-display: swap;
-		src: url("/fonts/asap/woff2/Asap-Medium.woff2?v=3.18") format("woff2"),
-				url("/fonts/asap/woff/Asap-Medium.woff?v=3.18") format("woff");
+		src: url("/fonts/PTSerif/PTSerif-Italic.woff2?v=3.18") format("woff2"),
+				url("/fonts/PTSerif/PTSerif-Italic.woff?v=3.18") format("woff");
 	}
 	@font-face {
-		font-family: 'Asap';
-		font-style:  italic;
-		font-weight: 500;
-		font-display: swap;
-		src: url("/fonts/asap/woff2/Asap-MediumItalic.woff2?v=3.18") format("woff2"),
-				url("/fonts/asap/woff/Asap-MediumItalic.woff?v=3.18") format("woff");
-	}
-
-	@font-face {
-		font-family: 'Asap';
-		font-style:  normal;
-		font-weight: 600;
-		font-display: swap;
-		src: url("/fonts/asap/woff2/Asap-SemiBold.woff2?v=3.18") format("woff2"),
-				url("/fonts/asap/woff/Asap-SemiBold.woff?v=3.18") format("woff");
-	}
-	@font-face {
-		font-family: 'Asap';
-		font-style:  italic;
-		font-weight: 600;
-		font-display: swap;
-		src: url("/fonts/asap/woff2/Asap-SemiBoldItalic.woff2?v=3.18") format("woff2"),
-				url("/fonts/asap/woff/Asap-SemiBoldItalic.woff?v=3.18") format("woff");
-	}
-
-	@font-face {
-		font-family: 'Asap';
+		font-family: 'PT Serif';
 		font-style:  normal;
 		font-weight: 700;
 		font-display: swap;
-		src: url("/fonts/asap/woff2/Asap-Bold.woff2?v=3.18") format("woff2"),
-				url("/fonts/asap/woff/Asap-Bold.woff?v=3.18") format("woff");
+		src: url("/fonts/PTSerif/PTSerif-Bold.woff2?v=3.18") format("woff2"),
+				url("/fonts/PTSerif/PTSerif-Bold.woff?v=3.18") format("woff");
 	}
 	@font-face {
-		font-family: 'Asap';
+		font-family: 'PT Serif';
 		font-style:  italic;
 		font-weight: 700;
 		font-display: swap;
-		src: url("/fonts/asap/woff2/Asap-BoldItalic.woff2?v=3.18") format("woff2"),
-				url("/fonts/asap/woff/Asap-BoldItalic.woff?v=3.18") format("woff");
+		src: url("/fonts/PTSerif/PTSerif-BoldItalic.woff2?v=3.18") format("woff2"),
+				url("/fonts/PTSerif/PTSerif-BoldItalic.woff?v=3.18") format("woff");
+	}
+	@font-face {
+		font-family: 'Manrope';
+		src: url('/fonts/Manrope/Manrope-VariableFont_wght.woff2?v=3.18') format('woff2-variations');
+		font-weight: 200 800;
+		font-style: normal;
+		font-display: swap;
 	}
 
   :root {
@@ -85,7 +57,7 @@
     width: 100vw;
     height: var(--screenHeight);
     overflow: hidden;
-		font-family: 'Asap', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+		font-family: 'Manrope', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
 		@apply text-gray-900 antialiased
   }
 }

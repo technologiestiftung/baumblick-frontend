@@ -33,24 +33,24 @@ export const Head: FC<Partial<HeadPropType>> = ({
   fbAppId = '',
   keywords = [
     'Berlin',
-    'Heatmap',
-    'Temperatur',
-    'Wind',
-    'Schwimmen',
-    'Schatten',
-    'Erfrischung',
-    'Baden',
-    'Bänke',
-    'Park',
+    'Trees',
+    'Climate',
+    'Thirty',
+    'Watering',
+    'Suction tenstion',
+    'AI',
+    'Artificial Intelligence',
+    'Birds on Mars',
+    'CityLAB',
   ],
-  themeColor = colors['layer-turquoise']['300'],
+  themeColor = colors['scale']['3'],
   locales = ['de'],
   locale = 'de',
   twitterUsername = 'TSBBerlin',
   socialThumbnail = '',
 }) => {
   const { pathname } = useRouter()
-  const longTitle = [pageTitle, siteTitle].join(' ❄️ ')
+  const longTitle = [pageTitle, siteTitle].join(' – ')
   const formatedSocialImage = `${siteUrl}/social-image.jpg`
 
   return (

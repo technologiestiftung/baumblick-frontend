@@ -1,4 +1,3 @@
-import { Sidebar } from '@components/Sidebar'
 import { Story, Meta } from '@storybook/react'
 import { FiveHundred } from '../../../pages/500'
 
@@ -7,11 +6,7 @@ export default {
   component: FiveHundred,
 } as Meta
 
-const Template: Story = () => (
-  <Sidebar>
-    <FiveHundred />
-  </Sidebar>
-)
+const Template: Story = () => <FiveHundred />
 
 export const Default = Template.bind({})
 Default.parameters = {

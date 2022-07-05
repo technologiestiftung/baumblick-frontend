@@ -1,4 +1,3 @@
-import { Sidebar } from '@components/Sidebar'
 import { Story, Meta } from '@storybook/react'
 import { Search } from '../../../pages/search'
 
@@ -7,11 +6,7 @@ export default {
   component: Search,
 } as Meta
 
-const Template: Story = () => (
-  <Sidebar title="Suche">
-    <Search />
-  </Sidebar>
-)
+const Template: Story = () => <Search />
 
 export const Default = Template.bind({})
 Default.parameters = {

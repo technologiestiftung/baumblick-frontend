@@ -17,10 +17,6 @@ const getSitemap: () => string = () => `<?xml version="1.0" encoding="utf-8"?>
     <lastmod>${formatDate()}</lastmod>
   </url>
   <url>
-    <loc>${createFullUrl('/filters')}</loc>
-    <lastmod>${formatDate()}</lastmod>
-  </url>
-  <url>
     <loc>${createFullUrl('/map')}</loc>
     <lastmod>${formatDate()}</lastmod>
   </url>
