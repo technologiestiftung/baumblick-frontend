@@ -5,6 +5,7 @@ import { mapRawQueryToState } from '@lib/utils/queryUtil'
 import { useRouter } from 'next/router'
 import { useDebouncedCallback } from 'use-debounce'
 import { ViewportProps } from '@lib/types/map'
+import { TREES_LAYER_ID, TREES_LAYER, TREES_SOURCE } from './treesLayer'
 
 interface MapProps {
   staticViewportProps?: {
@@ -106,62 +107,11 @@ export const TreesMap: FC<MapProps> = ({
         })
       })
 
-      map.current.addSource('trees', {
-        type: 'vector',
-        tiles: [process.env.NEXT_PUBLIC_TREE_TILES_URL as string],
-        maxzoom: 14,
-        minzoom: 0,
-      })
-      map.current.addLayer({
-        id: 'trees',
-        type: 'circle',
-        source: 'trees',
-        'source-layer': 'trees',
-        maxzoom: 24,
-        minzoom: 0,
-        paint: {
-          'circle-color': [
-            'interpolate',
-            ['linear'],
-            /*
-            Note that the following color scale is simply for demonstration purposes.
-            In reality we will want to interpolate the color based on the Saugspannung value that will be available in the vector tile.
-            At that point, the pflanzjahr has to be replaced with the new field's name and the domain changed from years to the values domain.
-            */
-            ['get', 'pflanzjahr'],
-            0, //0,
-            '#FFA600',
-            1960, //0.125,
-            '#FF7C43',
-            1970, //0.25,
-            '#F95D6A',
-            1980, //0.375,
-            '#D45087',
-            1990, //0.5,
-            '#A05195',
-            2000, //0.625,
-            '#665191',
-            2010, //0.75,
-            '#2F4B7C',
-            2020, //0.875,
-            '#003F5C',
-          ],
-          'circle-radius': [
-            'interpolate',
-            ['exponential', 0.5],
-            ['zoom'],
-            15,
-            4,
-            18,
-            8,
-            22,
-            24,
-          ],
-        },
-      })
+      map.current.addSource(TREES_LAYER_ID, TREES_SOURCE)
+      map.current.addLayer(TREES_LAYER)
     })
 
-    map.current.on('click', 'trees', function (e) {
+    map.current.on('click', TREES_LAYER_ID, function (e) {
       if (!e.features) return
 
       const features = e.features
@@ -174,7 +124,7 @@ export const TreesMap: FC<MapProps> = ({
   return (
     <div
       id={mapId}
-      className="w-full h-full bg-[#F8F4F0]"
+      className="w-full h-full bg-[#FBFBFC]"
       aria-label="Kartenansicht der Bäume"
     ></div>
   )
