@@ -1,5 +1,4 @@
 import { mapRawQueryToState } from '@lib/utils/queryUtil'
-import { RefreshmentMap } from '@modules/RefreshmentMap'
 import { ParsedUrlQuery } from 'querystring'
 import { StrictMode, FC } from 'react'
 import { Head } from '@components/Head'
@@ -25,10 +24,8 @@ const App: FC<{
 
   return (
     <StrictMode>
-      <RefreshmentMap {...pageProps} query={parsedQuery}>
-        <Head pageTitle={pageProps.title || ''} />
-        <Component {...pageProps} query={parsedQuery} />
-      </RefreshmentMap>
+      <Head pageTitle={pageProps.title || ''} />
+      <Component {...pageProps} query={parsedQuery} />
     </StrictMode>
   )
 }

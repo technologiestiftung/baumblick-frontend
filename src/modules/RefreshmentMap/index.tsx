@@ -2,13 +2,12 @@ import { FC } from 'react'
 import { TreesMap } from '@components/TreesMap'
 import { useHasMobileSize } from '@lib/hooks/useHasMobileSize'
 import { useRouter } from 'next/router'
-import { SplashScreen } from './../../components/SplashScreen'
 import { PageQueryType } from '@lib/utils/queryUtil'
 import { AppTitle } from '@components/AppTitle'
 import { SharingOverlay } from '@components/SharingOverlay'
 import { DisclaimerLinks } from '@components/DisclaimerLinks'
 
-interface RefreshmentMapPropType {
+export interface RefreshmentMapPropType {
   title?: string
   query: Partial<PageQueryType>
 }
@@ -23,13 +22,11 @@ export const MAP_CONFIG = {
 
 export const RefreshmentMap: FC<RefreshmentMapPropType> = (pageProps) => {
   const hasMobileSize = useHasMobileSize()
-
   const { pathname } = useRouter()
 
   return (
     <>
       {(pathname === '/map' || pathname === '/social-image') && <AppTitle />}
-      {pathname === '/' && <SplashScreen />}
       <TreesMap
         mapId="trees-map"
         staticViewportProps={{

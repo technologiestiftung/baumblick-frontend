@@ -40,13 +40,13 @@ export const SharingOption: FC<SharingOptionPropType> = ({
         <button
           className={classNames(
             'rounded-lg border-2 px-2 py-1 sm:text-xl transition',
-            'border-layer-turquoise-300 focus:outline-none whitespace-nowrap',
+            'border-scale-3 focus:outline-none whitespace-nowrap',
             !hasCopied && [
-              'text-layer-turquoise-300',
-              'hover:text-layer-turquoise-400 hover:border-layer-turquoise-400',
-              'focus:ring-4 focus:ring-layer-turquoise-200',
+              'text-scale-3',
+              'hover:text-scale-4 hover:border-scale-4',
+              'focus:ring-4 focus:ring-scale-2',
             ],
-            hasCopied && 'bg-layer-turquoise-300 text-white cursor-default'
+            hasCopied && 'bg-scale-3 text-white cursor-default'
           )}
           onClick={() => copyToClipboard(link)}
         >
@@ -96,7 +96,7 @@ export const SharingOverlay: FC = () => {
         >
           <h3 className="font-bold text-xl sm:text-2xl pr-20 mb-4">
             Erfrischenden Ort gefunden?{' '}
-            <span className="text-layer-turquoise-300">Teile ihn!</span>
+            <span className="text-scale-5">Teile ihn!</span>
           </h3>
           <SharingOption
             title="Kartenausschnitt"
