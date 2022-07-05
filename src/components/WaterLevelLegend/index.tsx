@@ -7,7 +7,7 @@ import colors from '../../style/colors'
 export interface WaterLevelLegendType {
   collapsable?: boolean
   initiallyCollapsed?: boolean
-  additionalClassNames?: string
+  hasShadow?: boolean
 }
 
 const wrapperWhenExpandedStyles = classNames(
@@ -20,7 +20,7 @@ const wrapperWhenExpandedStyles = classNames(
 export const WaterLevelLegend: FC<WaterLevelLegendType> = ({
   collapsable = false,
   initiallyCollapsed = false,
-  additionalClassNames,
+  hasShadow = false,
 }) => {
   const [isCollapsed, setIsCollapsed] = useState(initiallyCollapsed)
 
@@ -32,7 +32,7 @@ export const WaterLevelLegend: FC<WaterLevelLegendType> = ({
       className={classNames(
         'relative px-4',
         !isCollapsed && wrapperWhenExpandedStyles,
-        additionalClassNames
+        hasShadow && !isCollapsed && 'shadow-md'
       )}
     >
       {!isCollapsed && <h2 className="w-full font-semibold">Wasserstand</h2>}
