@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { TreesMap } from '@components/Map'
+import { TreesMap } from '@components/TreesMap'
 import { useHasMobileSize } from '@lib/hooks/useHasMobileSize'
 import { useRouter } from 'next/router'
 import { SplashScreen } from './../../components/SplashScreen'
