@@ -16,7 +16,7 @@ export const Home: FC<RefreshmentMapPropType> = (props) => (
   <>
     <RefreshmentMap {...props} />
     <div className={classNames('absolute bottom-2 left-2', 'w-[162px]')}>
-      <WaterLevelLegend collapsable={true} />
+      <WaterLevelLegend collapsable={true} additionalClassNames="shadow-md" />
     </div>
   </>
 )
