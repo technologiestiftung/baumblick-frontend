@@ -1,11 +1,9 @@
 import { FC } from 'react'
 import { TreesMap } from '@components/TreesMap'
-import { useHasMobileSize } from '@lib/hooks/useHasMobileSize'
 import { useRouter } from 'next/router'
 import { PageQueryType } from '@lib/utils/queryUtil'
 import { AppTitle } from '@components/AppTitle'
 import { SharingOverlay } from '@components/SharingOverlay'
-import { DisclaimerLinks } from '@components/DisclaimerLinks'
 
 export interface RefreshmentMapPropType {
   title?: string
@@ -21,7 +19,6 @@ export const MAP_CONFIG = {
 }
 
 export const RefreshmentMap: FC<RefreshmentMapPropType> = (pageProps) => {
-  const hasMobileSize = useHasMobileSize()
   const { pathname } = useRouter()
 
   return (
@@ -40,14 +37,7 @@ export const RefreshmentMap: FC<RefreshmentMapPropType> = (pageProps) => {
         }}
         onSelect={(treeId) => console.log('Selected tree ID:', treeId)}
       />
-      {pathname !== '/' && pathname !== '/social-image' && (
-        <>
-          <DisclaimerLinks
-            className={pathname !== '/map' && hasMobileSize ? 'hidden' : ''}
-          />
-          <SharingOverlay />
-        </>
-      )}
+      {pathname !== '/' && pathname !== '/social-image' && <SharingOverlay />}
     </>
   )
 }
