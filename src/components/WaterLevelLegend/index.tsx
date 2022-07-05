@@ -31,6 +31,7 @@ export const WaterLevelLegend: FC<WaterLevelLegendType> = ({
     <div
       className={classNames(
         'relative px-4',
+        isCollapsed && '-translate-y-3',
         !isCollapsed && wrapperWhenExpandedStyles,
         hasShadow && !isCollapsed && 'shadow-md'
       )}
