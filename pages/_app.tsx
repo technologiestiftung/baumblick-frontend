@@ -3,7 +3,6 @@ import { ParsedUrlQuery } from 'querystring'
 import { StrictMode, FC } from 'react'
 import { Head } from '@components/Head'
 import '../src/style/global.css'
-import '../src/components/MapControls/mapControls.css'
 import { useMatomo } from '@lib/hooks/useMatomo'
 
 interface PagePropType extends Record<string, unknown> {

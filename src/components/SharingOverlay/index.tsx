@@ -72,8 +72,9 @@ export const SharingOverlay: FC = () => {
         aria-label="Diesen Kartenabschnitt teilen"
         className={classNames(
           styles.sharingButton,
-          'rounded-full bg-white w-12 h-12',
-          'fixed right-4 text-center py-2',
+          'bg-white w-12 h-12',
+          'fixed right-[10px] text-center py-2',
+          'rounded-sm border border-gray-200',
           'shadow-lg transition',
           'focus:outline-none focus:ring-2',
           isOpened && 'text-white bg-gray-800',
@@ -86,9 +87,10 @@ export const SharingOverlay: FC = () => {
       {isOpened && (
         <div
           className={classNames(
-            'right-4 bottom-20 sm:bottom-4 sm:right-20',
-            'rounded shadow-xl p-6 sm:p-8 w-96',
-            'fixed bg-white flex flex-col'
+            'right-[10px] top-[10px]',
+            'rounded shadow-xl p-6 sm:p-8 w-96 h-min',
+            'fixed bg-white flex flex-col',
+            'z-10'
           )}
           style={{ maxWidth: 'calc(100% - 32px)' }}
         >
@@ -120,7 +122,7 @@ export const SharingOverlay: FC = () => {
           )}
           <button
             className={classNames(
-              'absolute top-6 sm:top-8 right-6 sm:right-8 cursor-pointer',
+              'absolute top-1 right-1 cursor-pointer',
               'w-10 h-10 grid place-content-center rounded-full',
               'focus:outline-none focus:ring-2 focus:ring-gray-800',
               'hover:bg-gray-200 transition'

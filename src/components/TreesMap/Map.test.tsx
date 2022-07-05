@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react'
-import { Map } from '.'
+import { TreesMap } from '.'
 import * as nextRouter from 'next/router'
 
 const useRouter = jest.fn()
@@ -23,7 +23,7 @@ const mapProps = {
 
 describe('Map component', () => {
   it('renders a map container', () => {
-    render(<Map {...mapProps} />)
+    render(<TreesMap {...mapProps} />)
     const mapContainer = document.querySelector(
       "div[style^='position: absolute;']"
     )
