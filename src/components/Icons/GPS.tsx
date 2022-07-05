@@ -1,6 +1,6 @@
 import { FC, SVGProps } from 'react'
 
-export const Cross: FC<SVGProps<SVGSVGElement>> = (props) => (
+export const GPS: FC<SVGProps<SVGSVGElement>> = (props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -9,29 +9,23 @@ export const Cross: FC<SVGProps<SVGSVGElement>> = (props) => (
     {...props}
   >
     <g fill="none" fillRule="evenodd">
-      <line
-        x1="12"
-        x2="12"
-        y1="5"
-        y2="19"
+      <circle
+        cx="12"
+        cy="12"
+        r="9"
         stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="2"
-        transform="rotate(45 12 12)"
         vectorEffect="non-scaling-stroke"
       />
-      <line
-        x1="5"
-        x2="19"
-        y1="12"
-        y2="12"
+      <polygon
         stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="2"
-        transform="rotate(45 12 12)"
         vectorEffect="non-scaling-stroke"
+        points="12 17 11 13 7 12 16 8"
       />
     </g>
   </svg>

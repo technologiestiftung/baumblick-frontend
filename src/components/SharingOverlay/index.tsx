@@ -1,4 +1,4 @@
-import { CrossIcon, SharingIcon } from '@components/Icons'
+import { Cross, Affiliate } from '@components/Icons'
 import { useCopyToClipboard } from '@lib/hooks/useCopyToClipboard'
 import { mapRawQueryToState } from '@lib/utils/queryUtil'
 import { MAP_CONFIG } from '@modules/RefreshmentMap'
@@ -81,7 +81,7 @@ export const SharingOverlay: FC = () => {
           !isOpened && 'focus:ring-gray-800'
         )}
       >
-        <SharingIcon className="inline transform -translate-x-0.5" />
+        <Affiliate className="inline transform -translate-x-0.5" />
       </button>
       {isOpened && (
         <div
@@ -127,7 +127,7 @@ export const SharingOverlay: FC = () => {
             )}
             onClick={() => setIsOpened(false)}
           >
-            <CrossIcon />
+            <Cross />
           </button>
         </div>
       )}

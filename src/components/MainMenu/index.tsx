@@ -1,3 +1,5 @@
+import { Affiliate } from '@components/Icons/Affiliate'
+import { ArrowDownLeft } from '@components/Icons/ArrowDownLeft'
 import { InternalLink } from '@components/InternalLink'
 import classNames from 'classnames'
 import { FC } from 'react'
@@ -6,14 +8,17 @@ const links = [
   {
     path: '/',
     name: 'Start',
+    Icon: () => <Affiliate width={32} height={32} />,
   },
   {
     path: '/map',
     name: 'Karte',
+    Icon: () => <ArrowDownLeft width={32} height={32} />,
   },
   {
     path: '/stories',
     name: 'Stories',
+    Icon: () => <div />,
   },
 ]
 
@@ -37,7 +42,7 @@ export const MainMenu: FC = () => (
           'flex place-items-center justify-center'
         )}
       >
-        Icon
+        <link.Icon />
       </InternalLink>
     ))}
   </div>
