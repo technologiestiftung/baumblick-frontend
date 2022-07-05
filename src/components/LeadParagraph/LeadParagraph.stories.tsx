@@ -1,19 +1,23 @@
+import { Paragraph } from '@components/Paragraph'
 import { Story, Meta } from '@storybook/react'
-import { Paragraph, ParagraphPropType } from '.'
+import { LeadParagraph, LeadParagraphPropType } from '.'
 
 export default {
-  title: 'UI Elements/Paragraph',
-  component: Paragraph,
+  title: 'UI Elements/LeadParagraph',
+  component: LeadParagraph,
 } as Meta
 
-const Template: Story<ParagraphPropType> = ({ children = '', ...props }) => (
+const Template: Story<LeadParagraphPropType> = ({
+  children = '',
+  ...props
+}) => (
   <>
-    <Paragraph {...props}>{children}</Paragraph>
+    <LeadParagraph {...props}>{children}</LeadParagraph>
     <Paragraph>
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ratione eum
-      aliquid velit corrupti, assumenda molestias cum! Laboriosam tenetur
-      deleniti quidem, quis totam accusantium ut! Ullam soluta itaque eius atque
-      aliquam.
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates
+      recusandae quis fugiat voluptatem placeat voluptatibus, ipsam rem velit,
+      ut nihil quibusdam perspiciatis, inventore accusamus quidem sint et
+      voluptate rerum aut!
     </Paragraph>
   </>
 )
@@ -28,19 +32,6 @@ Default.parameters = {
 Default.args = {
   children:
     'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi ipsam aut fuga nemo delectus ea soluta, nihil incidunt vero totam dolores, eligendi iusto veniam hic ducimus distinctio, dolor corrupti inventore!',
-}
-
-export const WithDropCap = Template.bind({})
-WithDropCap.parameters = {
-  nextRouter: {
-    query: {},
-    pathname: '/map',
-  },
-}
-WithDropCap.args = {
-  children:
-    'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolor excepturi eaque vel ipsam quae recusandae fugiat, alias id laboriosam assumenda nihil, ut a suscipit officiis consectetur optio mollitia, earum soluta?\nQuasi possimus amet natus dolore quisquam. Recusandae, numquam! Omnis sapiente placeat cumque veniam dolore dolores suscipit ratione quae distinctio est dolor quod ipsam totam molestiae provident, vitae possimus soluta. Et.',
-  dropCap: true,
 }
 
 export const WithFormatting = Template.bind({})
