@@ -1,7 +1,6 @@
 import { FC } from 'react'
-import { Map as MapRoot } from '@components/Map'
+import { TreesMap } from '@components/TreesMap'
 import { useHasMobileSize } from '@lib/hooks/useHasMobileSize'
-import { MapControls } from '@components/MapControls'
 import { useRouter } from 'next/router'
 import { PageQueryType } from '@lib/utils/queryUtil'
 import { AppTitle } from '@components/AppTitle'
@@ -15,7 +14,7 @@ export interface RefreshmentMapPropType {
 
 export const MAP_CONFIG = {
   minZoom: 11.5,
-  maxZoom: 19,
+  maxZoom: 22,
   defaultZoom: 14,
   defaultLatitude: 52.520952,
   defaultLongitude: 13.400033,
@@ -28,8 +27,8 @@ export const RefreshmentMap: FC<RefreshmentMapPropType> = (pageProps) => {
   return (
     <>
       {(pathname === '/map' || pathname === '/social-image') && <AppTitle />}
-      <MapRoot
-        mapStyle="mapbox://styles/mapbox/light-v10"
+      <TreesMap
+        mapId="trees-map"
         staticViewportProps={{
           minZoom: MAP_CONFIG.minZoom,
           maxZoom: MAP_CONFIG.maxZoom,
@@ -39,18 +38,8 @@ export const RefreshmentMap: FC<RefreshmentMapPropType> = (pageProps) => {
           longitude: pageProps.query.longitude || MAP_CONFIG.defaultLongitude,
           zoom: pageProps.query.zoom || MAP_CONFIG.defaultZoom,
         }}
-        interactiveLayerIds={[]}
-      >
-        {pathname !== '/' && pathname !== '/social-image' && (
-          <>
-            <MapControls
-              className={`absolute right-4 ${
-                hasMobileSize ? 'top-4' : 'bottom-4'
-              }`}
-            />
-          </>
-        )}
-      </MapRoot>
+        onSelect={(treeId) => console.log('Selected tree ID:', treeId)}
+      />
       {pathname !== '/' && pathname !== '/social-image' && (
         <>
           <DisclaimerLinks
