@@ -36,7 +36,7 @@ export const WaterLevelLegend: FC<WaterLevelLegendType> = ({
       <div
         className={classNames(
           'mt-2 mb-1',
-          'min-w-[162px] w-full h-3',
+          'w-full h-3',
           'bg-gray-200',
           'rounded-full',
           isCollapsed
