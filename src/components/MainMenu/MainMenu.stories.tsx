@@ -13,7 +13,16 @@ export const Default = Template.bind({})
 Default.parameters = {
   nextRouter: {
     query: {},
-    pathname: '/map',
+    pathname: '/',
   },
 }
 Default.args = {}
+
+export const OtherPage = Template.bind({})
+OtherPage.parameters = {
+  nextRouter: {
+    query: {},
+    pathname: '/map',
+  },
+}
+OtherPage.args = {}
