@@ -16,6 +16,7 @@ interface MapProps {
     longitude: number
     zoom: number
   }
+  mapId: string
   mapStyle?: string
   onSelect?: (treeId: string) => void
 }
@@ -28,7 +29,8 @@ const easeInOutQuad = (t: number): number =>
 export const TreesMap: FC<MapProps> = ({
   initialViewportProps,
   staticViewportProps,
-  mapStyle = process.env.NEXT_PUBLIC_MAPTILER_BASEMAP_URL || '',
+  mapId,
+  mapStyle = process.env.NEXT_PUBLIC_MAPTILER_BASEMAP_URL as string,
   onSelect = () => undefined,
 }) => {
   const { replace, query, pathname } = useRouter()
@@ -62,25 +64,30 @@ export const TreesMap: FC<MapProps> = ({
     1000
   )
 
-  const map = useRef<Map>(null)
+  const map = useRef<Map | null>(null)
+
+  const MAP_STYLE_URL = `${mapStyle}?key=${
+    process.env.NEXT_PUBLIC_MAPTILER_KEY as string
+  }`
 
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
     map.current = new maplibregl.Map({
-      container: 'map',
-      style: `${mapStyle}?key=${process.env.NEXT_PUBLIC_MAPTILER_KEY || ''}`,
+      container: mapId,
+      style: MAP_STYLE_URL,
       center: [viewport.longitude, viewport.latitude] as LngLatLike,
       zoom: viewport.zoom,
     })
 
     if (!map.current) return
 
-    const nav = new maplibregl.NavigationControl({ showCompass: false })
-    map.current.addControl(nav, 'bottom-right')
+    map.current.addControl(
+      new maplibregl.NavigationControl({
+        showCompass: false,
+      }),
+      'bottom-right'
+    )
 
-    const geolocate = new maplibregl.GeolocateControl({})
-    map.current.addControl(geolocate, 'bottom-right')
+    map.current.addControl(new maplibregl.GeolocateControl({}), 'bottom-right')
 
     map.current.on('load', function () {
       if (!map.current) return
@@ -101,7 +108,7 @@ export const TreesMap: FC<MapProps> = ({
 
       map.current.addSource('trees', {
         type: 'vector',
-        tiles: [process.env.NEXT_PUBLIC_TREE_TILES_URL || ''],
+        tiles: [process.env.NEXT_PUBLIC_TREE_TILES_URL as string],
         maxzoom: 14,
         minzoom: 0,
       })
@@ -119,7 +126,7 @@ export const TreesMap: FC<MapProps> = ({
             /*
             Note that the following color scale is simply for demonstration purposes.
             In reality we will want to interpolate the color based on the Saugspannung value that will be available in the vector tile.
-            At that point, the pflanzjahr has to be replaced with the new field's name and the domain chsnged from years to the values domain.
+            At that point, the pflanzjahr has to be replaced with the new field's name and the domain changed from years to the values domain.
             */
             ['get', 'pflanzjahr'],
             0, //0,
@@ -166,7 +173,7 @@ export const TreesMap: FC<MapProps> = ({
 
   return (
     <div
-      id="map"
+      id={mapId}
       className="w-full h-full bg-[#F8F4F0]"
       aria-label="Kartenansicht der Bäume"
     ></div>

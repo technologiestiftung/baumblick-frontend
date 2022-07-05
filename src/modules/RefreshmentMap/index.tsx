@@ -31,6 +31,7 @@ export const RefreshmentMap: FC<RefreshmentMapPropType> = (pageProps) => {
       {(pathname === '/map' || pathname === '/social-image') && <AppTitle />}
       {pathname === '/' && <SplashScreen />}
       <TreesMap
+        mapId="trees-map"
         staticViewportProps={{
           minZoom: MAP_CONFIG.minZoom,
           maxZoom: MAP_CONFIG.maxZoom,
