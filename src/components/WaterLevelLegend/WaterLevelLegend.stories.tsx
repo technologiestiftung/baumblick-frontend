@@ -8,7 +8,9 @@ export default {
 } as Meta
 
 const Template: Story<WaterLevelLegendType> = (args) => (
-  <WaterLevelLegend {...args} />
+  <div className="absolute bottom-2 left-2 w-[200px]">
+    <WaterLevelLegend {...args} />
+  </div>
 )
 
 export const Default = Template.bind({})

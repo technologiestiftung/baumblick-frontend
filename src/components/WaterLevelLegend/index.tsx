@@ -10,14 +10,14 @@ export interface WaterLevelLegendType {
 }
 
 const wrapperWhenExpandedStyles = classNames(
-  'py-2',
+  'py-3',
   'bg-white',
   'rounded-sm border border-gray-200',
   'flex flex-wrap place-content-between'
 )
 
 export const WaterLevelLegend: FC<WaterLevelLegendType> = ({
-  collapsable = true,
+  collapsable = false,
   initiallyCollapsed = false,
 }) => {
   const [isCollapsed, setIsCollapsed] = useState(initiallyCollapsed)
@@ -27,15 +27,21 @@ export const WaterLevelLegend: FC<WaterLevelLegendType> = ({
   }
   return (
     <div
-      className={classNames('px-3', !isCollapsed && wrapperWhenExpandedStyles)}
+      className={classNames(
+        'relative px-4',
+        !isCollapsed && wrapperWhenExpandedStyles
+      )}
     >
       {!isCollapsed && <h2 className="w-full font-semibold">Wasserstand</h2>}
       <div
         className={classNames(
           'mt-2 mb-1',
-          'w-full h-4',
+          'min-w-[162px] w-full h-3',
           'bg-gray-200',
-          'rounded-full border border-gray-900 border-opacity-10',
+          'rounded-full',
+          isCollapsed
+            ? 'ring-2 ring-white'
+            : 'ring-2 ring-offset-0 ring-gray-200',
           'grid grid-flow-col gap-0'
         )}
       >
@@ -66,6 +72,7 @@ export const WaterLevelLegend: FC<WaterLevelLegendType> = ({
             'rounded-full',
             'w-8 h-8',
             'border border-gray-200',
+            'translate-x-1/2 -translate-y-1/2',
             'flex justify-center items-center'
           )}
           onClick={toggleCollapsed}
