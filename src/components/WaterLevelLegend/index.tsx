@@ -1,3 +1,5 @@
+import { ArrowsDiagonal } from '@components/Icons/ArrowsDiagonal'
+import { ArrowsDiagonalMinimize2 } from '@components/Icons/ArrowsDiagonalMinimize2'
 import classNames from 'classnames'
 import { FC, useState } from 'react'
 import colors from '../../style/colors'
@@ -64,13 +66,11 @@ export const WaterLevelLegend: FC<WaterLevelLegendType> = ({
             'rounded-full',
             'w-8 h-8',
             'border border-gray-200',
-            'justify-center items-center',
-            'transition-transform',
-            isCollapsed ? 'rotate-[135deg]' : '-rotate-45'
+            'flex justify-center items-center'
           )}
           onClick={toggleCollapsed}
         >
-          ←
+          {isCollapsed ? <ArrowsDiagonal /> : <ArrowsDiagonalMinimize2 />}
         </button>
       )}
     </div>
