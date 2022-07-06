@@ -81,7 +81,11 @@ export const WaterLevelLegend: FC<WaterLevelLegendType> = ({
           )}
           onClick={toggleCollapsed}
         >
-          {isCollapsed ? <ArrowsDiagonal /> : <ArrowsDiagonalMinimize2 />}
+          {isCollapsed ? (
+            <ArrowsDiagonal className="rotate-90" />
+          ) : (
+            <ArrowsDiagonalMinimize2 className="rotate-90" />
+          )}
         </button>
       )}
     </div>
