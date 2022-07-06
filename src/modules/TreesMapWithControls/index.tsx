@@ -1,8 +1,6 @@
 import { FC } from 'react'
 import { TreesMap } from '@components/TreesMap'
-import { useRouter } from 'next/router'
 import { PageQueryType } from '@lib/utils/queryUtil'
-import { SharingOverlay } from '@components/SharingOverlay'
 import { WaterLevelLegend } from '@components/WaterLevelLegend'
 import classNames from 'classnames'
 
@@ -22,8 +20,6 @@ export const MAP_CONFIG = {
 export const TreesMapWithControls: FC<TreesMapWithControlsPropType> = (
   pageProps
 ) => {
-  const { pathname } = useRouter()
-
   return (
     <>
       <TreesMap
