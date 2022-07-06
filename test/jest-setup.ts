@@ -10,6 +10,7 @@ jest.mock('maplibre-gl/dist/maplibre-gl', () => ({
     on: jest.fn(),
   })),
   NavigationControl: jest.fn(),
+  AttributionControl: jest.fn(),
 }))
 
 fetchMock.enableMocks()
