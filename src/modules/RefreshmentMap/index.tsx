@@ -2,8 +2,9 @@ import { FC } from 'react'
 import { TreesMap } from '@components/TreesMap'
 import { useRouter } from 'next/router'
 import { PageQueryType } from '@lib/utils/queryUtil'
-import { AppTitle } from '@components/AppTitle'
 import { SharingOverlay } from '@components/SharingOverlay'
+import { WaterLevelLegend } from '@components/WaterLevelLegend'
+import classNames from 'classnames'
 
 export interface RefreshmentMapPropType {
   title?: string
@@ -23,7 +24,6 @@ export const RefreshmentMap: FC<RefreshmentMapPropType> = (pageProps) => {
 
   return (
     <>
-      {(pathname === '/map' || pathname === '/social-image') && <AppTitle />}
       <TreesMap
         mapId="trees-map"
         staticViewportProps={{
@@ -38,6 +38,9 @@ export const RefreshmentMap: FC<RefreshmentMapPropType> = (pageProps) => {
         onSelect={(treeId) => console.log('Selected tree ID:', treeId)}
       />
       {pathname !== '/' && pathname !== '/social-image' && <SharingOverlay />}
+      <div className={classNames('absolute bottom-2 left-2', 'w-[162px]')}>
+        <WaterLevelLegend collapsable={true} hasShadow={true} />
+      </div>
     </>
   )
 }
