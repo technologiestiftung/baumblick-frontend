@@ -1,4 +1,4 @@
-import { GeoPinIcon } from '@components/Icons'
+import { GPS } from '@components/Icons'
 import { SearchResultType, useGeocodedPlace } from '@lib/hooks/useGeocodedPlace'
 import { useHasMobileSize } from '@lib/hooks/useHasMobileSize'
 import { mapRawQueryToState } from '@lib/utils/queryUtil'
@@ -40,7 +40,7 @@ const SearchResultItem: FC<SearchResultItemPropType> = ({
       style={{ width: 'calc(100% + 32px)' }}
     >
       <span className="text-gray-300 transform -translate-y-2 mr-2">
-        <GeoPinIcon />
+        <GPS />
       </span>
       <div
         className={classNames(
