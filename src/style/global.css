@@ -63,6 +63,9 @@
 }
 
 /* MapLibre control adjustments */
+.maplibregl-ctrl-attrib.maplibregl-compact {
+	min-height: 24px !important;
+}
 .maplibregl-ctrl-group {
   background-color: transparent !important;
   border-radius: 2px !important;
