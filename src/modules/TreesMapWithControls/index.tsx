@@ -1,13 +1,10 @@
 import { FC } from 'react'
 import { TreesMap } from '@components/TreesMap'
-import { useHasMobileSize } from '@lib/hooks/useHasMobileSize'
-import { useRouter } from 'next/router'
 import { PageQueryType } from '@lib/utils/queryUtil'
-import { AppTitle } from '@components/AppTitle'
-import { SharingOverlay } from '@components/SharingOverlay'
-import { DisclaimerLinks } from '@components/DisclaimerLinks'
+import { WaterLevelLegend } from '@components/WaterLevelLegend'
+import classNames from 'classnames'
 
-export interface RefreshmentMapPropType {
+export interface TreesMapWithControlsPropType {
   title?: string
   query: Partial<PageQueryType>
 }
@@ -20,13 +17,11 @@ export const MAP_CONFIG = {
   defaultLongitude: 13.400033,
 }
 
-export const RefreshmentMap: FC<RefreshmentMapPropType> = (pageProps) => {
-  const hasMobileSize = useHasMobileSize()
-  const { pathname } = useRouter()
-
+export const TreesMapWithControls: FC<TreesMapWithControlsPropType> = (
+  pageProps
+) => {
   return (
     <>
-      {(pathname === '/map' || pathname === '/social-image') && <AppTitle />}
       <TreesMap
         mapId="trees-map"
         staticViewportProps={{
@@ -40,14 +35,9 @@ export const RefreshmentMap: FC<RefreshmentMapPropType> = (pageProps) => {
         }}
         onSelect={(treeId) => console.log('Selected tree ID:', treeId)}
       />
-      {pathname !== '/' && pathname !== '/social-image' && (
-        <>
-          <DisclaimerLinks
-            className={pathname !== '/map' && hasMobileSize ? 'hidden' : ''}
-          />
-          <SharingOverlay />
-        </>
-      )}
+      <div className={classNames('absolute top-2 left-2', 'w-[162px]')}>
+        <WaterLevelLegend collapsable={true} hasShadow={true} />
+      </div>
     </>
   )
 }

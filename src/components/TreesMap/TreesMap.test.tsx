@@ -12,8 +12,7 @@ nextRouter.useRouter = useRouter.mockReturnValue({
 })
 
 const mapProps = {
-  width: 1440,
-  height: 960,
+  mapId: 'map',
   initialViewportProps: {
     latitude: 15.123,
     longitude: 16.456,
@@ -24,9 +23,7 @@ const mapProps = {
 describe('Map component', () => {
   it('renders a map container', () => {
     render(<TreesMap {...mapProps} />)
-    const mapContainer = document.querySelector(
-      "div[style^='position: absolute;']"
-    )
+    const mapContainer = document.querySelector('#map')
     expect(mapContainer).toBeInTheDocument()
   })
 })

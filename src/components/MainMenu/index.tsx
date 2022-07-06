@@ -1,13 +1,14 @@
 import { Home, Map, News } from '@components/Icons'
+import { IconPropType } from '@components/Icons/IconPropType'
 import { InternalLink } from '@components/InternalLink'
 import classNames from 'classnames'
 import { useRouter } from 'next/router'
-import { FC, SVGProps } from 'react'
+import { FC } from 'react'
 
 interface LinkType {
   path: string
   name: string
-  Icon: FC<SVGProps<SVGSVGElement>>
+  Icon: FC<IconPropType>
 }
 
 const links: LinkType[] = [
