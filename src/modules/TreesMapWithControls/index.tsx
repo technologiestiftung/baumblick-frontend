@@ -6,7 +6,7 @@ import { SharingOverlay } from '@components/SharingOverlay'
 import { WaterLevelLegend } from '@components/WaterLevelLegend'
 import classNames from 'classnames'
 
-export interface RefreshmentMapPropType {
+export interface TreesMapWithControlsPropType {
   title?: string
   query: Partial<PageQueryType>
 }
@@ -19,7 +19,9 @@ export const MAP_CONFIG = {
   defaultLongitude: 13.400033,
 }
 
-export const RefreshmentMap: FC<RefreshmentMapPropType> = (pageProps) => {
+export const TreesMapWithControls: FC<TreesMapWithControlsPropType> = (
+  pageProps
+) => {
   const { pathname } = useRouter()
 
   return (

@@ -1,7 +1,7 @@
 import { Cross, Affiliate } from '@components/Icons'
 import { useCopyToClipboard } from '@lib/hooks/useCopyToClipboard'
 import { mapRawQueryToState } from '@lib/utils/queryUtil'
-import { MAP_CONFIG } from '@modules/RefreshmentMap'
+import { MAP_CONFIG } from '@modules/TreesMapWithControls'
 import classNames from 'classnames'
 import { useRouter } from 'next/router'
 import { FC, ReactNode, useState } from 'react'

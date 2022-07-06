@@ -1,4 +1,7 @@
-import { RefreshmentMap, RefreshmentMapPropType } from '@modules/RefreshmentMap'
+import {
+  TreesMapWithControls,
+  TreesMapWithControlsPropType,
+} from '@modules/TreesMapWithControls'
 import { GetServerSideProps } from 'next'
 import { FC } from 'react'
 
@@ -10,9 +13,9 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => ({
   },
 })
 
-export const Home: FC<RefreshmentMapPropType> = (props) => (
+export const Home: FC<TreesMapWithControlsPropType> = (props) => (
   <>
-    <RefreshmentMap {...props} />
+    <TreesMapWithControls {...props} />
   </>
 )
 
