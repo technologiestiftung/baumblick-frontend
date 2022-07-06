@@ -3,6 +3,15 @@
 import '@testing-library/jest-dom'
 import fetchMock from 'jest-fetch-mock'
 
+jest.mock('maplibre-gl/dist/maplibre-gl', () => ({
+  GeolocateControl: jest.fn(),
+  Map: jest.fn(() => ({
+    addControl: jest.fn(),
+    on: jest.fn(),
+  })),
+  NavigationControl: jest.fn(),
+}))
+
 fetchMock.enableMocks()
 
 beforeEach(() => {
