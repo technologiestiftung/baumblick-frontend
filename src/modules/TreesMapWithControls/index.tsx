@@ -40,7 +40,7 @@ export const TreesMapWithControls: FC<TreesMapWithControlsPropType> = (
         onSelect={(treeId) => console.log('Selected tree ID:', treeId)}
       />
       {pathname !== '/' && pathname !== '/social-image' && <SharingOverlay />}
-      <div className={classNames('absolute bottom-2 left-2', 'w-[162px]')}>
+      <div className={classNames('absolute top-2 left-2', 'w-[162px]')}>
         <WaterLevelLegend collapsable={true} hasShadow={true} />
       </div>
     </>

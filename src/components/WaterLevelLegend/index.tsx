@@ -31,7 +31,7 @@ export const WaterLevelLegend: FC<WaterLevelLegendType> = ({
     <div
       className={classNames(
         'relative px-4',
-        isCollapsed && '-translate-y-3',
+        isCollapsed && 'translate-y-3',
         !isCollapsed && wrapperWhenExpandedStyles,
         hasShadow && !isCollapsed && 'shadow-md'
       )}
@@ -71,12 +71,12 @@ export const WaterLevelLegend: FC<WaterLevelLegendType> = ({
       {collapsable && (
         <button
           className={classNames(
-            'absolute top-0 right-0',
+            'absolute bottom-0 right-0',
             'bg-white',
             'rounded-full',
             'w-8 h-8',
             'border border-gray-200',
-            'translate-x-1/2 -translate-y-1/2',
+            'translate-x-1/2 translate-y-1/2',
             'flex justify-center items-center'
           )}
           onClick={toggleCollapsed}
