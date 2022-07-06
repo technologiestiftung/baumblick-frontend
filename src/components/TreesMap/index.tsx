@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 import { useDebouncedCallback } from 'use-debounce'
 import { ViewportProps } from '@lib/types/map'
 import { TREES_LAYER_ID, TREES_LAYER, TREES_SOURCE } from './treesLayer'
+import { MapTilerLogo } from './MapTilerLogo'
 
 interface MapProps {
   staticViewportProps?: {
@@ -77,9 +78,15 @@ export const TreesMap: FC<MapProps> = ({
       style: MAP_STYLE_URL,
       center: [viewport.longitude, viewport.latitude] as LngLatLike,
       zoom: viewport.zoom,
+      attributionControl: false,
     })
 
     if (!map.current) return
+
+    map.current.addControl(
+      new maplibregl.AttributionControl({ compact: true }),
+      'bottom-left'
+    )
 
     map.current.addControl(
       new maplibregl.NavigationControl({
@@ -122,10 +129,13 @@ export const TreesMap: FC<MapProps> = ({
   }, [])
 
   return (
-    <div
-      id={mapId}
-      className="w-full h-full bg-[#FBFBFC]"
-      aria-label="Kartenansicht der Bäume"
-    ></div>
+    <>
+      <div
+        id={mapId}
+        className="!static w-full h-full bg-[#FBFBFC]"
+        aria-label="Kartenansicht der Bäume"
+      ></div>
+      <MapTilerLogo />
+    </>
   )
 }
