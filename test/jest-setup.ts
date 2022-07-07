@@ -10,9 +10,13 @@ jest.mock('maplibre-gl/dist/maplibre-gl', () => ({
     on: jest.fn(),
   })),
   NavigationControl: jest.fn(),
+  AttributionControl: jest.fn(),
 }))
 
 fetchMock.enableMocks()
+
+window.URL.createObjectURL = jest.fn().mockReturnValue('')
+performance.mark = jest.fn()
 
 beforeEach(() => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment

@@ -3,7 +3,7 @@ import { WaterLevelLegend } from '.'
 
 describe('WaterLevelLegend component', () => {
   it('renders title, scale, labels and collapse button by default', () => {
-    render(<WaterLevelLegend />)
+    render(<WaterLevelLegend collapsable />)
     const title = screen.getByText(/Wasserstand/i)
     expect(title).toBeInTheDocument()
 
