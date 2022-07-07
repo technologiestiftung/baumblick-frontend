@@ -1,10 +1,16 @@
-import { FC, SVGProps } from 'react'
+import { FC } from 'react'
+import { IconPropType } from './IconPropType'
 
-export const Minus: FC<SVGProps<SVGSVGElement>> = (props) => (
+export const Minus: FC<IconPropType> = ({
+  color1,
+  strokeWidth = 2,
+  size = 24,
+  ...props
+}) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
+    width={size}
+    height={size}
     viewBox="0 0 24 24"
     {...props}
   >
@@ -14,10 +20,10 @@ export const Minus: FC<SVGProps<SVGSVGElement>> = (props) => (
         x2="19"
         y1="12"
         y2="12"
-        stroke="currentColor"
+        stroke={color1 || 'currentColor'}
         strokeLinecap="round"
         strokeLinejoin="round"
-        strokeWidth="2"
+        strokeWidth={strokeWidth}
         vectorEffect="non-scaling-stroke"
       />
     </g>
