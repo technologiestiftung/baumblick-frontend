@@ -36,7 +36,7 @@ export const Headline: FC<HeadlinePropType> = ({ h1, h2, h3, ...props }) => {
   const allProps = { h1, h2, h3, ...props }
   const Tag = getTagByProps(allProps)
   return (
-    <Tag className={getStyles(allProps)} {...props}>
+    <Tag {...props} className={getStyles(allProps)}>
       {renderChildren(allProps)}
     </Tag>
   )
