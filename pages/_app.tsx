@@ -26,9 +26,9 @@ const App: FC<{
   return (
     <StrictMode>
       <Head pageTitle={pageProps.title || ''} />
-      <div className="fixed inset-0 bottom-16 overflow-x-hidden overflow-y-auto">
+      <main className="fixed inset-0 bottom-16 overflow-x-hidden overflow-y-auto">
         <Component {...pageProps} query={parsedQuery} />
-      </div>
+      </main>
       <MainMenu />
     </StrictMode>
   )

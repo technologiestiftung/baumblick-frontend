@@ -1,14 +1,12 @@
 const colorPalette = require('./src/style/colors')
 
 module.exports = {
-  mode: 'jit',
-  purge: [
+  content: [
     './pages/**/*.{js,ts,jsx,tsx}',
     './src/components/**/*.{js,ts,jsx,tsx}',
     './src/modules/**/*.{js,ts,jsx,tsx}',
     './src/layouts/**/*.{js,ts,jsx,tsx}',
   ],
-  darkMode: false, // or 'media' or 'class'
   theme: {
     fontFamily: {
       // prettier-ignore
@@ -28,10 +26,4 @@ module.exports = {
       },
     },
   },
-  variants: {
-    extend: {
-      scale: ['active'],
-    },
-  },
-  plugins: [],
 }
