@@ -16,6 +16,8 @@ export const stories: Record<string, StoryLinkPropType> = {
         <strong>Wasserstand der Berliner Stadtbäume</strong>.
       </>
     ),
+    leadParagraph:
+      'Gießen ist gut. Kann man aber auch falsch machen. Haste net gedacht oder wat?',
     Icon: WateringCan,
   },
   'wie-ist-ki-für-die-berechnung-des-wasserbedarfs-eingesetzt': {

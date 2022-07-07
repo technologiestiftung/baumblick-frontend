@@ -13,6 +13,7 @@ export interface StoryLinkPropType {
   readingDurationInMinutes: number
   excerpt: ReactNode
   Icon: FC<IconPropType>
+  leadParagraph?: ReactNode
 }
 
 export const StoryLink: FC<StoryLinkPropType> = ({

@@ -4,9 +4,11 @@ import { FC } from 'react'
 
 export const Header: FC<{
   compact?: boolean
-}> = ({ compact = false }) => (
+  className?: string
+}> = ({ compact = false, className }) => (
   <div
     className={classNames(
+      className,
       'w-screen bg-white px-3 transition-all',
       'flex justify-between items-center',
       compact ? 'py-1.5' : 'py-3'
