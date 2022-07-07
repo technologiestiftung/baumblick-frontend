@@ -74,7 +74,7 @@ export const TreesMap: FC<MapProps> = ({
 
   useEffect(() => {
     map.current = new maplibregl.Map({
-      container: mapId,
+      container: mapId || '',
       style: MAP_STYLE_URL,
       center: [viewport.longitude, viewport.latitude] as LngLatLike,
       zoom: viewport.zoom,
