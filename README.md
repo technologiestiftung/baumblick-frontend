@@ -22,7 +22,15 @@ This website is a NextJS app configured with:
 ### Requirements
 
 #### [MapTiler](https://maptiler.com/)
-You will need a [MapTiler](https://maptiler.com/) account to render the map locally. You will need to put your [MapTiler](https://maptiler.com/) access token into the `NEXT_PUBLIC_MAPTILER_KEY` environment variable. Make also sure to add whatever URL the app is run on to the list of allowed URLs in your [MapTiler](https://maptiler.com/) configuration.
+We use [MapTiler](https://maptiler.com/) for rendering the basemap in the background. You will need to put your MapTiler API key into the `NEXT_PUBLIC_MAPTILER_KEY` environment variable. Make also sure to add whatever URL the app is run on to the list of allowed URLs in your MapTiler configuration.
+
+Because we use a customized basemap hosted on MapTiler, you also need to provide the `NEXT_PUBLIC_MAPTILER_BASEMAP_URL`.
+
+Both variables can be found in our shared vault.
+
+#### Trees vector tiles
+
+We fetch the actual trees data from our self-hosted tileserver as a vector tileset. Add the URL to that tileset to the environment variable `NEXT_PUBLIC_TREE_TILES_URL`. Find the variable in our shared vault as well.
 
 #### [Matomo](https://matomo.org/)
 We use the Google Analytics alternative [Matomo](https://matomo.org/), which is more respectful of the users' privacy, in order to track the page-visits on the page.

@@ -1,3 +1,7 @@
+import {
+  TreesMapWithControls,
+  TreesMapWithControlsPropType,
+} from '@modules/TreesMapWithControls'
 import { GetServerSideProps } from 'next'
 import { FC } from 'react'
 
@@ -9,6 +13,10 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => ({
   },
 })
 
-export const Map: FC = () => null
+export const Home: FC<TreesMapWithControlsPropType> = (props) => (
+  <>
+    <TreesMapWithControls {...props} />
+  </>
+)
 
-export default Map
+export default Home

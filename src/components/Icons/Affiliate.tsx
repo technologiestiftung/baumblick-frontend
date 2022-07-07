@@ -1,0 +1,73 @@
+import { FC, SVGProps } from 'react'
+
+export const Affiliate: FC<SVGProps<SVGSVGElement>> = (props) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    {...props}
+  >
+    <g fill="none" fillRule="evenodd">
+      <path
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        vectorEffect="non-scaling-stroke"
+        d="M5.931,6.936 L7.206,11.185 M12.813,16.794 L17.064,18.069"
+      />
+      <line
+        x1="11.683"
+        x2="17.442"
+        y1="12.317"
+        y2="6.558"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        vectorEffect="non-scaling-stroke"
+      />
+      <circle
+        cx="5.5"
+        cy="5.5"
+        r="1.5"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        vectorEffect="non-scaling-stroke"
+      />
+      <circle
+        cx="18.5"
+        cy="5.5"
+        r="1.5"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        vectorEffect="non-scaling-stroke"
+      />
+      <circle
+        cx="18.5"
+        cy="18.5"
+        r="1.5"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        vectorEffect="non-scaling-stroke"
+      />
+      <circle
+        cx="8.5"
+        cy="15.5"
+        r="4.5"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        vectorEffect="non-scaling-stroke"
+      />
+    </g>
+  </svg>
+)
