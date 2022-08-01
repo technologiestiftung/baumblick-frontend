@@ -2,14 +2,18 @@ import { Headline } from '@components/Headline'
 import { useRouter } from 'next/router'
 import { stories } from '../../pages/stories'
 import colors from '../../src/style/colors'
-import { FC } from 'react'
+import { FC, useRef } from 'react'
 import { Header } from '@components/Header'
 import { InternalLink } from '@components/InternalLink'
 import { Paragraph } from '@components/Paragraph'
 import { LeadParagraph } from '@components/LeadParagraph'
+import { useHeadingsData } from '@lib/hooks/useHeadingData'
+import { TableOfContents } from '@components/TableOfContents'
 
 export const StoryLayout: FC = ({ children }) => {
   const { query } = useRouter()
+  const contentRef = useRef<HTMLElement | null>(null)
+  const { headings, scrollToHeading } = useHeadingsData(contentRef.current)
   const story =
     typeof query.id === 'string' && query.id in stories
       ? stories[query.id]
@@ -42,7 +46,17 @@ export const StoryLayout: FC = ({ children }) => {
           <LeadParagraph>{story.leadParagraph}</LeadParagraph>
         )}
       </section>
-      <article className="px-4 prose font-serif pb-8">{children}</article>
+      {headings?.length > 0 && (
+        <nav>
+          <TableOfContents
+            chapters={headings}
+            onChapterClick={scrollToHeading}
+          />
+        </nav>
+      )}
+      <article className="px-4 prose font-serif pb-8" ref={contentRef}>
+        {children}
+      </article>
       <footer className="px-4 pb-12">
         <Paragraph className="italic text-gray-500">{story.author}</Paragraph>
         <br />
