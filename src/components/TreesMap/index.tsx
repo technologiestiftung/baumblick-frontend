@@ -61,6 +61,15 @@ export const TreesMap: FC<MapProps> = ({
   const debouncedViewportChange = useDebouncedCallback(
     (viewport: URLViewportType): void => {
       const newQuery = { ...mappedQuery, ...viewport }
+
+      // Before replacing the URL with the map interaction, we need to check
+      // if navigation to a different route hasn't occurred before.
+      // This can happen when a tree is selected via `onSelect` which
+      // dispatches a router.push immediately.
+      // This results in the router expecting a query paramter for the tree ID
+      // which is not present in this viewport change.
+      if (pathname !== '/trees') return
+
       void replace({ pathname, query: newQuery }, undefined, { shallow: true })
     },
     1000

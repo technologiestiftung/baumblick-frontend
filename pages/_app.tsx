@@ -1,12 +1,14 @@
 import { mapRawQueryToState } from '@lib/utils/queryUtil'
 import { ParsedUrlQuery } from 'querystring'
-import { StrictMode, FC } from 'react'
+import { StrictMode, FC, ReactElement, ReactNode } from 'react'
 import { Head } from '@components/Head'
 import '../src/style/global.css'
 import { useMatomo } from '@lib/hooks/useMatomo'
 import { MainMenu } from '@components/MainMenu'
+import { NextPage } from 'next'
+import { AppProps } from 'next/app'
 
-interface PagePropType extends Record<string, unknown> {
+export interface PagePropType extends Record<string, unknown> {
   title?: string
   query: ParsedUrlQuery
 }
@@ -16,18 +18,28 @@ interface ComponentPropType {
   query?: ReturnType<typeof mapRawQueryToState>
 }
 
-const App: FC<{
-  Component: FC<ComponentPropType>
+export type NextPageWithLayout = NextPage<ComponentPropType> & {
+  getLayout?: (page: ReactElement, pageProps: ComponentPropType) => ReactNode
+}
+
+type AppPropsWithLayout = AppProps & {
   pageProps: PagePropType
-}> = ({ Component, pageProps }) => {
+  Component: NextPageWithLayout
+}
+
+const App: FC<AppPropsWithLayout> = ({
+  Component,
+  pageProps,
+}: AppPropsWithLayout) => {
   useMatomo()
-  const parsedQuery = pageProps.query ? mapRawQueryToState(pageProps.query) : {}
+
+  const getLayout = Component.getLayout ?? ((page) => page)
 
   return (
     <StrictMode>
-      <Head pageTitle={pageProps.title || ''} />
+      <Head />
       <div className="fixed inset-0 bottom-16 overflow-x-hidden overflow-y-auto">
-        <Component {...pageProps} query={parsedQuery} />
+        {getLayout(<Component {...pageProps} />, pageProps)}
       </div>
       <MainMenu />
     </StrictMode>
