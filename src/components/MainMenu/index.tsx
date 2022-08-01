@@ -18,7 +18,7 @@ const links: LinkType[] = [
     Icon: Home,
   },
   {
-    path: '/map',
+    path: '/trees',
     name: 'Karte',
     Icon: Map,
   },
