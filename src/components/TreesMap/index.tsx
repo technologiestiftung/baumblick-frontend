@@ -123,7 +123,7 @@ export const TreesMap: FC<MapProps> = ({
 
       const features = e.features
 
-      onSelect(features[0].properties?.baumid)
+      onSelect(features[0].properties?.trees_baumid)
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
