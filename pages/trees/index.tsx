@@ -42,10 +42,4 @@ MapPage.getLayout = function getLayout(page, props) {
   )
 }
 
-// export const Home: FC<TreesMapWithControlsPropType> = (props) => (
-//   <>
-//     <TreesMapWithControls {...props} />
-//   </>
-// )
-
 export default MapPage
