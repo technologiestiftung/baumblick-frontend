@@ -76,7 +76,6 @@ const TreePage: TreePageWithLayout = ({ treeData }) => {
 TreePage.getLayout = function getLayout(page: ReactElement) {
   return (
     <>
-      {/* TODO: fetch coordinates from API and make map fly to them */}
       <MapLayout />
       {page}
     </>
