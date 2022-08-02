@@ -3,6 +3,7 @@ import { MapLayout } from '@layouts/MapLayout'
 import classNames from 'classnames'
 import { GetServerSideProps, NextPage } from 'next'
 import { getTreeData, TreeDataType } from '@lib/requests/getTreeData'
+import { useNowcastData } from '@lib/hooks/useNowcastData'
 
 type TreePageWithLayout = NextPage<{
   treeData: TreeDataType
@@ -36,6 +37,12 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 }
 
 const TreePage: TreePageWithLayout = ({ treeData }) => {
+  const {
+    data: nowcastData,
+    error: nowcastError,
+    isLoading: nowcastIsLoading,
+  } = useNowcastData(treeData.gml_id)
+
   return (
     <div
       className={classNames(
@@ -48,6 +55,13 @@ const TreePage: TreePageWithLayout = ({ treeData }) => {
       {treeData.baumhoehe && <h2>{treeData.baumhoehe} m hoch</h2>}
       {treeData.standalter && (
         <h2>Gepflanzt vor {treeData.standalter} Jahren</h2>
+      )}
+      {nowcastData && !nowcastIsLoading && !nowcastError && (
+        <ul>
+          {nowcastData.map((item) => {
+            return <p key={item.id}>{item?.value}</p>
+          })}
+        </ul>
       )}
     </div>
   )
