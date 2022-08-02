@@ -1,17 +1,29 @@
 import { MutableRefObject, useCallback, useEffect, useState } from 'react'
+import { useActiveElementTitle } from '../useActiveElementTitle'
 
 interface HeadingElement {
   title: string
   element: Element
 }
 
-export const useHeadingsData = (
+type UseHeadingsDataType = (
   parent: MutableRefObject<HTMLElement | null>['current']
-): {
+) => {
   headings: HeadingElement[]
   scrollToHeading: (title: HeadingElement['title']) => void
-} => {
+  activeHeadingTitle: string | null
+}
+
+export const useHeadingsData: UseHeadingsDataType = (parent) => {
   const [headings, setHeadings] = useState<HeadingElement[]>([])
+  const [activeHeadingTitle, setActiveHeadingTitle] = useState<string | null>(
+    null
+  )
+  useActiveElementTitle({
+    setActiveTitle: setActiveHeadingTitle,
+    selector: 'h2, h3',
+    parent,
+  })
 
   useEffect(() => {
     if (!parent) return
@@ -40,5 +52,6 @@ export const useHeadingsData = (
   return {
     headings,
     scrollToHeading,
+    activeHeadingTitle,
   }
 }

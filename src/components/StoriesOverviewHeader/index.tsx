@@ -1,36 +1,22 @@
 import { Header } from '@components/Header'
-import { useAnimationFrame } from '@lib/hooks/useAnimationFrame'
+import { useHasScrolledPastThreshold } from '@lib/hooks/useHasScrolledPastThreshold'
 import classNames from 'classnames'
-import { FC, useCallback, useRef, useState } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 
 export const SCROLL_THRESHOLD = 10
 
 export const StoriesOverviewHeader: FC = () => {
-  const prevScrollY = useRef(0)
   const headerRef = useRef<HTMLElement | null>(null)
-  const [headerHeight, setHeaderHeight] = useState<number | null>(null)
-  const [hasScrolledPastThreshold, setHasScrolledPastThreshold] =
-    useState(false)
+  const [headerHeight, setHeaderHeight] = useState(120)
+  const { hasScrolledPastThreshold } = useHasScrolledPastThreshold({
+    threshold: SCROLL_THRESHOLD,
+    scrollParent: 'main',
+  })
 
-  const animationFrameCallback = useCallback(function onAnimationFrame(): void {
-    if (headerRef.current && !headerHeight) {
-      setHeaderHeight(headerRef.current.getBoundingClientRect().height)
-    }
-    const main = document.getElementsByTagName('main')[0]
-    if (!main) return
-    const currentScrollY = main.scrollTop
-
-    if (prevScrollY.current > SCROLL_THRESHOLD) {
-      setHasScrolledPastThreshold(true)
-    }
-    if (prevScrollY.current < SCROLL_THRESHOLD) {
-      setHasScrolledPastThreshold(false)
-    }
-
-    prevScrollY.current = currentScrollY
+  useEffect(() => {
+    if (!headerRef.current) return
+    setHeaderHeight(headerRef.current.getBoundingClientRect().height)
   }, [])
-
-  useAnimationFrame(animationFrameCallback)
 
   return (
     <>

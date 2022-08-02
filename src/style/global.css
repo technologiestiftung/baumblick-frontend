@@ -62,6 +62,9 @@
   }
 	
 	/* Prose styles (tailwindcss typography plugin) */
+	.prose h1, h2, h3 {
+		@apply font-sans;
+	}
 	.prose > p:not(.lead):first-of-type::first-letter {
 		@apply float-left mr-5 text-[5.5em] leading-[.9em];
 	}
