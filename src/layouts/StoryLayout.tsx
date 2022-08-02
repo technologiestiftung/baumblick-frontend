@@ -12,7 +12,8 @@ import { useHeadingsData } from '@lib/hooks/useHeadingData'
 import { TableOfContents } from '@components/TableOfContents'
 import classNames from 'classnames'
 import { Button } from '@components/Button'
-import { ArrowLeft, Cross, HamburgerMenu } from '@components/Icons'
+import { Cross, HamburgerMenu } from '@components/Icons'
+import { StoryStickyHeader } from '@components/StoryStickyHeader'
 
 export const StoryLayout: FC = ({ children }) => {
   const { query } = useRouter()
@@ -30,34 +31,18 @@ export const StoryLayout: FC = ({ children }) => {
       ? stories[query.id]
       : Object.values(stories)[0]
 
-  console.log(hasScrolledPastThreshold, isScrollingUp)
   return (
     <>
       <Header className="border-b border-gray-200" />
-      <header
-        className={classNames(
-          'grid grid-cols-[24px,32px,1fr] gap-4 items-center',
-          'transition-all bg-white shadow-lg border-b border-b-gray-300',
-          'px-4 py-5 fixed inset-0 bottom-auto z-10',
+      <StoryStickyHeader
+        headings={headings}
+        activeHeadingTitle={activeHeadingTitle}
+        story={story}
+        isVisible={
           (hasScrolledPastThreshold && isScrollingUp) ||
-            showStickyTableOfContents
-            ? 'opacity-100 translate-y-0'
-            : 'opacity-0 -translate-y-full'
-        )}
-      >
-        <InternalLink href="/stories" className="text-gray-600">
-          <ArrowLeft />
-        </InternalLink>
-        <story.Icon
-          size={32}
-          color1={colors.scale[8]}
-          color2={colors.scale[5]}
-          color3={colors.scale[2]}
-        />
-        <span className="font-bold text-lg block whitespace-nowrap text-ellipsis overflow-hidden">
-          {story.title}
-        </span>
-      </header>
+          showStickyTableOfContents
+        }
+      />
       <section className="px-4 pt-6 pb-2">
         <InternalLink
           href="/stories"
