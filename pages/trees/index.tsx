@@ -1,11 +1,16 @@
 import { MapLayout } from '@layouts/MapLayout'
+import { mapRawQueryToState } from '@lib/utils/queryUtil'
 import { GetServerSideProps, NextPage } from 'next'
 import router from 'next/router'
-import { PagePropType } from 'pages/_app'
 import { ReactElement, ReactNode } from 'react'
 
+export interface ComponentPropType {
+  title?: string
+  query?: ReturnType<typeof mapRawQueryToState>
+}
+
 type MapPageWithLayout = NextPage & {
-  getLayout?: (page: ReactElement, pageProps: PagePropType) => ReactNode
+  getLayout?: (page: ReactElement, pageProps: ComponentPropType) => ReactNode
 }
 
 // eslint-disable-next-line @typescript-eslint/require-await
@@ -24,15 +29,9 @@ MapPage.getLayout = function getLayout(page, props) {
   return (
     <>
       <MapLayout
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        latitude={props.query?.latitude}
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        longitude={props.query?.longitude}
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        zoom={props.query?.zoom}
+        latitude={props.query?.latitude || undefined}
+        longitude={props.query?.longitude || undefined}
+        zoom={props.query?.zoom || undefined}
         onTreeSelect={(treeId) => {
           void router.push({ pathname: `/trees/${treeId}`, query: null })
         }}
