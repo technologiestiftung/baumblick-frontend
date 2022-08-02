@@ -26,6 +26,7 @@ export type NowcastDataType = {
 
 const TABLE_NAME = 'nowcast'
 const TREE_ID_COLUMN_NAME = 'baum_id'
+const COLUMN_TO_SORT_BY = 'timestamp'
 
 const REQUEST_OPTIONS = {
   method: 'POST',
@@ -34,12 +35,17 @@ const REQUEST_OPTIONS = {
   },
 }
 
+/**
+ * Fetches the most recent nowcast data for a tree.
+ * @param treeId string
+ * @returns Promise<NowcastDataType[] | undefined>
+ */
 export const getNowcastData = async (
   treeId: string
 ): Promise<NowcastDataType[] | undefined> => {
   if (!treeId) return
 
-  const REQUEST_URL = `${SUPABASE_PASSTHROUGH_API_URL}/${TABLE_NAME}?${TREE_ID_COLUMN_NAME}=eq.${treeId}`
+  const REQUEST_URL = `${SUPABASE_PASSTHROUGH_API_URL}/${TABLE_NAME}?${TREE_ID_COLUMN_NAME}=eq.${treeId}&order=${COLUMN_TO_SORT_BY}&limit=4&offset=0`
 
   const response = await fetch(REQUEST_URL, REQUEST_OPTIONS)
 
