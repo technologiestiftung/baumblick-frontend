@@ -25,6 +25,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 
     return {
       props: {
+        title: treeData[0].art_dtsch,
         treeData: treeData[0],
       },
     }
