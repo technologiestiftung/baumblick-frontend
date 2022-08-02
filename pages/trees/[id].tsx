@@ -59,7 +59,13 @@ const TreePage: TreePageWithLayout = ({ treeData }) => {
       {nowcastData && !nowcastIsLoading && !nowcastError && (
         <ul>
           {nowcastData.map((item) => {
-            return <p key={item.id}>{item?.value}</p>
+            return (
+              <li key={item.id} className="mt-3 grid grid-cols-1">
+                <span>{item?.timestamp}</span>
+                <span>{item?.value}</span>
+                <span>{item?.type_id}</span>
+              </li>
+            )
           })}
         </ul>
       )}
