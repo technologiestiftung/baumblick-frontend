@@ -62,11 +62,28 @@
   }
 	
 	/* Prose styles (tailwindcss typography plugin) */
-	.prose h1, h2, h3 {
-		@apply font-sans;
-	}
 	.prose > p:not(.lead):first-of-type::first-letter {
 		@apply float-left mr-5 text-[5.5em] leading-[.9em];
+	}
+	.prose h1, .prose h2, .prose h3 {
+		@apply font-sans;
+	}
+	.prose h2,
+	.prose h3 {
+		scroll-margin-top: 4em;
+	}
+
+	/* Safari-only */
+	@supports (-webkit-hyphens:none) {
+		.prose h2 {
+				padding-top: 2em;
+				margin-top: -2em;
+			}
+		
+			.prose h3 {
+				padding-top: 1.6em;
+				margin-top: -1.6em;
+			}
 	}
 }
 
