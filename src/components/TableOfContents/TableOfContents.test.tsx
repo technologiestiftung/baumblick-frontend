@@ -9,18 +9,15 @@ nextRouter.useRouter = jest.fn().mockReturnValue({
 })
 
 describe('TableOfContents', () => {
-  test('should render the chapters with # links', () => {
+  test('should render the chapters', () => {
     const chapters = [
       {
-        path: '#chapter-1',
         title: 'This is chapter 1',
       },
       {
-        path: '#chapter-2',
         title: 'This is another chapter, the second one',
       },
       {
-        path: '#chapter-3',
         title: 'Last but not least',
       },
     ]
@@ -29,33 +26,12 @@ describe('TableOfContents', () => {
       <TableOfContents chapters={chapters} onChapterClick={onChapterClick} />
     )
 
-    const links = screen.getAllByRole('link')
+    const links = screen.getAllByRole('button')
 
     expect(links).toHaveLength(chapters.length)
 
     fireEvent.click(links[0])
 
-    expect(onChapterClick).toHaveBeenCalledWith(chapters[0])
-  })
-  test('should render the chapters with internal links', () => {
-    const chapters = [
-      {
-        path: '/chapter-1',
-        title: 'This is chapter 1',
-      },
-      {
-        path: '/chapter-2',
-        title: 'This is another chapter, the second one',
-      },
-      {
-        path: '/chapter-3',
-        title: 'Last but not least',
-      },
-    ]
-    render(<TableOfContents chapters={chapters} />)
-
-    const links = screen.getAllByRole('link')
-
-    expect(links).toHaveLength(chapters.length)
+    expect(onChapterClick).toHaveBeenCalledWith(chapters[0].title)
   })
 })

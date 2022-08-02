@@ -14,8 +14,7 @@ export interface ButtonPropType {
 
 const getStyles = ({ primary, disabled, className }: ButtonPropType): string =>
   classNames(
-    className,
-    'relative',
+    primary && 'relative',
     'rounded',
     'focus:ring px-5 py-3 font-semibold',
     'text-center inline-block',
@@ -42,7 +41,8 @@ const getStyles = ({ primary, disabled, className }: ButtonPropType): string =>
     disabled && [
       'bg-gray-100 text-gray-400 border border-gray-200',
       'cursor-default pointer-events-none',
-    ]
+    ],
+    className
   )
 
 const Scale: FC = () => (
