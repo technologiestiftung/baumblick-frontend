@@ -59,8 +59,6 @@ export const getTreeData = async (
 
   const REQUEST_URL = `${SUPABASE_PASSTHROUGH_API_URL}/${TABLE_NAME}?${TREE_ID_COLUMN_NAME}=eq.${treeId}`
 
-  console.log(REQUEST_URL)
-
   const response = await fetch(REQUEST_URL, REQUEST_OPTIONS)
 
   if (!response.ok) {
