@@ -1,11 +1,13 @@
 import { Header } from '@components/Header'
 import { useHasScrolledPastThreshold } from '@lib/hooks/useHasScrolledPastThreshold'
 import classNames from 'classnames'
+import useTranslation from 'next-translate/useTranslation'
 import { FC, useEffect, useRef, useState } from 'react'
 
 export const SCROLL_THRESHOLD = 10
 
 export const StoriesOverviewHeader: FC = () => {
+  const { t } = useTranslation('common')
   const headerRef = useRef<HTMLElement | null>(null)
   const [headerHeight, setHeaderHeight] = useState(120)
   const { hasScrolledPastThreshold } = useHasScrolledPastThreshold({
@@ -37,7 +39,7 @@ export const StoriesOverviewHeader: FC = () => {
             hasScrolledPastThreshold ? 'font-bold' : 'font-semibold'
           )}
         >
-          Stories
+          {t('stories.title')}
         </h1>
       </header>
       <div style={{ height: headerHeight || 121 }} />
