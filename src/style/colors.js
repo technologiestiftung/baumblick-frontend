@@ -1,9 +1,5 @@
-const {
-  colors: { white },
-} = require('tailwindcss/defaultTheme')
-
 const colors = {
-  white,
+  white: '#ffffff',
   gray: {
     '50': '#f9fafb',
     '100': '#f3f4f6',

@@ -13,6 +13,7 @@ export interface StoryLinkPropType {
   readingDurationInMinutes: number
   excerpt: ReactNode
   Icon: FC<IconPropType>
+  leadParagraph?: ReactNode
 }
 
 export const StoryLink: FC<StoryLinkPropType> = ({
@@ -28,7 +29,7 @@ export const StoryLink: FC<StoryLinkPropType> = ({
     className={classNames(
       'grid grid-cols-[auto,1fr] gap-4 px-4 pt-6 pb-3',
       'border-b border-gray-200',
-      'transition-colors',
+      'transition-colors last-of-type:border-b-0',
       'hover:bg-gray-100 active:bg-gray-200',
       'focus:outline-none focus:ring-4 ring-gray-900',
       'focus:bg-gray-100'

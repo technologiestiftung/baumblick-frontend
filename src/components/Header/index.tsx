@@ -2,24 +2,38 @@ import { InternalLink } from '@components/InternalLink'
 import classNames from 'classnames'
 import { FC } from 'react'
 
-export const Header: FC = () => (
+export const Header: FC<{
+  compact?: boolean
+  className?: string
+}> = ({ compact = false, className }) => (
   <div
     className={classNames(
-      'w-screen bg-white p-3',
-      'flex justify-between items-center'
+      className,
+      'w-screen bg-white px-3 transition-all',
+      'flex justify-between items-center',
+      compact ? 'py-1.5' : 'py-3'
     )}
   >
     <InternalLink
       href="/"
       className={classNames(
-        'font-semibold px-1',
+        'px-1',
         'text-gray-900',
         'transition-colors focus:outline-none',
         'focus:ring-2 focus:ring-gray-600',
-        'hover:text-gray-900 hover:underline'
+        'hover:text-gray-900 hover:underline',
+        compact ? 'font-normal' : 'font-semibold'
       )}
     >
-      Qtrees <span className="font-normal">Baummonitor</span>
+      Qtrees{' '}
+      <span
+        className={classNames(
+          'font-normal transition-opacity',
+          compact ? 'opacity-0' : 'opacity-1'
+        )}
+      >
+        Baummonitor
+      </span>
     </InternalLink>
     <a
       className={classNames(
