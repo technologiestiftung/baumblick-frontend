@@ -5,7 +5,13 @@ import { mapRawQueryToState } from '@lib/utils/queryUtil'
 import { useRouter } from 'next/router'
 import { useDebouncedCallback } from 'use-debounce'
 import { ViewportProps } from '@lib/types/map'
-import { TREES_LAYER_ID, TREES_LAYER, TREES_SOURCE } from './treesLayer'
+import {
+  TREES_LAYER_ID,
+  TREES_LAYER,
+  TREES_SOURCE,
+  TREES_SOURCE_ID,
+  TREES_SOURCE_LAYER_ID,
+} from './treesLayer'
 import { MapTilerLogo } from './MapTilerLogo'
 
 interface MapProps {
@@ -111,7 +117,7 @@ export const TreesMap: FC<MapProps> = ({
         })
       })
 
-      map.current.addSource(TREES_LAYER_ID, TREES_SOURCE)
+      map.current.addSource(TREES_SOURCE_ID, TREES_SOURCE)
       map.current.addLayer(TREES_LAYER)
     })
 
@@ -119,6 +125,7 @@ export const TreesMap: FC<MapProps> = ({
       if (!e.features) return
 
       const features = e.features
+      console.log(features[0])
 
       debouncedViewportChange.cancel()
       onSelect(features[0].properties?.trees_gml_id)
@@ -129,8 +136,8 @@ export const TreesMap: FC<MapProps> = ({
       if (hoveredTreeId) {
         map.current.setFeatureState(
           {
-            source: TREES_LAYER_ID,
-            sourceLayer: TREES_LAYER_ID,
+            source: TREES_SOURCE_ID,
+            sourceLayer: TREES_SOURCE_LAYER_ID,
             id: hoveredTreeId,
           },
           { hover: false }
@@ -142,8 +149,8 @@ export const TreesMap: FC<MapProps> = ({
 
         map.current.setFeatureState(
           {
-            source: TREES_LAYER_ID,
-            sourceLayer: TREES_LAYER_ID,
+            source: TREES_SOURCE_ID,
+            sourceLayer: TREES_SOURCE_LAYER_ID,
             id: e.features[0].id,
           },
           { hover: true }
@@ -157,8 +164,8 @@ export const TreesMap: FC<MapProps> = ({
       if (hoveredTreeId) {
         map.current.setFeatureState(
           {
-            source: TREES_LAYER_ID,
-            sourceLayer: TREES_LAYER_ID,
+            source: TREES_SOURCE_ID,
+            sourceLayer: TREES_SOURCE_LAYER_ID,
             id: hoveredTreeId,
           },
           { hover: false }

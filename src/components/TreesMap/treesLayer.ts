@@ -1,7 +1,14 @@
 import { LayerSpecification, SourceSpecification } from 'maplibre-gl'
 import colors from '../../style/colors'
 
-export const TREES_LAYER_ID = 'outfull'
+/** ID with which we can reference trees layer */
+export const TREES_LAYER_ID = 'trees'
+
+/** Name of the source in the vector tileset */
+export const TREES_SOURCE_ID = 'outfull'
+
+/** Name of the source layer in the vector tileset */
+export const TREES_SOURCE_LAYER_ID = 'outfull'
 
 export const TREES_SOURCE: SourceSpecification = {
   type: 'vector',
@@ -19,38 +26,33 @@ const CIRCLE_STROKE_WIDTH = {
 export const TREES_LAYER: LayerSpecification = {
   id: TREES_LAYER_ID,
   type: 'circle',
-  source: TREES_LAYER_ID,
-  'source-layer': TREES_LAYER_ID,
+  source: TREES_SOURCE_ID,
+  'source-layer': TREES_SOURCE_LAYER_ID,
   maxzoom: 24,
   minzoom: 0,
   paint: {
     'circle-color': [
       'case',
-      ['has', 'trees_pflanzjahr'],
+      ['has', 'nowcast_values_4'],
       [
         'interpolate',
         ['linear'],
-        /*
-      Note that the following color scale is simply for demonstration purposes.
-      In reality we will want to interpolate the color based on the Saugspannung value that will be available in the vector tile.
-      At that point, the pflanzjahr has to be replaced with the new field's name and the domain changed from years to the values domain.
-      */
-        ['get', 'trees_pflanzjahr'],
-        0, //0,
+        ['get', 'nowcast_values_4'],
+        0,
         colors.scale['1'],
-        1960, //0.125,
+        30,
         colors.scale['2'],
-        1970, //0.25,
+        60,
         colors.scale['3'],
-        1980, //0.375,
+        90,
         colors.scale['4'],
-        1990, //0.5,
+        120,
         colors.scale['5'],
-        2000, //0.625,
+        150,
         colors.scale['6'],
-        2010, //0.75,
+        180,
         colors.scale['7'],
-        2020, //0.875,
+        210,
         colors.scale['8'],
       ],
       colors.gray[200],
@@ -63,31 +65,26 @@ export const TREES_LAYER: LayerSpecification = {
     ],
     'circle-stroke-color': [
       'case',
-      ['has', 'trees_pflanzjahr'],
+      ['has', 'nowcast_values_4'],
       [
         'interpolate',
         ['linear'],
-        /*
-      Note that the following color scale is simply for demonstration purposes.
-      In reality we will want to interpolate the color based on the Saugspannung value that will be available in the vector tile.
-      At that point, the pflanzjahr has to be replaced with the new field's name and the domain changed from years to the values domain.
-      */
-        ['get', 'trees_pflanzjahr'],
-        0, //0,
+        ['get', 'nowcast_values_4'],
+        0,
         colors.scale['1-dark'],
-        1960, //0.125,
+        30,
         colors.scale['2-dark'],
-        1970, //0.25,
+        60,
         colors.scale['3-dark'],
-        1980, //0.375,
+        90,
         colors.scale['4-dark'],
-        1990, //0.5,
+        120,
         colors.scale['5-dark'],
-        2000, //0.625,
+        150,
         colors.scale['6-dark'],
-        2010, //0.75,
+        180,
         colors.scale['7-dark'],
-        2020, //0.875,
+        210,
         colors.scale['8-dark'],
       ],
       colors.gray[300],
