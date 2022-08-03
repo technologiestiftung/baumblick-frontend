@@ -88,9 +88,26 @@
 }
 
 /* Slick carousel adjustments */
+.slick-slider {
+	@apply h-full grid-cols-1 grid-rows-[1fr,auto] gap-4;
+	display: grid !important;
+}
+
 .slick-dots {
-	@apply px-4 mt-4 justify-evenly gap-4;
+	@apply px-4 justify-evenly gap-4;
 	display: flex !important;
+}
+
+.slick-track,
+.slick-slide {
+	height: 100%;
+}
+
+.slick-slide > div {
+	height: 100%;
+	display: grid !important;
+	grid-template-columns: 1fr;
+	grid-template-rows: 1fr auto;
 }
 
 .slick-dots > li {

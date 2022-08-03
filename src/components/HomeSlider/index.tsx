@@ -5,7 +5,7 @@ import 'slick-carousel/slick/slick.css'
 
 const HomeSlide: FC = ({ children }) => (
   <div className="px-4">
-    <div className="border border-gray-200 rounded-md h-96 grid grid-rows-[1fr,auto] grid-cols-1">
+    <div className="border border-gray-200 rounded-md h-full grid grid-rows-[1fr,auto] grid-cols-1">
       <div></div>
       <p className="p-4 font-serif border-t border-gray-100">{children}</p>
     </div>

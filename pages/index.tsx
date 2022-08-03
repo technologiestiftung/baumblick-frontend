@@ -19,14 +19,16 @@ export const Home: FC = () => {
   const { t } = useTranslation('common')
   return (
     <>
-      <Header />
-      <HomeSlider />
-      <div className="px-4 py-8">
-        <Button href="/map" primary className="w-full">
-          <GPS />
-          {t('home.cta')}
-        </Button>
-        <LegalLinks />
+      <div className="grid grid-cols-1 grid-rows-[auto,1fr,auto] h-full">
+        <Header />
+        <HomeSlider />
+        <div className="px-4 py-8">
+          <Button href="/map" primary className="w-full">
+            <GPS />
+            {t('home.cta')}
+          </Button>
+          <LegalLinks />
+        </div>
       </div>
     </>
   )
