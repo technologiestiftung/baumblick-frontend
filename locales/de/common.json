@@ -1,0 +1,23 @@
+{
+  "name": {
+    "short": "Qtrees",
+    "addition": "Baummonitor",
+    "full": "Qtrees Baummonitor"
+  },
+  "url": "qtrees.ai",
+  "time": {
+    "minShortened": "Min"
+  },
+  "stories": {
+    "title": "Stories",
+    "backToStoriesLink": "Zurück zu der Stories",
+    "contentsLink": "Inhalte"
+  },
+  "legend": {
+    "map": {
+      "title": "Wasserstand",
+      "start": "Trocken",
+      "end": "Versorgt"
+    }
+  }
+}

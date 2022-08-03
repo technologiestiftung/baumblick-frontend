@@ -14,8 +14,12 @@ import classNames from 'classnames'
 import { Button } from '@components/Button'
 import { Cross, HamburgerMenu } from '@components/Icons'
 import { StoryStickyHeader } from '@components/StoryStickyHeader'
+import useTranslation from 'next-translate/useTranslation'
+import I18nProvider from 'next-translate/I18nProvider'
+import commonDE from '../../locales/de/common.json'
 
-export const StoryLayout: FC = ({ children }) => {
+const StoryLayoutWithoutTranslation: FC = ({ children }) => {
+  const { t } = useTranslation('common')
   const { query } = useRouter()
   const contentRef = useRef<HTMLElement | null>(null)
   const [showStickyTableOfContents, setShowStickyTOC] = useState(false)
@@ -48,7 +52,7 @@ export const StoryLayout: FC = ({ children }) => {
           href="/stories"
           className="font-semibold text-gray-500 block mb-4"
         >
-          ← Zurück zu der Stories
+          ← {t('stories.backToStoriesLink')}
         </InternalLink>
         <div className="grid grid-cols-[1fr,auto] gap-2">
           <Headline h1>{story.title}</Headline>
@@ -61,7 +65,8 @@ export const StoryLayout: FC = ({ children }) => {
           />
         </div>
         <Paragraph className="italic text-gray-500">
-          {story.author} · {story.readingDurationInMinutes} Min
+          {story.author} · {story.readingDurationInMinutes}{' '}
+          {t('time.minShortened')}
         </Paragraph>
         {story.leadParagraph && (
           <LeadParagraph>{story.leadParagraph}</LeadParagraph>
@@ -121,9 +126,15 @@ export const StoryLayout: FC = ({ children }) => {
           href="/stories"
           className="font-semibold text-gray-500 block mt-8"
         >
-          ← Zurück zu der Stories
+          ← {t('stories.backToStoriesLink')}
         </InternalLink>
       </footer>
     </>
   )
 }
+
+export const StoryLayout: FC = ({ children }) => (
+  <I18nProvider lang="de" namespaces={{ common: commonDE }}>
+    <StoryLayoutWithoutTranslation>{children}</StoryLayoutWithoutTranslation>
+  </I18nProvider>
+)
