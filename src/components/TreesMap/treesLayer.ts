@@ -8,6 +8,12 @@ export const TREES_SOURCE: SourceSpecification = {
   tiles: [process.env.NEXT_PUBLIC_TREE_TILES_URL as string],
   maxzoom: 14,
   minzoom: 0,
+  promoteId: 'trees_gml_id',
+}
+
+const CIRCLE_STROKE_WIDTH = {
+  default: 1,
+  hovered: 5,
 }
 
 export const TREES_LAYER: LayerSpecification = {
@@ -49,7 +55,12 @@ export const TREES_LAYER: LayerSpecification = {
       ],
       colors.gray[200],
     ],
-    'circle-stroke-width': 1,
+    'circle-stroke-width': [
+      'case',
+      ['boolean', ['feature-state', 'hover'], false],
+      CIRCLE_STROKE_WIDTH.hovered,
+      CIRCLE_STROKE_WIDTH.default,
+    ],
     'circle-stroke-color': [
       'case',
       ['has', 'trees_pflanzjahr'],
