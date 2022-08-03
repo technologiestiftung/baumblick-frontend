@@ -74,7 +74,7 @@ const TreePage: TreePageWithLayout = ({ treeData }) => {
   )
 }
 
-TreePage.getLayout = function getLayout(page: ReactElement) {
+TreePage.getLayout = function getLayout(page) {
   return (
     <>
       <MapLayout />
