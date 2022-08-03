@@ -1,6 +1,5 @@
 import { LayerSpecification, SourceSpecification } from 'maplibre-gl'
 import colors from '../../style/colors'
-import chroma from 'chroma-js'
 
 export const TREES_LAYER_ID = 'outfull'
 
@@ -56,21 +55,21 @@ export const TREES_LAYER: LayerSpecification = {
       */
       ['get', 'trees_pflanzjahr'],
       0, //0,
-      chroma(colors.scale['1']).darken(0.5).hex(),
+      colors.scale['1-dark'],
       1960, //0.125,
-      chroma(colors.scale['2']).darken(0.5).hex(),
+      colors.scale['2-dark'],
       1970, //0.25,
-      chroma(colors.scale['3']).darken(0.5).hex(),
+      colors.scale['3-dark'],
       1980, //0.375,
-      chroma(colors.scale['4']).darken(0.5).hex(),
+      colors.scale['4-dark'],
       1990, //0.5,
-      chroma(colors.scale['5']).darken(0.5).hex(),
+      colors.scale['5-dark'],
       2000, //0.625,
-      chroma(colors.scale['6']).darken(0.5).hex(),
+      colors.scale['6-dark'],
       2010, //0.75,
-      chroma(colors.scale['7']).darken(0.5).hex(),
+      colors.scale['7-dark'],
       2020, //0.875,
-      chroma(colors.scale['8']).darken(0.5).hex(),
+      colors.scale['8-dark'],
     ],
     'circle-radius': [
       'interpolate',

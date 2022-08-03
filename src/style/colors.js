@@ -14,13 +14,21 @@ const colors = {
   },
   scale: {
     '1': '#fbe993',
+    '1-dark': '#F1DA6A',
     '2': '#DAE897',
+    '2-dark': '#C5D676',
     '3': '#BDE3A3',
+    '3-dark': '#A1CE83',
     '4': '#A2DFAF',
+    '4-dark': '#83C992',
     '5': '#8CD5BD',
+    '5-dark': '#71BCA3',
     '6': '#77D0CC',
+    '6-dark': '#5CB7B3',
     '7': '#6BC7D6',
+    '7-dark': '#4FB0BF',
     '8': '#53BCDC',
+    '8-dark': '#37A2C3',
   },
 }
 
