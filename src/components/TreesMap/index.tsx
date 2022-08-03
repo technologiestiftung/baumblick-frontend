@@ -62,14 +62,6 @@ export const TreesMap: FC<MapProps> = ({
     (viewport: URLViewportType): void => {
       const newQuery = { ...mappedQuery, ...viewport }
 
-      // Before replacing the URL with the map interaction, we need to check
-      // if navigation to a different route hasn't occurred before.
-      // This can happen when a tree is selected via `onSelect` which
-      // dispatches a router.push immediately.
-      // This results in the router expecting a query paramter for the tree ID
-      // which is not present in this viewport change.
-      if (pathname !== '/trees') return
-
       void replace({ pathname, query: newQuery }, undefined, { shallow: true })
     },
     1000
@@ -109,12 +101,6 @@ export const TreesMap: FC<MapProps> = ({
     map.current.on('load', function () {
       if (!map.current) return
 
-      map.current.on('zoomend', (e) => {
-        debouncedViewportChange({
-          zoom: e.target.transform._zoom,
-        })
-      })
-
       map.current.on('moveend', (e) => {
         debouncedViewportChange({
           latitude: e.target.transform._center.lat,
@@ -132,6 +118,7 @@ export const TreesMap: FC<MapProps> = ({
 
       const features = e.features
 
+      debouncedViewportChange.cancel()
       onSelect(features[0].properties?.trees_gml_id)
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
