@@ -1,7 +1,7 @@
 import { LayerSpecification, SourceSpecification } from 'maplibre-gl'
 import colors from '../../style/colors'
 
-export const TREES_LAYER_ID = 'trees'
+export const TREES_LAYER_ID = 'outfull'
 
 export const TREES_SOURCE: SourceSpecification = {
   type: 'vector',
@@ -14,7 +14,7 @@ export const TREES_LAYER: LayerSpecification = {
   id: TREES_LAYER_ID,
   type: 'circle',
   source: TREES_LAYER_ID,
-  'source-layer': 'trees',
+  'source-layer': TREES_LAYER_ID,
   maxzoom: 24,
   minzoom: 0,
   paint: {
@@ -26,7 +26,7 @@ export const TREES_LAYER: LayerSpecification = {
       In reality we will want to interpolate the color based on the Saugspannung value that will be available in the vector tile.
       At that point, the pflanzjahr has to be replaced with the new field's name and the domain changed from years to the values domain.
       */
-      ['get', 'pflanzjahr'],
+      ['get', 'trees_pflanzjahr'],
       0, //0,
       colors.scale['1'],
       1960, //0.125,
@@ -53,7 +53,7 @@ export const TREES_LAYER: LayerSpecification = {
       In reality we will want to interpolate the color based on the Saugspannung value that will be available in the vector tile.
       At that point, the pflanzjahr has to be replaced with the new field's name and the domain changed from years to the values domain.
       */
-      ['get', 'pflanzjahr'],
+      ['get', 'trees_pflanzjahr'],
       0, //0,
       colors.scale['1-dark'],
       1960, //0.125,
