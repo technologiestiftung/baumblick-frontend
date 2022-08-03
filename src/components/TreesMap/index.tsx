@@ -61,6 +61,7 @@ export const TreesMap: FC<MapProps> = ({
   const debouncedViewportChange = useDebouncedCallback(
     (viewport: URLViewportType): void => {
       const newQuery = { ...mappedQuery, ...viewport }
+
       void replace({ pathname, query: newQuery }, undefined, { shallow: true })
     },
     1000
@@ -100,12 +101,6 @@ export const TreesMap: FC<MapProps> = ({
     map.current.on('load', function () {
       if (!map.current) return
 
-      map.current.on('zoomend', (e) => {
-        debouncedViewportChange({
-          zoom: e.target.transform._zoom,
-        })
-      })
-
       map.current.on('moveend', (e) => {
         debouncedViewportChange({
           latitude: e.target.transform._center.lat,
@@ -123,7 +118,8 @@ export const TreesMap: FC<MapProps> = ({
 
       const features = e.features
 
-      onSelect(features[0].properties?.baumid)
+      debouncedViewportChange.cancel()
+      onSelect(features[0].properties?.trees_gml_id)
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])

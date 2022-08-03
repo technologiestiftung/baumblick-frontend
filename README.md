@@ -17,11 +17,16 @@ This website is a NextJS app configured with:
 - Linting, typechecking and formatting on by default using [`husky`](https://github.com/typicode/husky) for commit hooks
 - Testing with [Jest](https://jestjs.io/) and [`react-testing-library`](https://testing-library.com/docs/react-testing-library/intro)
 
-## Install and contribute
+## Getting started
 
 ### Requirements
 
-#### [MapTiler](https://maptiler.com/)
+#### Node.js
+
+This project is a Next.js app which requires you to have [Node.js](https://nodejs.org/en/) installed.
+
+#### MapTiler
+
 We use [MapTiler](https://maptiler.com/) for rendering the basemap in the background. You will need to put your MapTiler API key into the `NEXT_PUBLIC_MAPTILER_KEY` environment variable. Make also sure to add whatever URL the app is run on to the list of allowed URLs in your MapTiler configuration.
 
 Because we use a customized basemap hosted on MapTiler, you also need to provide the `NEXT_PUBLIC_MAPTILER_BASEMAP_URL`.
@@ -30,34 +35,62 @@ Both variables can be found in our shared vault.
 
 #### Trees vector tiles
 
-We fetch the actual trees data from our self-hosted tileserver as a vector tileset. Add the URL to that tileset to the environment variable `NEXT_PUBLIC_TREE_TILES_URL`. Find the variable in our shared vault as well.
+We fetch the trees vector tileset from our self-hosted tileserver. Add the URL to that tileset to the environment variable `NEXT_PUBLIC_TREE_TILES_URL`. Find the variable in our shared vault as well.
 
-#### [Matomo](https://matomo.org/)
-We use the Google Analytics alternative [Matomo](https://matomo.org/), which is more respectful of the users' privacy, in order to track the page-visits on the page.
+#### Trees API (using Supabase)
 
-You will need a [Matomo](https://matomo.org/) account if you wish to use page analytics as well and configure the environment variables `NEXT_PUBLIC_MATOMO_URL` and `NEXT_PUBLIC_MATOMO_SITE_ID` for this purpose.
+We use a small "passthrough" API which exposes all the data that is required. The API is deployed as a Supabase Edge Function. Make sure to include the necessary environment variables as specified in `.env.example`.
 
 ### Installation
 
+Clone the repository to your local machine:
+
 ```bash
-# Clone the repo
 git clone git@github.com:technologiestiftung/qtrees-citizens-frontend.git
+```
 
-# Move into the repo
+Move into the repository folder:
+
+```bash
 cd qtrees-citizens-frontend
+```
 
-# Install the npm dependencies
+Make sure you use the Node.js version specified in `.nvmrc`. Find out which Node version you're currently on with:
+
+```bash
+node --version
+```
+
+If this version differs from the one specified in `.nvmrc`, please install the required version, either manually, or using a tool such as [nvm](https://github.com/nvm-sh/nvm), which allows switching to the correct version via:
+
+```bash
+nvm use
+```
+
+With the correct Node version, install the dependencies:
+
+```bash
 npm install
+```
 
-# Create your own .env file
-cp .env.example .env
+Because we use Supabase for accessing the database, you will need to provide connection details in your environment. In this repository you can find a file `.env.example`. Duplicate this file and name it `.env`.
 
-# Edit the .env file with your own values
-vim .env # Use your favourite editor here
+In `.env` you must enter the connection details for Supabase as suggested in `.env.example`. If you do not know how to obtain the necessary details, please ask a repository maintainer for access.
+
+You are now ready to start a local development server on http://localhost:3000 via:
+
+```bash
+npm run dev
 ```
 
 ## Deployment
 _Qtrees – Citizens Frontend_ is deployed to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+
+## Page analytics
+
+We use [Matomo](https://matomo.org/) for website analytics. Matomo is respectful of the users' privacy, the page visits are tracked anonymously.
+
+In the production environment, a `NEXT_PUBLIC_MATOMO_URL` and `NEXT_PUBLIC_MATOMO_SITE_ID` is configured for this purpose.
 
 ## Contributors
 
