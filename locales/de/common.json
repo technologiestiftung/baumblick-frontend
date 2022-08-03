@@ -10,6 +10,7 @@
   },
   "home": {
     "cta": "Baum finden",
+    "ctaLoading": "Lädt...",
     "slides": {
       "1": "Der QTrees Baummonitor zeigt dir den <0>Wasserstand der Berliner Stadtbäume</0> - von <1/> gut versorgt bis <2/> bedenklich trocken.",
       "2": "<0>Wie das funktioniert?</0> Mit einem KI-Modell berechnen wir täglich den Wasserstand der 800.000 Berliner Stadtbäume.",

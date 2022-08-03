@@ -66,9 +66,16 @@ const renderChildren = ({ children, primary }: ButtonPropType): ReactNode => (
 )
 
 export const Button: FC<ButtonPropType> = (props) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { primary, ...restProps } = props
   if (!props.href) {
     return (
-      <span tabIndex={0} {...props} className={getStyles(props)} role="button">
+      <span
+        tabIndex={props.disabled ? -1 : 0}
+        {...restProps}
+        className={getStyles(props)}
+        role="button"
+      >
         {renderChildren(props)}
       </span>
     )
@@ -76,7 +83,7 @@ export const Button: FC<ButtonPropType> = (props) => {
   if (props.href?.startsWith('/')) {
     return (
       <InternalLink
-        {...props}
+        {...restProps}
         href={props.href || '/'}
         className={getStyles(props)}
       >
@@ -89,7 +96,7 @@ export const Button: FC<ButtonPropType> = (props) => {
       className={getStyles(props)}
       rel="noreferrer noopener"
       target="_blank"
-      {...props}
+      {...restProps}
     >
       {renderChildren(props)}
     </a>
