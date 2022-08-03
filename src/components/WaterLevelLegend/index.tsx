@@ -17,6 +17,12 @@ const wrapperWhenExpandedStyles = classNames(
   'flex flex-wrap place-content-between'
 )
 
+const legendColors = Object.entries(colors.scale)
+  .filter(([colorKey]) => {
+    return !colorKey.includes('-dark')
+  })
+  .map(([, colorValue]) => colorValue)
+
 export const WaterLevelLegend: FC<WaterLevelLegendType> = ({
   collapsable = false,
   initiallyCollapsed = false,
@@ -49,7 +55,7 @@ export const WaterLevelLegend: FC<WaterLevelLegendType> = ({
           'grid grid-flow-col gap-0'
         )}
       >
-        {Object.values(colors.scale).map((color) => {
+        {legendColors.map((color) => {
           return (
             <div
               key={color}
