@@ -3,6 +3,7 @@ import { GetServerSideProps } from 'next'
 import { FC } from 'react'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
+import Trans from 'next-translate/Trans'
 
 // eslint-disable-next-line @typescript-eslint/require-await
 export const getServerSideProps: GetServerSideProps = async ({ query }) => ({
@@ -28,22 +29,53 @@ const LegendDot: FC<{ className: string }> = ({ className }) => (
 )
 
 export const Home: FC = () => {
+  const formattingComponents = [
+    /* eslint-disable react/jsx-key */
+    <strong />,
+    <LegendDot className="bg-scale-8 border-scale-8-dark" />,
+    <LegendDot className="bg-scale-1 border-scale-1-dark" />,
+    /* eslint-enable react/jsx-key */
+  ]
   return (
     <>
       <Header />
       <Slider arrows={false} infinite={false} dots>
         <HomeSlide>
-          Der QTrees Baummonitor zeigt dir den{' '}
-          <b>Wasserstand der Berliner Stadtbäume</b> - von{' '}
-          <LegendDot className="bg-scale-8 border-scale-8-dark" /> gut versorgt
-          bis <LegendDot className="bg-scale-1 border-scale-1-dark" />{' '}
-          bedenklich trocken.
+          <Trans
+            i18nKey="common:home.slides.1"
+            components={formattingComponents}
+          />
         </HomeSlide>
-        <HomeSlide>B</HomeSlide>
-        <HomeSlide>C</HomeSlide>
-        <HomeSlide>D</HomeSlide>
-        <HomeSlide>E</HomeSlide>
-        <HomeSlide>F</HomeSlide>
+        <HomeSlide>
+          <Trans
+            i18nKey="common:home.slides.2"
+            components={formattingComponents}
+          />
+        </HomeSlide>
+        <HomeSlide>
+          <Trans
+            i18nKey="common:home.slides.3"
+            components={formattingComponents}
+          />
+        </HomeSlide>
+        <HomeSlide>
+          <Trans
+            i18nKey="common:home.slides.4"
+            components={formattingComponents}
+          />
+        </HomeSlide>
+        <HomeSlide>
+          <Trans
+            i18nKey="common:home.slides.5"
+            components={formattingComponents}
+          />
+        </HomeSlide>
+        <HomeSlide>
+          <Trans
+            i18nKey="common:home.slides.6"
+            components={formattingComponents}
+          />
+        </HomeSlide>
       </Slider>
     </>
   )
