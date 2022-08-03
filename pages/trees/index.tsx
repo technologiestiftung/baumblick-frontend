@@ -33,7 +33,7 @@ MapPage.getLayout = function getLayout(page, props) {
         longitude={props.query?.longitude || undefined}
         zoom={props.query?.zoom || undefined}
         onTreeSelect={(treeId) => {
-          void router.push({ pathname: `/trees/${treeId}`, query: null })
+          void router.push({ pathname: '/trees/[id]', query: { id: treeId } })
         }}
       />
       {page}
