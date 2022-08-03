@@ -10,6 +10,8 @@ export const TREES_SOURCE_ID = 'outfull'
 /** Name of the source layer in the vector tileset */
 export const TREES_SOURCE_LAYER_ID = 'outfull'
 
+const NOWCAST_AVERAGE_PROPERTY = 'nowcast_values_4'
+
 export const TREES_SOURCE: SourceSpecification = {
   type: 'vector',
   tiles: [process.env.NEXT_PUBLIC_TREE_TILES_URL as string],
@@ -33,11 +35,11 @@ export const TREES_LAYER: LayerSpecification = {
   paint: {
     'circle-color': [
       'case',
-      ['has', 'nowcast_values_4'],
+      ['has', NOWCAST_AVERAGE_PROPERTY],
       [
         'interpolate',
         ['linear'],
-        ['get', 'nowcast_values_4'],
+        ['get', NOWCAST_AVERAGE_PROPERTY],
         0,
         colors.scale['1'],
         30,
@@ -65,11 +67,11 @@ export const TREES_LAYER: LayerSpecification = {
     ],
     'circle-stroke-color': [
       'case',
-      ['has', 'nowcast_values_4'],
+      ['has', NOWCAST_AVERAGE_PROPERTY],
       [
         'interpolate',
         ['linear'],
-        ['get', 'nowcast_values_4'],
+        ['get', NOWCAST_AVERAGE_PROPERTY],
         0,
         colors.scale['1-dark'],
         30,
