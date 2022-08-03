@@ -87,6 +87,23 @@
 	}
 }
 
+/* Slick carousel adjustments */
+.slick-dots {
+	@apply px-4 mt-4 justify-evenly gap-4;
+	display: flex !important;
+}
+
+.slick-dots > li {
+	@apply w-full h-1;
+}
+.slick-dots > li > button {
+	@apply w-full h-1 rounded-full bg-gray-300 transition-colors indent-[100%] whitespace-nowrap overflow-hidden;
+}
+
+.slick-dots > li.slick-active > button {
+	@apply bg-gray-900;
+}
+
 /* MapLibre control adjustments */
 .maplibregl-ctrl-attrib.maplibregl-compact {
 	min-height: 24px !important;
