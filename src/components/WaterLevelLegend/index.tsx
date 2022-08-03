@@ -2,6 +2,7 @@ import { ArrowsDiagonal } from '@components/Icons/ArrowsDiagonal'
 import { ArrowsDiagonalMinimize2 } from '@components/Icons/ArrowsDiagonalMinimize2'
 import classNames from 'classnames'
 import { FC, useState } from 'react'
+import useTranslation from 'next-translate/useTranslation'
 import colors from '../../style/colors'
 
 export interface WaterLevelLegendType {
@@ -22,6 +23,7 @@ export const WaterLevelLegend: FC<WaterLevelLegendType> = ({
   initiallyCollapsed = false,
   hasShadow = false,
 }) => {
+  const { t } = useTranslation('common')
   const [isCollapsed, setIsCollapsed] = useState(initiallyCollapsed)
 
   const toggleCollapsed = (): void => {
@@ -36,7 +38,9 @@ export const WaterLevelLegend: FC<WaterLevelLegendType> = ({
         hasShadow && !isCollapsed && 'shadow-md'
       )}
     >
-      {!isCollapsed && <h2 className="w-full font-semibold">Wasserstand</h2>}
+      {!isCollapsed && (
+        <h2 className="w-full font-semibold">{t('legend.map.title')}</h2>
+      )}
       <div
         className={classNames(
           'mt-2 mb-1',
@@ -64,8 +68,12 @@ export const WaterLevelLegend: FC<WaterLevelLegendType> = ({
       </div>
       {!isCollapsed && (
         <>
-          <span className="text-xs font-semibold text-gray-800">Trocken</span>
-          <span className="text-xs font-semibold text-gray-800">Versorgt</span>
+          <span className="text-xs font-semibold text-gray-800">
+            {t('legend.map.start')}
+          </span>
+          <span className="text-xs font-semibold text-gray-800">
+            {t('legend.map.end')}
+          </span>
         </>
       )}
       {collapsable && (
