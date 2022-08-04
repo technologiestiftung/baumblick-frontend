@@ -53,3 +53,15 @@ LongTitle.args = {
   statusBorderColor: 'border-scale-4-dark',
   isCompressed: true,
 }
+
+export const WithAdditionalClasses = Template.bind({})
+
+WithAdditionalClasses.args = {
+  species: 'Kaiser-Linde',
+  height: 12,
+  age: 50,
+  statusBackgroundColor: 'bg-scale-4',
+  statusBorderColor: 'border-scale-4-dark',
+  isCompressed: true,
+  additionalClasses: 'shadow-md',
+}
