@@ -32,6 +32,9 @@ export const TREES_LAYER: LayerSpecification = {
   'source-layer': TREES_SOURCE_LAYER_ID,
   maxzoom: 24,
   minzoom: 0,
+  layout: {
+    'circle-sort-key': ['to-number', ['get', NOWCAST_AVERAGE_PROPERTY]],
+  },
   paint: {
     'circle-color': [
       'case',
