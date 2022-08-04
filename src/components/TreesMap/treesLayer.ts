@@ -33,7 +33,7 @@ export const TREES_LAYER: LayerSpecification = {
   maxzoom: 24,
   minzoom: 0,
   layout: {
-    'circle-sort-key': ['to-number', ['get', NOWCAST_AVERAGE_PROPERTY]],
+    'circle-sort-key': ['get', NOWCAST_AVERAGE_PROPERTY],
   },
   paint: {
     'circle-color': [
