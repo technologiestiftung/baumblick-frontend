@@ -22,7 +22,7 @@ export const HomeSlider: FC = () => {
   const formattingComponents = [
     /* eslint-disable react/jsx-key */
     <strong />,
-    <LegendDot className="bg-scale-8 border-scale-8-dark" />,
+    <LegendDot className="bg-scale-5 border-scale-5-dark" />,
     <LegendDot className="bg-scale-1 border-scale-1-dark" />,
     /* eslint-enable react/jsx-key */
   ]

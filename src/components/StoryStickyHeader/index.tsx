@@ -12,9 +12,6 @@ const scaleClasses = [
   'bg-scale-3',
   'bg-scale-4',
   'bg-scale-5',
-  'bg-scale-6',
-  'bg-scale-7',
-  'bg-scale-8',
 ]
 
 interface StoryStickyHeaderPropsType {
@@ -43,7 +40,7 @@ export const StoryStickyHeader: FC<StoryStickyHeaderPropsType> = ({
       </InternalLink>
       <story.Icon
         size={32}
-        color1={colors.scale[8]}
+        color1={colors.scale[5]}
         color2={colors.scale[5]}
         color3={colors.scale[2]}
       />
