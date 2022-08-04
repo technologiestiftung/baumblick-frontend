@@ -5,7 +5,13 @@ import { mapRawQueryToState } from '@lib/utils/queryUtil'
 import { useRouter } from 'next/router'
 import { useDebouncedCallback } from 'use-debounce'
 import { ViewportProps } from '@lib/types/map'
-import { TREES_LAYER_ID, TREES_LAYER, TREES_SOURCE } from './treesLayer'
+import {
+  TREES_LAYER_ID,
+  TREES_LAYER,
+  TREES_SOURCE,
+  TREES_SOURCE_ID,
+  TREES_SOURCE_LAYER_ID,
+} from './treesLayer'
 import { MapTilerLogo } from './MapTilerLogo'
 
 interface MapProps {
@@ -84,6 +90,8 @@ export const TreesMap: FC<MapProps> = ({
 
     if (!map.current) return
 
+    let hoveredTreeId: string | null = null
+
     map.current.addControl(
       new maplibregl.AttributionControl({ compact: true }),
       'bottom-left'
@@ -109,7 +117,7 @@ export const TreesMap: FC<MapProps> = ({
         })
       })
 
-      map.current.addSource(TREES_LAYER_ID, TREES_SOURCE)
+      map.current.addSource(TREES_SOURCE_ID, TREES_SOURCE)
       map.current.addLayer(TREES_LAYER)
     })
 
@@ -117,10 +125,56 @@ export const TreesMap: FC<MapProps> = ({
       if (!e.features) return
 
       const features = e.features
+      console.log(features[0])
 
       debouncedViewportChange.cancel()
       onSelect(features[0].properties?.trees_gml_id)
     })
+
+    map.current.on('mousemove', TREES_LAYER_ID, function (e) {
+      if (!map.current || !e.features || e.features.length === 0) return
+      if (hoveredTreeId) {
+        map.current.setFeatureState(
+          {
+            source: TREES_SOURCE_ID,
+            sourceLayer: TREES_SOURCE_LAYER_ID,
+            id: hoveredTreeId,
+          },
+          { hover: false }
+        )
+      }
+
+      if (e.features[0].id) {
+        hoveredTreeId = e.features[0].id as string
+
+        map.current.setFeatureState(
+          {
+            source: TREES_SOURCE_ID,
+            sourceLayer: TREES_SOURCE_LAYER_ID,
+            id: e.features[0].id,
+          },
+          { hover: true }
+        )
+      }
+    })
+
+    map.current.on('mouseleave', TREES_LAYER_ID, function () {
+      if (!map.current) return
+
+      if (hoveredTreeId) {
+        map.current.setFeatureState(
+          {
+            source: TREES_SOURCE_ID,
+            sourceLayer: TREES_SOURCE_LAYER_ID,
+            id: hoveredTreeId,
+          },
+          { hover: false }
+        )
+      }
+
+      hoveredTreeId = null
+    })
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
