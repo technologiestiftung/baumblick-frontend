@@ -8,6 +8,18 @@
   "time": {
     "minShortened": "Min"
   },
+  "home": {
+    "cta": "Baum finden",
+    "ctaLoading": "Lädt...",
+    "slides": {
+      "1": "Der QTrees Baummonitor zeigt dir den <0>Wasserstand der Berliner Stadtbäume</0> - von <1/> gut versorgt bis <2/> bedenklich trocken.",
+      "2": "<0>Wie das funktioniert?</0> Mit einem KI-Modell berechnen wir täglich den Wasserstand der 800.000 Berliner Stadtbäume.",
+      "3": "Der QTrees Baummonitor zeigt dir den <0>Wasserstand der Berliner Stadtbäume</0> - von <1/> gut versorgt bis <2/> bedenklich trocken.",
+      "4": "Der QTrees Baummonitor zeigt dir den <0>Wasserstand der Berliner Stadtbäume</0> - von <1/> gut versorgt bis <2/> bedenklich trocken.",
+      "5": "Der QTrees Baummonitor zeigt dir den <0>Wasserstand der Berliner Stadtbäume</0> - von <1/> gut versorgt bis <2/> bedenklich trocken.",
+      "6": "Der QTrees Baummonitor zeigt dir den <0>Wasserstand der Berliner Stadtbäume</0> - von <1/> gut versorgt bis <2/> bedenklich trocken."
+    }
+  },
   "stories": {
     "title": "Stories",
     "backToStoriesLink": "Zurück zu der Stories",
@@ -19,5 +31,9 @@
       "start": "Trocken",
       "end": "Versorgt"
     }
+  },
+  "legal": {
+    "imprint": "Impressum",
+    "privacy": "Datenschutz"
   }
 }
