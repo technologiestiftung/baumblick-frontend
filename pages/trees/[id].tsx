@@ -1,10 +1,12 @@
-import type { ReactElement, ReactNode } from 'react'
+import { ReactElement, ReactNode } from 'react'
 import { MapLayout } from '@layouts/MapLayout'
 import classNames from 'classnames'
 import { GetServerSideProps, NextPage } from 'next'
 import { getTreeData, TreeDataType } from '@lib/requests/getTreeData'
 import { useNowcastData } from '@lib/hooks/useNowcastData'
 import { TreeInfoHeader } from '@components/TreeInfoHeader'
+import { DataListItem } from '@components/DataListItem'
+import { mapNowcastToScale } from '@lib/utils/mapNowcastToScale'
 
 type TreePageWithLayout = NextPage<{
   treeData: TreeDataType
@@ -47,28 +49,68 @@ const TreePage: TreePageWithLayout = ({ treeData }) => {
 
   return (
     <div
+      style={{ height: 'calc(100vh - 4rem)' }}
       className={classNames(
-        'absolute bottom-0 left-0 min-h-[75vh] bg-white w-full rounded-t-xl shadow-md z-10'
+        'absolute bottom-0 left-0 w-full',
+        'z-10',
+        'grid grid-cols-1 grid-rows-[106px,1fr] gap-0'
       )}
     >
-      <TreeInfoHeader
-        species={treeData.art_dtsch || 'Unbekannte Art'}
-        age={treeData.standalter}
-        height={treeData.baumhoehe}
-      />
-      {nowcastData && !nowcastIsLoading && !nowcastError && (
+      <div
+        className={classNames(
+          'bg-white',
+          'rounded-t-2xl shadow-[0_-12px_24px_-16px_rgba(0,0,0,0.3)]',
+          'row-start-2 row-span-1',
+          'overflow-y-scroll'
+        )}
+      >
+        <TreeInfoHeader
+          species={treeData.art_dtsch || 'Unbekannte Art'}
+          age={treeData.standalter}
+          height={treeData.baumhoehe}
+        />
         <ul>
-          {nowcastData.map((item) => {
-            return (
-              <li key={item.id} className="mt-3 grid grid-cols-1">
-                <span>{item?.timestamp}</span>
-                <span>{item?.value}</span>
-                <span>{item?.type_id}</span>
-              </li>
-            )
-          })}
+          <DataListItem
+            title="Saugspannung"
+            subtitle="⌀ aus 30, 60, 90 cm Tiefe"
+            value={
+              nowcastData &&
+              !nowcastIsLoading &&
+              !nowcastError &&
+              nowcastData[3].value
+                ? mapNowcastToScale(nowcastData[3].value)
+                : '-'
+            }
+          />
+          <DataListItem
+            title="Regenmenge"
+            subtitle="Letzte 14 Tage"
+            value={`${Math.floor(Math.random() * (800 - 1) + 1)} l`}
+          />
+          <DataListItem
+            title="Baumscheibe"
+            subtitle="Unversiegelter Bereich um den Stamm"
+            value={`${(Math.random() * (8 - 1) + 1).toFixed(1)} qm`}
+          />
+          <DataListItem
+            title="Verschattung"
+            subtitle="Anteil an Schattenzeit pro Tag"
+            value={`${Math.floor(Math.random() * (100 - 1) + 1)} %`}
+          />
+          <DataListItem
+            title="Gießwassermenge"
+            subtitle="Letzte 14 Tage"
+            value={`${Math.floor(Math.random() * (500 - 1) + 1)} l`}
+          />
+          {treeData.stammumfg && (
+            <DataListItem
+              title="Stammumfang"
+              subtitle="An der weitesten Stelle"
+              value={`${treeData.stammumfg} cm`}
+            />
+          )}
         </ul>
-      )}
+      </div>
     </div>
   )
 }
