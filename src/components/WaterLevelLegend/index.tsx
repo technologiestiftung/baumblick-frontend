@@ -12,9 +12,7 @@ export interface WaterLevelLegendType {
 }
 
 const legendColors = Object.entries(colors.scale)
-  .filter(([colorKey]) => {
-    return !colorKey.includes('-dark')
-  })
+  .filter(([colorKey]) => !colorKey.includes('-dark'))
   .map(([, colorValue]) => colorValue)
 
 export const WaterLevelLegend: FC<WaterLevelLegendType> = ({
@@ -34,9 +32,9 @@ export const WaterLevelLegend: FC<WaterLevelLegendType> = ({
         'relative inline-block min-w-[75px]',
         collapsable && isCollapsed && 'translate-y-3',
         !collapsable && 'translate-y-0.5',
-        collapsable && 'px-4',
+        collapsable && 'px-3',
         !isCollapsed && [
-          'py-3',
+          'py-2',
           'bg-white',
           'rounded-sm border border-gray-200',
           'flex flex-wrap place-content-between',
@@ -45,30 +43,33 @@ export const WaterLevelLegend: FC<WaterLevelLegendType> = ({
       )}
     >
       {!isCollapsed && (
-        <h2 className="w-full font-semibold">{t('legend.map.title')}</h2>
+        <h2 className="w-full text-sm font-semibold">
+          {t('legend.map.title')}
+        </h2>
       )}
       <div
         className={classNames(
-          collapsable && 'mt-2 mb-1',
-          'w-full h-3',
+          collapsable && 'my-1',
+          'w-full',
           'bg-gray-200',
           'rounded-full',
-          isCollapsed
-            ? 'ring-2 ring-white'
-            : 'ring-2 ring-offset-0 ring-gray-200',
+          isCollapsed && 'ring-2 ring-white',
           'grid grid-flow-col gap-0'
         )}
       >
-        {legendColors.map((color) => {
+        {legendColors.map((color, idx) => {
           return (
             <div
               key={color}
               style={{ backgroundColor: color }}
               className={classNames(
-                'w-auto h-full',
-                'first-of-type:rounded-l-full last-of-type:rounded-r-full'
+                'w-auto h-full text-xs flex text-center place-content-center',
+                'first-of-type:rounded-l-full last-of-type:rounded-r-full',
+                'text-gray-900/50'
               )}
-            ></div>
+            >
+              {idx + 1}
+            </div>
           )
         })}
       </div>

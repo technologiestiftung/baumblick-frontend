@@ -27,9 +27,9 @@
   },
   "legend": {
     "map": {
-      "title": "Wasserstand",
-      "start": "Trocken",
-      "end": "Versorgt"
+      "title": "Saugspannung",
+      "start": "Gering",
+      "end": "Hoch"
     }
   },
   "legal": {

@@ -10,13 +10,13 @@ describe('WaterLevelLegend component', () => {
         <WaterLevelLegend collapsable />
       </I18nProvider>
     )
-    const title = screen.getByText(/Wasserstand/i)
+    const title = screen.getByText(/Saugspannung/i)
     expect(title).toBeInTheDocument()
 
-    const min = screen.getByText(/Trocken/i)
+    const min = screen.getByText(/Gering/i)
     expect(min).toBeInTheDocument()
 
-    const max = screen.getByText(/Versorgt/i)
+    const max = screen.getByText(/Hoch/i)
     expect(max).toBeInTheDocument()
 
     const button = screen.getByRole('button')
