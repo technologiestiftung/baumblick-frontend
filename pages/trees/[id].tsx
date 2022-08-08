@@ -7,6 +7,7 @@ import { useNowcastData } from '@lib/hooks/useNowcastData'
 import { TreeInfoHeader } from '@components/TreeInfoHeader'
 import { DataListItem } from '@components/DataListItem'
 import { mapSuctionTensionToLevel } from '@lib/utils/mapSuctionTensionToLevel'
+import { SuctionTensionViz } from '@components/SuctionTensionViz'
 
 type TreePageWithLayout = NextPage<{
   treeData: TreeDataType
@@ -65,6 +66,31 @@ const TreePage: TreePageWithLayout = ({ treeData }) => {
           'motion-safe:animate-slide-up'
         )}
       >
+        {!nowcastError && (
+          <SuctionTensionViz
+            depth30Level={
+              nowcastData && nowcastData[0].value
+                ? mapSuctionTensionToLevel(nowcastData[0].value)
+                : undefined
+            }
+            depth60Level={
+              nowcastData && nowcastData[1].value
+                ? mapSuctionTensionToLevel(nowcastData[1].value)
+                : undefined
+            }
+            depth90Level={
+              nowcastData && nowcastData[2].value
+                ? mapSuctionTensionToLevel(nowcastData[2].value)
+                : undefined
+            }
+            averageLevel={
+              nowcastData && nowcastData[3].value
+                ? mapSuctionTensionToLevel(nowcastData[3].value)
+                : undefined
+            }
+          />
+        )}
+
         <TreeInfoHeader
           species={treeData.art_dtsch || 'Unbekannte Art'}
           age={treeData.standalter}
