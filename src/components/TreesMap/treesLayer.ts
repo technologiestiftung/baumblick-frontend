@@ -53,7 +53,6 @@ export const TREES_NUMBERS: LayerSpecification = {
       ],
       '',
     ],
-    'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
     'text-size': 12,
   },
   paint: {
