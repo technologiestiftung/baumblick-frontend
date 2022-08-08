@@ -66,6 +66,7 @@ export const TreesMap: FC<MapProps> = ({
 
   const debouncedViewportChange = useDebouncedCallback(
     (viewport: URLViewportType): void => {
+      if (pathname !== 'trees') return
       const newQuery = { ...mappedQuery, ...viewport }
 
       void replace({ pathname, query: newQuery }, undefined, { shallow: true })
