@@ -1,16 +1,16 @@
 import { SuctionTensionLevel } from '@lib/utils/mapSuctionTensionToLevel'
 import classNames from 'classnames'
 import { FC } from 'react'
-import colors from 'src/style/colors'
+import colors from '../../style/colors'
 
 export const SoilLayer: FC<{
-  level: SuctionTensionLevel
+  level: SuctionTensionLevel | undefined
   depth: number
 }> = ({ depth, level }) => (
   <div
-    style={{ backgroundColor: colors.scale[level] }}
+    style={{ backgroundColor: level ? colors.scale[level] : colors.gray[300] }}
     className={classNames('h-20', 'pl-6', 'flex items-center')}
-    aria-label={`Tiefe: ${depth} cm, Stufe: ${level}`}
+    aria-label={`Tiefe: ${depth} cm, Stufe: ${level || 'unbekannt'}`}
   >
     <span
       className={classNames(
@@ -19,7 +19,7 @@ export const SoilLayer: FC<{
         'px-2 py-1'
       )}
     >
-      {depth} cm <b className="ml-1 pr-1">{level}</b>
+      {depth} cm <b className="ml-1 pr-1">{level || '-'}</b>
     </span>
   </div>
 )

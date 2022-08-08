@@ -19,3 +19,9 @@ Default.args = {
   depth90Level: 2,
   averageLevel: 5,
 }
+
+export const WithMissingLevels = Template.bind({})
+
+WithMissingLevels.args = {
+  depth30Level: 1,
+}

@@ -2,15 +2,15 @@ import { RootsIllustration } from '@components/RootsIllustration'
 import { SuctionTensionLevel } from '@lib/utils/mapSuctionTensionToLevel'
 import classNames from 'classnames'
 import { FC } from 'react'
-import colors from 'src/style/colors'
+import colors from '../../style/colors'
 import { AverageCircle } from './AverageCircle'
 import { SoilLayer } from './SoilLayer'
 
 export interface SuctionTensionVizType {
-  depth30Level: SuctionTensionLevel
-  depth60Level: SuctionTensionLevel
-  depth90Level: SuctionTensionLevel
-  averageLevel: SuctionTensionLevel
+  depth30Level: SuctionTensionLevel | undefined
+  depth60Level: SuctionTensionLevel | undefined
+  depth90Level: SuctionTensionLevel | undefined
+  averageLevel: SuctionTensionLevel | undefined
 }
 
 export const SuctionTensionViz: FC<SuctionTensionVizType> = ({
