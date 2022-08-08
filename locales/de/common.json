@@ -12,12 +12,12 @@
     "cta": "Baum finden",
     "ctaLoading": "Lädt...",
     "slides": {
-      "1": "Der QTrees Baummonitor zeigt dir den <0>Wasserstand der Berliner Stadtbäume</0> - von <1/> gut versorgt bis <2/> bedenklich trocken.",
-      "2": "<0>Wie das funktioniert?</0> Mit einem KI-Modell berechnen wir täglich den Wasserstand der 800.000 Berliner Stadtbäume.",
-      "3": "Der QTrees Baummonitor zeigt dir den <0>Wasserstand der Berliner Stadtbäume</0> - von <1/> gut versorgt bis <2/> bedenklich trocken.",
-      "4": "Der QTrees Baummonitor zeigt dir den <0>Wasserstand der Berliner Stadtbäume</0> - von <1/> gut versorgt bis <2/> bedenklich trocken.",
-      "5": "Der QTrees Baummonitor zeigt dir den <0>Wasserstand der Berliner Stadtbäume</0> - von <1/> gut versorgt bis <2/> bedenklich trocken.",
-      "6": "Der QTrees Baummonitor zeigt dir den <0>Wasserstand der Berliner Stadtbäume</0> - von <1/> gut versorgt bis <2/> bedenklich trocken."
+      "1": "Diese Karte zeigt auf eine Skala von 1 bis 5 (<legend/>), welche Berliner Bäume leicht an Waßer rankommen und welche nicht.",
+      "2": "<bold>Wie das funktioniert?</bold> Mit einem KI-Modell berechnen wir täglich den Wasserstand der 800.000 Berliner Stadtbäume.",
+      "3": "Der QTrees Baummonitor zeigt dir den <bold>Wasserstand der Berliner Stadtbäume</bold> - von <dotStart/> gut versorgt bis <dotEnd/> bedenklich trocken.",
+      "4": "Der QTrees Baummonitor zeigt dir den <bold>Wasserstand der Berliner Stadtbäume</bold> - von <dotStart/> gut versorgt bis <dotEnd/> bedenklich trocken.",
+      "5": "Der QTrees Baummonitor zeigt dir den <bold>Wasserstand der Berliner Stadtbäume</bold> - von <dotStart/> gut versorgt bis <dotEnd/> bedenklich trocken.",
+      "6": "Der QTrees Baummonitor zeigt dir den <bold>Wasserstand der Berliner Stadtbäume</bold> - von <dotStart/> gut versorgt bis <dotEnd/> bedenklich trocken."
     }
   },
   "stories": {

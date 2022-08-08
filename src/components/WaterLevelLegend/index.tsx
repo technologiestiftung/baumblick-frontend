@@ -11,13 +11,6 @@ export interface WaterLevelLegendType {
   hasShadow?: boolean
 }
 
-const wrapperWhenExpandedStyles = classNames(
-  'py-3',
-  'bg-white',
-  'rounded-sm border border-gray-200',
-  'flex flex-wrap place-content-between'
-)
-
 const legendColors = Object.entries(colors.scale)
   .filter(([colorKey]) => {
     return !colorKey.includes('-dark')
@@ -38,9 +31,16 @@ export const WaterLevelLegend: FC<WaterLevelLegendType> = ({
   return (
     <div
       className={classNames(
-        'relative px-4',
-        isCollapsed && 'translate-y-3',
-        !isCollapsed && wrapperWhenExpandedStyles,
+        'relative inline-block min-w-[75px]',
+        collapsable && isCollapsed && 'translate-y-3',
+        !collapsable && 'translate-y-0.5',
+        collapsable && 'px-4',
+        !isCollapsed && [
+          'py-3',
+          'bg-white',
+          'rounded-sm border border-gray-200',
+          'flex flex-wrap place-content-between',
+        ],
         hasShadow && !isCollapsed && 'shadow-md'
       )}
     >
@@ -49,7 +49,7 @@ export const WaterLevelLegend: FC<WaterLevelLegendType> = ({
       )}
       <div
         className={classNames(
-          'mt-2 mb-1',
+          collapsable && 'mt-2 mb-1',
           'w-full h-3',
           'bg-gray-200',
           'rounded-full',

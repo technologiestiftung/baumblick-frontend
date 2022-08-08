@@ -1,3 +1,4 @@
+import { WaterLevelLegend } from '@components/WaterLevelLegend'
 import Trans from 'next-translate/Trans'
 import { FC } from 'react'
 import Slider from 'react-slick'
@@ -12,20 +13,12 @@ const HomeSlide: FC = ({ children }) => (
   </div>
 )
 
-const LegendDot: FC<{ className: string }> = ({ className }) => (
-  <span
-    className={`${className} border w-3 h-3 inline-block rounded-full align-middle`}
-  />
-)
-
 export const HomeSlider: FC = () => {
-  const formattingComponents = [
-    /* eslint-disable react/jsx-key */
-    <strong />,
-    <LegendDot className="bg-scale-8 border-scale-8-dark" />,
-    <LegendDot className="bg-scale-1 border-scale-1-dark" />,
-    /* eslint-enable react/jsx-key */
-  ]
+  const formattingComponents = {
+    bold: <strong />,
+    italic: <em />,
+    legend: <WaterLevelLegend initiallyCollapsed />,
+  }
   return (
     <Slider arrows={false} infinite={false} dots>
       <HomeSlide>
