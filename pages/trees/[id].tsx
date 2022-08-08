@@ -4,6 +4,7 @@ import classNames from 'classnames'
 import { GetServerSideProps, NextPage } from 'next'
 import { getTreeData, TreeDataType } from '@lib/requests/getTreeData'
 import { useNowcastData } from '@lib/hooks/useNowcastData'
+import { TreeInfoHeader } from '@components/TreeInfoHeader'
 
 type TreePageWithLayout = NextPage<{
   treeData: TreeDataType
@@ -47,16 +48,14 @@ const TreePage: TreePageWithLayout = ({ treeData }) => {
   return (
     <div
       className={classNames(
-        'absolute bottom-0 left-0 min-h-[75vh] bg-white w-full rounded-t-xl shadow-md p-6 z-10'
+        'absolute bottom-0 left-0 min-h-[75vh] bg-white w-full rounded-t-xl shadow-md z-10'
       )}
     >
-      {treeData.art_dtsch && (
-        <h1 className="font-bold">{treeData.art_dtsch}</h1>
-      )}
-      {treeData.baumhoehe && <h2>{treeData.baumhoehe} m hoch</h2>}
-      {treeData.standalter && (
-        <h2>Gepflanzt vor {treeData.standalter} Jahren</h2>
-      )}
+      <TreeInfoHeader
+        species={treeData.art_dtsch || 'Unbekannte Art'}
+        age={treeData.standalter}
+        height={treeData.baumhoehe}
+      />
       {nowcastData && !nowcastIsLoading && !nowcastError && (
         <ul>
           {nowcastData.map((item) => {
