@@ -85,22 +85,22 @@ const TreePage: TreePageWithLayout = ({ treeData }) => {
           <DataListItem
             title="Regenmenge"
             subtitle="Letzte 14 Tage"
-            value={`${Math.floor(Math.random() * (800 - 1) + 1)} l`}
+            value={`${258} l`}
           />
           <DataListItem
             title="Baumscheibe"
             subtitle="Unversiegelter Bereich um den Stamm"
-            value={`${(Math.random() * (8 - 1) + 1).toFixed(1)} qm`}
+            value={`${3.1} qm`}
           />
           <DataListItem
             title="Verschattung"
             subtitle="Anteil an Schattenzeit pro Tag"
-            value={`${Math.floor(Math.random() * (100 - 1) + 1)} %`}
+            value={`${65} %`}
           />
           <DataListItem
             title="Gießwassermenge"
             subtitle="Letzte 14 Tage"
-            value={`${Math.floor(Math.random() * (500 - 1) + 1)} l`}
+            value={`${25} l`}
           />
           {treeData.stammumfg && (
             <DataListItem
