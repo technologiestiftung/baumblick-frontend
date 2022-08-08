@@ -61,7 +61,8 @@ const TreePage: TreePageWithLayout = ({ treeData }) => {
           'bg-white',
           'rounded-t-2xl shadow-[0_-12px_24px_-16px_rgba(0,0,0,0.3)]',
           'row-start-2 row-span-1',
-          'overflow-y-scroll'
+          'overflow-y-scroll',
+          'motion-safe:animate-slide-up'
         )}
       >
         <TreeInfoHeader
