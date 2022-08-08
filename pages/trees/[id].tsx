@@ -8,6 +8,8 @@ import { TreeInfoHeader } from '@components/TreeInfoHeader'
 import { DataListItem } from '@components/DataListItem'
 import { mapSuctionTensionToLevel } from '@lib/utils/mapSuctionTensionToLevel'
 import { SuctionTensionViz } from '@components/SuctionTensionViz'
+import { useRouter } from 'next/router'
+import { Cross as CrossIcon } from '@components/Icons'
 
 interface TreePageComponentPropType {
   treeData: TreeDataType
@@ -51,6 +53,8 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 }
 
 const TreePage: TreePageWithLayout = ({ treeData }) => {
+  const { push } = useRouter()
+
   const {
     data: nowcastData,
     error: nowcastError,
@@ -59,13 +63,33 @@ const TreePage: TreePageWithLayout = ({ treeData }) => {
 
   return (
     <div
-      style={{ height: 'calc(100vh - 132px)' }}
       className={classNames(
-        'absolute bottom-0 left-0 w-full',
+        'absolute top-0 bottom-0 left-0 w-full',
         'z-10',
-        'grid grid-cols-1 grid-rows-[106px,1fr] gap-0'
+        'grid grid-cols-1 grid-rows-[124px,1fr] gap-0'
       )}
     >
+      <button
+        className={classNames(
+          'row-start-1 row-span1',
+          'relative',
+          'group focus:outline-none'
+        )}
+        onClick={() => {
+          void push('/trees')
+        }}
+        aria-label="Kartenansicht"
+      >
+        <div
+          className={classNames(
+            'absolute top-2 right-2',
+            'p-3 bg-white rounded-full shadow-md hover:bg-gray-100',
+            'border-2 border-gray-900 border-opacity-0 group-focus:border-opacity-100'
+          )}
+        >
+          <CrossIcon className="w-8 h-8" />
+        </div>
+      </button>
       <div
         className={classNames(
           'bg-white',
