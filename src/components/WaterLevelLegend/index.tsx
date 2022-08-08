@@ -27,12 +27,11 @@ export const WaterLevelLegend: FC<WaterLevelLegendType> = ({
     setIsCollapsed(!isCollapsed)
   }
   return (
-    <div
+    <span
       className={classNames(
-        'relative inline-block min-w-[75px]',
+        'relative inline-block min-w-[80px] font-sans',
         collapsable && isCollapsed && 'translate-y-3',
-        !collapsable && 'translate-y-0.5',
-        collapsable && 'px-3',
+        collapsable && 'px-3 w-full',
         !isCollapsed && [
           'py-2',
           'bg-white',
@@ -47,7 +46,7 @@ export const WaterLevelLegend: FC<WaterLevelLegendType> = ({
           {t('legend.map.title')}
         </h2>
       )}
-      <div
+      <span
         className={classNames(
           collapsable && 'my-1',
           'w-full',
@@ -59,7 +58,7 @@ export const WaterLevelLegend: FC<WaterLevelLegendType> = ({
       >
         {legendColors.map((color, idx) => {
           return (
-            <div
+            <span
               key={color}
               style={{ backgroundColor: color }}
               className={classNames(
@@ -69,10 +68,10 @@ export const WaterLevelLegend: FC<WaterLevelLegendType> = ({
               )}
             >
               {idx + 1}
-            </div>
+            </span>
           )
         })}
-      </div>
+      </span>
       {!isCollapsed && (
         <>
           <span className="text-xs font-semibold text-gray-800">
@@ -103,6 +102,6 @@ export const WaterLevelLegend: FC<WaterLevelLegendType> = ({
           )}
         </button>
       )}
-    </div>
+    </span>
   )
 }
