@@ -112,21 +112,29 @@ const TreePage: TreePageWithLayout = ({ treeData }) => {
           <DataListItem
             title="Regenmenge"
             subtitle="Letzte 14 Tage"
+            // TODO: Attention, this is dummy data.
+            // Update when adding access to real data.
             value={`${258} l`}
           />
           <DataListItem
             title="Baumscheibe"
             subtitle="Unversiegelter Bereich um den Stamm"
+            // TODO: Attention, this is dummy data.
+            // Update when adding access to real data.
             value={`${3.1} qm`}
           />
           <DataListItem
             title="Verschattung"
             subtitle="Anteil an Schattenzeit pro Tag"
+            // TODO: Attention, this is dummy data.
+            // Update when adding access to real data.
             value={`${65} %`}
           />
           <DataListItem
             title="Gießwassermenge"
             subtitle="Letzte 14 Tage"
+            // TODO: Attention, this is dummy data.
+            // Update when adding access to real data.
             value={`${25} l`}
           />
           {treeData.stammumfg && (
