@@ -29,7 +29,7 @@ export const TreeInfoHeader: FC<TreeInfoHeaderType> = ({
     <header
       className={classNames(
         'grid grid-cols-[32px,1fr,32px] gap-y-2 gap-x-3 items-center',
-        'px-5 md:px-6 py-4 md:py-5',
+        'px-8 py-6',
         'bg-white border-b border-gray-100',
         additionalClasses
       )}
