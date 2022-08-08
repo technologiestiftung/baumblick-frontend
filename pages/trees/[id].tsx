@@ -50,7 +50,7 @@ const TreePage: TreePageWithLayout = ({ treeData }) => {
 
   return (
     <div
-      style={{ height: 'calc(100vh - 4rem)' }}
+      style={{ height: 'calc(100vh - 132px)' }}
       className={classNames(
         'absolute bottom-0 left-0 w-full',
         'z-10',
