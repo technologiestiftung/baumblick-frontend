@@ -125,7 +125,6 @@ export const TreesMap: FC<MapProps> = ({
       if (!e.features) return
 
       const features = e.features
-      console.log(features[0])
 
       debouncedViewportChange.cancel()
       onSelect(features[0].properties?.trees_gml_id)
