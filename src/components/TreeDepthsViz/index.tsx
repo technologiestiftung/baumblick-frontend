@@ -1,16 +1,16 @@
-import { SaugspannungLevel } from '@lib/utils/mapNowcastToScale'
+import { SuctionTensionLevel } from '@lib/utils/mapSuctionTensionToLevel'
 import classNames from 'classnames'
 import { FC } from 'react'
 import colors from 'src/style/colors'
 
 export interface SoilLayersVizType {
-  depth30Level: SaugspannungLevel
-  depth60Level: SaugspannungLevel
-  depth90Level: SaugspannungLevel
-  averageLevel: SaugspannungLevel
+  depth30Level: SuctionTensionLevel
+  depth60Level: SuctionTensionLevel
+  depth90Level: SuctionTensionLevel
+  averageLevel: SuctionTensionLevel
 }
 
-const SoilLayer: FC<{ nowcastLevel: SaugspannungLevel; depth: number }> = ({
+const SoilLayer: FC<{ nowcastLevel: SuctionTensionLevel; depth: number }> = ({
   depth,
   nowcastLevel,
 }) => (

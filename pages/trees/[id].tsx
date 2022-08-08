@@ -6,7 +6,7 @@ import { getTreeData, TreeDataType } from '@lib/requests/getTreeData'
 import { useNowcastData } from '@lib/hooks/useNowcastData'
 import { TreeInfoHeader } from '@components/TreeInfoHeader'
 import { DataListItem } from '@components/DataListItem'
-import { mapNowcastToScale } from '@lib/utils/mapNowcastToScale'
+import { mapSuctionTensionToLevel } from '@lib/utils/mapSuctionTensionToLevel'
 
 type TreePageWithLayout = NextPage<{
   treeData: TreeDataType
@@ -79,7 +79,7 @@ const TreePage: TreePageWithLayout = ({ treeData }) => {
               !nowcastIsLoading &&
               !nowcastError &&
               nowcastData[3].value
-                ? mapNowcastToScale(nowcastData[3].value)
+                ? mapSuctionTensionToLevel(nowcastData[3].value)
                 : '-'
             }
           />
