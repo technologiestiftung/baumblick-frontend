@@ -40,6 +40,8 @@ export const MapLayout: FC<MapLayoutType> = ({
             zoom: zoom || MAP_CONFIG.defaultZoom,
           }}
           onSelect={onTreeSelect}
+          latitude={latitude}
+          longitude={longitude}
         />
         <div className={classNames('absolute top-2 left-2', 'w-[162px]')}>
           <WaterLevelLegend collapsable={true} hasShadow={true} />

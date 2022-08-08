@@ -9,10 +9,17 @@ import { DataListItem } from '@components/DataListItem'
 import { mapSuctionTensionToLevel } from '@lib/utils/mapSuctionTensionToLevel'
 import { SuctionTensionViz } from '@components/SuctionTensionViz'
 
-type TreePageWithLayout = NextPage<{
+interface TreePageComponentPropType {
   treeData: TreeDataType
-}> & {
-  getLayout?: (page: ReactElement) => ReactNode
+  latitude?: number
+  longitude?: number
+}
+
+type TreePageWithLayout = NextPage<TreePageComponentPropType> & {
+  getLayout?: (
+    page: ReactElement,
+    props: TreePageComponentPropType
+  ) => ReactNode
 }
 
 // eslint-disable-next-line @typescript-eslint/require-await
@@ -31,6 +38,8 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
       props: {
         title: treeData[0].art_dtsch,
         treeData: treeData[0],
+        latitude: treeData[0].lat,
+        longitude: treeData[0].lng,
       },
     }
   } catch (error) {
@@ -150,10 +159,10 @@ const TreePage: TreePageWithLayout = ({ treeData }) => {
   )
 }
 
-TreePage.getLayout = function getLayout(page) {
+TreePage.getLayout = function getLayout(page, props) {
   return (
     <>
-      <MapLayout />
+      <MapLayout latitude={props.latitude} longitude={props.longitude} />
       {page}
     </>
   )

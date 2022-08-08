@@ -26,6 +26,8 @@ interface MapProps {
   }
   mapId: string
   mapStyle?: string
+  latitude?: number
+  longitude?: number
   onSelect?: (treeId: string) => void
 }
 
@@ -39,6 +41,8 @@ export const TreesMap: FC<MapProps> = ({
   staticViewportProps,
   mapId,
   mapStyle = process.env.NEXT_PUBLIC_MAPTILER_BASEMAP_URL as string,
+  latitude,
+  longitude,
   onSelect = () => undefined,
 }) => {
   const { replace, query, pathname } = useRouter()
@@ -66,7 +70,7 @@ export const TreesMap: FC<MapProps> = ({
 
   const debouncedViewportChange = useDebouncedCallback(
     (viewport: URLViewportType): void => {
-      if (pathname !== 'trees') return
+      if (pathname !== '/trees') return
       const newQuery = { ...mappedQuery, ...viewport }
 
       void replace({ pathname, query: newQuery }, undefined, { shallow: true })
@@ -177,6 +181,11 @@ export const TreesMap: FC<MapProps> = ({
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  useEffect(() => {
+    if (!map.current || !latitude || !longitude) return
+    map.current.flyTo({ center: [longitude, latitude], zoom: 18 })
+  }, [map, latitude, longitude])
 
   return (
     <>
