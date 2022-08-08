@@ -4,6 +4,9 @@ import colors from '../../style/colors'
 /** ID with which we can reference trees layer */
 export const TREES_LAYER_ID = 'trees'
 
+/** ID with which we can reference trees layer */
+export const TREES_NUMBERS_LAYER_ID = 'trees_numbers'
+
 /** Name of the source in the vector tileset */
 export const TREES_SOURCE_ID = 'outfull'
 
@@ -23,6 +26,40 @@ export const TREES_SOURCE: SourceSpecification = {
 const CIRCLE_STROKE_WIDTH = {
   default: 1,
   hovered: 5,
+}
+
+export const TREES_NUMBERS: LayerSpecification = {
+  id: TREES_NUMBERS_LAYER_ID,
+  type: 'symbol',
+  source: TREES_SOURCE_ID,
+  'source-layer': TREES_SOURCE_LAYER_ID,
+  filter: ['has', NOWCAST_AVERAGE_PROPERTY],
+  layout: {
+    'text-field': [
+      'case',
+      ['has', NOWCAST_AVERAGE_PROPERTY],
+      [
+        'step',
+        ['get', NOWCAST_AVERAGE_PROPERTY],
+        `1`,
+        50,
+        `2`,
+        100,
+        `3`,
+        150,
+        `4`,
+        200,
+        `5`,
+      ],
+      '',
+    ],
+    'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+    'text-size': 12,
+  },
+  paint: {
+    'text-opacity': 0.5,
+  },
+  minzoom: 17,
 }
 
 export const TREES_LAYER: LayerSpecification = {
