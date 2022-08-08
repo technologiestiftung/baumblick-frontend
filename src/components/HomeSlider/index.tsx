@@ -14,8 +14,8 @@ interface HomeSlidePropType {
 
 const HomeSlide: FC<HomeSlidePropType> = ({ img: { url, alt }, children }) => (
   <div className="px-4">
-    <div className="border border-gray-200 rounded-md h-full grid grid-rows-[1fr,auto] grid-cols-1">
-      <img src={url} alt={alt} className="object-cover" />
+    <div className="border border-gray-200 rounded-md h-full grid grid-rows-[auto,1fr] grid-cols-1">
+      <img src={url} alt={alt} className="object-cover h-full" />
       <p className="p-4 font-serif border-t border-gray-100">{children}</p>
     </div>
   </div>
