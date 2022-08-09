@@ -39,7 +39,7 @@ export const StoryLink: FC<StoryLinkPropType> = ({
       )}
     >
       <Icon
-        color1={colors.scale['8']}
+        color1={colors.scale['5']}
         color2={colors.scale['5']}
         color3={colors.scale['2']}
         size={40}

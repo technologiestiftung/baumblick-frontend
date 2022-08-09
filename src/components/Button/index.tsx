@@ -51,10 +51,7 @@ const Scale: FC = () => (
     <span className="w-full h-1 bg-scale-2" />
     <span className="w-full h-1 bg-scale-3" />
     <span className="w-full h-1 bg-scale-4" />
-    <span className="w-full h-1 bg-scale-5" />
-    <span className="w-full h-1 bg-scale-6" />
-    <span className="w-full h-1 bg-scale-7" />
-    <span className="w-full h-1 bg-scale-8 rounded-br" />
+    <span className="w-full h-1 bg-scale-5 rounded-br" />
   </div>
 )
 

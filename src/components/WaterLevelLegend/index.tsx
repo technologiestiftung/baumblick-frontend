@@ -11,17 +11,8 @@ export interface WaterLevelLegendType {
   hasShadow?: boolean
 }
 
-const wrapperWhenExpandedStyles = classNames(
-  'py-3',
-  'bg-white',
-  'rounded-sm border border-gray-200',
-  'flex flex-wrap place-content-between'
-)
-
 const legendColors = Object.entries(colors.scale)
-  .filter(([colorKey]) => {
-    return !colorKey.includes('-dark')
-  })
+  .filter(([colorKey]) => !colorKey.includes('-dark'))
   .map(([, colorValue]) => colorValue)
 
 export const WaterLevelLegend: FC<WaterLevelLegendType> = ({
@@ -36,42 +27,51 @@ export const WaterLevelLegend: FC<WaterLevelLegendType> = ({
     setIsCollapsed(!isCollapsed)
   }
   return (
-    <div
+    <span
       className={classNames(
-        'relative px-4',
-        isCollapsed && 'translate-y-3',
-        !isCollapsed && wrapperWhenExpandedStyles,
+        'relative inline-block min-w-[80px] font-sans',
+        collapsable && isCollapsed && 'translate-y-3',
+        collapsable && 'px-3 w-full',
+        !isCollapsed && [
+          'py-2',
+          'bg-white',
+          'rounded-sm border border-gray-200',
+          'flex flex-wrap place-content-between',
+        ],
         hasShadow && !isCollapsed && 'shadow-md'
       )}
     >
       {!isCollapsed && (
-        <h2 className="w-full font-semibold">{t('legend.map.title')}</h2>
+        <h2 className="w-full text-sm font-semibold">
+          {t('legend.map.title')}
+        </h2>
       )}
-      <div
+      <span
         className={classNames(
-          'mt-2 mb-1',
-          'w-full h-3',
+          collapsable && 'my-1',
+          'w-full',
           'bg-gray-200',
           'rounded-full',
-          isCollapsed
-            ? 'ring-2 ring-white'
-            : 'ring-2 ring-offset-0 ring-gray-200',
+          isCollapsed && 'ring-2 ring-white',
           'grid grid-flow-col gap-0'
         )}
       >
-        {legendColors.map((color) => {
+        {legendColors.map((color, idx) => {
           return (
-            <div
+            <span
               key={color}
               style={{ backgroundColor: color }}
               className={classNames(
-                'w-auto h-full',
-                'first-of-type:rounded-l-full last-of-type:rounded-r-full'
+                'w-auto h-full text-xs flex text-center place-content-center',
+                'first-of-type:rounded-l-full last-of-type:rounded-r-full',
+                'text-gray-900/50 font-bold'
               )}
-            ></div>
+            >
+              {idx + 1}
+            </span>
           )
         })}
-      </div>
+      </span>
       {!isCollapsed && (
         <>
           <span className="text-xs font-semibold text-gray-800">
@@ -102,6 +102,6 @@ export const WaterLevelLegend: FC<WaterLevelLegendType> = ({
           )}
         </button>
       )}
-    </div>
+    </span>
   )
 }

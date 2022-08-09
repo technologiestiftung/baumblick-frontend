@@ -20,8 +20,8 @@ export const stories: Record<string, StoryLinkPropType> = {
       'Gießen ist gut. Kann man aber auch falsch machen. Haste net gedacht oder wat?',
     Icon: WateringCan,
   },
-  'wie-ist-ki-für-die-berechnung-des-wasserbedarfs-eingesetzt': {
-    path: `/stories/wie-ist-ki-für-die-berechnung-des-wasserbedarfs-eingesetzt`,
+  'wie-ist-ki-fuer-die-berechnung-des-wasserbedarfs-eingesetzt': {
+    path: `/stories/wie-ist-ki-fuer-die-berechnung-des-wasserbedarfs-eingesetzt`,
     title: `Wie ist KI für die Berechnung des Wasserbedarfs eingesetzt?`,
     author: `Juan Carlos Carvajal Bermúdez`,
     readingDurationInMinutes: 20,
