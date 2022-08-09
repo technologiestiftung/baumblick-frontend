@@ -2,7 +2,7 @@ import { Headline } from '@components/Headline'
 import { useRouter } from 'next/router'
 import { stories } from '../../pages/stories'
 import colors from '../../src/style/colors'
-import { FC, useRef, useState } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 import { Header } from '@components/Header'
 import { InternalLink } from '@components/InternalLink'
 import { Paragraph } from '@components/Paragraph'
@@ -22,10 +22,10 @@ const StoryLayoutWithoutTranslation: FC = ({ children }) => {
   const { t } = useTranslation('common')
   const { query } = useRouter()
   const contentRef = useRef<HTMLElement | null>(null)
+  const [contentParent, setContentParent] = useState<HTMLElement | null>(null)
   const [showStickyTableOfContents, setShowStickyTOC] = useState(false)
-  const { headings, scrollToHeading, activeHeadingTitle } = useHeadingsData(
-    contentRef.current
-  )
+  const { headings, scrollToHeading, activeHeadingTitle } =
+    useHeadingsData(contentParent)
   const { hasScrolledPastThreshold, isScrollingUp } =
     useHasScrolledPastThreshold({
       threshold: 600,
@@ -34,6 +34,11 @@ const StoryLayoutWithoutTranslation: FC = ({ children }) => {
     typeof query.id === 'string' && query.id in stories
       ? stories[query.id]
       : Object.values(stories)[0]
+
+  useEffect(() => {
+    if (!contentRef.current) return
+    setContentParent(contentRef.current)
+  }, [])
 
   return (
     <>
