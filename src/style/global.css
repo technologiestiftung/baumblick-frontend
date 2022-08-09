@@ -1,11 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@layer utilities {
-  .h-screen {
-    height: var(--screenHeight);
-  }
-}
+
 @layer base {
 	@font-face {
 		font-family: 'PT Serif';
@@ -166,4 +162,12 @@
   background-color: white !important;
   width: 3rem !important;
   height: 3rem !important;
+}
+
+.maplibregl-ctrl-bottom-right {
+	bottom: 64px !important;
+}
+
+.maplibregl-ctrl-bottom-left {
+	bottom: 64px !important;
 }
