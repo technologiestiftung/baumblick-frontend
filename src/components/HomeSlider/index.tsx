@@ -27,6 +27,16 @@ export const HomeSlider: FC = () => {
     bold: <strong />,
     italic: <em />,
     legend: <SuctionTensionScale />,
+    '1': (
+      <span className="h-4 w-4 font-sans text-center font-bold inline-flex place-content-center border-scale-1-dark leading-tight text-xs text-gray-900/50 bg-scale-1 rounded-full">
+        1
+      </span>
+    ),
+    '5': (
+      <span className="h-4 w-4 font-sans text-center font-bold inline-flex place-content-center border-scale-5-dark leading-tight text-xs text-gray-900/50 bg-scale-5 rounded-full">
+        5
+      </span>
+    ),
   }
   return (
     <Slider arrows={false} infinite={false} dots>
