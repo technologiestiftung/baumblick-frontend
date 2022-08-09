@@ -16,7 +16,8 @@ export const SoilLayer: FC<{
       'h-20',
       'pl-6',
       'border-t first-of-type:border-t-0',
-      'flex items-center'
+      'flex items-center',
+      'transition-colors'
     )}
     aria-label={`Tiefe: ${depth} cm, Stufe: ${level || 'unbekannt'}`}
   >
