@@ -64,7 +64,7 @@ export const WaterLevelLegend: FC<WaterLevelLegendType> = ({
               className={classNames(
                 'w-auto h-full text-xs flex text-center place-content-center',
                 'first-of-type:rounded-l-full last-of-type:rounded-r-full',
-                'text-gray-900/50'
+                'text-gray-900/50 font-bold'
               )}
             >
               {idx + 1}

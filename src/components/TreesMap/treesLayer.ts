@@ -54,6 +54,7 @@ export const TREES_NUMBERS: LayerSpecification = {
       '',
     ],
     'text-size': 12,
+    'text-font': ['Bold'],
   },
   paint: {
     'text-opacity': 0.5,
