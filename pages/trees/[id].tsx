@@ -63,6 +63,7 @@ const TreePage: TreePageWithLayout = ({ treeData }) => {
 
   return (
     <div
+      id="inidividual-tree-container"
       className={classNames(
         'absolute top-0 bottom-0 left-0 w-full',
         'z-10',
@@ -98,7 +99,6 @@ const TreePage: TreePageWithLayout = ({ treeData }) => {
           'bg-white',
           'rounded-t-2xl shadow-[0_-12px_24px_-16px_rgba(0,0,0,0.3)]',
           'row-start-2 row-span-1',
-          'overflow-y-scroll',
           'motion-safe:animate-slide-up'
         )}
       >
@@ -132,7 +132,7 @@ const TreePage: TreePageWithLayout = ({ treeData }) => {
           age={treeData.standalter}
           height={treeData.baumhoehe}
         />
-        <ul>
+        <ul className="z-10 relative bg-white">
           <DataListItem
             title="Saugspannung"
             subtitle="⌀ aus 30, 60, 90 cm Tiefe"

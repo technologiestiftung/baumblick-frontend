@@ -1,6 +1,8 @@
 import { TreesMap } from '@components/TreesMap'
 import { SuctionTensionLegend } from '@components/SuctionTensionLegend'
 import { FC } from 'react'
+import { useHasScrolledPastThreshold } from '@lib/hooks/useHasScrolledPastThreshold'
+import classNames from 'classnames'
 
 export const MAP_CONFIG = {
   minZoom: 11.5,
@@ -26,6 +28,11 @@ export const MapLayout: FC<MapLayoutType> = ({
   isMinimized,
   children,
 }) => {
+  const { hasScrolledPastThreshold } = useHasScrolledPastThreshold({
+    threshold: 5,
+    scrollParent: 'main',
+  })
+
   return (
     <>
       <div className="w-full h-full">
@@ -45,7 +52,14 @@ export const MapLayout: FC<MapLayoutType> = ({
           longitude={longitude}
           isMinimized={isMinimized}
         />
-        <SuctionTensionLegend collapsable={true} hasShadow={true} />
+        <SuctionTensionLegend
+          collapsable={true}
+          hasShadow={true}
+          className={classNames(
+            'transition-opacity',
+            hasScrolledPastThreshold && 'opacity-0 pointer-events-none'
+          )}
+        />
       </div>
       {children}
     </>

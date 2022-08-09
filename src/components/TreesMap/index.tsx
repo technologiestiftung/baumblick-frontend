@@ -1,5 +1,11 @@
 import { FC, useEffect, useRef, useState } from 'react'
-import maplibregl, { LngLatLike, Map } from 'maplibre-gl'
+import maplibregl, {
+  AttributionControl,
+  GeolocateControl,
+  LngLatLike,
+  Map,
+  NavigationControl,
+} from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import { mapRawQueryToState } from '@lib/utils/queryUtil'
 import { useRouter } from 'next/router'
@@ -61,6 +67,13 @@ export const TreesMap: FC<MapProps> = ({
     ...initialViewportProps,
   })
 
+  const [geolocateControl, setGeolocateControl] =
+    useState<GeolocateControl | null>(null)
+  const [navigationControl, setNavigationControl] =
+    useState<NavigationControl | null>(null)
+  const [attributionControl, setAttributionControl] =
+    useState<AttributionControl | null>(null)
+
   useEffect(() => {
     setViewport({
       ...viewport,
@@ -100,20 +113,6 @@ export const TreesMap: FC<MapProps> = ({
     if (!map.current) return
 
     let hoveredTreeId: string | null = null
-
-    map.current.addControl(
-      new maplibregl.AttributionControl({ compact: true }),
-      'bottom-left'
-    )
-
-    map.current.addControl(
-      new maplibregl.NavigationControl({
-        showCompass: false,
-      }),
-      'bottom-right'
-    )
-
-    map.current.addControl(new maplibregl.GeolocateControl({}), 'bottom-right')
 
     map.current.on('load', function () {
       if (!map.current) return
@@ -184,8 +183,39 @@ export const TreesMap: FC<MapProps> = ({
       hoveredTreeId = null
     })
 
+    setAttributionControl(new maplibregl.AttributionControl({ compact: true }))
+    setNavigationControl(
+      new maplibregl.NavigationControl({
+        showCompass: false,
+      })
+    )
+    setGeolocateControl(new maplibregl.GeolocateControl({}))
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  useEffect(() => {
+    if (
+      !map.current ||
+      !navigationControl ||
+      !attributionControl ||
+      !geolocateControl
+    )
+      return
+
+    map.current.hasControl(navigationControl) &&
+      map.current.removeControl(navigationControl)
+    map.current.hasControl(attributionControl) &&
+      map.current.removeControl(attributionControl)
+    map.current.hasControl(geolocateControl) &&
+      map.current.removeControl(geolocateControl)
+
+    if (pathname !== '/trees') return
+
+    map.current.addControl(navigationControl, 'bottom-right')
+    map.current.addControl(attributionControl, 'bottom-left')
+    map.current.addControl(geolocateControl, 'bottom-right')
+  }, [map, pathname, geolocateControl, navigationControl, attributionControl])
 
   useEffect(() => {
     if (!map.current || !latitude || !longitude) return

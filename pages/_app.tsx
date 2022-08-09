@@ -36,13 +36,13 @@ const App: FC<AppPropsWithLayout> = ({
   return (
     <StrictMode>
       <Head pageTitle={pageProps.title || ''} />
-      <div
+      <main
         className={classNames(
           'fixed inset-0 overflow-x-hidden overflow-y-auto bottom-16'
         )}
       >
         {getLayout(<Component {...pageProps} />, pageProps)}
-      </div>
+      </main>
       <MainMenu />
     </StrictMode>
   )

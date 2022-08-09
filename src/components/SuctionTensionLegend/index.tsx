@@ -8,12 +8,14 @@ export interface SuctionTensionLegendType {
   collapsable?: boolean
   initiallyCollapsed?: boolean
   hasShadow?: boolean
+  className?: string
 }
 
 export const SuctionTensionLegend: FC<SuctionTensionLegendType> = ({
   collapsable = false,
   initiallyCollapsed = false,
   hasShadow = false,
+  className = '',
 }) => {
   const { t } = useTranslation('common')
   const [isCollapsed, setIsCollapsed] = useState(initiallyCollapsed)
@@ -36,6 +38,7 @@ export const SuctionTensionLegend: FC<SuctionTensionLegendType> = ({
         ? { role: 'button', tabIndex: 0, onClick: toggleCollapsed }
         : {})}
       className={classNames(
+        className,
         'group',
         'inline-block',
         'fixed top-2 left-2',
