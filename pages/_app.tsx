@@ -7,7 +7,6 @@ import { MainMenu } from '@components/MainMenu'
 import { NextPage } from 'next'
 import type { AppProps as NextAppProps } from 'next/app'
 import classNames from 'classnames'
-import { useRouter } from 'next/router'
 
 type AppProps<P = unknown> = {
   pageProps: P
@@ -31,7 +30,6 @@ const App: FC<AppPropsWithLayout> = ({
   pageProps,
 }: AppPropsWithLayout) => {
   useMatomo()
-  const { pathname } = useRouter()
 
   const getLayout = Component.getLayout ?? ((page) => page)
 
@@ -40,8 +38,7 @@ const App: FC<AppPropsWithLayout> = ({
       <Head pageTitle={pageProps.title || ''} />
       <div
         className={classNames(
-          'fixed inset-0 overflow-x-hidden overflow-y-auto',
-          !pathname.startsWith('/trees') && 'bottom-16'
+          'fixed inset-0 overflow-x-hidden overflow-y-auto bottom-16'
         )}
       >
         {getLayout(<Component {...pageProps} />, pageProps)}

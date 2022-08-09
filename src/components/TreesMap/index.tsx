@@ -189,6 +189,7 @@ export const TreesMap: FC<MapProps> = ({
 
   useEffect(() => {
     if (!map.current || !latitude || !longitude) return
+    map.current.resize()
     map.current.flyTo({
       center: [longitude, latitude],
       zoom: 18,
@@ -196,25 +197,17 @@ export const TreesMap: FC<MapProps> = ({
   }, [map, latitude, longitude])
 
   return (
-    <div
-      className={classNames(
-        isMinimized ? 'h-[132px]' : 'h-full',
-        'relative',
-        'flex place-content-center text-center place-items-center',
-        'overflow-hidden',
-        'transition-all'
-      )}
-    >
+    <>
       <div
         id={mapId}
         className={classNames(
+          isMinimized ? 'h-[132px]' : 'h-full',
           'w-full inline-block',
-          'h-screen',
           'bg-[#FBFBFC]'
         )}
         aria-label="Kartenansicht der Bäume"
       ></div>
       {!isMinimized && <MapTilerLogo />}
-    </div>
+    </>
   )
 }

@@ -163,11 +163,3 @@
   width: 3rem !important;
   height: 3rem !important;
 }
-
-.maplibregl-ctrl-bottom-right {
-	bottom: 64px !important;
-}
-
-.maplibregl-ctrl-bottom-left {
-	bottom: 64px !important;
-}
