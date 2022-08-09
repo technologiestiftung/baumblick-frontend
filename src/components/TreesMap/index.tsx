@@ -218,13 +218,14 @@ export const TreesMap: FC<MapProps> = ({
   }, [map, pathname, geolocateControl, navigationControl, attributionControl])
 
   useEffect(() => {
-    if (!map.current || !latitude || !longitude) return
+    if (!map.current) return
     map.current.resize()
+    if (!latitude || !longitude) return
     map.current.flyTo({
       center: [longitude, latitude],
       zoom: 18,
     })
-  }, [map, latitude, longitude])
+  }, [map, latitude, longitude, isMinimized])
 
   return (
     <>

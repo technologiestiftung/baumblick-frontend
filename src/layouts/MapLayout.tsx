@@ -35,7 +35,7 @@ export const MapLayout: FC<MapLayoutType> = ({
 
   return (
     <>
-      <div className="w-full h-full">
+      <div className="w-full h-full overflow-hidden">
         <TreesMap
           mapId="trees-map"
           staticViewportProps={{
