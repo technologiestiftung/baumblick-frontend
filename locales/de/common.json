@@ -12,12 +12,30 @@
     "cta": "Baum finden",
     "ctaLoading": "Lädt...",
     "slides": {
-      "1": "Der QTrees Baummonitor zeigt dir den <0>Wasserstand der Berliner Stadtbäume</0> - von <1/> gut versorgt bis <2/> bedenklich trocken.",
-      "2": "<0>Wie das funktioniert?</0> Mit einem KI-Modell berechnen wir täglich den Wasserstand der 800.000 Berliner Stadtbäume.",
-      "3": "Der QTrees Baummonitor zeigt dir den <0>Wasserstand der Berliner Stadtbäume</0> - von <1/> gut versorgt bis <2/> bedenklich trocken.",
-      "4": "Der QTrees Baummonitor zeigt dir den <0>Wasserstand der Berliner Stadtbäume</0> - von <1/> gut versorgt bis <2/> bedenklich trocken.",
-      "5": "Der QTrees Baummonitor zeigt dir den <0>Wasserstand der Berliner Stadtbäume</0> - von <1/> gut versorgt bis <2/> bedenklich trocken.",
-      "6": "Der QTrees Baummonitor zeigt dir den <0>Wasserstand der Berliner Stadtbäume</0> - von <1/> gut versorgt bis <2/> bedenklich trocken."
+      "1": {
+        "text": "Diese Karte zeigt auf eine Skala von 1 bis 5 (<legend/>), welche Berliner Bäume leicht an Waßer rankommen und welche nicht.",
+        "alt": "Ein Kartenausschnitt mit einigen farbigen Kreisen, die Bäume und deren Saugspannung darstellen"
+      },
+      "2": {
+        "text": "Gelingt der Baum schwieriger an Waßer, spricht man von <bold>hohen Saugspannung</bold>. Weniger Aufwand bedeutet <bold>niedriege Saugspannung</bold>.",
+        "alt": "Die Silouhette von 2 Bäumen. Einer hat einen gelben Boden und hat einen durstigen Emoji daneben. Der andere hat einen blauen Boden und ein glückliches Emoji daneben."
+      },
+      "3": {
+        "text": "Selbst wenn die Saugspanung an der Oberfläche <bold>gering</bold> ist, kann es sein, dass in tieferen Schichten Waßer <bold>schwieriger</bold> verfügbar ist.",
+        "alt": "Die Silhouette eines Baumes und seiner Wurzeln. Der Grund ist in drei Farben geschichtet. Auf jeder Ebene befindet sich ein Emoji mit einem Text. Auf der ersten Ebene: Blauer Hintergrund, fröhliches Emoji, der Text 'Gering'. Auf der zweiten Ebene: Grüner Hintergrund, neutrales Emoji und der Text 'Durchschnittlich'. Auf der tiefsten Ebene: Gelber Hintergrund, erschöpftes Emoji und der Text 'Hoch'."
+      },
+      "4": {
+        "text": "<bold>Sensoren</bold> messen bei ca. 100 Bäume die Saugspannungswerte <bold>in 3 unterschiedliche Tiefen</bold> (-30, -60, -90 cm).",
+        "alt": "Die Silhouette eines Baumes und seiner Wurzeln. Der Grund ist in drei Farben geschichtet. Auf jeder Ebene befindet sich ein Sensor-Symbol mit der Beschriftungen: -30cm, -60cm, -90cm."
+      },
+      "5": {
+        "text": "Wir nutzen dann diese und andere Daten (Wetter, Schatten, usw.), um <bold>mithilfe von KI</bold> die Saugspannung bei anderen Bäume täglich zu schätzen.",
+        "alt": "Eine Wolke von Symbolen, die eine Sonne, Regen, Schatten, eine Gießkanne und eine Karte darstellen. Eine geschweifte Klammer, die alle Symbole umfasst und mit einem Vorwärtspfeil in die Mitte führt. In der Mitte ein Symbol für ein neuronales Netz mit dem Text AI. Von letzterem Text und Symbol führt ein Pfeil zu einem Screenshot einer Karte mit vielen farbigen Baumkreisen."
+      },
+      "6": {
+        "text": "Zusätzlich werden für jeden Baum Daten angezeigt, die helfen, den Standort sowie die Schätzung der Saugspannung zu verstehen.",
+        "alt": "Eine Wolke von Symbolen, die eine Sonne, Regen, Schatten, eine Gießkanne und eine Karte darstellen. Eine geschweifte Klammer, die alle Symbole umfasst und mit einem Vorwärtspfeil in die rechte untere Ecke des Bildes führt, wo ein Screenshot der Benutzeroberfläche zeigt, wie diese Informationen in der Benutzeroberfläche angezeigt werden (Listenansicht)."
+      }
     }
   },
   "stories": {

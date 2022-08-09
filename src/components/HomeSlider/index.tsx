@@ -1,66 +1,98 @@
+import { WaterLevelLegend } from '@components/WaterLevelLegend'
 import Trans from 'next-translate/Trans'
+import useTranslation from 'next-translate/useTranslation'
 import { FC } from 'react'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 
-const HomeSlide: FC = ({ children }) => (
+interface HomeSlidePropType {
+  img: {
+    url: string
+    alt: string
+  }
+}
+
+const HomeSlide: FC<HomeSlidePropType> = ({ img: { url, alt }, children }) => (
   <div className="px-4">
-    <div className="border border-gray-200 rounded-md h-full grid grid-rows-[1fr,auto] grid-cols-1">
-      <div></div>
+    <div className="border border-gray-200 rounded-md h-full grid grid-rows-[auto,1fr] grid-cols-1">
+      <img src={url} alt={alt} className="object-cover h-full" />
       <p className="p-4 font-serif border-t border-gray-100">{children}</p>
     </div>
   </div>
 )
 
-const LegendDot: FC<{ className: string }> = ({ className }) => (
-  <span
-    className={`${className} border w-3 h-3 inline-block rounded-full align-middle`}
-  />
-)
-
 export const HomeSlider: FC = () => {
-  const formattingComponents = [
-    /* eslint-disable react/jsx-key */
-    <strong />,
-    <LegendDot className="bg-scale-5 border-scale-5-dark" />,
-    <LegendDot className="bg-scale-1 border-scale-1-dark" />,
-    /* eslint-enable react/jsx-key */
-  ]
+  const { t } = useTranslation('common')
+  const formattingComponents = {
+    bold: <strong />,
+    italic: <em />,
+    legend: <WaterLevelLegend initiallyCollapsed />,
+  }
   return (
     <Slider arrows={false} infinite={false} dots>
-      <HomeSlide>
+      <HomeSlide
+        img={{
+          url: '/images/home-slider/1.svg',
+          alt: t('home.slides.1.alt'),
+        }}
+      >
         <Trans
-          i18nKey="common:home.slides.1"
+          i18nKey="common:home.slides.1.text"
           components={formattingComponents}
         />
       </HomeSlide>
-      <HomeSlide>
+      <HomeSlide
+        img={{
+          url: '/images/home-slider/2.svg',
+          alt: t('home.slides.2.alt'),
+        }}
+      >
         <Trans
-          i18nKey="common:home.slides.2"
+          i18nKey="common:home.slides.2.text"
           components={formattingComponents}
         />
       </HomeSlide>
-      <HomeSlide>
+      <HomeSlide
+        img={{
+          url: '/images/home-slider/3.svg',
+          alt: t('home.slides.3.alt'),
+        }}
+      >
         <Trans
-          i18nKey="common:home.slides.3"
+          i18nKey="common:home.slides.3.text"
           components={formattingComponents}
         />
       </HomeSlide>
-      <HomeSlide>
+      <HomeSlide
+        img={{
+          url: '/images/home-slider/4.svg',
+          alt: t('home.slides.4.alt'),
+        }}
+      >
         <Trans
-          i18nKey="common:home.slides.4"
+          i18nKey="common:home.slides.4.text"
           components={formattingComponents}
         />
       </HomeSlide>
-      <HomeSlide>
+      <HomeSlide
+        img={{
+          url: '/images/home-slider/5.svg',
+          alt: t('home.slides.5.alt'),
+        }}
+      >
         <Trans
-          i18nKey="common:home.slides.5"
+          i18nKey="common:home.slides.5.text"
           components={formattingComponents}
         />
       </HomeSlide>
-      <HomeSlide>
+      <HomeSlide
+        img={{
+          url: '/images/home-slider/6.svg',
+          alt: t('home.slides.6.alt'),
+        }}
+      >
         <Trans
-          i18nKey="common:home.slides.6"
+          i18nKey="common:home.slides.6.text"
           components={formattingComponents}
         />
       </HomeSlide>

@@ -60,6 +60,14 @@
 		font-family: 'Manrope', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
 		@apply text-gray-900 antialiased
   }
+
+	p {
+		-webkit-hyphens: auto;
+		-ms-hyphens: auto;
+		hyphens: auto;
+		hyphenate-limit-after: 2;
+		hyphenate-limit-before: 3;
+	}
 	
 	/* Prose styles (tailwindcss typography plugin) */
 	.prose > p:not(.lead):first-of-type::first-letter {
