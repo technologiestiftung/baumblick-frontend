@@ -49,13 +49,13 @@ export const MainMenu: FC = () => {
             key={link.path}
             href={link.path}
             className={classNames(
-              'bg-white w-full',
+              'bg-white w-full relative',
               'group cursor-default',
               isActive ? 'text-gray-900' : 'text-gray-400',
               !isActive &&
                 'hover:text-gray-600 hover:bg-gray-200 cursor-pointer',
               'transition-colors focus:outline-none',
-              'focus:ring-2 focus:ring-gray-800',
+              'focus:ring-2 focus:ring-gray-800 focus:z-10',
               'flex place-items-center justify-center'
             )}
           >

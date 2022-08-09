@@ -40,6 +40,19 @@ const StoryLayoutWithoutTranslation: FC = ({ children }) => {
     setContentParent(contentRef.current)
   }, [])
 
+  const backLink = (
+    <InternalLink
+      href="/stories"
+      className={classNames(
+        'font-semibold text-gray-500 block mb-4',
+        'focus:outline-none focus:ring-2 focus:ring-gray-900',
+        'focus:ring-offset-2 focus:ring-offset-white'
+      )}
+    >
+      ← {t('stories.backToStoriesLink')}
+    </InternalLink>
+  )
+
   return (
     <>
       <Header className="border-b border-gray-200" />
@@ -53,12 +66,7 @@ const StoryLayoutWithoutTranslation: FC = ({ children }) => {
         }
       />
       <section className="px-4 pt-6 pb-2">
-        <InternalLink
-          href="/stories"
-          className="font-semibold text-gray-500 block mb-4"
-        >
-          ← {t('stories.backToStoriesLink')}
-        </InternalLink>
+        {backLink}
         <div className="grid grid-cols-[1fr,auto] gap-2">
           <Headline h1>{story.title}</Headline>
           <story.Icon
@@ -127,12 +135,8 @@ const StoryLayoutWithoutTranslation: FC = ({ children }) => {
         <Paragraph className="italic text-gray-500">{story.author}</Paragraph>
         <br />
         <hr />
-        <InternalLink
-          href="/stories"
-          className="font-semibold text-gray-500 block mt-8"
-        >
-          ← {t('stories.backToStoriesLink')}
-        </InternalLink>
+        <br />
+        {backLink}
       </footer>
     </>
   )
