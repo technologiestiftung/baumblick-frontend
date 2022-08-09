@@ -6,6 +6,8 @@ import { useMatomo } from '@lib/hooks/useMatomo'
 import { MainMenu } from '@components/MainMenu'
 import { NextPage } from 'next'
 import type { AppProps as NextAppProps } from 'next/app'
+import classNames from 'classnames'
+import { useRouter } from 'next/router'
 
 type AppProps<P = unknown> = {
   pageProps: P
@@ -29,13 +31,19 @@ const App: FC<AppPropsWithLayout> = ({
   pageProps,
 }: AppPropsWithLayout) => {
   useMatomo()
+  const { pathname } = useRouter()
 
   const getLayout = Component.getLayout ?? ((page) => page)
 
   return (
     <StrictMode>
       <Head pageTitle={pageProps.title || ''} />
-      <div className="fixed inset-0 bottom-16 overflow-x-hidden overflow-y-auto">
+      <div
+        className={classNames(
+          'fixed inset-0 overflow-x-hidden overflow-y-auto',
+          !pathname.startsWith('/trees') && 'bottom-16'
+        )}
+      >
         {getLayout(<Component {...pageProps} />, pageProps)}
       </div>
       <MainMenu />
