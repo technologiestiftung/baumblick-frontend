@@ -197,17 +197,25 @@ export const TreesMap: FC<MapProps> = ({
   }, [map, latitude, longitude])
 
   return (
-    <>
+    <div
+      className={classNames(
+        isMinimized ? 'h-[124px]' : 'h-full',
+        'relative',
+        'overflow-hidden',
+        'transition-all'
+      )}
+    >
       <div
         id={mapId}
         className={classNames(
-          '!static w-full',
-          isMinimized ? 'h-[124px]' : 'h-full',
+          'w-full',
+          'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2',
+          'h-[calc(100vh-64px)]',
           'bg-[#FBFBFC]'
         )}
         aria-label="Kartenansicht der Bäume"
       ></div>
-      <MapTilerLogo />
-    </>
+      {!isMinimized && <MapTilerLogo />}
+    </div>
   )
 }
