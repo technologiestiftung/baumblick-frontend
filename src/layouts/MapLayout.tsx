@@ -1,6 +1,5 @@
 import { TreesMap } from '@components/TreesMap'
 import { WaterLevelLegend } from '@components/WaterLevelLegend'
-import classNames from 'classnames'
 import { FC } from 'react'
 
 export const MAP_CONFIG = {
@@ -46,9 +45,7 @@ export const MapLayout: FC<MapLayoutType> = ({
           longitude={longitude}
           isMinimized={isMinimized}
         />
-        <div className={classNames('absolute top-2 left-2', 'w-[130px]')}>
-          <WaterLevelLegend collapsable={true} hasShadow={true} />
-        </div>
+        <WaterLevelLegend collapsable={true} hasShadow={true} />
       </div>
       {children}
     </>

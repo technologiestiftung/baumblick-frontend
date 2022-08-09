@@ -1,4 +1,4 @@
-import { WaterLevelLegend } from '@components/WaterLevelLegend'
+import { SuctionTensionScale } from '@components/SuctionTensionScale'
 import Trans from 'next-translate/Trans'
 import useTranslation from 'next-translate/useTranslation'
 import { FC } from 'react'
@@ -26,7 +26,7 @@ export const HomeSlider: FC = () => {
   const formattingComponents = {
     bold: <strong />,
     italic: <em />,
-    legend: <WaterLevelLegend initiallyCollapsed />,
+    legend: <SuctionTensionScale />,
   }
   return (
     <Slider arrows={false} infinite={false} dots>
