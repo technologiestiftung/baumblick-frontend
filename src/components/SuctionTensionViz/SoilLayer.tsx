@@ -8,8 +8,16 @@ export const SoilLayer: FC<{
   depth: number
 }> = ({ depth, level }) => (
   <div
-    style={{ backgroundColor: level ? colors.scale[level] : colors.gray[300] }}
-    className={classNames('h-20', 'pl-6', 'flex items-center')}
+    style={{
+      backgroundColor: level ? colors.scale[level] : colors.gray[300],
+      borderColor: level ? colors.scale[`${level}-dark`] : colors.gray[400],
+    }}
+    className={classNames(
+      'h-20',
+      'pl-6',
+      'border-t first-of-type:border-t-0',
+      'flex items-center'
+    )}
     aria-label={`Tiefe: ${depth} cm, Stufe: ${level || 'unbekannt'}`}
   >
     <span
