@@ -64,9 +64,9 @@ const StoryLayoutWithoutTranslation: FC = ({ children }) => {
           <story.Icon
             size={80}
             strokeWidth={4}
-            color1={colors.scale[5]}
-            color2={colors.scale[5]}
-            color3={colors.scale[2]}
+            color1={colors.scale[1]}
+            color2={colors.scale[2]}
+            color3={colors.scale[3]}
           />
         </div>
         <Paragraph className="italic text-gray-500">
@@ -113,11 +113,11 @@ const StoryLayoutWithoutTranslation: FC = ({ children }) => {
         onClick={() => setShowStickyTOC((v) => !v)}
       >
         {showStickyTableOfContents ? (
-          <Cross color1={colors.scale['5']} color2={colors.scale['5']} />
+          <Cross color1={colors.scale['1']} color2={colors.scale['3']} />
         ) : (
           <HamburgerMenu
-            color1={colors.scale['5']}
-            color2={colors.scale['5']}
+            color1={colors.scale['1']}
+            color2={colors.scale['2']}
             color3={colors.scale['3']}
           />
         )}

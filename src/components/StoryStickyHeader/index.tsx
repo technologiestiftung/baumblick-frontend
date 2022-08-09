@@ -40,9 +40,9 @@ export const StoryStickyHeader: FC<StoryStickyHeaderPropsType> = ({
       </InternalLink>
       <story.Icon
         size={32}
-        color1={colors.scale[5]}
-        color2={colors.scale[5]}
-        color3={colors.scale[2]}
+        color1={colors.scale['1']}
+        color2={colors.scale['2']}
+        color3={colors.scale['3']}
       />
       <span className="font-bold text-lg block whitespace-nowrap text-ellipsis overflow-hidden">
         {story.title}

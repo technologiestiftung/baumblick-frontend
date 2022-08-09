@@ -64,8 +64,8 @@ CustomStrokeWidth.args = {
 
 export const DuoToneIcons = Template.bind({})
 DuoToneIcons.args = {
-  color1: colors.scale['5'],
-  color2: colors.scale['5'],
+  color1: colors.scale['1'],
+  color2: colors.scale['2'],
   color3: colors.scale['3'],
   size: 80,
   strokeWidth: 4,
