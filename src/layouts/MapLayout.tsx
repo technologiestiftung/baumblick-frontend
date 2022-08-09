@@ -41,7 +41,7 @@ export const MapLayout: FC<MapLayoutType> = ({
           }}
           onSelect={onTreeSelect}
         />
-        <div className={classNames('absolute top-2 left-2', 'w-[162px]')}>
+        <div className={classNames('absolute top-2 left-2', 'w-[130px]')}>
           <WaterLevelLegend collapsable={true} hasShadow={true} />
         </div>
       </div>

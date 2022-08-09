@@ -7,9 +7,6 @@ const scaleClasses = [
   'border-scale-3',
   'border-scale-4',
   'border-scale-5',
-  'border-scale-6',
-  'border-scale-7',
-  'border-scale-8',
 ]
 
 interface ChapterType {
