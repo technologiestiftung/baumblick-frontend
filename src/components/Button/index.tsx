@@ -21,10 +21,13 @@ const getStyles = ({ primary, disabled, className }: ButtonPropType): string =>
     'transition-colors focus:outline-none',
     'inline-flex items-center gap-2',
     !className?.includes('justify') && 'justify-center',
+    !disabled && [
+      'focus:ring-offset-2 focus:ring-offset-white',
+      'focus:ring-gray-900',
+    ],
     !disabled &&
       primary && [
         'bg-gray-900 text-white',
-        'focus:ring-scale-3',
         'hover:bg-gray-700',
         'active:bg-gray-900',
         'pb-4',
@@ -32,11 +35,9 @@ const getStyles = ({ primary, disabled, className }: ButtonPropType): string =>
     !disabled &&
       !primary && [
         'bg-white text-gray-900',
-        'focus:ring-scale-3',
         'border border-gray-300',
         'hover:bg-gray-200',
         'active:bg-gray-300',
-        'focus:border-scale-3',
       ],
     disabled && [
       'bg-gray-100 text-gray-400 border border-gray-200',

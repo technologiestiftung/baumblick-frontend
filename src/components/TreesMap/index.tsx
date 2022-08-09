@@ -6,7 +6,6 @@ import maplibregl, {
   Map,
   NavigationControl,
 } from 'maplibre-gl'
-import 'maplibre-gl/dist/maplibre-gl.css'
 import { mapRawQueryToState } from '@lib/utils/queryUtil'
 import { useRouter } from 'next/router'
 import { useDebouncedCallback } from 'use-debounce'
@@ -237,7 +236,7 @@ export const TreesMap: FC<MapProps> = ({
           'bg-[#FBFBFC]'
         )}
         aria-label="Kartenansicht der Bäume"
-      ></div>
+      />
       {!isMinimized && <MapTilerLogo />}
     </>
   )

@@ -51,7 +51,7 @@ export const SuctionTensionLegend: FC<SuctionTensionLegendType> = ({
         !isCollapsed && [
           'py-2',
           'bg-white',
-          'rounded-sm border border-gray-200',
+          'rounded border border-gray-300',
           'flex flex-wrap place-content-between gap-1',
         ],
         hasShadow && !isCollapsed && 'shadow-md'

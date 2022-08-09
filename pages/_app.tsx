@@ -1,6 +1,7 @@
 import { ParsedUrlQuery } from 'querystring'
 import { StrictMode, FC, ReactElement, ReactNode } from 'react'
 import { Head } from '@components/Head'
+import 'maplibre-gl/dist/maplibre-gl.css'
 import '../src/style/global.css'
 import { useMatomo } from '@lib/hooks/useMatomo'
 import { MainMenu } from '@components/MainMenu'
