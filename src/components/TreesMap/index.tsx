@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from 'react'
+import { FC, useCallback, useEffect, useRef, useState } from 'react'
 import maplibregl, {
   AttributionControl,
   GeolocateControl,
@@ -35,6 +35,7 @@ interface MapProps {
   mapStyle?: string
   latitude?: number
   longitude?: number
+  treeIdToSelect?: string
   onSelect?: (treeId: string) => void
   isMinimized?: boolean
 }
@@ -51,6 +52,7 @@ export const TreesMap: FC<MapProps> = ({
   mapStyle = process.env.NEXT_PUBLIC_MAPTILER_BASEMAP_URL as string,
   latitude,
   longitude,
+  treeIdToSelect,
   onSelect = () => undefined,
   isMinimized = false,
 }) => {
@@ -65,6 +67,10 @@ export const TreesMap: FC<MapProps> = ({
     ...staticViewportProps,
     ...initialViewportProps,
   })
+
+  const [currentSelectedTreeId, setCurrentSelectedTreeId] = useState<
+    string | undefined
+  >(treeIdToSelect)
 
   const [geolocateControl, setGeolocateControl] =
     useState<GeolocateControl | null>(null)
@@ -100,6 +106,28 @@ export const TreesMap: FC<MapProps> = ({
     process.env.NEXT_PUBLIC_MAPTILER_KEY as string
   }`
 
+  const onTreeClick = useCallback(
+    (e) => {
+      if (!e.features) return
+
+      const features = e.features
+
+      debouncedViewportChange.cancel()
+      onSelect(features[0].properties?.trees_gml_id)
+    },
+    [onSelect]
+  )
+
+  useEffect(() => {
+    if (!map.current) return
+    map.current.on('click', TREES_LAYER_ID, onTreeClick)
+
+    return () => {
+      if (!map.current) return
+      map.current.off('click', TREES_LAYER_ID, onTreeClick)
+    }
+  }, [map, onTreeClick])
+
   useEffect(() => {
     map.current = new maplibregl.Map({
       container: mapId || '',
@@ -127,16 +155,21 @@ export const TreesMap: FC<MapProps> = ({
       map.current.addSource(TREES_SOURCE_ID, TREES_SOURCE)
       map.current.addLayer(TREES_LAYER)
       map.current.addLayer(TREES_NUMBERS)
+
+      // If we have a treeIdToSelect on the initial map load, we already set the selected feature state, so that the selected style is applied:
+      if (treeIdToSelect) {
+        map.current.setFeatureState(
+          {
+            source: TREES_SOURCE_ID,
+            sourceLayer: TREES_SOURCE_LAYER_ID,
+            id: currentSelectedTreeId,
+          },
+          { selected: true }
+        )
+      }
     })
 
-    map.current.on('click', TREES_LAYER_ID, function (e) {
-      if (!e.features) return
-
-      const features = e.features
-
-      debouncedViewportChange.cancel()
-      onSelect(features[0].properties?.trees_gml_id)
-    })
+    map.current.on('click', TREES_LAYER_ID, onTreeClick)
 
     map.current.on('mousemove', TREES_LAYER_ID, function (e) {
       if (!map.current || !e.features || e.features.length === 0) return
@@ -215,6 +248,38 @@ export const TreesMap: FC<MapProps> = ({
     map.current.addControl(attributionControl, 'bottom-left')
     map.current.addControl(geolocateControl, 'bottom-right')
   }, [map, pathname, geolocateControl, navigationControl, attributionControl])
+
+  useEffect(() => {
+    if (!map.current || !map.current.loaded()) return
+
+    if (typeof treeIdToSelect === 'undefined') {
+      // Remove selected feature state from source:
+      map.current.setFeatureState(
+        {
+          source: TREES_SOURCE_ID,
+          sourceLayer: TREES_SOURCE_LAYER_ID,
+          id: currentSelectedTreeId,
+        },
+        { selected: false }
+      )
+
+      // No more selected feature, so we set the state to undefined:
+      setCurrentSelectedTreeId(undefined)
+    } else {
+      // If a valid treeIdToSelect is passed to the map, we set the state of currentSelectedTreeId to treeIdToSelect. So that later we can reference the ID. This will be useful when we want to remove the selected feature state (e.g. when closing the detail view)
+      setCurrentSelectedTreeId(treeIdToSelect)
+
+      // Set feature state of currentSelectedTreeId to selected
+      map.current.setFeatureState(
+        {
+          source: TREES_SOURCE_ID,
+          sourceLayer: TREES_SOURCE_LAYER_ID,
+          id: currentSelectedTreeId,
+        },
+        { selected: true }
+      )
+    }
+  }, [map, currentSelectedTreeId, treeIdToSelect])
 
   useEffect(() => {
     if (!map.current) return
