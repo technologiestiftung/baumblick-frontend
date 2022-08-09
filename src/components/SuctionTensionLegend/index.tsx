@@ -4,13 +4,13 @@ import useTranslation from 'next-translate/useTranslation'
 import ReactDOM from 'react-dom'
 import { SuctionTensionScale } from '@components/SuctionTensionScale'
 
-export interface WaterLevelLegendType {
+export interface SuctionTensionLegendType {
   collapsable?: boolean
   initiallyCollapsed?: boolean
   hasShadow?: boolean
 }
 
-export const WaterLevelLegend: FC<WaterLevelLegendType> = ({
+export const SuctionTensionLegend: FC<SuctionTensionLegendType> = ({
   collapsable = false,
   initiallyCollapsed = false,
   hasShadow = false,

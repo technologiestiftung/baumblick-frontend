@@ -1,5 +1,5 @@
 import { TreesMap } from '@components/TreesMap'
-import { WaterLevelLegend } from '@components/WaterLevelLegend'
+import { SuctionTensionLegend } from '@components/SuctionTensionLegend'
 import { FC } from 'react'
 
 export const MAP_CONFIG = {
@@ -45,7 +45,7 @@ export const MapLayout: FC<MapLayoutType> = ({
           longitude={longitude}
           isMinimized={isMinimized}
         />
-        <WaterLevelLegend collapsable={true} hasShadow={true} />
+        <SuctionTensionLegend collapsable={true} hasShadow={true} />
       </div>
       {children}
     </>
