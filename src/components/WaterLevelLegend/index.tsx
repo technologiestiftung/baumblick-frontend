@@ -1,5 +1,3 @@
-import { ArrowsDiagonal } from '@components/Icons/ArrowsDiagonal'
-import { ArrowsDiagonalMinimize2 } from '@components/Icons/ArrowsDiagonalMinimize2'
 import classNames from 'classnames'
 import { FC, useState } from 'react'
 import useTranslation from 'next-translate/useTranslation'
@@ -28,10 +26,17 @@ export const WaterLevelLegend: FC<WaterLevelLegendType> = ({
   }
   return (
     <span
+      {...(collapsable
+        ? { role: 'button', tabIndex: 0, onClick: toggleCollapsed }
+        : {})}
       className={classNames(
+        'group',
         'relative inline-block min-w-[80px] font-sans',
         collapsable && isCollapsed && 'translate-y-3',
-        collapsable && 'px-3 w-full',
+        collapsable && 'w-full px-3',
+        collapsable &&
+          !isCollapsed &&
+          'focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 focus:ring-offset-white',
         !isCollapsed && [
           'py-2',
           'bg-white',
@@ -53,7 +58,10 @@ export const WaterLevelLegend: FC<WaterLevelLegendType> = ({
           'bg-gray-200',
           'rounded-full',
           isCollapsed && 'ring-2 ring-white',
-          'grid grid-flow-col gap-0'
+          'grid grid-flow-col gap-0',
+          collapsable &&
+            isCollapsed &&
+            'group-focus:outline-none group-focus:ring-2 group-focus:ring-gray-900 group-focus:ring-offset-2 group-focus:ring-offset-white'
         )}
       >
         {legendColors.map((color, idx) => {
@@ -81,26 +89,6 @@ export const WaterLevelLegend: FC<WaterLevelLegendType> = ({
             {t('legend.map.end')}
           </span>
         </>
-      )}
-      {collapsable && (
-        <button
-          className={classNames(
-            'absolute bottom-0 right-0',
-            'bg-white',
-            'rounded-full',
-            'w-8 h-8',
-            'border border-gray-200',
-            'translate-x-1/2 translate-y-1/2',
-            'flex justify-center items-center'
-          )}
-          onClick={toggleCollapsed}
-        >
-          {isCollapsed ? (
-            <ArrowsDiagonal className="rotate-90" />
-          ) : (
-            <ArrowsDiagonalMinimize2 className="rotate-90" />
-          )}
-        </button>
       )}
     </span>
   )
