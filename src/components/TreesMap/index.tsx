@@ -13,6 +13,7 @@ import {
   TREES_SOURCE_LAYER_ID,
 } from './treesLayer'
 import { MapTilerLogo } from './MapTilerLogo'
+import classNames from 'classnames'
 
 interface MapProps {
   staticViewportProps?: {
@@ -29,6 +30,7 @@ interface MapProps {
   latitude?: number
   longitude?: number
   onSelect?: (treeId: string) => void
+  isMinimized?: boolean
 }
 
 type URLViewportType = Pick<ViewportProps, 'latitude' | 'longitude' | 'zoom'>
@@ -44,6 +46,7 @@ export const TreesMap: FC<MapProps> = ({
   latitude,
   longitude,
   onSelect = () => undefined,
+  isMinimized = false,
 }) => {
   const { replace, query, pathname } = useRouter()
   const mappedQuery = mapRawQueryToState(query)
@@ -184,14 +187,22 @@ export const TreesMap: FC<MapProps> = ({
 
   useEffect(() => {
     if (!map.current || !latitude || !longitude) return
-    map.current.flyTo({ center: [longitude, latitude], zoom: 18 })
+    map.current.resize()
+    map.current.flyTo({
+      center: [longitude, latitude],
+      zoom: 18,
+    })
   }, [map, latitude, longitude])
 
   return (
     <>
       <div
         id={mapId}
-        className="!static w-full h-full bg-[#FBFBFC]"
+        className={classNames(
+          '!static w-full',
+          isMinimized ? 'h-[124px]' : 'h-full',
+          'bg-[#FBFBFC]'
+        )}
         aria-label="Kartenansicht der Bäume"
       ></div>
       <MapTilerLogo />

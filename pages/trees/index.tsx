@@ -35,6 +35,7 @@ MapPage.getLayout = function getLayout(page, props) {
         onTreeSelect={(treeId) => {
           void router.push({ pathname: '/trees/[id]', query: { id: treeId } })
         }}
+        isMinimized={false}
       />
       {page}
     </>

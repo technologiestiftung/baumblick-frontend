@@ -16,6 +16,7 @@ export interface MapLayoutType {
   longitude?: number
   zoom?: number
   onTreeSelect?: (treeId: string) => void
+  isMinimized?: boolean
 }
 
 export const MapLayout: FC<MapLayoutType> = ({
@@ -23,6 +24,7 @@ export const MapLayout: FC<MapLayoutType> = ({
   longitude,
   zoom,
   onTreeSelect = () => undefined,
+  isMinimized,
   children,
 }) => {
   return (
@@ -42,6 +44,7 @@ export const MapLayout: FC<MapLayoutType> = ({
           onSelect={onTreeSelect}
           latitude={latitude}
           longitude={longitude}
+          isMinimized={isMinimized}
         />
         <div className={classNames('absolute top-2 left-2', 'w-[162px]')}>
           <WaterLevelLegend collapsable={true} hasShadow={true} />

@@ -76,7 +76,10 @@ const TreePage: TreePageWithLayout = ({ treeData }) => {
           'group focus:outline-none'
         )}
         onClick={() => {
-          void push('/trees')
+          void push({
+            pathname: '/trees',
+            query: { latitude: treeData.lat, longitude: treeData.lng },
+          })
         }}
         aria-label="Kartenansicht"
       >
@@ -186,7 +189,11 @@ const TreePage: TreePageWithLayout = ({ treeData }) => {
 TreePage.getLayout = function getLayout(page, props) {
   return (
     <>
-      <MapLayout latitude={props.latitude} longitude={props.longitude} />
+      <MapLayout
+        latitude={props.latitude}
+        longitude={props.longitude}
+        isMinimized={true}
+      />
       {page}
     </>
   )
