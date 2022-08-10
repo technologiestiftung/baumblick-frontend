@@ -267,8 +267,23 @@ export const TreesMap: FC<MapProps> = ({
   useEffect(() => {
     if (!map.current || !map.current.loaded()) return
 
-    if (typeof treeIdToSelect === 'undefined') {
-      // Remove selected feature state from source:
+    if (treeIdToSelect) {
+      // Set feature state of treeIdToSelect to selected
+      map.current.setFeatureState(
+        {
+          source: TREES_SOURCE_ID,
+          sourceLayer: TREES_SOURCE_LAYER_ID,
+          id: treeIdToSelect,
+        },
+        { selected: true }
+      )
+
+      // If a valid treeIdToSelect is passed to the map, we set the state of currentSelectedTreeId to treeIdToSelect. So that later we can reference the ID. This will be useful when we want to remove the selected feature state (see next if statement)
+      setCurrentSelectedTreeId(treeIdToSelect)
+    }
+
+    if (typeof treeIdToSelect === 'undefined' && currentSelectedTreeId) {
+      // If we specify that there is no treeIdToSelect, we need to remove the selected feature state from source:
       map.current.setFeatureState(
         {
           source: TREES_SOURCE_ID,
@@ -280,19 +295,6 @@ export const TreesMap: FC<MapProps> = ({
 
       // No more selected feature, so we set the state to undefined:
       setCurrentSelectedTreeId(undefined)
-    } else {
-      // If a valid treeIdToSelect is passed to the map, we set the state of currentSelectedTreeId to treeIdToSelect. So that later we can reference the ID. This will be useful when we want to remove the selected feature state (e.g. when closing the detail view)
-      setCurrentSelectedTreeId(treeIdToSelect)
-
-      // Set feature state of currentSelectedTreeId to selected
-      map.current.setFeatureState(
-        {
-          source: TREES_SOURCE_ID,
-          sourceLayer: TREES_SOURCE_LAYER_ID,
-          id: currentSelectedTreeId,
-        },
-        { selected: true }
-      )
     }
   }, [map, currentSelectedTreeId, treeIdToSelect])
 
