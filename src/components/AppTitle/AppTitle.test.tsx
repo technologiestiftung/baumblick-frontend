@@ -12,8 +12,8 @@ describe('AppTitle', () => {
   test('should render the title', () => {
     render(<AppTitle />)
 
-    const qtrees = screen.getByText('Qtrees')
+    const treewatch = screen.getByText('TreeWatch')
 
-    expect(qtrees).toBeInTheDocument()
+    expect(treewatch).toBeInTheDocument()
   })
 })

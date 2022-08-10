@@ -12,7 +12,7 @@ export const stories: Record<string, StoryLinkPropType> = {
     readingDurationInMinutes: 2,
     excerpt: (
       <>
-        Der QTrees Baummonitor zeigt dir den{' '}
+        TreeWatch zeigt dir den{' '}
         <strong>Wasserstand der Berliner Stadtbäume</strong>.
       </>
     ),
@@ -35,7 +35,7 @@ export const stories: Record<string, StoryLinkPropType> = {
   },
   'das-quantified-trees-konsortium': {
     path: `/stories/das-quantified-trees-konsortium`,
-    title: `Das "Quantified Trees" (QTrees) Konsortium`,
+    title: `Das "Quantified Trees" Konsortium`,
     author: `Julia Zimmermann`,
     readingDurationInMinutes: 12,
     excerpt: (

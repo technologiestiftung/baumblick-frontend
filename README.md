@@ -1,7 +1,7 @@
 ![](https://img.shields.io/badge/Built%20with%20%E2%9D%A4%EF%B8%8F-at%20Technologiestiftung%20Berlin-blue)
 
-# _Quantified Trees (Qtrees) – Citizens Frontend_
-> The [_Qtrees – Citizens Frontend_]() is an interactive map of Berlin that shows how thirsty the public trees of berlin are. More precisely, it visualizes the trees' ground suction tension. This suction tension represents the amount of energy tree roots are needing in order to suck out water from the ground. Using open data as well as sensors distributed under the ground of about a hundred trees, an AI developed by [Birds on Mars](https://www.birdsonmars.com/) is able to generate forecasts for the trees not equiped with sensors. This web-app is oriented towards the public and should inform about the AI-generated forecasts in a simple and intuitive way.
+# _TreeWatch_
+> The [_TreeWatch_]() is an interactive map of Berlin that shows how thirsty the public trees of berlin are. More precisely, it visualizes the trees' ground suction tension. This suction tension represents the amount of energy tree roots are needing in order to suck out water from the ground. Using open data as well as sensors distributed under the ground of about a hundred trees, an AI developed by [Birds on Mars](https://www.birdsonmars.com/) is able to generate forecasts for the trees not equiped with sensors. This web-app is oriented towards the public and should inform about the AI-generated forecasts in a simple and intuitive way.
 
 ## Context
 Climate change is causing increasingly hot, dry weather in many places. In recent years, Berlin has also experienced more hot days than ever before. Determining whether trees are in need of water isn't as easy as looking at the ground on the surface level. Many factors such as the tree's age, specie, plate size or ground quality play an important role. Old trees, for instance, tend to have deep roots and thereby be less dependent on additional watering. Overwatering can in fact be more detrimental to a tree than helpful.
@@ -46,13 +46,13 @@ We use a small "passthrough" API which exposes all the data that is required. Th
 Clone the repository to your local machine:
 
 ```bash
-git clone git@github.com:technologiestiftung/qtrees-citizens-frontend.git
+git clone git@github.com:technologiestiftung/treewatch-frontend.git
 ```
 
 Move into the repository folder:
 
 ```bash
-cd qtrees-citizens-frontend
+cd treewatch-frontend
 ```
 
 Make sure you use the Node.js version specified in `.nvmrc`. Find out which Node version you're currently on with:
@@ -84,7 +84,7 @@ npm run dev
 ```
 
 ## Deployment
-_Qtrees – Citizens Frontend_ is deployed to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+_TreeWatch_ is deployed to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
 
 ## Page analytics
 
@@ -101,8 +101,8 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/dnsos"><img src="https://avatars.githubusercontent.com/u/15640196?v=4?s=64" width="64px;" alt=""/><br /><sub><b>Dennis Ostendorf</b></sub></a><br /><a href="https://github.com/technologiestiftung/qtrees-citizens-frontend/commits?author=dnsos" title="Code">💻</a> <a href="https://github.com/technologiestiftung/qtrees-citizens-frontend/commits?author=dnsos" title="Documentation">📖</a></td>
-    <td align="center"><a href="https://vogelino.com/"><img src="https://avatars.githubusercontent.com/u/2759340?v=4?s=64" width="64px;" alt=""/><br /><sub><b>Lucas Vogel</b></sub></a><br /><a href="https://github.com/technologiestiftung/qtrees-citizens-frontend/commits?author=vogelino" title="Code">💻</a> <a href="https://github.com/technologiestiftung/qtrees-citizens-frontend/commits?author=vogelino" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/dnsos"><img src="https://avatars.githubusercontent.com/u/15640196?v=4?s=64" width="64px;" alt=""/><br /><sub><b>Dennis Ostendorf</b></sub></a><br /><a href="https://github.com/technologiestiftung/treewatch-frontend/commits?author=dnsos" title="Code">💻</a> <a href="https://github.com/technologiestiftung/treewatch-frontend/commits?author=dnsos" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://vogelino.com/"><img src="https://avatars.githubusercontent.com/u/2759340?v=4?s=64" width="64px;" alt=""/><br /><sub><b>Lucas Vogel</b></sub></a><br /><a href="https://github.com/technologiestiftung/treewatch-frontend/commits?author=vogelino" title="Code">💻</a> <a href="https://github.com/technologiestiftung/treewatch-frontend/commits?author=vogelino" title="Documentation">📖</a></td>
   </tr>
 </table>
 

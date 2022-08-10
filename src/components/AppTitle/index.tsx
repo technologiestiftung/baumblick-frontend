@@ -22,7 +22,7 @@ export const AppTitle: FC = () => (
         'focus:ring-2 focus:ring-gray-800'
       )}
     >
-      <span className="text-scale-3">Qtrees</span>
+      <span className="text-scale-3">TreeWatch</span>
     </InternalLink>
   </div>
 )
