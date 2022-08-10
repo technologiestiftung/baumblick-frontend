@@ -20,22 +20,16 @@ export const Header: FC<{
       <InternalLink
         href="/"
         className={classNames(
-          'px-1',
+          'px-1 inline-flex gap-2',
           'text-gray-900',
           'transition-colors focus:outline-none',
           'focus:ring-2 focus:ring-gray-600',
-          'hover:text-gray-900 hover:underline',
-          compact ? 'font-normal' : 'font-semibold'
+          'hover:text-gray-900 hover:underline'
         )}
       >
-        {t('name.short')}{' '}
-        <span
-          className={classNames(
-            'font-normal transition-opacity',
-            compact ? 'opacity-0' : 'opacity-1'
-          )}
-        >
-          {t('name.addition')}
+        <img src="/logo.svg" alt="TreeWatch Logo" className="h-6" />
+        <span className={compact ? 'font-medium' : 'font-bold'}>
+          {t('name.short')}
         </span>
       </InternalLink>
       <a
@@ -45,7 +39,7 @@ export const Header: FC<{
           'focus:ring-2 focus:ring-gray-600',
           'hover:text-gray-900 hover:underline'
         )}
-        href="https://qtrees.ai"
+        href={`https://${t('url')}`}
         rel="noopener noreferrer"
         target="_blank"
       >

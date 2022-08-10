@@ -1,10 +1,10 @@
 {
   "name": {
-    "short": "Qtrees",
+    "short": "TreeWatch",
     "addition": "Baummonitor",
-    "full": "Qtrees Baummonitor"
+    "full": "TreeWatch Baummonitor"
   },
-  "url": "qtrees.ai",
+  "url": "treewatch.ai",
   "time": {
     "minShortened": "Min"
   },

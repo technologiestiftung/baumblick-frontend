@@ -87,8 +87,10 @@ const TreePage: TreePageWithLayout = ({ treeData }) => {
         <div
           className={classNames(
             'absolute top-2 right-2',
-            'p-3 bg-white rounded-full shadow-md hover:bg-gray-100',
-            'border-2 border-gray-900 border-opacity-0 group-focus:border-opacity-100'
+            'p-2 bg-white rounded-full shadow-md hover:bg-gray-100',
+            'border border-gray-300',
+            'group-focus:ring-2 group-focus:ring-gray-900 group-focus:ring-offset-2',
+            'group-focus:ring-offset-white'
           )}
         >
           <CrossIcon className="w-8 h-8" />

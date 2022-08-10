@@ -15,7 +15,7 @@ export const SoilLayer: FC<{
     className={classNames(
       'h-20',
       'pl-6',
-      'border-t first-of-type:border-t-0',
+      'border-t first-of-type:rounded-t-xl',
       'flex items-center',
       'transition-colors'
     )}
