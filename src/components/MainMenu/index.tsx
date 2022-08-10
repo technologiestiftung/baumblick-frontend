@@ -40,24 +40,29 @@ export const MainMenu: FC = () => {
         'flex gap-[1px] drop-shadow-lg'
       )}
     >
-      {links.map((link) => (
-        <InternalLink
-          key={link.path}
-          href={link.path}
-          className={classNames(
-            'bg-white w-full',
-            'group cursor-default',
-            pathname === link.path ? 'text-gray-900' : 'text-gray-400',
-            pathname !== link.path &&
-              'hover:text-gray-600 hover:bg-gray-200 cursor-pointer',
-            'transition-colors focus:outline-none',
-            'focus:ring-2 focus:ring-gray-800',
-            'flex place-items-center justify-center'
-          )}
-        >
-          <link.Icon width={32} height={32} />
-        </InternalLink>
-      ))}
+      {links.map((link) => {
+        const isActive =
+          (pathname.startsWith('/trees') && link.path === '/trees') ||
+          pathname === link.path
+        return (
+          <InternalLink
+            key={link.path}
+            href={link.path}
+            className={classNames(
+              'bg-white w-full relative',
+              'group cursor-default',
+              isActive ? 'text-gray-900' : 'text-gray-400',
+              !isActive &&
+                'hover:text-gray-600 hover:bg-gray-200 cursor-pointer',
+              'transition-colors focus:outline-none',
+              'focus:ring-2 focus:ring-gray-800 focus:z-10',
+              'flex place-items-center justify-center'
+            )}
+          >
+            <link.Icon width={32} height={32} />
+          </InternalLink>
+        )
+      })}
     </div>
   )
 }

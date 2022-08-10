@@ -1,7 +1,8 @@
 import { TreesMap } from '@components/TreesMap'
-import { WaterLevelLegend } from '@components/WaterLevelLegend'
-import classNames from 'classnames'
+import { SuctionTensionLegend } from '@components/SuctionTensionLegend'
 import { FC } from 'react'
+import { useHasScrolledPastThreshold } from '@lib/hooks/useHasScrolledPastThreshold'
+import classNames from 'classnames'
 
 export const MAP_CONFIG = {
   minZoom: 11.5,
@@ -14,20 +15,29 @@ export const MAP_CONFIG = {
 export interface MapLayoutType {
   latitude?: number
   longitude?: number
+  treeIdToSelect?: string
   zoom?: number
   onTreeSelect?: (treeId: string) => void
+  isMinimized?: boolean
 }
 
 export const MapLayout: FC<MapLayoutType> = ({
   latitude,
   longitude,
+  treeIdToSelect,
   zoom,
   onTreeSelect = () => undefined,
+  isMinimized,
   children,
 }) => {
+  const { hasScrolledPastThreshold } = useHasScrolledPastThreshold({
+    threshold: 5,
+    scrollParent: 'main',
+  })
+
   return (
     <>
-      <div className="w-full h-full">
+      <div className="w-full h-full overflow-hidden">
         <TreesMap
           mapId="trees-map"
           staticViewportProps={{
@@ -40,10 +50,19 @@ export const MapLayout: FC<MapLayoutType> = ({
             zoom: zoom || MAP_CONFIG.defaultZoom,
           }}
           onSelect={onTreeSelect}
+          latitude={latitude}
+          longitude={longitude}
+          treeIdToSelect={treeIdToSelect}
+          isMinimized={isMinimized}
         />
-        <div className={classNames('absolute top-2 left-2', 'w-[130px]')}>
-          <WaterLevelLegend collapsable={true} hasShadow={true} />
-        </div>
+        <SuctionTensionLegend
+          collapsable={true}
+          hasShadow={true}
+          className={classNames(
+            'transition-opacity',
+            hasScrolledPastThreshold && 'opacity-0 pointer-events-none'
+          )}
+        />
       </div>
       {children}
     </>

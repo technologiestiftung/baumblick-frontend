@@ -1,11 +1,13 @@
 import { ParsedUrlQuery } from 'querystring'
 import { StrictMode, FC, ReactElement, ReactNode } from 'react'
 import { Head } from '@components/Head'
+import 'maplibre-gl/dist/maplibre-gl.css'
 import '../src/style/global.css'
 import { useMatomo } from '@lib/hooks/useMatomo'
 import { MainMenu } from '@components/MainMenu'
 import { NextPage } from 'next'
 import type { AppProps as NextAppProps } from 'next/app'
+import classNames from 'classnames'
 
 type AppProps<P = unknown> = {
   pageProps: P
@@ -35,9 +37,13 @@ const App: FC<AppPropsWithLayout> = ({
   return (
     <StrictMode>
       <Head pageTitle={pageProps.title || ''} />
-      <div className="fixed inset-0 bottom-16 overflow-x-hidden overflow-y-auto">
+      <main
+        className={classNames(
+          'fixed inset-0 overflow-x-hidden overflow-y-auto bottom-16'
+        )}
+      >
         {getLayout(<Component {...pageProps} />, pageProps)}
-      </div>
+      </main>
       <MainMenu />
     </StrictMode>
   )

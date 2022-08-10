@@ -39,9 +39,9 @@ export const StoryLink: FC<StoryLinkPropType> = ({
       )}
     >
       <Icon
-        color1={colors.scale['5']}
-        color2={colors.scale['5']}
-        color3={colors.scale['2']}
+        color1={colors.scale['1']}
+        color2={colors.scale['2']}
+        color3={colors.scale['3']}
         size={40}
       />
       <section>

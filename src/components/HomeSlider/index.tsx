@@ -1,4 +1,5 @@
-import { WaterLevelLegend } from '@components/WaterLevelLegend'
+import { SuctionTensionScale } from '@components/SuctionTensionScale'
+import classNames from 'classnames'
 import Trans from 'next-translate/Trans'
 import useTranslation from 'next-translate/useTranslation'
 import { FC } from 'react'
@@ -21,12 +22,27 @@ const HomeSlide: FC<HomeSlidePropType> = ({ img: { url, alt }, children }) => (
   </div>
 )
 
+const Pill: FC<{ className?: string }> = ({ className = '', children }) => (
+  <span
+    className={classNames(
+      className,
+      'h-4 w-4 font-sans text-center font-bold',
+      'inline-flex place-content-center leading-tight',
+      'text-xs text-gray-900/50 rounded-full'
+    )}
+  >
+    {children}
+  </span>
+)
+
 export const HomeSlider: FC = () => {
   const { t } = useTranslation('common')
   const formattingComponents = {
     bold: <strong />,
     italic: <em />,
-    legend: <WaterLevelLegend initiallyCollapsed />,
+    legend: <SuctionTensionScale />,
+    '1': <Pill className="bg-scale-1 border-scale-1-dark">1</Pill>,
+    '5': <Pill className="bg-scale-5 border-scale-5-dark">5</Pill>,
   }
   return (
     <Slider arrows={false} infinite={false} dots>
@@ -93,6 +109,17 @@ export const HomeSlider: FC = () => {
       >
         <Trans
           i18nKey="common:home.slides.6.text"
+          components={formattingComponents}
+        />
+      </HomeSlide>
+      <HomeSlide
+        img={{
+          url: '/images/home-slider/7.svg',
+          alt: t('home.slides.7.alt'),
+        }}
+      >
+        <Trans
+          i18nKey="common:home.slides.7.text"
           components={formattingComponents}
         />
       </HomeSlide>

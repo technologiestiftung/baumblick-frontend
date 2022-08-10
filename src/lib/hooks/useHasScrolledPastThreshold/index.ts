@@ -31,10 +31,10 @@ export const useHasScrolledPastThreshold: UseHasScrolledPastThresholdType = ({
       } else {
         currentScrollY = document.querySelector('main')?.scrollTop || 0
       }
-      if (prevScrollY.current > threshold) {
+      if (currentScrollY > threshold) {
         setHasScrolledPastThreshold(true)
       }
-      if (prevScrollY.current < threshold) {
+      if (currentScrollY < threshold) {
         setHasScrolledPastThreshold(false)
       }
 

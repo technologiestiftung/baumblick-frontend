@@ -2,7 +2,7 @@ import { Headline } from '@components/Headline'
 import { useRouter } from 'next/router'
 import { stories } from '../../pages/stories'
 import colors from '../../src/style/colors'
-import { FC, useRef, useState } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 import { Header } from '@components/Header'
 import { InternalLink } from '@components/InternalLink'
 import { Paragraph } from '@components/Paragraph'
@@ -22,10 +22,10 @@ const StoryLayoutWithoutTranslation: FC = ({ children }) => {
   const { t } = useTranslation('common')
   const { query } = useRouter()
   const contentRef = useRef<HTMLElement | null>(null)
+  const [contentParent, setContentParent] = useState<HTMLElement | null>(null)
   const [showStickyTableOfContents, setShowStickyTOC] = useState(false)
-  const { headings, scrollToHeading, activeHeadingTitle } = useHeadingsData(
-    contentRef.current
-  )
+  const { headings, scrollToHeading, activeHeadingTitle } =
+    useHeadingsData(contentParent)
   const { hasScrolledPastThreshold, isScrollingUp } =
     useHasScrolledPastThreshold({
       threshold: 600,
@@ -34,6 +34,24 @@ const StoryLayoutWithoutTranslation: FC = ({ children }) => {
     typeof query.id === 'string' && query.id in stories
       ? stories[query.id]
       : Object.values(stories)[0]
+
+  useEffect(() => {
+    if (!contentRef.current) return
+    setContentParent(contentRef.current)
+  }, [])
+
+  const backLink = (
+    <InternalLink
+      href="/stories"
+      className={classNames(
+        'font-semibold text-gray-500 block mb-4',
+        'focus:outline-none focus:ring-2 focus:ring-gray-900',
+        'focus:ring-offset-2 focus:ring-offset-white'
+      )}
+    >
+      ← {t('stories.backToStoriesLink')}
+    </InternalLink>
+  )
 
   return (
     <>
@@ -48,20 +66,15 @@ const StoryLayoutWithoutTranslation: FC = ({ children }) => {
         }
       />
       <section className="px-4 pt-6 pb-2">
-        <InternalLink
-          href="/stories"
-          className="font-semibold text-gray-500 block mb-4"
-        >
-          ← {t('stories.backToStoriesLink')}
-        </InternalLink>
+        {backLink}
         <div className="grid grid-cols-[1fr,auto] gap-2">
           <Headline h1>{story.title}</Headline>
           <story.Icon
             size={80}
             strokeWidth={4}
-            color1={colors.scale[5]}
-            color2={colors.scale[5]}
-            color3={colors.scale[2]}
+            color1={colors.scale[1]}
+            color2={colors.scale[2]}
+            color3={colors.scale[3]}
           />
         </div>
         <Paragraph className="italic text-gray-500">
@@ -108,11 +121,11 @@ const StoryLayoutWithoutTranslation: FC = ({ children }) => {
         onClick={() => setShowStickyTOC((v) => !v)}
       >
         {showStickyTableOfContents ? (
-          <Cross color1={colors.scale['5']} color2={colors.scale['5']} />
+          <Cross color1={colors.scale['1']} color2={colors.scale['3']} />
         ) : (
           <HamburgerMenu
-            color1={colors.scale['5']}
-            color2={colors.scale['5']}
+            color1={colors.scale['1']}
+            color2={colors.scale['2']}
             color3={colors.scale['3']}
           />
         )}
@@ -122,12 +135,8 @@ const StoryLayoutWithoutTranslation: FC = ({ children }) => {
         <Paragraph className="italic text-gray-500">{story.author}</Paragraph>
         <br />
         <hr />
-        <InternalLink
-          href="/stories"
-          className="font-semibold text-gray-500 block mt-8"
-        >
-          ← {t('stories.backToStoriesLink')}
-        </InternalLink>
+        <br />
+        {backLink}
       </footer>
     </>
   )

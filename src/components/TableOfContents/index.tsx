@@ -44,11 +44,12 @@ const ChapterLink: FC<ChapterLinkPropType> = ({
   const wrapperStyles = classNames('block')
   const linkStyles = classNames(
     colorClass,
-    'py-1 block transition-all',
+    'py-1 block transition-all pr-4',
     'hover:text-gray-900 text-left',
     'hover:border-l-8 hover:pl-5',
     isActive ? 'font-bold text-gray-900' : 'font-medium text-gray-600',
-    isActive ? 'border-l-[12px] pl-4' : 'border-l-4 pl-6'
+    isActive ? 'border-l-[12px] pl-4' : 'border-l-4 pl-6',
+    'focus:outline-none focus:ring-2 focus:ring-gray-900'
   )
 
   return (

@@ -24,6 +24,15 @@ module.exports = {
         lg: '32rem',
         xl: '36rem',
       },
+      animation: {
+        'slide-up': 'slide-up 0.125s ease-in-out',
+      },
+      keyframes: {
+        'slide-up': {
+          from: { transform: 'translateY(100%)' },
+          to: { transform: 'translateY(0)' },
+        },
+      },
     },
   },
   plugins: [require('@tailwindcss/typography')],
