@@ -17,7 +17,7 @@
         "alt": "Ein Kartenausschnitt mit einigen farbigen Kreisen, die Bäume und deren Saugspannung darstellen"
       },
       "2": {
-        "text": "Können die Wurzeln eines Baumes leicht Wasser aufnehmen, spricht man von einer <bold>niedriegen Saugspannung</bold> <1/>. Fällt es den Wurzeln schwer, spricht man von einer <bold>hohen Saugspannung</bold> <5/>.",
+        "text": "Können die Wurzeln eines Baumes leicht Wasser aufnehmen, spricht man von einer <bold>niedrigen Saugspannung</bold> <1/>. Fällt es den Wurzeln schwer, spricht man von einer <bold>hohen Saugspannung</bold> <5/>.",
         "alt": "Die Silouhette von 2 Bäumen. Einer hat einen gelben Boden und hat einen durstigen Emoji daneben. Der andere hat einen blauen Boden und ein glückliches Emoji daneben."
       },
       "3": {
@@ -37,8 +37,8 @@
         "alt": "Eine Wolke von Symbolen, die eine Sonne, Regen, Schatten, eine Gießkanne und eine Karte darstellen. Eine geschweifte Klammer, die alle Symbole umfasst und mit einem Vorwärtspfeil in die Mitte führt. In der Mitte ein Symbol für ein neuronales Netz mit dem Text AI. Von letzterem Text und Symbol führt ein Pfeil zu einem Screenshot einer Karte mit vielen farbigen Baumkreisen."
       },
       "7": {
-        "text": "Finden Sie heraus, wie hoch die Saugspannung der Bäume in Ihrer Umgebung ist. <bold>Klicken Sie auf der Button unten!</bold>",
-        "alt": "Ein Button mit einem Geolocation-Symbol und den Worten 'Baum finden'. Ein Pfeil verbindet das Wort 'Klick' und der Button."
+        "text": "Finde heraus, wie hoch die Saugspannung der Bäume in deiner Umgebung ist. <bold>Klicke auf den Button unten!</bold>",
+        "alt": "Ein Button mit einem Geolocation-Symbol und den Worten 'Baum finden'. Ein Pfeil verbindet das Wort 'Klick' und den Button."
       }
     }
   },
