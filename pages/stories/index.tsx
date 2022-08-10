@@ -33,9 +33,9 @@ export const stories: Record<string, StoryLinkPropType> = {
     ),
     Icon: Affiliate,
   },
-  'das-treewatch-konsortium': {
+  'das-quantified-trees-konsortium': {
     path: `/stories/das-quantified-trees-konsortium`,
-    title: `Das "TreeWatch" Konsortium`,
+    title: `Das "Quantified Trees" Konsortium`,
     author: `Julia Zimmermann`,
     readingDurationInMinutes: 12,
     excerpt: (
