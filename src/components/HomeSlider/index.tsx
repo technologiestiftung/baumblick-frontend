@@ -2,7 +2,7 @@ import { SuctionTensionScale } from '@components/SuctionTensionScale'
 import classNames from 'classnames'
 import Trans from 'next-translate/Trans'
 import useTranslation from 'next-translate/useTranslation'
-import { FC, forwardRef } from 'react'
+import { FC } from 'react'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 
@@ -35,30 +35,6 @@ const Pill: FC<{ className?: string }> = ({ className = '', children }) => (
   </span>
 )
 
-const SliderButton = forwardRef<HTMLButtonElement, { label: string }>(
-  ({ label }, ref) => (
-    <button
-      ref={ref}
-      aria-label={label}
-      className={classNames(
-        'group',
-        'w-full h-1 py-3',
-        'transition-colors focus:outline-none focus:!ring-0',
-        'flex place-content-center place-items-center'
-      )}
-    >
-      <span
-        className={classNames(
-          'w-full h-1',
-          'rounded-full bg-gray-300',
-          'group-focus:ring-offset-2 group-focus:ring-offset-white group-focus:ring-2 group-focus:ring-gray-900'
-        )}
-      ></span>
-    </button>
-  )
-)
-SliderButton.displayName = 'Slider Button'
-
 export const HomeSlider: FC = () => {
   const { t } = useTranslation('common')
   const formattingComponents = {
@@ -73,7 +49,25 @@ export const HomeSlider: FC = () => {
       arrows={false}
       infinite={false}
       dots
-      customPaging={(i) => <SliderButton label={`Slide ${i + 1}`} />}
+      customPaging={(i) => (
+        <button
+          aria-label={`Slide ${i + 1}`}
+          className={classNames(
+            'group',
+            'w-full h-1 py-3',
+            'transition-colors focus:outline-none focus:!ring-0',
+            'flex place-content-center place-items-center'
+          )}
+        >
+          <span
+            className={classNames(
+              'w-full h-1',
+              'rounded-full bg-gray-300',
+              'group-focus:ring-offset-2 group-focus:ring-offset-white group-focus:ring-2 group-focus:ring-gray-900'
+            )}
+          ></span>
+        </button>
+      )}
     >
       <HomeSlide
         img={{
