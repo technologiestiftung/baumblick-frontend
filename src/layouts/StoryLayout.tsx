@@ -90,16 +90,21 @@ const StoryLayoutWithoutTranslation: FC = ({ children }) => {
       </nav>
       <div
         className={classNames(
-          'fixed w-full left-0 top-16 pointer-events-none',
-          'bg-gradient-to-br h-full',
-          'from-white to-white/30 via-white/90',
-          'transition-opacity pt-8 backdrop-blur-sm',
-          hasScrolledPastThreshold && showStickyTableOfContents
-            ? 'opacity-100'
-            : 'opacity-0'
+          'fixed w-full left-0 top-16 pointer-events-none h-full'
         )}
       >
-        <div className="w-full max-w-3xl mx-auto">
+        <div
+          className={classNames(
+            'w-full max-w-3xl mx-auto',
+            'bg-gradient-to-br h-full',
+            'md:border-r md:border-l border-gray-200',
+            'from-white to-white/30 via-white/90',
+            'transition-opacity pt-8 backdrop-blur-sm',
+            hasScrolledPastThreshold && showStickyTableOfContents
+              ? 'opacity-100'
+              : 'opacity-0'
+          )}
+        >
           <div
             className={classNames(
               showStickyTableOfContents && 'pointer-events-auto'

@@ -32,6 +32,7 @@ export const StoryStickyHeader: FC<StoryStickyHeaderPropsType> = ({
       className={classNames(
         'mx-auto max-w-3xl ',
         'transition-all bg-white shadow-lg border-b border-b-gray-300',
+        'md:border-r md:border-l border-l-gray-200 border-r-gray-200',
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full'
       )}
     >

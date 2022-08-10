@@ -28,6 +28,7 @@ export const StoriesOverviewHeader: FC = () => {
         <h1
           className={classNames(
             'border-b border-gray-200 px-4',
+            'md:border-r md:border-l',
             'transition-all',
             hasScrolledPastThreshold ? 'pb-3 pt-0' : 'pb-6 pt-3',
             hasScrolledPastThreshold ? 'text-xl' : 'text-3xl',

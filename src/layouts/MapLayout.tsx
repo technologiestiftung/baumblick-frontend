@@ -38,7 +38,7 @@ export const MapLayout: FC<MapLayoutType> = ({
 
   return (
     <>
-      <div className="w-full h-full overflow-hidden">
+      <div className={classNames('fixed inset-0')}>
         {!isMinimized && (
           <div className="fixed w-full left-0 top-2 md:top-4 pointer-events-none z-10">
             <div className="w-full max-w-3xl flex justify-end mx-auto">

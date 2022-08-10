@@ -58,7 +58,7 @@
   }
 
 	body {
-		@apply max-w-3xl mx-auto relative md:border-r md:border-l border-gray-300;
+		@apply max-w-3xl mx-auto relative md:border-r md:border-l border-gray-200;
 	}
 
 	a,
@@ -149,6 +149,10 @@ main .maplibregl-ctrl-group:not(:empty) {
 
 main .maplibregl-ctrl-group button {
 	@apply rounded bg-white w-12 h-12;
+}
+
+main .maplibregl-control-container {
+	@apply fixed max-w-3xl bottom-16 left-1/2 -translate-x-1/2 w-full;
 }
 
 main .maplibregl-ctrl-attrib-button:focus,
