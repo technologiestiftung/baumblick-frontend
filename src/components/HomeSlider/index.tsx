@@ -2,7 +2,7 @@ import { SuctionTensionScale } from '@components/SuctionTensionScale'
 import classNames from 'classnames'
 import Trans from 'next-translate/Trans'
 import useTranslation from 'next-translate/useTranslation'
-import { FC } from 'react'
+import { FC, forwardRef } from 'react'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 
@@ -35,9 +35,10 @@ const Pill: FC<{ className?: string }> = ({ className = '', children }) => (
   </span>
 )
 
-const SliderButton: FC<{ label: string }> = ({ label }) => {
-  return (
+const SliderButton = forwardRef<HTMLButtonElement, { label: string }>(
+  ({ label }, ref) => (
     <button
+      ref={ref}
       aria-label={label}
       className={classNames(
         'group',
@@ -55,7 +56,8 @@ const SliderButton: FC<{ label: string }> = ({ label }) => {
       ></span>
     </button>
   )
-}
+)
+SliderButton.displayName = 'Slider Button'
 
 export const HomeSlider: FC = () => {
   const { t } = useTranslation('common')
