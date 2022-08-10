@@ -25,7 +25,7 @@ export const TREES_SOURCE: SourceSpecification = {
 
 const CIRCLE_STROKE_WIDTH = {
   default: 1,
-  hovered: 5,
+  highlighted: 5,
 }
 
 export const TREES_NUMBERS: LayerSpecification = {
@@ -93,8 +93,13 @@ export const TREES_LAYER: LayerSpecification = {
     ],
     'circle-stroke-width': [
       'case',
-      ['boolean', ['feature-state', 'hover'], false],
-      CIRCLE_STROKE_WIDTH.hovered,
+      [
+        'boolean',
+        ['feature-state', 'selected'],
+        ['feature-state', 'hover'],
+        false,
+      ],
+      CIRCLE_STROKE_WIDTH.highlighted,
       CIRCLE_STROKE_WIDTH.default,
     ],
     'circle-stroke-color': [
