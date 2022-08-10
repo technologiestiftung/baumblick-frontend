@@ -130,11 +130,8 @@
 .slick-dots > li {
 	@apply w-full h-1;
 }
-.slick-dots > li > button {
-	@apply w-full h-1 rounded-full bg-gray-300 transition-colors indent-[100%] whitespace-nowrap overflow-hidden focus:outline-none focus:ring-offset-2 focus:ring-offset-white focus:ring-2 focus:ring-gray-900;
-}
 
-.slick-dots > li.slick-active > button {
+.slick-dots > li.slick-active > button > span {
 	@apply bg-gray-900;
 }
 
