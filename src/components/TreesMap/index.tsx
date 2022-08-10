@@ -106,27 +106,33 @@ export const TreesMap: FC<MapProps> = ({
     process.env.NEXT_PUBLIC_MAPTILER_KEY as string
   }`
 
-  const onTreeClick = useCallback(
+  const onTreeClickCallback = useCallback(
     (e) => {
+      // NOTE: We ignore TypeScript here for now because it is tricky to get the types right.
+      // In theory they should match the type of the listener of map.current.on("click")
+
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       if (!e.features) return
 
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
       const features = e.features
 
       debouncedViewportChange.cancel()
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       onSelect(features[0].properties?.trees_gml_id)
     },
-    [onSelect]
+    [debouncedViewportChange, onSelect]
   )
 
   useEffect(() => {
     if (!map.current) return
-    map.current.on('click', TREES_LAYER_ID, onTreeClick)
+    map.current.on('click', TREES_LAYER_ID, onTreeClickCallback)
 
     return () => {
       if (!map.current) return
-      map.current.off('click', TREES_LAYER_ID, onTreeClick)
+      map.current.off('click', TREES_LAYER_ID, onTreeClickCallback)
     }
-  }, [map, onTreeClick])
+  }, [map, onTreeClickCallback])
 
   useEffect(() => {
     map.current = new maplibregl.Map({
@@ -169,7 +175,7 @@ export const TreesMap: FC<MapProps> = ({
       }
     })
 
-    map.current.on('click', TREES_LAYER_ID, onTreeClick)
+    map.current.on('click', TREES_LAYER_ID, onTreeClickCallback)
 
     map.current.on('mousemove', TREES_LAYER_ID, function (e) {
       if (!map.current || !e.features || e.features.length === 0) return
