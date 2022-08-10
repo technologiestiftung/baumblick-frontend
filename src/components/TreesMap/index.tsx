@@ -85,6 +85,7 @@ export const TreesMap: FC<MapProps> = ({
   const [attributionControl, setAttributionControl] =
     useState<AttributionControl | null>(null)
 
+  // Update viewport when URL params provide new lat/lng/zoom values
   useEffect(() => {
     setViewport({
       ...viewport,
@@ -96,6 +97,7 @@ export const TreesMap: FC<MapProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mappedQuery.latitude, mappedQuery.longitude, mappedQuery.zoom])
 
+  // Change route after map interaction (zoom, pan, etc.) (debounced with 1s)
   const debouncedViewportChange = useDebouncedCallback(
     (viewport: URLViewportType): void => {
       if (pathname !== '/trees') return
@@ -106,6 +108,7 @@ export const TreesMap: FC<MapProps> = ({
     1000
   )
 
+  // Keep a reference to on click listener so that it can be turned off if necessary
   const onTreeClickCallback = useCallback(
     (e) => {
       // NOTE: We ignore TypeScript here for now because it is tricky to get the types right.
@@ -124,6 +127,7 @@ export const TreesMap: FC<MapProps> = ({
     [debouncedViewportChange, onSelect]
   )
 
+  // Attach or detach click listener when onSelect changes
   useEffect(() => {
     if (!map.current) return
     map.current.on('click', TREES_LAYER_ID, onTreeClickCallback)
@@ -136,6 +140,7 @@ export const TreesMap: FC<MapProps> = ({
 
   const MAP_STYLE_URL = `${mapStyle}?key=${NEXT_PUBLIC_MAPTILER_KEY}`
 
+  // Setup a map instance with general event listeners etc.
   useEffect(() => {
     map.current = new maplibregl.Map({
       container: mapId || '',
@@ -234,6 +239,7 @@ export const TreesMap: FC<MapProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  // Remove map controls when not on the /trees route (map view)
   useEffect(() => {
     if (
       !map.current ||
@@ -257,6 +263,7 @@ export const TreesMap: FC<MapProps> = ({
     map.current.addControl(geolocateControl, 'bottom-right')
   }, [map, pathname, geolocateControl, navigationControl, attributionControl])
 
+  // Highlight and un-highlight selected trees
   useEffect(() => {
     if (!map.current || !map.current.loaded()) return
 
@@ -289,6 +296,7 @@ export const TreesMap: FC<MapProps> = ({
     }
   }, [map, currentSelectedTreeId, treeIdToSelect])
 
+  // Fly to specific location when map is provided explicit lat/lng
   useEffect(() => {
     if (!map.current) return
     map.current.resize()
