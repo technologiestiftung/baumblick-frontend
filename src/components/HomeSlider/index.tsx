@@ -45,7 +45,30 @@ export const HomeSlider: FC = () => {
     '5': <Pill className="bg-scale-5 border-scale-5-dark">5</Pill>,
   }
   return (
-    <Slider arrows={false} infinite={false} dots>
+    <Slider
+      arrows={false}
+      infinite={false}
+      dots
+      customPaging={(i) => (
+        <button
+          aria-label={`Slide ${i + 1}`}
+          className={classNames(
+            'group',
+            'w-full h-1 py-3',
+            'transition-colors focus:outline-none focus:!ring-0',
+            'flex place-content-center place-items-center'
+          )}
+        >
+          <span
+            className={classNames(
+              'w-full h-1',
+              'rounded-full bg-gray-300',
+              'group-focus:ring-offset-2 group-focus:ring-offset-white group-focus:ring-2 group-focus:ring-gray-900'
+            )}
+          ></span>
+        </button>
+      )}
+    >
       <HomeSlide
         img={{
           url: '/images/home-slider/1.svg',
