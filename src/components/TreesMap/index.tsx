@@ -20,6 +20,10 @@ import {
 } from './treesLayer'
 import { MapTilerLogo } from './MapTilerLogo'
 import classNames from 'classnames'
+import {
+  NEXT_PUBLIC_MAPTILER_BASEMAP_URL,
+  NEXT_PUBLIC_MAPTILER_KEY,
+} from '@lib/utils/envUtil'
 
 interface MapProps {
   staticViewportProps?: {
@@ -49,7 +53,7 @@ export const TreesMap: FC<MapProps> = ({
   initialViewportProps,
   staticViewportProps,
   mapId,
-  mapStyle = process.env.NEXT_PUBLIC_MAPTILER_BASEMAP_URL as string,
+  mapStyle = NEXT_PUBLIC_MAPTILER_BASEMAP_URL,
   latitude,
   longitude,
   treeIdToSelect,
@@ -62,6 +66,8 @@ export const TreesMap: FC<MapProps> = ({
     transitionDuration: 2000,
     transitionEasing: easeInOutQuad,
   }
+
+  const map = useRef<Map | null>(null)
 
   const [viewport, setViewport] = useState<ViewportProps>({
     ...staticViewportProps,
@@ -100,12 +106,6 @@ export const TreesMap: FC<MapProps> = ({
     1000
   )
 
-  const map = useRef<Map | null>(null)
-
-  const MAP_STYLE_URL = `${mapStyle}?key=${
-    process.env.NEXT_PUBLIC_MAPTILER_KEY as string
-  }`
-
   const onTreeClickCallback = useCallback(
     (e) => {
       // NOTE: We ignore TypeScript here for now because it is tricky to get the types right.
@@ -133,6 +133,8 @@ export const TreesMap: FC<MapProps> = ({
       map.current.off('click', TREES_LAYER_ID, onTreeClickCallback)
     }
   }, [map, onTreeClickCallback])
+
+  const MAP_STYLE_URL = `${mapStyle}?key=${NEXT_PUBLIC_MAPTILER_KEY}`
 
   useEffect(() => {
     map.current = new maplibregl.Map({
