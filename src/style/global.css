@@ -50,12 +50,16 @@
   }
 
   html, body, #__next {
-    width: 100vw;
+    width: 100%;
     height: var(--screenHeight);
     overflow: hidden;
 		font-family: 'Manrope', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
 		@apply text-gray-900 antialiased
   }
+
+	body {
+		@apply max-w-3xl mx-auto relative md:border-r md:border-l border-gray-300;
+	}
 
 	a,
 	summary,
@@ -72,14 +76,17 @@
 	}
 	
 	/* Prose styles (tailwindcss typography plugin) */
-	.prose > p:not(.lead):first-of-type::first-letter {
+	main .prose {
+		@apply max-w-full;
+	}
+	main .prose > p:not(.lead):first-of-type::first-letter {
 		@apply float-left mr-5 text-[5.5em] leading-[.9em];
 	}
-	.prose h1, .prose h2, .prose h3 {
+	main .prose h1, main .prose h2, main .prose h3 {
 		@apply font-sans;
 	}
-	.prose h2,
-	.prose h3 {
+	main .prose h2,
+	main .prose h3 {
 		scroll-margin-top: 4em;
 	}
 

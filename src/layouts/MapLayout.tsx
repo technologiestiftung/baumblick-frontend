@@ -40,20 +40,24 @@ export const MapLayout: FC<MapLayoutType> = ({
     <>
       <div className="w-full h-full overflow-hidden">
         {!isMinimized && (
-          <InternalLink
-            href="/"
-            className={classNames(
-              'fixed top-2 right-2 z-10',
-              'inline-flex gap-2',
-              'text-gray-900 bg-white p-3 rounded-full',
-              'border border-gray-300 shadow',
-              'transition-colors focus:outline-none',
-              'focus:ring-2 focus:ring-gray-600',
-              'hover:text-gray-900 hover:underline'
-            )}
-          >
-            <img src="/logo.svg" alt="TreeWatch Logo" className="h-6" />
-          </InternalLink>
+          <div className="fixed w-full left-0 top-2 md:top-4 pointer-events-none z-10">
+            <div className="w-full max-w-3xl flex justify-end mx-auto">
+              <InternalLink
+                href="/"
+                className={classNames(
+                  'mr-2 md:mr-4',
+                  'inline-flex gap-2',
+                  'text-gray-900 bg-white p-3 rounded-full',
+                  'border border-gray-300 shadow',
+                  'transition-colors focus:outline-none',
+                  'focus:ring-2 focus:ring-gray-600',
+                  'hover:text-gray-900 hover:underline'
+                )}
+              >
+                <img src="/logo.svg" alt="TreeWatch Logo" className="h-6" />
+              </InternalLink>
+            </div>
+          </div>
         )}
         <TreesMap
           mapId="trees-map"

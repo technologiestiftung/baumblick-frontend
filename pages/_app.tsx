@@ -39,7 +39,9 @@ const App: FC<AppPropsWithLayout> = ({
       <Head pageTitle={pageProps.title || ''} />
       <main
         className={classNames(
-          'fixed inset-0 overflow-x-hidden overflow-y-auto bottom-16'
+          'absolute top-0 left-0 z-0',
+          'overflow-x-hidden overflow-y-auto bottom-16',
+          'w-full'
         )}
       >
         {getLayout(<Component {...pageProps} />, pageProps)}
