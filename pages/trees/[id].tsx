@@ -192,6 +192,7 @@ TreePage.getLayout = function getLayout(page, props) {
       <MapLayout
         latitude={props.latitude}
         longitude={props.longitude}
+        treeIdToSelect={props.treeData.gml_id}
         isMinimized={true}
       />
       {page}

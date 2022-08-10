@@ -15,6 +15,7 @@ export const MAP_CONFIG = {
 export interface MapLayoutType {
   latitude?: number
   longitude?: number
+  treeIdToSelect?: string
   zoom?: number
   onTreeSelect?: (treeId: string) => void
   isMinimized?: boolean
@@ -23,6 +24,7 @@ export interface MapLayoutType {
 export const MapLayout: FC<MapLayoutType> = ({
   latitude,
   longitude,
+  treeIdToSelect,
   zoom,
   onTreeSelect = () => undefined,
   isMinimized,
@@ -50,6 +52,7 @@ export const MapLayout: FC<MapLayoutType> = ({
           onSelect={onTreeSelect}
           latitude={latitude}
           longitude={longitude}
+          treeIdToSelect={treeIdToSelect}
           isMinimized={isMinimized}
         />
         <SuctionTensionLegend
