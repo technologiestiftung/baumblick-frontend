@@ -49,6 +49,7 @@ export const MapLayout: FC<MapLayoutType> = ({
                   'inline-flex gap-2',
                   'text-gray-900 bg-white p-3 rounded-full',
                   'border border-gray-300 shadow',
+                  'pointer-events-auto',
                   'transition-colors focus:outline-none',
                   'focus:ring-2 focus:ring-gray-600',
                   'hover:text-gray-900 hover:underline'
