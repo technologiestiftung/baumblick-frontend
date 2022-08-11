@@ -62,127 +62,127 @@ const TreePage: TreePageWithLayout = ({ treeData }) => {
   } = useNowcastData(treeData.gml_id)
 
   return (
-    <div
-      id="inidividual-tree-container"
-      className={classNames(
-        'absolute top-0 bottom-0 left-0 w-full',
-        'z-10',
-        'grid grid-cols-1 grid-rows-[124px,1fr] gap-0'
-      )}
-    >
-      <button
-        className={classNames(
-          'row-start-1 row-span1',
-          'relative',
-          'group focus:outline-none'
-        )}
-        onClick={() => {
-          void push({
-            pathname: '/trees',
-            query: { latitude: treeData.lat, longitude: treeData.lng },
-          })
-        }}
-        aria-label="Kartenansicht"
-      >
-        <div
-          className={classNames(
-            'absolute top-2 right-2',
-            'p-2 bg-white rounded-full shadow-md hover:bg-gray-100',
-            'border border-gray-300',
-            'group-focus:ring-2 group-focus:ring-gray-900 group-focus:ring-offset-2',
-            'group-focus:ring-offset-white'
-          )}
-        >
-          <CrossIcon className="w-8 h-8" />
-        </div>
-      </button>
+    <div id="inidividual-tree-container">
       <div
         className={classNames(
-          'bg-white',
-          'rounded-t-2xl shadow-[0_-12px_24px_-16px_rgba(0,0,0,0.3)]',
-          'row-start-2 row-span-1',
-          'motion-safe:animate-slide-up'
+          'max-w-3xl mx-auto',
+          'grid grid-cols-1 grid-rows-[124px,1fr] gap-0',
+          'md:border-l md:border-r border-gray-200'
         )}
       >
-        {!nowcastError && (
-          <SuctionTensionViz
-            depth30Level={
-              nowcastData && nowcastData[0].value
-                ? mapSuctionTensionToLevel(nowcastData[0].value)
-                : undefined
-            }
-            depth60Level={
-              nowcastData && nowcastData[1].value
-                ? mapSuctionTensionToLevel(nowcastData[1].value)
-                : undefined
-            }
-            depth90Level={
-              nowcastData && nowcastData[2].value
-                ? mapSuctionTensionToLevel(nowcastData[2].value)
-                : undefined
-            }
-            averageLevel={
-              nowcastData && nowcastData[3].value
-                ? mapSuctionTensionToLevel(nowcastData[3].value)
-                : undefined
-            }
-          />
-        )}
-
-        <TreeInfoHeader
-          species={treeData.art_dtsch || 'Unbekannte Art'}
-          age={treeData.standalter}
-          height={treeData.baumhoehe}
-        />
-        <ul className="z-10 relative bg-white">
-          <DataListItem
-            title="Saugspannung"
-            subtitle="⌀ aus 30, 60, 90 cm Tiefe"
-            value={
-              nowcastData &&
-              !nowcastIsLoading &&
-              !nowcastError &&
-              nowcastData[3].value
-                ? mapSuctionTensionToLevel(nowcastData[3].value)
-                : '-'
-            }
-          />
-          <DataListItem
-            title="Regenmenge"
-            subtitle="Letzte 14 Tage"
-            // TODO: Attention, this is dummy data.
-            // Update when adding access to real data.
-            value={`${258} l`}
-          />
-          <DataListItem
-            title="Baumscheibe"
-            subtitle="Unversiegelter Bereich um den Stamm"
-            // TODO: Attention, this is dummy data.
-            // Update when adding access to real data.
-            value={`${3.1} qm`}
-          />
-          <DataListItem
-            title="Verschattung"
-            subtitle="Anteil an Schattenzeit pro Tag"
-            // TODO: Attention, this is dummy data.
-            // Update when adding access to real data.
-            value={`${65} %`}
-          />
-          <DataListItem
-            title="Gießwassermenge"
-            subtitle="Letzte 14 Tage"
-            // TODO: Attention, this is dummy data.
-            // Update when adding access to real data.
-            value={`${25} l`}
-          />
-          {treeData.stammumfg && (
-            <DataListItem
-              title="Stammumfang"
-              subtitle="An der weitesten Stelle"
-              value={`${treeData.stammumfg} cm`}
+        <button
+          className={classNames(
+            'row-start-1 row-span1',
+            'relative',
+            'group focus:outline-none'
+          )}
+          onClick={() => {
+            void push({
+              pathname: '/trees',
+              query: { latitude: treeData.lat, longitude: treeData.lng },
+            })
+          }}
+          aria-label="Kartenansicht"
+        >
+          <div
+            className={classNames(
+              'absolute top-2 right-2',
+              'p-2 bg-white rounded-full shadow-md hover:bg-gray-100',
+              'border border-gray-300',
+              'group-focus:ring-2 group-focus:ring-gray-900 group-focus:ring-offset-2',
+              'group-focus:ring-offset-white'
+            )}
+          >
+            <CrossIcon className="w-8 h-8" />
+          </div>
+        </button>
+        <div
+          className={classNames(
+            'bg-white',
+            'rounded-t-2xl shadow-[0_-12px_24px_-16px_rgba(0,0,0,0.3)]',
+            'row-start-2 row-span-1',
+            'motion-safe:animate-slide-up'
+          )}
+        >
+          {!nowcastError && (
+            <SuctionTensionViz
+              depth30Level={
+                nowcastData && nowcastData[0].value
+                  ? mapSuctionTensionToLevel(nowcastData[0].value)
+                  : undefined
+              }
+              depth60Level={
+                nowcastData && nowcastData[1].value
+                  ? mapSuctionTensionToLevel(nowcastData[1].value)
+                  : undefined
+              }
+              depth90Level={
+                nowcastData && nowcastData[2].value
+                  ? mapSuctionTensionToLevel(nowcastData[2].value)
+                  : undefined
+              }
+              averageLevel={
+                nowcastData && nowcastData[3].value
+                  ? mapSuctionTensionToLevel(nowcastData[3].value)
+                  : undefined
+              }
             />
           )}
-        </ul>
+          <TreeInfoHeader
+            species={treeData.art_dtsch || 'Unbekannte Art'}
+            age={treeData.standalter}
+            height={treeData.baumhoehe}
+          />
+          <ul className="z-10 relative bg-white">
+            <DataListItem
+              title="Saugspannung"
+              subtitle="⌀ aus 30, 60, 90 cm Tiefe"
+              value={
+                nowcastData &&
+                !nowcastIsLoading &&
+                !nowcastError &&
+                nowcastData[3].value
+                  ? mapSuctionTensionToLevel(nowcastData[3].value)
+                  : '-'
+              }
+            />
+            <DataListItem
+              title="Regenmenge"
+              subtitle="Letzte 14 Tage"
+              // TODO: Attention, this is dummy data.
+              // Update when adding access to real data.
+              value={`${0} l`}
+            />
+            <DataListItem
+              title="Baumscheibe"
+              subtitle="Unversiegelter Bereich um den Stamm"
+              // TODO: Attention, this is dummy data.
+              // Update when adding access to real data.
+              value={`${3.1} qm`}
+            />
+            <DataListItem
+              title="Verschattung"
+              subtitle="Anteil an Schattenzeit pro Tag"
+              // TODO: Attention, this is dummy data.
+              // Update when adding access to real data.
+              value={`${65} %`}
+            />
+            <DataListItem
+              title="Gießwassermenge"
+              subtitle="Letzte 14 Tage"
+              // TODO: Attention, this is dummy data.
+              // Update when adding access to real data.
+              value={`${25} l`}
+            />
+            {treeData.stammumfg && (
+              <DataListItem
+                title="Stammumfang"
+                subtitle="An der weitesten Stelle"
+                value={`${treeData.stammumfg} cm`}
+              />
+            )}
+          </ul>
+        </div>
       </div>
     </div>
   )

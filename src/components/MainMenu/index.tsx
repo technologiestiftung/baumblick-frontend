@@ -35,9 +35,9 @@ export const MainMenu: FC = () => {
   return (
     <div
       className={classNames(
-        'fixed bottom-0 left-0 right-0 h-16',
-        'w-screen bg-gray-300 border-t border-gray-300',
-        'flex gap-[1px] drop-shadow-lg'
+        'fixed bottom-0 left-1/2 -translate-x-1/2 h-16 z-50',
+        'w-full bg-gray-300 border-t border-gray-300',
+        'flex gap-[1px] drop-shadow-lg max-w-3xl'
       )}
     >
       {links.map((link) => {

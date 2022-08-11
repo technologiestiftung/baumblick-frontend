@@ -46,9 +46,9 @@ const ChapterLink: FC<ChapterLinkPropType> = ({
     colorClass,
     'py-1 block transition-all pr-4',
     'hover:text-gray-900 text-left',
-    'hover:border-l-8 hover:pl-5',
+    'hover:border-l-8 md:hover:border-l-10 hover:pl-5 md:hover:pl-8',
     isActive ? 'font-bold text-gray-900' : 'font-medium text-gray-600',
-    isActive ? 'border-l-[12px] pl-4' : 'border-l-4 pl-6',
+    isActive ? 'border-l-[12px] pl-4 md:pl-6' : 'border-l-4 pl-6 md:pl-8',
     'focus:outline-none focus:ring-2 focus:ring-gray-900'
   )
 

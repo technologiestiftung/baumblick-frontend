@@ -39,10 +39,13 @@ const App: FC<AppPropsWithLayout> = ({
       <Head pageTitle={pageProps.title || ''} />
       <main
         className={classNames(
-          'fixed inset-0 overflow-x-hidden overflow-y-auto bottom-16'
+          'fixed top-0 left-0 w-full z-0 min-h-[calc(100%-4rem)]',
+          'overflow-x-hidden overflow-y-auto bottom-16 grid'
         )}
       >
-        {getLayout(<Component {...pageProps} />, pageProps)}
+        <div className="w-full max-w-3xl mx-auto">
+          {getLayout(<Component {...pageProps} />, pageProps)}
+        </div>
       </main>
       <MainMenu />
     </StrictMode>

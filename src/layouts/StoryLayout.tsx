@@ -65,7 +65,7 @@ const StoryLayoutWithoutTranslation: FC = ({ children }) => {
           showStickyTableOfContents
         }
       />
-      <section className="px-4 pt-6 pb-2">
+      <section className="px-4 md:px-8 pt-6 pb-2">
         {backLink}
         <div className="grid grid-cols-[1fr,auto] gap-2">
           <Headline h1>{story.title}</Headline>
@@ -90,47 +90,66 @@ const StoryLayoutWithoutTranslation: FC = ({ children }) => {
       </nav>
       <div
         className={classNames(
-          'fixed inset-0 top-16 bg-gradient-to-br',
-          'from-white to-white/30 via-white/90',
-          'transition-opacity pt-8 backdrop-blur-sm',
-          hasScrolledPastThreshold && showStickyTableOfContents
-            ? 'opacity-100'
-            : 'opacity-0',
-          !showStickyTableOfContents && 'pointer-events-none'
+          'fixed w-full left-0 top-16 pointer-events-none h-full'
         )}
       >
-        <TableOfContents
-          chapters={headings}
-          onChapterClick={(chap) => {
-            setShowStickyTOC(false)
-            scrollToHeading(chap)
-          }}
-          activeChapterTitle={activeHeadingTitle || undefined}
-        />
+        <div
+          className={classNames(
+            'w-full max-w-3xl mx-auto',
+            'bg-gradient-to-br h-full',
+            'md:border-r md:border-l border-gray-200',
+            'from-white to-white/30 via-white/90',
+            'transition-opacity pt-8 backdrop-blur-sm',
+            hasScrolledPastThreshold && showStickyTableOfContents
+              ? 'opacity-100'
+              : 'opacity-0'
+          )}
+        >
+          <div
+            className={classNames(
+              showStickyTableOfContents && 'pointer-events-auto'
+            )}
+          >
+            <TableOfContents
+              chapters={headings}
+              onChapterClick={(chap) => {
+                setShowStickyTOC(false)
+                scrollToHeading(chap)
+              }}
+              activeChapterTitle={activeHeadingTitle || undefined}
+            />
+          </div>
+        </div>
       </div>
-      <article className="px-4 prose font-serif pb-8" ref={contentRef}>
+      <article className="px-4 md:px-8 prose font-serif pb-8" ref={contentRef}>
         {children}
       </article>
-      <Button
-        className={classNames(
-          'fixed right-2 bottom-[4.5rem] shadow-md',
-          'transition-all',
-          hasScrolledPastThreshold ? 'opacity-100' : 'opacity-0 translate-y-4',
-          !hasScrolledPastThreshold && 'pointer-events-none'
-        )}
-        onClick={() => setShowStickyTOC((v) => !v)}
-      >
-        {showStickyTableOfContents ? (
-          <Cross color1={colors.scale['1']} color2={colors.scale['3']} />
-        ) : (
-          <HamburgerMenu
-            color1={colors.scale['1']}
-            color2={colors.scale['2']}
-            color3={colors.scale['3']}
-          />
-        )}
-        Inhalte
-      </Button>
+      <div className="fixed w-full left-0 bottom-[4.5rem] pointer-events-none">
+        <div className="w-full max-w-3xl flex justify-end mx-auto">
+          <Button
+            className={classNames(
+              'shadow-md pointer-events-auto',
+              'transition-all mr-2',
+              hasScrolledPastThreshold
+                ? 'opacity-100'
+                : 'opacity-0 translate-y-4',
+              !hasScrolledPastThreshold && 'pointer-events-none'
+            )}
+            onClick={() => setShowStickyTOC((v) => !v)}
+          >
+            {showStickyTableOfContents ? (
+              <Cross color1={colors.scale['1']} color2={colors.scale['3']} />
+            ) : (
+              <HamburgerMenu
+                color1={colors.scale['1']}
+                color2={colors.scale['2']}
+                color3={colors.scale['3']}
+              />
+            )}
+            Inhalte
+          </Button>
+        </div>
+      </div>
       <footer className="px-4 pb-12">
         <Paragraph className="italic text-gray-500">{story.author}</Paragraph>
         <br />

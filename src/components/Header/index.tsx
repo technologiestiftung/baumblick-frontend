@@ -12,8 +12,9 @@ export const Header: FC<{
     <div
       className={classNames(
         className,
-        'w-screen bg-white px-3 transition-all',
+        'w-full bg-white px-3 transition-all',
         'flex justify-between items-center',
+        'md:border-r md:border-l border-gray-200',
         compact ? 'py-1.5' : 'py-3'
       )}
     >
