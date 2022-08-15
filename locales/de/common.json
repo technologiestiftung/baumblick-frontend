@@ -57,5 +57,10 @@
   "legal": {
     "imprint": "Impressum",
     "privacy": "Datenschutz"
+  },
+  "share": {
+    "treeShareTitle": "Baum teilen",
+    "copyFieldlabel": "Kopiere die folgende URL",
+    "copiedFeedback": "In Zwischenablage kopiert!"
   }
 }

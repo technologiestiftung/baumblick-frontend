@@ -1,5 +1,12 @@
 import { render } from '@testing-library/react'
 import { TreeInfoHeader } from '.'
+import * as nextRouter from 'next/router'
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+nextRouter.useRouter = jest.fn().mockReturnValue({
+  asPath: '',
+})
 
 describe('TreeInfoHeader', () => {
   test('renders tree height if provided', () => {

@@ -3,6 +3,7 @@ import {
   ArrowAutofitHeight as HeightIcon,
   Plant as PlantIcon,
 } from '@components/Icons'
+import { TreeContextMenu } from '@components/TreeContextMenu'
 import classNames from 'classnames'
 import { FC } from 'react'
 
@@ -31,7 +32,7 @@ export const TreeInfoHeader: FC<TreeInfoHeaderType> = ({
     <header
       className={classNames(
         'grid grid-cols-[32px,1fr,32px] gap-y-2 gap-x-3 items-center',
-        'px-8 py-6 z-10 relative',
+        'px-8 py-6 z-30 relative',
         'bg-white border-b border-gray-100',
         additionalClasses
       )}
@@ -54,12 +55,13 @@ export const TreeInfoHeader: FC<TreeInfoHeaderType> = ({
       <Headline
         h1
         className={classNames(
-          isCompressed ? 'col-span-1' : 'col-span-3',
+          isCompressed ? 'col-span-1' : 'col-span-2',
           isCompressed && 'truncate text-ellipsis'
         )}
       >
         {species}
       </Headline>
+      {!isCompressed && <TreeContextMenu />}
       {!isCompressed && (
         <div className={classNames('col-span-3', 'flex flex-wrap gap-2')}>
           {height && (
