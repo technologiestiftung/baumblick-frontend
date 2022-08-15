@@ -13,7 +13,7 @@ export const TREES_SOURCE_ID = 'outfull'
 /** Name of the source layer in the vector tileset */
 export const TREES_SOURCE_LAYER_ID = 'outfull'
 
-const NOWCAST_AVERAGE_PROPERTY = 'nowcast_values_4'
+const NOWCAST_AVERAGE_PROPERTY = 'nowcast_values_stamm'
 
 export const TREES_SOURCE: SourceSpecification = {
   type: 'vector',
