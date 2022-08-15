@@ -34,7 +34,8 @@ export const TreeContextMenu: FC = () => {
       >
         <Popover.Panel
           className={classNames(
-            'absolute z-10 right-0 pt-4 pb-1 px-6 bg-white w-[calc(100vw-4rem)]',
+            'absolute z-10 right-0 pt-4 pb-1 px-6 bg-white',
+            'w-[calc(100vw-4rem)] max-w-[400px]',
             'shadow-lg border border-gray-300 rounded-md'
           )}
         >
