@@ -10,6 +10,7 @@ import { mapSuctionTensionToLevel } from '@lib/utils/mapSuctionTensionToLevel'
 import { SuctionTensionViz } from '@components/SuctionTensionViz'
 import { useRouter } from 'next/router'
 import { Cross as CrossIcon } from '@components/Icons'
+import { useHasScrolledPastThreshold } from '@lib/hooks/useHasScrolledPastThreshold'
 
 interface TreePageComponentPropType {
   treeData: TreeDataType
@@ -52,14 +53,45 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   }
 }
 
+const getRingClassesByLevel = (
+  level: number | undefined
+): {
+  bg: string
+  border: string
+} => {
+  switch (level) {
+    case 1:
+      return { bg: 'bg-scale-1', border: 'border-scale-1-dark' }
+    case 2:
+      return { bg: 'bg-scale-2', border: 'border-scale-2-dark' }
+    case 3:
+      return { bg: 'bg-scale-3', border: 'border-scale-3-dark' }
+    case 4:
+      return { bg: 'bg-scale-4', border: 'border-scale-4-dark' }
+    case 5:
+      return { bg: 'bg-scale-5', border: 'border-scale-5-dark' }
+    default:
+      return { bg: 'bg-gray-300', border: 'border-gray-400' }
+  }
+}
+
 const TreePage: TreePageWithLayout = ({ treeData }) => {
   const { push } = useRouter()
+  const { hasScrolledPastThreshold } = useHasScrolledPastThreshold({
+    threshold: 450,
+  })
 
   const {
     data: nowcastData,
     error: nowcastError,
     isLoading: nowcastIsLoading,
   } = useNowcastData(treeData.gml_id)
+
+  const avgLevel =
+    nowcastData && nowcastData[3].value
+      ? mapSuctionTensionToLevel(nowcastData[3].value)
+      : undefined
+  const circleColorClasses = getRingClassesByLevel(avgLevel)
 
   return (
     <div id="inidividual-tree-container">
@@ -121,18 +153,36 @@ const TreePage: TreePageWithLayout = ({ treeData }) => {
                   ? mapSuctionTensionToLevel(nowcastData[2].value)
                   : undefined
               }
-              averageLevel={
-                nowcastData && nowcastData[3].value
-                  ? mapSuctionTensionToLevel(nowcastData[3].value)
-                  : undefined
-              }
+              averageLevel={avgLevel}
             />
           )}
           <TreeInfoHeader
             species={treeData.art_dtsch || 'Unbekannte Art'}
             age={treeData.standalter}
             height={treeData.baumhoehe}
+            level={avgLevel}
+            statusBackgroundColor={circleColorClasses.bg}
+            statusBorderColor={circleColorClasses.border}
           />
+          <div
+            className={classNames(
+              'fixed w-screen top-0 z-20 border-gray-300 pointer-events-none',
+              'transition-all',
+              hasScrolledPastThreshold
+                ? ' opacity-1 shadow-lg border-b'
+                : 'opacity-0'
+            )}
+          >
+            <TreeInfoHeader
+              species={treeData.art_dtsch || 'Unbekannte Art'}
+              age={treeData.standalter}
+              height={treeData.baumhoehe}
+              level={avgLevel}
+              statusBackgroundColor={circleColorClasses.bg}
+              statusBorderColor={circleColorClasses.border}
+              isCompressed={hasScrolledPastThreshold}
+            />
+          </div>
           <ul className="z-10 relative bg-white">
             <DataListItem
               title="Saugspannung"
