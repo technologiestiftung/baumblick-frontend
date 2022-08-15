@@ -87,9 +87,7 @@ export const SuctionTensionLegend: FC<SuctionTensionLegendType> = ({
             </>
           )}
         </span>
-        ,
       </div>
-      ,
     </div>,
     bodyNode
   )
