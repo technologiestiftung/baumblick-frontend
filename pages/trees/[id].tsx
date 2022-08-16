@@ -1,4 +1,4 @@
-import { ReactElement, ReactNode } from 'react'
+import { FC, ReactElement, ReactNode } from 'react'
 import { MapLayout } from '@layouts/MapLayout'
 import classNames from 'classnames'
 import { GetServerSideProps, NextPage } from 'next'
@@ -11,6 +11,9 @@ import { SuctionTensionViz } from '@components/SuctionTensionViz'
 import { useRouter } from 'next/router'
 import { Cross as CrossIcon } from '@components/Icons'
 import { useHasScrolledPastThreshold } from '@lib/hooks/useHasScrolledPastThreshold'
+import { NowcastDataType } from '@lib/requests/getNowcastData'
+import { Tabs } from '@components/Tabs'
+import useTranslation from 'next-translate/useTranslation'
 
 interface TreePageComponentPropType {
   treeData: TreeDataType
@@ -75,7 +78,65 @@ const getRingClassesByLevel = (
   }
 }
 
+const InfoList: FC<{
+  treeData: TreeDataType | null
+  nowcastData: NowcastDataType[] | null
+  nowcastIsLoading: boolean
+  nowcastError: Error | null
+}> = ({ treeData, nowcastData, nowcastIsLoading, nowcastError }) => (
+  <ul className="z-10 relative bg-white">
+    <DataListItem
+      title="Saugspannung"
+      subtitle="⌀ aus 30, 60, 90 cm Tiefe"
+      value={
+        nowcastData &&
+        !nowcastIsLoading &&
+        !nowcastError &&
+        nowcastData[3].value
+          ? mapSuctionTensionToLevel(nowcastData[3].value)
+          : '-'
+      }
+    />
+    <DataListItem
+      title="Regenmenge"
+      subtitle="Letzte 14 Tage"
+      // TODO: Attention, this is dummy data.
+      // Update when adding access to real data.
+      value={`${0} l`}
+    />
+    <DataListItem
+      title="Baumscheibe"
+      subtitle="Unversiegelter Bereich um den Stamm"
+      // TODO: Attention, this is dummy data.
+      // Update when adding access to real data.
+      value={`${3.1} qm`}
+    />
+    <DataListItem
+      title="Verschattung"
+      subtitle="Anteil an Schattenzeit pro Tag"
+      // TODO: Attention, this is dummy data.
+      // Update when adding access to real data.
+      value={`${65} %`}
+    />
+    <DataListItem
+      title="Gießwassermenge"
+      subtitle="Letzte 14 Tage"
+      // TODO: Attention, this is dummy data.
+      // Update when adding access to real data.
+      value={`${25} l`}
+    />
+    {treeData?.stammumfg && (
+      <DataListItem
+        title="Stammumfang"
+        subtitle="An der weitesten Stelle"
+        value={`${treeData.stammumfg} cm`}
+      />
+    )}
+  </ul>
+)
+
 const TreePage: TreePageWithLayout = ({ treeData }) => {
+  const { t } = useTranslation('common')
   const { push } = useRouter()
   const { hasScrolledPastThreshold } = useHasScrolledPastThreshold({
     threshold: 450,
@@ -183,55 +244,25 @@ const TreePage: TreePageWithLayout = ({ treeData }) => {
               isCompressed={hasScrolledPastThreshold}
             />
           </div>
-          <ul className="z-10 relative bg-white">
-            <DataListItem
-              title="Saugspannung"
-              subtitle="⌀ aus 30, 60, 90 cm Tiefe"
-              value={
-                nowcastData &&
-                !nowcastIsLoading &&
-                !nowcastError &&
-                nowcastData[3].value
-                  ? mapSuctionTensionToLevel(nowcastData[3].value)
-                  : '-'
-              }
-            />
-            <DataListItem
-              title="Regenmenge"
-              subtitle="Letzte 14 Tage"
-              // TODO: Attention, this is dummy data.
-              // Update when adding access to real data.
-              value={`${0} l`}
-            />
-            <DataListItem
-              title="Baumscheibe"
-              subtitle="Unversiegelter Bereich um den Stamm"
-              // TODO: Attention, this is dummy data.
-              // Update when adding access to real data.
-              value={`${3.1} qm`}
-            />
-            <DataListItem
-              title="Verschattung"
-              subtitle="Anteil an Schattenzeit pro Tag"
-              // TODO: Attention, this is dummy data.
-              // Update when adding access to real data.
-              value={`${65} %`}
-            />
-            <DataListItem
-              title="Gießwassermenge"
-              subtitle="Letzte 14 Tage"
-              // TODO: Attention, this is dummy data.
-              // Update when adding access to real data.
-              value={`${25} l`}
-            />
-            {treeData.stammumfg && (
-              <DataListItem
-                title="Stammumfang"
-                subtitle="An der weitesten Stelle"
-                value={`${treeData.stammumfg} cm`}
-              />
-            )}
-          </ul>
+          <Tabs
+            tabs={[
+              {
+                name: t('treeView.tabs.0'),
+                content: (
+                  <InfoList
+                    nowcastIsLoading={nowcastIsLoading}
+                    treeData={treeData}
+                    nowcastData={nowcastData}
+                    nowcastError={nowcastError}
+                  />
+                ),
+              },
+              {
+                name: t('treeView.tabs.1'),
+                content: <div>Here comes the requests</div>,
+              },
+            ]}
+          />
         </div>
       </div>
     </div>

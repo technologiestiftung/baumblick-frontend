@@ -62,5 +62,11 @@
     "treeShareTitle": "Baum teilen",
     "copyFieldlabel": "Kopiere die folgende URL",
     "copiedFeedback": "In Zwischenablage kopiert!"
+  },
+  "treeView": {
+    "tabs": {
+      "0": "Infos",
+      "1": "Mitwirken"
+    }
   }
 }

@@ -12,6 +12,14 @@ const Template: Story<TabsPropTypes> = (props) => <Tabs {...props} />
 export const Default = Template.bind({})
 
 Default.args = {
-  tabs: ['Infos', 'Mitwirken'],
-  activeTabIndex: 1,
+  tabs: [
+    {
+      name: 'Infos',
+      content: <div className="p-8">This is the Infos content</div>,
+    },
+    {
+      name: 'Mitwirken',
+      content: <div className="p-8">This is the Mitwirken content</div>,
+    },
+  ],
 }
