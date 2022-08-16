@@ -3,7 +3,10 @@ import { FC } from 'react'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 
-export const Carousel: FC = ({ children }) => {
+export const Carousel: FC<{ innerSliderClass?: string }> = ({
+  innerSliderClass,
+  children,
+}) => {
   return (
     <Slider
       arrows={false}
@@ -28,6 +31,7 @@ export const Carousel: FC = ({ children }) => {
           ></span>
         </button>
       )}
+      className={classNames(innerSliderClass, 'bg-white')}
     >
       {children}
     </Slider>
