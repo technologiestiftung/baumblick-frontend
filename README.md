@@ -86,6 +86,16 @@ npm run dev
 ## Deployment
 _TreeWatch_ is deployed to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
 
+## Content
+
+The content of TreeWatch can be customized. You can edit it in the following locations:
+
+ - The images for the slides are located under: `/images/home-slider/`
+ - The text for the slides and the alternative text for the images is located in `/locales/de/common.json`
+ - The index of the available stories is located under `/pages/stories/index.tsx`
+ - The text for the expert articles "stories" can be edited in the individual files located under `/pages/stories`
+
+
 ## Page analytics
 
 We use [Matomo](https://matomo.org/) for website analytics. Matomo is respectful of the users' privacy, the page visits are tracked anonymously.
@@ -116,7 +126,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 
 ## Content Licencing
 
-Texts and content available as [CC BY](https://creativecommons.org/licenses/by/3.0/de/). 
+Texts and content available as [CC BY](https://creativecommons.org/licenses/by/3.0/de/).
 
 ## Credits
 
