@@ -26,7 +26,7 @@ Default.args = {
       suctionTensionLevel: 3,
     },
     {
-      date: '2022-08-13-kjkjkjkj',
+      date: '2022-08-13',
       suctionTensionLevel: 4,
     },
     {

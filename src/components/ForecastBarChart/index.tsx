@@ -1,5 +1,6 @@
 import { SuctionTensionLevel } from '@lib/utils/mapSuctionTensionToLevel'
 import classNames from 'classnames'
+import { format } from 'date-fns'
 import { getRingClassesByLevel } from 'pages/trees/[id]'
 import { FC } from 'react'
 
@@ -78,16 +79,16 @@ export const ForecastBarChart: FC<ForecastBarChartPropType> = ({ data }) => {
                 <div
                   key={dataItem.date}
                   className={classNames(
-                    'relative flex justify-center',
+                    'relative flex justify-center items-end',
                     'overflow-hidden',
                     'row-start-[-1]',
                     getRingClassesByLevel(dataItem.suctionTensionLevel).bg
                   )}
                   style={{ gridRowEnd: -(dataItem.suctionTensionLevel + 1) }}
                 >
-                  {/* <span className="absolute bottom-0 w-full -rotate-90 -translate-y-full whitespace-nowrap">
-              {dataItem.xValue}
-            </span> */}
+                  <span className="pl-0 absolute bottom-0 text-gray-900 text-opacity-50 font-semibold -rotate-90 -translate-y-4 origin-center whitespace-nowrap">
+                    {format(new Date(dataItem.date), 'dd.MM.')}
+                  </span>
                 </div>
               )
             })}
