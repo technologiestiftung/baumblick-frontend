@@ -139,7 +139,7 @@ const TreePage: TreePageWithLayout = ({ treeData }) => {
             'motion-safe:animate-slide-up'
           )}
         >
-          <Carousel>
+          <Carousel dotsClass="slick-dots w-2/6 md:w-1/4 mx-auto">
             {!nowcastError && (
               <SuctionTensionViz
                 depth30Level={

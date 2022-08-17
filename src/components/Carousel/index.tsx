@@ -3,8 +3,9 @@ import { FC } from 'react'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 
-export const Carousel: FC<{ wrapperClass?: string }> = ({
+export const Carousel: FC<{ wrapperClass?: string; dotsClass?: string }> = ({
   wrapperClass,
+  dotsClass = 'slick-dots',
   children,
 }) => {
   return (
@@ -12,6 +13,7 @@ export const Carousel: FC<{ wrapperClass?: string }> = ({
       arrows={false}
       infinite={false}
       dots
+      dotsClass={dotsClass}
       customPaging={(i) => (
         <button
           aria-label={`Slide ${i + 1}`}
