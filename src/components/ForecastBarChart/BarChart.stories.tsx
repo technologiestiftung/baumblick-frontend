@@ -8,7 +8,7 @@ export default {
 } as Meta
 
 const Template: Story<ForecastBarChartPropType> = (props) => (
-  <div className="w-full h-72">
+  <div className="w-full h-72 border border-gray-200">
     <ForecastBarChart {...props} />
   </div>
 )
