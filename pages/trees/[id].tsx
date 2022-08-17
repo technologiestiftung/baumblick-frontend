@@ -193,36 +193,42 @@ const TreePage: TreePageWithLayout = ({ treeData }) => {
         <div
           className={classNames(
             'bg-white',
-            'rounded-t-2xl shadow-[0_-12px_24px_-16px_rgba(0,0,0,0.3)]',
             'row-start-2 row-span-1',
             'grid grid-cols-1 grid-rows-auto',
-            'overflow-hidden',
             'motion-safe:animate-slide-up'
           )}
         >
-          <Carousel dotsClass="slick-dots w-2/6 md:w-1/4 mx-auto">
-            {!nowcastError && (
-              <SuctionTensionViz
-                depth30Level={
-                  nowcastData && nowcastData[0].value
-                    ? mapSuctionTensionToLevel(nowcastData[0].value)
-                    : undefined
-                }
-                depth60Level={
-                  nowcastData && nowcastData[1].value
-                    ? mapSuctionTensionToLevel(nowcastData[1].value)
-                    : undefined
-                }
-                depth90Level={
-                  nowcastData && nowcastData[2].value
-                    ? mapSuctionTensionToLevel(nowcastData[2].value)
-                    : undefined
-                }
-                averageLevel={avgLevel}
-              />
+          <div
+            className={classNames(
+              'w-full sticky top-0',
+              'overflow-hidden rounded-t-2xl',
+              'shadow-[0_-12px_24px_-16px_rgba(0,0,0,0.3)]'
             )}
-            <div className="bg-scale-4 h-full">Bar chart</div>
-          </Carousel>
+          >
+            <Carousel dotsClass="slick-dots w-2/6 md:w-1/4 mx-auto">
+              {!nowcastError && (
+                <SuctionTensionViz
+                  depth30Level={
+                    nowcastData && nowcastData[0].value
+                      ? mapSuctionTensionToLevel(nowcastData[0].value)
+                      : undefined
+                  }
+                  depth60Level={
+                    nowcastData && nowcastData[1].value
+                      ? mapSuctionTensionToLevel(nowcastData[1].value)
+                      : undefined
+                  }
+                  depth90Level={
+                    nowcastData && nowcastData[2].value
+                      ? mapSuctionTensionToLevel(nowcastData[2].value)
+                      : undefined
+                  }
+                  averageLevel={avgLevel}
+                />
+              )}
+              <div className="bg-scale-4 h-full">Bar chart</div>
+            </Carousel>
+          </div>
           <TreeInfoHeader
             species={treeData.art_dtsch || 'Unbekannte Art'}
             age={treeData.standalter}
