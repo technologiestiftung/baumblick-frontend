@@ -111,7 +111,7 @@
 }
 
 .slick-dots {
-	@apply px-4 justify-evenly gap-4;
+	@apply px-4 py-2 justify-evenly gap-4;
 	display: flex !important;
 }
 
@@ -128,7 +128,7 @@
 }
 
 .slick-dots > li {
-	@apply w-full h-1;
+	@apply w-full h-1 flex items-center;
 }
 
 .slick-dots > li.slick-active > button > span {

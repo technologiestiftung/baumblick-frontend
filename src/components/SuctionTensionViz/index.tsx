@@ -20,7 +20,7 @@ export const SuctionTensionViz: FC<SuctionTensionVizType> = ({
   averageLevel,
 }) => {
   return (
-    <div className="w-full sticky z-0 top-0 overflow-hidden rounded-t-lg">
+    <div className="relative overflow-hidden">
       <SoilLayer depth={30} level={depth30Level} />
       <SoilLayer depth={60} level={depth60Level} />
       <SoilLayer depth={90} level={depth90Level} />
