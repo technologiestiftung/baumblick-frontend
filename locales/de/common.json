@@ -68,5 +68,14 @@
       "0": "Infos",
       "1": "Mitwirken"
     }
+  },
+  "feedback": {
+    "imageAlt": "So kann/können „{{title}}“ aussehen",
+    "reportButton": "{{title}} melden",
+    "modalHelp": "Bitte bestätige, dass du beim Baum „{{treeName}}“ Nähe {{address}} die Eigenschaft „{{title}}“ erkannt hast.",
+    "modalConfirm": "Melden",
+    "modalCancel": "Abbrechen",
+    "confirmationTitle": "Danke! Erfolgreich gemeldet!",
+    "confirmationDescription": "Ab morgen kannst du es wieder melden"
   }
 }
