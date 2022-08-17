@@ -1,19 +1,21 @@
+import { Carousel } from '@components/Carousel'
 import { SuctionTensionScale } from '@components/SuctionTensionScale'
 import classNames from 'classnames'
 import Trans from 'next-translate/Trans'
 import useTranslation from 'next-translate/useTranslation'
 import { FC } from 'react'
-import Slider from 'react-slick'
-import 'slick-carousel/slick/slick.css'
 
-interface HomeSlidePropType {
+interface HomeCarouselPropType {
   img: {
     url: string
     alt: string
   }
 }
 
-const HomeSlide: FC<HomeSlidePropType> = ({ img: { url, alt }, children }) => (
+const HomeSlide: FC<HomeCarouselPropType> = ({
+  img: { url, alt },
+  children,
+}) => (
   <div className="px-4">
     <div className="border border-gray-200 rounded-lg h-full grid grid-rows-[auto,1fr] grid-cols-1">
       <img src={url} alt={alt} className="w-full float-left rounded-t-lg" />
@@ -37,7 +39,7 @@ const Pill: FC<{ className?: string }> = ({ className = '', children }) => (
   </span>
 )
 
-export const HomeSlider: FC = () => {
+export const HomeCarousel: FC = () => {
   const { t } = useTranslation('common')
   const formattingComponents = {
     bold: <strong />,
@@ -47,30 +49,7 @@ export const HomeSlider: FC = () => {
     '5': <Pill className="bg-scale-5 border-scale-5-dark">5</Pill>,
   }
   return (
-    <Slider
-      arrows={false}
-      infinite={false}
-      dots
-      customPaging={(i) => (
-        <button
-          aria-label={`Slide ${i + 1}`}
-          className={classNames(
-            'group',
-            'w-full h-1 py-3',
-            'transition-colors focus:outline-none focus:!ring-0',
-            'flex place-content-center place-items-center'
-          )}
-        >
-          <span
-            className={classNames(
-              'w-full h-1',
-              'rounded-full bg-gray-300',
-              'group-focus:ring-offset-2 group-focus:ring-offset-white group-focus:ring-2 group-focus:ring-gray-900'
-            )}
-          ></span>
-        </button>
-      )}
-    >
+    <Carousel>
       <HomeSlide
         img={{
           url: '/images/home-slider/1.svg',
@@ -148,6 +127,6 @@ export const HomeSlider: FC = () => {
           components={formattingComponents}
         />
       </HomeSlide>
-    </Slider>
+    </Carousel>
   )
 }
