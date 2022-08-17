@@ -1,7 +1,7 @@
 import { getScaleClassesByLevel } from '@lib/utils/getScaleClassesByLevel'
 import { SuctionTensionLevel } from '@lib/utils/mapSuctionTensionToLevel'
 import classNames from 'classnames'
-import { format } from 'date-fns'
+import { format, isToday } from 'date-fns'
 import { FC } from 'react'
 
 interface DataItem {
@@ -22,6 +22,10 @@ const VIZ_GRID_BASE_CLASSES = classNames(
   'w-full h-full px-2',
   'grid gap-x-[2px] gap-y-0'
 )
+
+const getDateLabel = (date: Date): string => {
+  return `${format(new Date(date), 'dd.MM.')}${isToday(date) ? ' (Heute)' : ''}`
+}
 
 export const ForecastBarChart: FC<ForecastBarChartPropType> = ({ data }) => {
   const VIZ_GRID_AXES_CLASSES = {
@@ -102,7 +106,7 @@ export const ForecastBarChart: FC<ForecastBarChartPropType> = ({ data }) => {
                       'text-gray-900 text-opacity-50 font-semibold whitespace-nowrap'
                     )}
                   >
-                    {format(new Date(dataItem.date), 'dd.MM.')}
+                    {getDateLabel(new Date(dataItem.date))}
                   </span>
                 </div>
               )
