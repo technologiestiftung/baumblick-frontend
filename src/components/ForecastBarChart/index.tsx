@@ -103,7 +103,7 @@ export const ForecastBarChart: FC<ForecastBarChartPropType> = ({ data }) => {
                     className={classNames(
                       'absolute bottom-0 w-[45px]',
                       '-rotate-90 -translate-y-4 origin-center',
-                      'text-gray-900 text-opacity-50 font-semibold whitespace-nowrap'
+                      'text-gray-900 text-opacity-50 font-semibold text-sm md:text-base whitespace-nowrap'
                     )}
                   >
                     {getDateLabel(dataItem.date)}
