@@ -56,7 +56,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   }
 }
 
-const getRingClassesByLevel = (
+export const getRingClassesByLevel = (
   level: number | undefined
 ): {
   bg: string
