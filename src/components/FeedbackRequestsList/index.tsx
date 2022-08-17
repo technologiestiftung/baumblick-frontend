@@ -17,13 +17,14 @@ export const FeedbackRequestsList: FC<FeedbackRequestsListPropType> = ({
       <p className="px-8 py-8 font-serif md:text-lg">
         {t('feedback.introduction')}
       </p>
-      {issues?.map((issueType) => (
-        <FeedbackReportForm
-          key={issueType.id}
-          {...issueType}
-          onButtonClick={() => reportIssue(treeId)}
-        />
-      ))}
+      {!error &&
+        issues?.map((issueType) => (
+          <FeedbackReportForm
+            key={issueType.id}
+            {...issueType}
+            onButtonClick={() => reportIssue(issueType.id)}
+          />
+        ))}
       {isLoading && (
         <div className="p-8 font-serif md:text-lg">{t('feedback.loading')}</div>
       )}
@@ -32,7 +33,7 @@ export const FeedbackRequestsList: FC<FeedbackRequestsListPropType> = ({
           {t('feedback.error')}
           <br />
           <span className="font-mono bg-gray-100 px-2 py-1 -ml-2 mt-2 inline-block">
-            {error.message}
+            {error}
           </span>
         </div>
       )}

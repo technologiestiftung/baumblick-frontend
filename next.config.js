@@ -37,7 +37,7 @@ module.exports = nextTranslate({
               `script-src 'self' 'unsafe-eval'`,
               `style-src 'self' 'unsafe-inline'`,
               `font-src 'self' data:`,
-              `img-src 'self' ${matomoUrl} ${tilesUrl} ${basemapUrl} data: blob:`,
+              `img-src 'self' ${matomoUrl} ${tilesUrl} ${basemapUrl} ${sdkUrl} data: blob:`,
               `frame-ancestors 'none'`,
               `worker-src 'self' blob:`,
               `child-src 'self' blob:`,

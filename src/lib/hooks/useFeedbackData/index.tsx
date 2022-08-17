@@ -1,25 +1,23 @@
 import { supabase } from '@lib/requests/supabase'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import useSWR from 'swr'
 
 const LOCAL_STORAGE_PREFIX = 'issue-'
 
 interface RawIssueType {
-  issue_type_id: string
+  issue_type_id: number
   gml_id: string
 }
 
 interface RawIssueTypeType {
-  id: string
+  id: number
   title: string
   description: string
-  image_id?: {
-    image_url: string
-  } | null
+  image_url: string | null
 }
 
 export interface IssueTypeType {
-  id: string
+  id: number
   title: string
   description: string
   imageUrl: string | null
@@ -29,8 +27,8 @@ export interface IssueTypeType {
 type UseFeedbackDataType = (treeId: string) => {
   issues: IssueTypeType[] | null
   isLoading: boolean
-  error: Error | null
-  reportIssue: (issueTypeId: string) => Promise<void>
+  error: string | null
+  reportIssue: (issueTypeId: number) => Promise<void>
 }
 
 const getIssueTypeTypes = async (treeId: string): Promise<IssueTypeType[]> => {
@@ -39,16 +37,14 @@ const getIssueTypeTypes = async (treeId: string): Promise<IssueTypeType[]> => {
     id,
     title,
     description,
-    image_id (
-      image_url
-    )
+    image_url
   `)
 
   if (error) throw error
   if (!data || data.length === 0) throw new Error('No issu types found!')
   return data.map((issueTypeType) => ({
     ...issueTypeType,
-    imageUrl: issueTypeType.image_id?.image_url || null,
+    imageUrl: issueTypeType.image_url || null,
     alreadySubmitted: getIfAlreadySubmitted(issueTypeType.id, treeId),
   }))
 }
@@ -83,25 +79,11 @@ const cleanLocalStorage = (): void => {
   })
 }
 
-const getLocalStorageKey = (treeId: string, issueTypeId: string): string =>
+const getLocalStorageKey = (treeId: string, issueTypeId: number): string =>
   `${LOCAL_STORAGE_PREFIX}-${treeId}-${issueTypeId}`
 
-const getIssueReporter =
-  (treeId: string) =>
-  async (issueTypeId: string): Promise<void> => {
-    const { error } = await supabase.from<RawIssueType>('issue').insert({
-      issue_type_id: issueTypeId,
-      gml_id: treeId,
-    })
-    if (error) throw error
-    window.localStorage.setItem(
-      getLocalStorageKey(treeId, issueTypeId),
-      new Date().toISOString()
-    )
-  }
-
 const getIfAlreadySubmitted = (
-  issueTypeId: string,
+  issueTypeId: number,
   treeId: string
 ): boolean => {
   const lsItem = window.localStorage.getItem(
@@ -115,9 +97,14 @@ const getIfAlreadySubmitted = (
 }
 
 export const useFeedbackData: UseFeedbackDataType = (treeId) => {
-  const { data, error } = useSWR<IssueTypeType[], Error>('issue_types', () =>
-    getIssueTypeTypes(treeId)
+  const { data, error: sdkError } = useSWR<IssueTypeType[], Error>(
+    'issue_types',
+    async () => {
+      setIssueError(null)
+      return getIssueTypeTypes(treeId)
+    }
   )
+  const [issueError, setIssueError] = useState<string | null>(null)
 
   useEffect(() => {
     cleanLocalStorage()
@@ -130,7 +117,21 @@ export const useFeedbackData: UseFeedbackDataType = (treeId) => {
         alreadySubmitted: getIfAlreadySubmitted(item.id, treeId),
       })) || null,
     isLoading: data === null,
-    error: error || null,
-    reportIssue: getIssueReporter(treeId),
+    error: issueError || sdkError?.message || null,
+    reportIssue: async (issueTypeId: number): Promise<void> => {
+      setIssueError(null)
+      const { error } = await supabase.from<RawIssueType>('issues').insert({
+        issue_type_id: issueTypeId,
+        gml_id: treeId,
+      })
+      if (error) {
+        setIssueError(error.message)
+        return
+      }
+      window.localStorage.setItem(
+        getLocalStorageKey(treeId, issueTypeId),
+        new Date().toISOString()
+      )
+    },
   }
 }
