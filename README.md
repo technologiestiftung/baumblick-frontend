@@ -1,14 +1,17 @@
 ![](https://img.shields.io/badge/Built%20with%20%E2%9D%A4%EF%B8%8F-at%20Technologiestiftung%20Berlin-blue)
 
 # _TreeWatch_
-> The [_TreeWatch_]() is an interactive map of Berlin that shows how thirsty the public trees of berlin are. More precisely, it visualizes the trees' ground suction tension. This suction tension represents the amount of energy tree roots are needing in order to suck out water from the ground. Using open data as well as sensors distributed under the ground of about a hundred trees, an AI developed by [Birds on Mars](https://www.birdsonmars.com/) is able to generate forecasts for the trees not equiped with sensors. This web-app is oriented towards the public and should inform about the AI-generated forecasts in a simple and intuitive way.
+
+> TreeWatch is an interactive map of Berlin that shows how thirsty the public trees of berlin are. More precisely, it visualizes the trees' ground suction tension. This suction tension represents the amount of energy tree roots are needing in order to suck out water from the ground. Using open data as well as sensors distributed under the ground of about a hundred trees, an AI developed by [Birds on Mars](https://www.birdsonmars.com/) is able to generate forecasts for the trees not equiped with sensors. This web-app is oriented towards the public and should inform about the AI-generated forecasts in a simple and intuitive way.
 
 ## Context
+
 Climate change is causing increasingly hot, dry weather in many places. In recent years, Berlin has also experienced more hot days than ever before. Determining whether trees are in need of water isn't as easy as looking at the ground on the surface level. Many factors such as the tree's age, specie, plate size or ground quality play an important role. Old trees, for instance, tend to have deep roots and thereby be less dependent on additional watering. Overwatering can in fact be more detrimental to a tree than helpful.
 
 This application is completely based on open data, much of which is administrative or weather data. Open data is now an important part of Berlin's administrative activities and not only creates transparency and openness, but also enables analysis and applications like this to make everyday life a little bit more pleasant. You can find more open data at the [Berlin Open Data Portal](https://daten.berlin.de/).
 
 ## Tech stack
+
 This website is a NextJS app configured with:
 
 - [Typescript](https://www.typescriptlang.org/)
@@ -84,7 +87,17 @@ npm run dev
 ```
 
 ## Deployment
+
 _TreeWatch_ is deployed to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+
+## Content
+
+The content of TreeWatch can be customized. You can edit it in the following locations:
+
+- The images for the slides on the homepage are located under: `/images/home-slider/`.
+- The text for the slides and the alternative text for the images are located in `/locales/de/common.json`.
+- The index page of the available stories is located under `/pages/stories/index.tsx`. The path parameter should point to a valid file name, for example `/stories/my-file-name`.
+- The text for the expert articles "stories" can be edited in the individual files located under `/pages/stories`. The file format is MDX, a superset of Markdown. It can be edited with a markdown editor.
 
 ## Page analytics
 
@@ -116,7 +129,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 
 ## Content Licencing
 
-Texts and content available as [CC BY](https://creativecommons.org/licenses/by/3.0/de/). 
+Texts and content available as [CC BY](https://creativecommons.org/licenses/by/3.0/de/).
 
 ## Credits
 
