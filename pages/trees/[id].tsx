@@ -14,6 +14,7 @@ import { useHasScrolledPastThreshold } from '@lib/hooks/useHasScrolledPastThresh
 import { NowcastDataType } from '@lib/requests/getNowcastData'
 import { Tabs } from '@components/Tabs'
 import useTranslation from 'next-translate/useTranslation'
+import { FeedbackRequestsList } from '@components/FeedbackRequestsList'
 
 interface TreePageComponentPropType {
   treeData: TreeDataType
@@ -259,7 +260,7 @@ const TreePage: TreePageWithLayout = ({ treeData }) => {
               },
               {
                 name: t('treeView.tabs.1'),
-                content: <div>Here comes the requests</div>,
+                content: <FeedbackRequestsList treeId={treeData.gml_id} />,
               },
             ]}
           />
