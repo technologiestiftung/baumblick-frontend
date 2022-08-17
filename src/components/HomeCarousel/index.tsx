@@ -5,14 +5,17 @@ import Trans from 'next-translate/Trans'
 import useTranslation from 'next-translate/useTranslation'
 import { FC } from 'react'
 
-interface HomeSlidePropType {
+interface HomeCarouselPropType {
   img: {
     url: string
     alt: string
   }
 }
 
-const HomeSlide: FC<HomeSlidePropType> = ({ img: { url, alt }, children }) => (
+const HomeSlide: FC<HomeCarouselPropType> = ({
+  img: { url, alt },
+  children,
+}) => (
   <div className="px-4">
     <div className="border border-gray-200 rounded-lg h-full grid grid-rows-[auto,1fr] grid-cols-1">
       <img src={url} alt={alt} className="w-full float-left rounded-t-lg" />
@@ -36,7 +39,7 @@ const Pill: FC<{ className?: string }> = ({ className = '', children }) => (
   </span>
 )
 
-export const HomeSlider: FC = () => {
+export const HomeCarousel: FC = () => {
   const { t } = useTranslation('common')
   const formattingComponents = {
     bold: <strong />,
