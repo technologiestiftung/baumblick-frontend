@@ -1,17 +1,23 @@
 import { FeedbackReportForm } from '@components/FeedbackReportForm'
-import { useFeedbackData } from '@lib/hooks/useFeedbackData'
+import { FeedbackReportModal } from '@components/FeedbackReportModal'
+import { IssueTypeType, useFeedbackData } from '@lib/hooks/useFeedbackData'
+import { TreeDataType } from '@lib/requests/getTreeData'
 import useTranslation from 'next-translate/useTranslation'
-import { FC } from 'react'
+import { FC, useState } from 'react'
 
 interface FeedbackRequestsListPropType {
-  treeId: string
+  treeData: TreeDataType
 }
 
 export const FeedbackRequestsList: FC<FeedbackRequestsListPropType> = ({
-  treeId,
+  treeData,
 }) => {
   const { t } = useTranslation('common')
-  const { issues, reportIssue, isLoading, error } = useFeedbackData(treeId)
+  const { issues, reportIssue, isLoading, error } = useFeedbackData(
+    treeData.gml_id
+  )
+  const [openedIssueModal, setOpenedIssueModal] =
+    useState<IssueTypeType | null>(null)
   return (
     <>
       <p className="px-8 py-8 font-serif md:text-lg">
@@ -22,9 +28,24 @@ export const FeedbackRequestsList: FC<FeedbackRequestsListPropType> = ({
           <FeedbackReportForm
             key={issueType.id}
             {...issueType}
-            onButtonClick={() => reportIssue(issueType.id)}
+            onButtonClick={() => setOpenedIssueModal(issueType)}
           />
         ))}
+      <FeedbackReportModal
+        title={openedIssueModal?.title || ' '}
+        address={[treeData.strname, treeData.hausnr, treeData.bezirk]
+          .filter(Boolean)
+          .join(' ')}
+        imageUrl={openedIssueModal?.imageUrl}
+        treeName={treeData.gattung_deutsch || 'Baum'}
+        isOpen={!!openedIssueModal}
+        onConfirm={() => {
+          if (!openedIssueModal) return
+          setOpenedIssueModal(null)
+          void reportIssue(openedIssueModal.id)
+        }}
+        onClose={() => setOpenedIssueModal(null)}
+      />
       {isLoading && (
         <div className="p-8 font-serif md:text-lg">{t('feedback.loading')}</div>
       )}

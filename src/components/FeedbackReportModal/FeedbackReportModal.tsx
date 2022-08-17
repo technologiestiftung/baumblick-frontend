@@ -10,7 +10,7 @@ export interface FeedbackReportModalPropType {
   title: string
   address: string
   treeName: string
-  imageUrl?: string
+  imageUrl?: string | null
   isOpen?: boolean
   onConfirm?: () => void
   onClose?: () => void

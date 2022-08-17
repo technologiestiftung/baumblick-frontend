@@ -272,7 +272,7 @@ const TreePage: TreePageWithLayout = ({ treeData }) => {
               },
               {
                 name: t('treeView.tabs.1'),
-                content: <FeedbackRequestsList treeId={treeData.gml_id} />,
+                content: <FeedbackRequestsList treeData={treeData} />,
               },
             ]}
           />
