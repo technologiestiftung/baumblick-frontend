@@ -1,7 +1,7 @@
+import { getScaleClassesByLevel } from '@lib/utils/getScaleClassesByLevel'
 import { SuctionTensionLevel } from '@lib/utils/mapSuctionTensionToLevel'
 import classNames from 'classnames'
 import { format } from 'date-fns'
-import { getRingClassesByLevel } from 'pages/trees/[id]'
 import { FC } from 'react'
 
 interface DataItem {
@@ -82,7 +82,7 @@ export const ForecastBarChart: FC<ForecastBarChartPropType> = ({ data }) => {
                     'relative flex justify-center items-end',
                     'overflow-hidden',
                     'row-start-[-1]',
-                    getRingClassesByLevel(dataItem.suctionTensionLevel).bg
+                    getScaleClassesByLevel(dataItem.suctionTensionLevel).bg
                   )}
                   style={{ gridRowEnd: -(dataItem.suctionTensionLevel + 1) }}
                 >
