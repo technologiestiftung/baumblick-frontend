@@ -90,10 +90,10 @@ _TreeWatch_ is deployed to the cloud with [Vercel](https://vercel.com/new?utm_so
 
 The content of TreeWatch can be customized. You can edit it in the following locations:
 
- - The images for the slides are located under: `/images/home-slider/`
- - The text for the slides and the alternative text for the images is located in `/locales/de/common.json`
- - The index of the available stories is located under `/pages/stories/index.tsx`
- - The text for the expert articles "stories" can be edited in the individual files located under `/pages/stories`
+ - The images for the slides are located under: `/images/home-slider/`.
+ - The text for the slides and the alternative text for the images is located in `/locales/de/common.json`.
+ - The index of the available stories is located under `/pages/stories/index.tsx`. The path parameter should point to a valid file name, for example `/stories/my-file-name`.
+ - The text for the expert articles "stories" can be edited in the individual files located under `/pages/stories`. The file format is MDX a superset of Markdown. It can be edited with a markdown editor.
 
 
 ## Page analytics
