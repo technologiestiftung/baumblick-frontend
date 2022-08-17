@@ -47,3 +47,7 @@ Default.args = {
     },
   ],
 }
+
+export const MissingData = Template.bind({})
+
+MissingData.args = {}

@@ -9,7 +9,7 @@ interface DataItem {
 }
 
 export interface ForecastBarChartPropType {
-  data: DataItem[]
+  data?: DataItem[]
 }
 
 const SUCTION_TENSION_LEVELS: SuctionTensionLevel[] = [1, 2, 3, 4, 5]
@@ -24,7 +24,7 @@ export const ForecastBarChart: FC<ForecastBarChartPropType> = ({ data }) => {
   const MAX_Y_VALUE = 5 // Max suction tension
 
   const GRID_AXES_CLASSES = {
-    gridTemplateColumns: `repeat(${data.length}, minmax(0, 1fr))`,
+    gridTemplateColumns: `repeat(${data?.length || 1}, minmax(0, 1fr))`,
     gridTemplateRows: `repeat(${MAX_Y_VALUE}, minmax(0, 1fr))`,
   }
 
@@ -61,33 +61,38 @@ export const ForecastBarChart: FC<ForecastBarChartPropType> = ({ data }) => {
           {SUCTION_TENSION_LEVELS.reverse().map((level) => {
             return (
               <div
-                key={`suction-tension-axis-level-${data.length}`}
+                key={`suction-tension-axis-level-${level}`}
                 className="w-[calc(100%+16px)] -translate-x-[8px] border-t border-gray-200"
-                style={{ gridColumn: `span ${data.length}`, gridRow: level }}
+                style={{
+                  gridColumn: `span ${data?.length || 1}`,
+                  gridRow: level,
+                }}
               ></div>
             )
           })}
         </div>
-        <div className={GRID_BASE_CLASSES} style={{ ...GRID_AXES_CLASSES }}>
-          {data.map((dataItem) => {
-            return (
-              <div
-                key={dataItem.date}
-                className={classNames(
-                  'relative flex justify-center',
-                  'overflow-hidden',
-                  'row-start-[-1]',
-                  getRingClassesByLevel(dataItem.suctionTensionLevel).bg
-                )}
-                style={{ gridRowEnd: -(dataItem.suctionTensionLevel + 1) }}
-              >
-                {/* <span className="absolute bottom-0 w-full -rotate-90 -translate-y-full whitespace-nowrap">
+        {data && (
+          <div className={GRID_BASE_CLASSES} style={{ ...GRID_AXES_CLASSES }}>
+            {data.map((dataItem) => {
+              return (
+                <div
+                  key={dataItem.date}
+                  className={classNames(
+                    'relative flex justify-center',
+                    'overflow-hidden',
+                    'row-start-[-1]',
+                    getRingClassesByLevel(dataItem.suctionTensionLevel).bg
+                  )}
+                  style={{ gridRowEnd: -(dataItem.suctionTensionLevel + 1) }}
+                >
+                  {/* <span className="absolute bottom-0 w-full -rotate-90 -translate-y-full whitespace-nowrap">
               {dataItem.xValue}
             </span> */}
-              </div>
-            )
-          })}
-        </div>
+                </div>
+              )
+            })}
+          </div>
+        )}
       </div>
     </div>
   )
