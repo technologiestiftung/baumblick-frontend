@@ -9,7 +9,7 @@ import colors from '../../style/colors'
 export interface FeedbackReportFormPropType {
   title: string
   description: string
-  imageUrl?: string
+  imageUrl?: string | null
   onButtonClick?: () => void
   alreadyReported?: boolean
 }

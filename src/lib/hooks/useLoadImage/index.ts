@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 export const useImageLoadsSuccessfully = (
-  imgUrl: string | undefined
+  imgUrl: string | undefined | null
 ): boolean | null => {
   const [loadsSuccessfully, setLoadsSuccessfully] = useState<boolean | null>(
     null

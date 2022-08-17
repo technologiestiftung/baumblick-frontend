@@ -11,9 +11,21 @@ const mdx = withMDX({
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
 })
 
+const cleanUrl = (url) => {
+  const newUrl = new URL(url)
+  return `${newUrl.protocol}//${newUrl.hostname}`
+}
+
 module.exports = nextTranslate({
   ...mdx,
   async headers() {
+    const matomoUrl = cleanUrl(process.env.NEXT_PUBLIC_MATOMO_URL)
+    const tilesUrl = cleanUrl(process.env.NEXT_PUBLIC_TREE_TILES_URL)
+    const basemapUrl = cleanUrl(process.env.NEXT_PUBLIC_MAPTILER_BASEMAP_URL)
+    const sdkUrl = cleanUrl(process.env.NEXT_PUBLIC_SUPABASE_SDK_URL)
+    const passthroughUrl = cleanUrl(
+      process.env.NEXT_PUBLIC_SUPABASE_PASSTHROUGH_URL
+    )
     return [
       {
         source: '/(.*)',
@@ -25,11 +37,11 @@ module.exports = nextTranslate({
               `script-src 'self' 'unsafe-eval'`,
               `style-src 'self' 'unsafe-inline'`,
               `font-src 'self' data:`,
-              `img-src 'self' ${process.env.NEXT_PUBLIC_MATOMO_URL} ${process.env.NEXT_PUBLIC_TREE_TILES_URL} ${process.env.NEXT_PUBLIC_MAPTILER_BASEMAP_URL} data: blob:`,
+              `img-src 'self' ${matomoUrl} ${tilesUrl} ${basemapUrl} data: blob:`,
               `frame-ancestors 'none'`,
               `worker-src 'self' blob:`,
               `child-src 'self' blob:`,
-              `connect-src 'self' ${process.env.NEXT_PUBLIC_SUPABASE_SDK_URL} ${process.env.NEXT_PUBLIC_TREE_TILES_URL} ${process.env.NEXT_PUBLIC_SUPABASE_PASSTHROUGH_URL} ${process.env.NEXT_PUBLIC_MAPTILER_BASEMAP_URL} ${process.env.NEXT_PUBLIC_MATOMO_URL} https://api.github.com https://api.maptiler.com`,
+              `connect-src 'self' ${sdkUrl} ${tilesUrl} ${passthroughUrl} ${basemapUrl} ${matomoUrl}`,
             ].join('; '),
           },
         ],
