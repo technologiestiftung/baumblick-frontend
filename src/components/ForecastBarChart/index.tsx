@@ -93,7 +93,7 @@ export const ForecastBarChart: FC<ForecastBarChartPropType> = ({ data }) => {
                   key={dataItem.date}
                   className={classNames(
                     'relative flex justify-center items-end',
-                    'overflow-hidden',
+                    'overflow-visible',
                     'row-start-[-1]',
                     getScaleClassesByLevel(dataItem.suctionTensionLevel).bg
                   )}
@@ -101,7 +101,7 @@ export const ForecastBarChart: FC<ForecastBarChartPropType> = ({ data }) => {
                 >
                   <span
                     className={classNames(
-                      'absolute bottom-0',
+                      'absolute bottom-0 w-[45px]',
                       '-rotate-90 -translate-y-4 origin-center',
                       'text-gray-900 text-opacity-50 font-semibold whitespace-nowrap'
                     )}
