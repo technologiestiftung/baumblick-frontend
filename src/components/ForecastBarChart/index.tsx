@@ -6,7 +6,7 @@ import { FC } from 'react'
 
 interface DataItem {
   suctionTensionLevel: SuctionTensionLevel
-  date: string
+  date: Date
 }
 
 export interface ForecastBarChartPropType {
@@ -24,7 +24,7 @@ const VIZ_GRID_BASE_CLASSES = classNames(
 )
 
 const getDateLabel = (date: Date): string => {
-  return `${format(new Date(date), 'dd.MM.')}${isToday(date) ? ' (Heute)' : ''}`
+  return `${format(date, 'dd.MM.')}${isToday(date) ? ' (Heute)' : ''}`
 }
 
 export const ForecastBarChart: FC<ForecastBarChartPropType> = ({ data }) => {
@@ -90,7 +90,7 @@ export const ForecastBarChart: FC<ForecastBarChartPropType> = ({ data }) => {
             {data.map((dataItem) => {
               return (
                 <div
-                  key={dataItem.date}
+                  key={dataItem.date.toISOString()}
                   className={classNames(
                     'relative flex justify-center items-end',
                     'overflow-visible',
@@ -106,7 +106,7 @@ export const ForecastBarChart: FC<ForecastBarChartPropType> = ({ data }) => {
                       'text-gray-900 text-opacity-50 font-semibold whitespace-nowrap'
                     )}
                   >
-                    {getDateLabel(new Date(dataItem.date))}
+                    {getDateLabel(dataItem.date)}
                   </span>
                 </div>
               )
