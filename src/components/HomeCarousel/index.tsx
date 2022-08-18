@@ -45,8 +45,10 @@ export const HomeCarousel: FC = () => {
     bold: <strong />,
     italic: <em />,
     legend: <SuctionTensionScale />,
-    '1': <Pill className="bg-scale-1 border-scale-1-dark">1</Pill>,
-    '5': <Pill className="bg-scale-5 border-scale-5-dark">5</Pill>,
+    '1': <Pill className="bg-scale-good border-scale-good-dark">1</Pill>,
+    '5': (
+      <Pill className="bg-scale-critical border-scale-critical-dark">5</Pill>
+    ),
   }
   return (
     <Carousel>

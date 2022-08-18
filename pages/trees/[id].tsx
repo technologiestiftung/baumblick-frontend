@@ -15,7 +15,7 @@ import { Carousel } from '@components/Carousel'
 import { NowcastDataType } from '@lib/requests/getNowcastData'
 import { Tabs } from '@components/Tabs'
 import useTranslation from 'next-translate/useTranslation'
-import { getScaleClassesByLevel } from '@lib/utils/getScaleClassesByLevel'
+import { getClassesByScaleId } from '@lib/utils/getClassesByScaleId'
 import { treeUrlSlugToId } from '@lib/utils/urlUtil'
 
 interface TreePageComponentPropType {
@@ -75,7 +75,7 @@ const InfoList: FC<{
         !nowcastIsLoading &&
         !nowcastError &&
         nowcastData[3].value
-          ? mapSuctionTensionToLevel(nowcastData[3].value)
+          ? mapSuctionTensionToLevel(nowcastData[3].value)?.id
           : '-'
       }
     />
@@ -132,9 +132,9 @@ const TreePage: TreePageWithLayout = ({ treeData }) => {
 
   const avgLevel =
     nowcastData && nowcastData[3].value
-      ? mapSuctionTensionToLevel(nowcastData[3].value)
+      ? mapSuctionTensionToLevel(nowcastData[3].value)?.id
       : undefined
-  const circleColorClasses = getScaleClassesByLevel(avgLevel)
+  const circleColorClasses = getClassesByScaleId(avgLevel)
 
   return (
     <div id="inidividual-tree-container">
@@ -189,22 +189,22 @@ const TreePage: TreePageWithLayout = ({ treeData }) => {
             <Carousel dotsClass="slick-dots w-2/6 md:w-1/4 mx-auto">
               {!nowcastError && (
                 <SuctionTensionViz
-                  depth30Level={
+                  depth30LevelId={
                     nowcastData && nowcastData[0].value
-                      ? mapSuctionTensionToLevel(nowcastData[0].value)
+                      ? mapSuctionTensionToLevel(nowcastData[0].value)?.id
                       : undefined
                   }
-                  depth60Level={
+                  depth60LevelId={
                     nowcastData && nowcastData[1].value
-                      ? mapSuctionTensionToLevel(nowcastData[1].value)
+                      ? mapSuctionTensionToLevel(nowcastData[1].value)?.id
                       : undefined
                   }
-                  depth90Level={
+                  depth90LevelId={
                     nowcastData && nowcastData[2].value
-                      ? mapSuctionTensionToLevel(nowcastData[2].value)
+                      ? mapSuctionTensionToLevel(nowcastData[2].value)?.id
                       : undefined
                   }
-                  averageLevel={avgLevel}
+                  averageLevelId={avgLevel}
                 />
               )}
               <div className="bg-scale-4 h-full">Bar chart</div>
@@ -214,7 +214,6 @@ const TreePage: TreePageWithLayout = ({ treeData }) => {
             species={treeData.art_dtsch || 'Unbekannte Art'}
             age={treeData.standalter}
             height={treeData.baumhoehe}
-            level={avgLevel}
             statusBackgroundColor={circleColorClasses.bg}
             statusBorderColor={circleColorClasses.border}
           />
@@ -231,7 +230,6 @@ const TreePage: TreePageWithLayout = ({ treeData }) => {
               species={treeData.art_dtsch || 'Unbekannte Art'}
               age={treeData.standalter}
               height={treeData.baumhoehe}
-              level={avgLevel}
               statusBackgroundColor={circleColorClasses.bg}
               statusBorderColor={circleColorClasses.border}
               isCompressed={hasScrolledPastThreshold}
