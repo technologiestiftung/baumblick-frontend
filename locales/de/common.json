@@ -79,6 +79,6 @@
     "confirmationDescription": "Ab morgen kannst du es wieder melden",
     "introduction": "Deine Meldungen können uns helfen, unsere Vorhersagemodell zu verbessern.",
     "loading": "Die Meldeeigenschaften werden geladen...",
-    "error": "Es ist beim Laden der Meldeeigenschaften einen Fehler aufgetreten:"
+    "error": "Es ist beim Laden der Meldeeigenschaften ein Fehler aufgetreten:"
   }
 }
