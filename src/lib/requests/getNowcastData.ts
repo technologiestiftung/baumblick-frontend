@@ -45,9 +45,20 @@ export const getNowcastData = async (
 ): Promise<NowcastDataType[] | undefined> => {
   if (!treeId) return
 
-  const REQUEST_URL = `${SUPABASE_PASSTHROUGH_API_URL}/${TABLE_NAME}?${TREE_ID_COLUMN_NAME}=eq.${treeId}&order=${COLUMN_TO_SORT_BY}&limit=4&offset=0`
+  const REQUEST_URL = `${SUPABASE_PASSTHROUGH_API_URL}/${TABLE_NAME}`
 
-  const response = await fetch(REQUEST_URL, REQUEST_OPTIONS)
+  const REQUEST_PARAMS = new URLSearchParams({
+    [TREE_ID_COLUMN_NAME]: `eq.${treeId}`,
+    order: `${COLUMN_TO_SORT_BY}`,
+    limit: '4',
+    offset: '0',
+  })
+
+  const response = await fetch(
+    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+    `${REQUEST_URL}?${REQUEST_PARAMS}`,
+    REQUEST_OPTIONS
+  )
 
   if (!response.ok) {
     const txt = await response.text()
