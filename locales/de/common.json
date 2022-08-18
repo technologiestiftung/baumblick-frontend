@@ -72,7 +72,8 @@
   "feedback": {
     "imageAlt": "So kann/können „{{title}}“ aussehen",
     "reportButton": "{{title}} melden",
-    "modalHelp": "Bitte bestätige, dass du beim Baum <bold>„{{treeName}}“</bold> Nähe <bold>{{address}}</bold> die Eigenschaft <bold>„{{title}}“</bold> erkannt hast.",
+    "proximityWord": "Nähe",
+    "modalHelp": "Bitte bestätige, dass du beim Baum <bold>„{{treeName}}“</bold> {{address}} die Eigenschaft <bold>„{{title}}“</bold> erkannt hast.",
     "modalConfirm": "Melden",
     "modalCancel": "Abbrechen",
     "confirmationTitle": "Danke! Erfolgreich gemeldet!",

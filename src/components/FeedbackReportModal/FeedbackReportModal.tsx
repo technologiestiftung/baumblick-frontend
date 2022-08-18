@@ -84,7 +84,13 @@ export const FeedbackReportModal: FC<FeedbackReportModalPropType> = ({
                 <Trans
                   i18nKey="common:feedback.modalHelp"
                   components={formattingComponents}
-                  values={{ address, title, treeName }}
+                  values={{
+                    address: address
+                      ? `${t('feedback.proximityWord')} <bold>${address}</bold>`
+                      : '',
+                    title,
+                    treeName,
+                  }}
                 />
               </p>
               <footer className="flex p-6 justify-between">
