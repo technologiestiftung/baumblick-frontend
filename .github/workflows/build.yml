@@ -9,7 +9,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, 'skip ci')"
     env:
       NEXT_PUBLIC_MAPTILER_KEY: ${{ env.NEXT_PUBLIC_MAPTILER_KEY }}
       NEXT_PUBLIC_TREE_TILES_URL: ${{ env.NEXT_PUBLIC_TREE_TILES_URL }}
@@ -19,6 +18,7 @@ jobs:
       NEXT_PUBLIC_SUPABASE_PASSTHROUGH_URL: ${{ env.NEXT_PUBLIC_SUPABASE_PASSTHROUGH_URL }}
       NEXT_PUBLIC_SUPABASE_SDK_URL: ${{ env.NEXT_PUBLIC_SUPABASE_SDK_URL }}
       NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ env.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+    if: "!contains(github.event.head_commit.message, 'skip ci')"
 
     steps:
       - uses: actions/checkout@v3
