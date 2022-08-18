@@ -1,13 +1,9 @@
+import { reportIssue } from '@lib/requests/reportIssue'
 import { supabase } from '@lib/requests/supabase'
 import { useEffect, useState } from 'react'
 import useSWR from 'swr'
 
 const LOCAL_STORAGE_PREFIX = 'issue'
-
-interface RawIssueType {
-  issue_type_id: number
-  gml_id: string
-}
 
 interface RawIssueTypeType {
   id: number
@@ -31,7 +27,7 @@ type UseFeedbackDataType = (treeId: string) => {
   reportIssue: (issueTypeId: number) => Promise<void>
 }
 
-const getIssueTypeTypes = async (treeId: string): Promise<IssueTypeType[]> => {
+const getIssueTypes = async (treeId: string): Promise<IssueTypeType[]> => {
   const { data, error } = await supabase.from<RawIssueTypeType>('issue_types')
     .select(`
     id,
@@ -45,7 +41,7 @@ const getIssueTypeTypes = async (treeId: string): Promise<IssueTypeType[]> => {
   return data.map((issueTypeType) => ({
     ...issueTypeType,
     imageUrl: issueTypeType.image_url || null,
-    alreadyReported: getIfalreadyReported(issueTypeType.id, treeId),
+    alreadyReported: getIfAlreadyReported(issueTypeType.id, treeId),
   }))
 }
 
@@ -82,7 +78,7 @@ const cleanLocalStorage = (): void => {
 const getLocalStorageKey = (treeId: string, issueTypeId: number): string =>
   `${LOCAL_STORAGE_PREFIX}-${treeId}-${issueTypeId}`
 
-const getIfalreadyReported = (issueTypeId: number, treeId: string): boolean => {
+const getIfAlreadyReported = (issueTypeId: number, treeId: string): boolean => {
   const lsItem = window.localStorage.getItem(
     getLocalStorageKey(treeId, issueTypeId)
   )
@@ -100,7 +96,7 @@ export const useFeedbackData: UseFeedbackDataType = (treeId) => {
     mutate,
   } = useSWR<IssueTypeType[], Error>('issue_types', async () => {
     setIssueError(null)
-    return getIssueTypeTypes(treeId)
+    return getIssueTypes(treeId)
   })
   const [issueError, setIssueError] = useState<string | null>(null)
 
@@ -112,25 +108,23 @@ export const useFeedbackData: UseFeedbackDataType = (treeId) => {
     issues:
       data?.map((item) => ({
         ...item,
-        alreadyReported: getIfalreadyReported(item.id, treeId),
+        alreadyReported: getIfAlreadyReported(item.id, treeId),
       })) || null,
     isLoading: data === null,
     error: issueError || sdkError?.message || null,
     reportIssue: async (issueTypeId: number): Promise<void> => {
       setIssueError(null)
-      const { error } = await supabase.from<RawIssueType>('issues').insert({
-        issue_type_id: issueTypeId,
-        gml_id: treeId,
-      })
-      if (error) {
-        setIssueError(error.message)
+      try {
+        await reportIssue({ issueTypeId, treeId })
+        window.localStorage.setItem(
+          getLocalStorageKey(treeId, issueTypeId),
+          new Date().toISOString()
+        )
+        void mutate()
+      } catch (error) {
+        setIssueError((error as Error).message)
         return
       }
-      window.localStorage.setItem(
-        getLocalStorageKey(treeId, issueTypeId),
-        new Date().toISOString()
-      )
-      void mutate()
     },
   }
 }
