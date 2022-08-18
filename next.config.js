@@ -11,7 +11,7 @@ const mdx = withMDX({
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
 })
 
-const cleanUrl = (url) => {
+const getUrlWithoutPath = (url) => {
   const newUrl = new URL(url)
   return `${newUrl.protocol}//${newUrl.hostname}`
 }
@@ -19,11 +19,13 @@ const cleanUrl = (url) => {
 module.exports = nextTranslate({
   ...mdx,
   async headers() {
-    const matomoUrl = cleanUrl(process.env.NEXT_PUBLIC_MATOMO_URL)
-    const tilesUrl = cleanUrl(process.env.NEXT_PUBLIC_TREE_TILES_URL)
-    const basemapUrl = cleanUrl(process.env.NEXT_PUBLIC_MAPTILER_BASEMAP_URL)
-    const sdkUrl = cleanUrl(process.env.NEXT_PUBLIC_SUPABASE_SDK_URL)
-    const passthroughUrl = cleanUrl(
+    const matomoUrl = getUrlWithoutPath(process.env.NEXT_PUBLIC_MATOMO_URL)
+    const tilesUrl = getUrlWithoutPath(process.env.NEXT_PUBLIC_TREE_TILES_URL)
+    const basemapUrl = getUrlWithoutPath(
+      process.env.NEXT_PUBLIC_MAPTILER_BASEMAP_URL
+    )
+    const sdkUrl = getUrlWithoutPath(process.env.NEXT_PUBLIC_SUPABASE_SDK_URL)
+    const passthroughUrl = getUrlWithoutPath(
       process.env.NEXT_PUBLIC_SUPABASE_PASSTHROUGH_URL
     )
     return [
