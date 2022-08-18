@@ -2,7 +2,7 @@ import { supabase } from '@lib/requests/supabase'
 import { useEffect, useState } from 'react'
 import useSWR from 'swr'
 
-const LOCAL_STORAGE_PREFIX = 'issue-'
+const LOCAL_STORAGE_PREFIX = 'issue'
 
 interface RawIssueType {
   issue_type_id: number
@@ -21,7 +21,7 @@ export interface IssueTypeType {
   title: string
   description: string
   imageUrl: string | null
-  alreadySubmitted: boolean
+  alreadyReported: boolean
 }
 
 type UseFeedbackDataType = (treeId: string) => {
@@ -45,7 +45,7 @@ const getIssueTypeTypes = async (treeId: string): Promise<IssueTypeType[]> => {
   return data.map((issueTypeType) => ({
     ...issueTypeType,
     imageUrl: issueTypeType.image_url || null,
-    alreadySubmitted: getIfAlreadySubmitted(issueTypeType.id, treeId),
+    alreadyReported: getIfalreadyReported(issueTypeType.id, treeId),
   }))
 }
 
@@ -82,10 +82,7 @@ const cleanLocalStorage = (): void => {
 const getLocalStorageKey = (treeId: string, issueTypeId: number): string =>
   `${LOCAL_STORAGE_PREFIX}-${treeId}-${issueTypeId}`
 
-const getIfAlreadySubmitted = (
-  issueTypeId: number,
-  treeId: string
-): boolean => {
+const getIfalreadyReported = (issueTypeId: number, treeId: string): boolean => {
   const lsItem = window.localStorage.getItem(
     getLocalStorageKey(treeId, issueTypeId)
   )
@@ -97,13 +94,14 @@ const getIfAlreadySubmitted = (
 }
 
 export const useFeedbackData: UseFeedbackDataType = (treeId) => {
-  const { data, error: sdkError } = useSWR<IssueTypeType[], Error>(
-    'issue_types',
-    async () => {
-      setIssueError(null)
-      return getIssueTypeTypes(treeId)
-    }
-  )
+  const {
+    data,
+    error: sdkError,
+    mutate,
+  } = useSWR<IssueTypeType[], Error>('issue_types', async () => {
+    setIssueError(null)
+    return getIssueTypeTypes(treeId)
+  })
   const [issueError, setIssueError] = useState<string | null>(null)
 
   useEffect(() => {
@@ -114,7 +112,7 @@ export const useFeedbackData: UseFeedbackDataType = (treeId) => {
     issues:
       data?.map((item) => ({
         ...item,
-        alreadySubmitted: getIfAlreadySubmitted(item.id, treeId),
+        alreadyReported: getIfalreadyReported(item.id, treeId),
       })) || null,
     isLoading: data === null,
     error: issueError || sdkError?.message || null,
@@ -132,6 +130,7 @@ export const useFeedbackData: UseFeedbackDataType = (treeId) => {
         getLocalStorageKey(treeId, issueTypeId),
         new Date().toISOString()
       )
+      void mutate()
     },
   }
 }

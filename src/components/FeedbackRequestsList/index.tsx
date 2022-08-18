@@ -18,6 +18,7 @@ export const FeedbackRequestsList: FC<FeedbackRequestsListPropType> = ({
   )
   const [openedIssueModal, setOpenedIssueModal] =
     useState<IssueTypeType | null>(null)
+
   return (
     <>
       <p className="px-8 py-8 font-serif md:text-lg">
@@ -33,11 +34,15 @@ export const FeedbackRequestsList: FC<FeedbackRequestsListPropType> = ({
         ))}
       <FeedbackReportModal
         title={openedIssueModal?.title || ' '}
-        address={[treeData.strname, treeData.hausnr, treeData.bezirk]
-          .filter(Boolean)
-          .join(' ')}
+        address={
+          (treeData.strname &&
+            treeData.hausnr &&
+            treeData.bezirk &&
+            `${treeData.strname} ${treeData.hausnr}, ${treeData.bezirk}`) ||
+          ''
+        }
         imageUrl={openedIssueModal?.imageUrl}
-        treeName={treeData.gattung_deutsch || 'Baum'}
+        treeName={treeData.art_dtsch || 'Baum'}
         isOpen={!!openedIssueModal}
         onConfirm={() => {
           if (!openedIssueModal) return
