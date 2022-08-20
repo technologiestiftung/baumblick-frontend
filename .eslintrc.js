@@ -62,6 +62,11 @@ module.exports = {
 				],
 				'prettier/prettier': ['error', {}, { usePrettierrc: true }], // Includes .prettierrc.js rules
 				'import/no-unresolved': 'error',
+        'no-unused-vars': 'off',
+        '@typescript-eslint/no-unused-vars': [
+          'error',
+          { argsIgnorePattern: '^_' },
+        ],
 			},
 		},
 	],
