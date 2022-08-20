@@ -48,7 +48,6 @@ export default async function handler(
     }
 
     switch (req.method) {
-      // TODO:Make all request GET not POST
       case 'POST': // for migration purpose
       case 'GET': {
         const result = await sql<
@@ -62,7 +61,11 @@ export default async function handler(
         if (!req.url) {
           return res.status(400).json({ error: 'Missing url' })
         }
-        let url = new URL(req.url, `http://${req.headers.host}`)
+
+        let url = new URL(
+          req.url,
+          `http://${req.headers.host ? req.headers.host : 'localhost'}`
+        )
 
         const { searchParams } = url
 
