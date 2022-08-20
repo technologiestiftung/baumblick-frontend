@@ -8,6 +8,7 @@ type CsrfTokenType = string
 export const getServerSideProps: GetServerSideProps<{
   csrfToken: CsrfTokenType
 }> = async ({ req, res }) => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
   await csrf(req, res)
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -25,29 +26,23 @@ export const Issues: FC<
   const apiRequest: (withHeader: boolean) => void = (withHeader = true) => {
     fetch('http://localhost:3000/api/issues', {
       method: 'POST',
-      body: JSON.stringify({ test: 'test' }),
-      headers: withHeader ? { 'CSRF-Token': csrfToken } : undefined,
+      body: JSON.stringify({ gml_id: 'gml_id', issue_type_id: 1 }),
+      headers: withHeader
+        ? { 'CSRF-Token': csrfToken, 'Content-Type': 'application/json' }
+        : undefined,
     })
       .then((response) => {
         if (response.ok) {
-          console.log('success')
           return response.json()
         }
         throw response.json()
       })
       .then((json) => {
-        console.log(json)
+        console.info(json)
       })
       .catch((error) => {
-        console.log(error)
+        console.error(error)
       })
-    // axios
-    //   .post(
-    //     'http://localhost:3000/api/hello',
-    //     {},
-    //   )
-    //   .then((res) => alert(`Hi ${res.data.name}`))
-    //   .catch(() => alert('Not protected'))
   }
   return (
     <div>

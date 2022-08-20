@@ -4,7 +4,7 @@ import type { RequestHandler } from 'express'
 
 // Helper method to wait for a middleware to execute before continuing
 // And to throw an error when an error happens in a middleware
-export function csrf(req: any, res: any): Promise<any> {
+export function csrf(req: any, res: any): Promise<unknown> {
   return new Promise((resolve, reject) => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
     const middleware: RequestHandler = csurf({
@@ -21,3 +21,9 @@ export function csrf(req: any, res: any): Promise<any> {
 }
 
 export default csrf
+// import Tokens from 'csrf'
+
+// const options = {}
+// const token = new Tokens(options)
+// export const csurfer = {}
+// export default csurfer
