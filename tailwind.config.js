@@ -7,6 +7,12 @@ module.exports = {
     './src/modules/**/*.{js,ts,jsx,tsx}',
     './src/layouts/**/*.{js,ts,jsx,tsx}',
   ],
+  safelist: [
+    {
+      pattern:
+        /(bg|text|border|ring|ring-offset)-scale-(good|medium|critical)(-dark)?/,
+    },
+  ],
   theme: {
     fontFamily: {
       // prettier-ignore
