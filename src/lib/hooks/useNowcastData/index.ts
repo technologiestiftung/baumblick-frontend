@@ -1,17 +1,20 @@
 import { getNowcastData, NowcastDataType } from '@lib/requests/getNowcastData'
 import useSWR from 'swr'
 
-interface useListDataReturnType {
+interface useNowcastDataReturnType {
   isLoading: boolean
   data: NowcastDataType[] | null
   error: Error | null
 }
 
-export const useNowcastData = (treeId: string): useListDataReturnType => {
-  const params = [`Tree ID - ${treeId}`]
+export const useNowcastData = (
+  treeId: string,
+  csrfToken: string
+): useNowcastDataReturnType => {
+  const params = [`Nowcast - Tree ID - ${treeId}`]
   const { data, error } = useSWR<NowcastDataType[] | undefined, Error>(
     params,
-    () => getNowcastData(treeId)
+    () => getNowcastData(treeId, csrfToken)
   )
 
   return {

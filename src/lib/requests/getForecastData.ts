@@ -1,9 +1,10 @@
 import { getBaseUrl } from '@lib/utils/urlUtil'
+import { startOfDay } from 'date-fns'
 
 /**
  * According to the database schema all values except id are nullable.
  */
-export type NowcastDataType = {
+export type ForecastDataType = {
   id: number
   /** `baum_id? is what `gml_id` is in the the trees table.
    * (Unfortunately it is marked as nullable in the database schema)
@@ -21,27 +22,34 @@ export type NowcastDataType = {
   model_id?: string
 }
 
-const TABLE_NAME = 'nowcast'
+const TABLE_NAME = 'forecast'
 const TREE_ID_COLUMN_NAME = 'baum_id'
-const COLUMN_TO_SORT_BY = 'timestamp'
+const TYPE_ID_COLUMN_NAME = 'type_id'
+const TYPE_ID_FOR_AVERAGE = '4'
+
+const TIMESTAMP_COLUMN = 'timestamp'
+const TODAY = startOfDay(Date.now()).toISOString()
+const FORECAST_MAX_ROWS = 14
 
 /**
- * Fetches the most recent nowcast data for a tree.
+ * Fetches the forecast data for a tree (maximum 14 days).
  * @param treeId string
- * @returns Promise<NowcastDataType[] | undefined>
+ * @returns Promise<ForecastDataType[] | undefined>
  */
-export const getNowcastData = async (
+export const getForecastData = async (
   treeId: string,
   csrfToken: string
-): Promise<NowcastDataType[] | undefined> => {
+): Promise<ForecastDataType[] | undefined> => {
   if (!treeId) return
 
   const REQUEST_URL = `${getBaseUrl()}/api/ml-api-passthrough/${TABLE_NAME}`
 
   const REQUEST_PARAMS = new URLSearchParams({
     [TREE_ID_COLUMN_NAME]: `eq.${treeId}`,
-    order: `${COLUMN_TO_SORT_BY}`,
-    limit: '4',
+    [TYPE_ID_COLUMN_NAME]: `eq.${TYPE_ID_FOR_AVERAGE}`,
+    [TIMESTAMP_COLUMN]: `gte.${TODAY}`,
+    order: `${TIMESTAMP_COLUMN}`,
+    limit: `${FORECAST_MAX_ROWS}`,
     offset: '0',
   })
 
@@ -63,7 +71,7 @@ export const getNowcastData = async (
     throw new Error(txt)
   }
 
-  const data = (await response.json()) as { json: NowcastDataType[] }
+  const data = (await response.json()) as { json: ForecastDataType[] }
 
   return data.json
 }
