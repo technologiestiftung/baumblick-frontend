@@ -10,7 +10,7 @@ export interface FeedbackReportModalPropType {
   title: string
   address: string
   treeName: string
-  imageUrl?: string
+  imageUrl?: string | null
   isOpen?: boolean
   onConfirm?: () => void
   onClose?: () => void
@@ -68,13 +68,27 @@ export const FeedbackReportModal: FC<FeedbackReportModalPropType> = ({
                 'grid gap-x-4 gap-y-2 border-b border-gray-200'
               )}
             >
-              {showImg && (
-                <img
-                  src={imageUrl}
-                  alt={t('feedback.imageAlt', { title })}
-                  className="object-cover w-full h-[120px] rounded-t-md"
-                />
-              )}
+              <div
+                className={classNames(
+                  'bg-gray-100 w-full h-[120px] rounded-t overflow-hidden',
+                  !showImg && imageUrl && 'animate-pulse'
+                )}
+              >
+                <Transition
+                  show={!!showImg}
+                  enter="transition-opacity duration-500"
+                  enterFrom="opacity-0  delay-1000"
+                  enterTo="opacity-100"
+                  leave="transition-opacity duration-150"
+                  leaveFrom="opacity-100"
+                  leaveTo="opacity-0"
+                >
+                  <div
+                    className="w-full h-[120px] bg-cover bg-center"
+                    style={{ backgroundImage: `url("${imageUrl || ''}")` }}
+                  />
+                </Transition>
+              </div>
               <Dialog.Title
                 className={classNames('px-6 pt-4 pb-1 font-semibold text-2xl')}
               >
@@ -84,7 +98,13 @@ export const FeedbackReportModal: FC<FeedbackReportModalPropType> = ({
                 <Trans
                   i18nKey="common:feedback.modalHelp"
                   components={formattingComponents}
-                  values={{ address, title, treeName }}
+                  values={{
+                    address: address
+                      ? `${t('feedback.proximityWord')} <bold>${address}</bold>`
+                      : '',
+                    title,
+                    treeName,
+                  }}
                 />
               </p>
               <footer className="flex p-6 justify-between">

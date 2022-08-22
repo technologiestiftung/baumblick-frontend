@@ -1,5 +1,6 @@
 import { Button } from '@components/Button'
 import { Check } from '@components/Icons'
+import { Transition } from '@headlessui/react'
 import { useImageLoadsSuccessfully } from '@lib/hooks/useLoadImage'
 import classNames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
@@ -9,7 +10,7 @@ import colors from '../../style/colors'
 export interface FeedbackReportFormPropType {
   title: string
   description: string
-  imageUrl?: string
+  imageUrl?: string | null
   onButtonClick?: () => void
   alreadyReported?: boolean
 }
@@ -29,44 +30,56 @@ export const FeedbackReportForm: FC<FeedbackReportFormPropType> = ({
     <div
       className={classNames(
         'grid p-6 gap-x-6 gap-y-2 border-b border-gray-200',
-        showImg && 'pr-0 grid-cols-[8fr,5fr]'
+        'pr-0 grid-cols-[8fr,5fr]'
       )}
     >
-      <h2 className="font-semibold text-2xl">{title}</h2>
-      {showImg && (
-        <img
-          src={imageUrl}
-          alt={t('feedback.imageAlt', { title })}
-          className="row-span-2 object-cover h-full rounded-l-md"
-        />
-      )}
-      <p className="font-serif">{description}</p>
-      {alreadyReported && (
-        <div
-          className={classNames(
-            'grid grid-cols-[1fr,24px] gap-x-6',
-            showImg && 'col-span-2 mr-6',
-            'mt-4'
-          )}
-        >
-          <h4 className="font-bold">{t('feedback.confirmationTitle')}</h4>
-          <div className="row-span-2 flex items-center">
-            <Check color1={colors.scale['good']} />
+      <div>
+        <h2 className="font-semibold text-2xl">{title}</h2>
+        <p className="font-serif mt-2">{description}</p>
+        {alreadyReported && (
+          <div
+            className={classNames(
+              'grid grid-cols-[1fr,24px] gap-x-6',
+              'col-span-2 mr-6',
+              'mt-4'
+            )}
+          >
+            <h4 className="font-bold">{t('feedback.confirmationTitle')}</h4>
+            <div className="row-span-2 flex items-center">
+              <Check color1={colors.scale['good']} />
+            </div>
+            <p className="font-serif text-gray-500">
+              {t('feedback.confirmationDescription')}
+            </p>
           </div>
-          <p className="font-serif text-gray-500">
-            {t('feedback.confirmationDescription')}
-          </p>
-        </div>
-      )}
-      {!alreadyReported && (
-        <Button
-          onClick={onButtonClick}
-          className={classNames(showImg && 'col-span-2 mr-6 ', 'mt-4')}
-          primary
+        )}
+        {!alreadyReported && (
+          <Button onClick={onButtonClick} className="col-span-2 mt-6" primary>
+            {t('feedback.reportButton', { title })}
+          </Button>
+        )}
+      </div>
+      <div
+        className={classNames(
+          'w-full bg-gray-100 h-full rounded-l-md relative max-h-48',
+          !showImg && imageUrl && 'animate-pulse'
+        )}
+      >
+        <Transition
+          show={!!showImg}
+          enter="transition-opacity duration-500"
+          enterFrom="opacity-0  delay-1000"
+          enterTo="opacity-100"
+          leave="transition-opacity duration-150"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0"
         >
-          {t('feedback.reportButton', { title })}
-        </Button>
-      )}
+          <div
+            className="absolute z-0 inset-0 rounded-l-md bg-cover bg-center"
+            style={{ backgroundImage: `url("${imageUrl || ''}")` }}
+          />
+        </Transition>
+      </div>
     </div>
   )
 }

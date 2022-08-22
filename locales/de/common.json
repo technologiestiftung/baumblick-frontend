@@ -71,10 +71,14 @@
   "feedback": {
     "imageAlt": "So kann/können „{{title}}“ aussehen",
     "reportButton": "{{title}} melden",
-    "modalHelp": "Bitte bestätige, dass du beim Baum <bold>„{{treeName}}“</bold> Nähe <bold>{{address}}</bold> die Eigenschaft <bold>„{{title}}“</bold> erkannt hast.",
+    "proximityWord": "Nähe",
+    "modalHelp": "Bitte bestätige, dass du beim Baum <bold>„{{treeName}}“</bold> {{address}} die Eigenschaft <bold>„{{title}}“</bold> erkannt hast.",
     "modalConfirm": "Melden",
     "modalCancel": "Abbrechen",
     "confirmationTitle": "Danke! Erfolgreich gemeldet!",
-    "confirmationDescription": "Ab morgen kannst du es wieder melden"
+    "confirmationDescription": "Ab morgen kannst du es wieder melden",
+    "introduction": "Deine Meldungen können uns helfen, unsere Vorhersagemodell zu verbessern.",
+    "loading": "Die Meldeeigenschaften werden geladen...",
+    "error": "Es ist beim Laden der Meldeeigenschaften ein Fehler aufgetreten:"
   }
 }

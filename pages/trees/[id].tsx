@@ -23,11 +23,15 @@ import { treeUrlSlugToId } from '@lib/utils/urlUtil'
 import { getLevelLabel } from '@lib/getLevelLabel'
 import { ForecastViz } from '@components/ForecastViz'
 import { addDays } from 'date-fns'
+import { FeedbackRequestsList } from '@components/FeedbackRequestsList'
+import csrf from '@lib/api/csrf'
+import { useForecastData } from '@lib/hooks/useForecastData'
 
 interface TreePageComponentPropType {
   treeData: TreeDataType
   latitude?: number
   longitude?: number
+  csrfToken: string
 }
 
 type TreePageWithLayout = NextPage<TreePageComponentPropType> & {
@@ -37,21 +41,32 @@ type TreePageWithLayout = NextPage<TreePageComponentPropType> & {
   ) => ReactNode
 }
 
-// eslint-disable-next-line @typescript-eslint/require-await
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+type CsrfTokenType = string
+
+export const getServerSideProps: GetServerSideProps<
+  TreePageComponentPropType
+> = async ({ params, req, res }) => {
   try {
+    await csrf(req, res)
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //@ts-ignore
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+    const csrfToken = req.csrfToken() as CsrfTokenType
+
     const treeId =
       typeof params?.id === 'string' ? treeUrlSlugToId(params.id) : null
 
     if (!treeId || Array.isArray(treeId)) return { notFound: true }
 
-    const treeData = await getTreeData(treeId)
+    const treeData = await getTreeData(treeId, csrfToken)
 
     if (!treeData || treeData.length !== 1)
       throw new Error('No tree found for this request')
 
     return {
       props: {
+        csrfToken,
         title: treeData[0].art_dtsch,
         treeData: treeData[0],
         latitude: treeData[0].lat,
@@ -125,7 +140,7 @@ const InfoList: FC<{
   )
 }
 
-const TreePage: TreePageWithLayout = ({ treeData }) => {
+const TreePage: TreePageWithLayout = ({ treeData, csrfToken }) => {
   const { t } = useTranslation('common')
   const { push } = useRouter()
   const { hasScrolledPastThreshold } = useHasScrolledPastThreshold({
@@ -136,7 +151,12 @@ const TreePage: TreePageWithLayout = ({ treeData }) => {
     data: nowcastData,
     error: nowcastError,
     isLoading: nowcastIsLoading,
-  } = useNowcastData(treeData.gml_id)
+  } = useNowcastData(treeData.gml_id, csrfToken)
+
+  const { data: forecastData, error: forecastError } = useForecastData(
+    treeData.gml_id,
+    csrfToken
+  )
 
   const avgLevel =
     nowcastData && nowcastData[3].value
@@ -215,17 +235,19 @@ const TreePage: TreePageWithLayout = ({ treeData }) => {
                   averageLevelId={avgLevel}
                 />
               )}
-              <ForecastViz
-                // TODO: Attention: this is sample data. Replace with actual data once we have access:
-                data={Array.from(Array(14)).map((_, i: number) => {
-                  return {
-                    date: addDays(Date.now(), i),
-                    waterSupplyLevelId: ['good', 'medium', 'critical'][
-                      Math.floor(Math.random() * 3)
-                    ] as WaterSupplyLevelType['id'],
-                  }
-                })}
-              />
+              {!forecastError && forecastData && forecastData?.length > 0 && (
+                <ForecastViz
+                  // TODO: Attention: this is sample data. Replace with actual data once we have access:
+                  data={Array.from(Array(14)).map((_, i: number) => {
+                    return {
+                      date: addDays(Date.now(), i),
+                      waterSupplyLevelId: ['good', 'medium', 'critical'][
+                        Math.floor(Math.random() * 3)
+                      ] as WaterSupplyLevelType['id'],
+                    }
+                  })}
+                />
+              )}
             </Carousel>
           </div>
           <TreeInfoHeader
@@ -237,7 +259,7 @@ const TreePage: TreePageWithLayout = ({ treeData }) => {
           />
           <div
             className={classNames(
-              'fixed w-screen top-0 z-20 border-gray-300 pointer-events-none',
+              'fixed w-screen top-0 z-50 border-gray-300 pointer-events-none',
               'transition-all',
               hasScrolledPastThreshold
                 ? ' opacity-1 shadow-lg border-b'
@@ -268,7 +290,12 @@ const TreePage: TreePageWithLayout = ({ treeData }) => {
               },
               {
                 name: t('treeView.tabs.1'),
-                content: <div>Here comes the requests</div>,
+                content: (
+                  <FeedbackRequestsList
+                    treeData={treeData}
+                    csrfToken={csrfToken}
+                  />
+                ),
               },
             ]}
           />
