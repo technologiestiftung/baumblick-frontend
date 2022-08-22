@@ -2,13 +2,13 @@ import { render, screen } from '@testing-library/react'
 import { SuctionTensionViz } from '.'
 
 describe('SuctionTensionViz', () => {
-  test('renders all levels and average circle', () => {
+  test('renders all statuses and average circle', () => {
     render(
       <SuctionTensionViz
-        depth30LevelId={'critical'}
-        depth60LevelId={'good'}
-        depth90LevelId={'medium'}
-        averageLevelId={'medium'}
+        depth30StatusId={'critical'}
+        depth60StatusId={'good'}
+        depth90StatusId={'medium'}
+        averageStatusId={'medium'}
       />
     )
 
@@ -36,10 +36,10 @@ describe('SuctionTensionViz', () => {
   test('falls back to gray colors without provided values', () => {
     render(
       <SuctionTensionViz
-        depth30LevelId={'critical'}
-        depth60LevelId={undefined}
-        depth90LevelId={undefined}
-        averageLevelId={undefined}
+        depth30StatusId={'critical'}
+        depth60StatusId={undefined}
+        depth90StatusId={undefined}
+        averageStatusId={undefined}
       />
     )
 

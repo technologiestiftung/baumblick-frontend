@@ -1,4 +1,4 @@
-import { WATER_SUPPLY_LEVELS } from '@lib/utils/mapSuctionTensionToLevel'
+import { WATER_SUPPLY_STATUSES } from '@lib/utils/mapSuctionTensionToStatus'
 import { LayerSpecification, SourceSpecification } from 'maplibre-gl'
 import colors from '../../style/colors'
 
@@ -35,10 +35,10 @@ const CIRCLE_STROKE_WIDTH = {
  * @returns (string | number)[]
  */
 const getColorScale = (idSuffix = ''): (string | number)[] => {
-  return WATER_SUPPLY_LEVELS.flatMap<string | number>((levelItem) => {
+  return WATER_SUPPLY_STATUSES.flatMap<string | number>((statusItem) => {
     return [
-      colors.scale[`${levelItem.id}${idSuffix}` as keyof typeof colors.scale],
-      levelItem.suctionTensionRange[1],
+      colors.scale[`${statusItem.id}${idSuffix}` as keyof typeof colors.scale],
+      statusItem.suctionTensionRange[1],
     ]
   }).slice(0, -1) // Removes the last number value because it not needed anymore
 }

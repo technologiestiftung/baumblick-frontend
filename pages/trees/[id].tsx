@@ -7,9 +7,9 @@ import { useNowcastData } from '@lib/hooks/useNowcastData'
 import { TreeInfoHeader } from '@components/TreeInfoHeader'
 import { DataListItem } from '@components/DataListItem'
 import {
-  mapSuctionTensionToLevel,
-  WaterSupplyLevelType,
-} from '@lib/utils/mapSuctionTensionToLevel'
+  mapSuctionTensionToStatus,
+  WaterSupplyStatusType,
+} from '@lib/utils/mapSuctionTensionToStatus'
 import { SuctionTensionViz } from '@components/SuctionTensionViz'
 import { useRouter } from 'next/router'
 import { Cross as CrossIcon } from '@components/Icons'
@@ -18,9 +18,9 @@ import { Carousel } from '@components/Carousel'
 import { NowcastDataType } from '@lib/requests/getNowcastData'
 import { Tabs } from '@components/Tabs'
 import useTranslation from 'next-translate/useTranslation'
-import { getClassesByScaleId } from '@lib/utils/getClassesByScaleId'
+import { getClassesByStatusId } from '@lib/utils/getClassesByStatusId'
 import { treeUrlSlugToId } from '@lib/utils/urlUtil'
-import { getLevelLabel } from '@lib/getLevelLabel'
+import { getStatusLabel } from '@lib/utils/getStatusLabel'
 import { ForecastViz } from '@components/ForecastViz'
 import { addDays } from 'date-fns'
 import { FeedbackRequestsList } from '@components/FeedbackRequestsList'
@@ -87,19 +87,19 @@ const InfoList: FC<{
   nowcastIsLoading: boolean
   nowcastError: Error | null
 }> = ({ treeData, nowcastData, nowcastIsLoading, nowcastError }) => {
-  const levelIdAverage =
+  const averageStatusId =
     nowcastData &&
     !nowcastIsLoading &&
     !nowcastError &&
     nowcastData[3].value &&
-    mapSuctionTensionToLevel(nowcastData[3].value)?.id
+    mapSuctionTensionToStatus(nowcastData[3].value)?.id
 
   return (
     <ul className="z-10 relative bg-white">
       <DataListItem
         title="Wasserversorgung"
         subtitle="⌀ aus 30, 60, 90 cm Tiefe"
-        value={levelIdAverage ? getLevelLabel(levelIdAverage) : '-'}
+        value={averageStatusId ? getStatusLabel(averageStatusId) : '-'}
       />
       <DataListItem
         title="Regenmenge"
@@ -160,9 +160,9 @@ const TreePage: TreePageWithLayout = ({ treeData, csrfToken }) => {
 
   const avgLevel =
     nowcastData && nowcastData[3].value
-      ? mapSuctionTensionToLevel(nowcastData[3].value)?.id
+      ? mapSuctionTensionToStatus(nowcastData[3].value)?.id
       : undefined
-  const circleColorClasses = getClassesByScaleId(avgLevel)
+  const circleColorClasses = getClassesByStatusId(avgLevel)
 
   return (
     <div id="inidividual-tree-container">
@@ -217,22 +217,22 @@ const TreePage: TreePageWithLayout = ({ treeData, csrfToken }) => {
             <Carousel dotsClass="slick-dots w-2/6 md:w-1/4 mx-auto">
               {!nowcastError && (
                 <SuctionTensionViz
-                  depth30LevelId={
+                  depth30StatusId={
                     nowcastData && nowcastData[0].value
-                      ? mapSuctionTensionToLevel(nowcastData[0].value)?.id
+                      ? mapSuctionTensionToStatus(nowcastData[0].value)?.id
                       : undefined
                   }
-                  depth60LevelId={
+                  depth60StatusId={
                     nowcastData && nowcastData[1].value
-                      ? mapSuctionTensionToLevel(nowcastData[1].value)?.id
+                      ? mapSuctionTensionToStatus(nowcastData[1].value)?.id
                       : undefined
                   }
-                  depth90LevelId={
+                  depth90StatusId={
                     nowcastData && nowcastData[2].value
-                      ? mapSuctionTensionToLevel(nowcastData[2].value)?.id
+                      ? mapSuctionTensionToStatus(nowcastData[2].value)?.id
                       : undefined
                   }
-                  averageLevelId={avgLevel}
+                  averageStatusId={avgLevel}
                 />
               )}
               {!forecastError && forecastData && forecastData?.length > 0 && (
@@ -241,9 +241,9 @@ const TreePage: TreePageWithLayout = ({ treeData, csrfToken }) => {
                   data={Array.from(Array(14)).map((_, i: number) => {
                     return {
                       date: addDays(Date.now(), i),
-                      waterSupplyLevelId: ['good', 'medium', 'critical'][
+                      waterSupplyStatusId: ['good', 'medium', 'critical'][
                         Math.floor(Math.random() * 3)
-                      ] as WaterSupplyLevelType['id'],
+                      ] as WaterSupplyStatusType['id'],
                     }
                   })}
                 />

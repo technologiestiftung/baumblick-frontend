@@ -1,19 +1,19 @@
-import { getLevelLabel } from '@lib/getLevelLabel'
-import { WaterSupplyLevelType } from '@lib/utils/mapSuctionTensionToLevel'
+import { getStatusLabel } from '@lib/utils/getStatusLabel'
+import { WaterSupplyStatusType } from '@lib/utils/mapSuctionTensionToStatus'
 import classNames from 'classnames'
 import { FC } from 'react'
 import colors from '../../style/colors'
 
 export const AverageCircle: FC<{
-  levelId: WaterSupplyLevelType['id'] | undefined
-}> = ({ levelId }) => (
+  statusId: WaterSupplyStatusType['id'] | undefined
+}> = ({ statusId }) => (
   <div
     style={{
-      backgroundColor: levelId
-        ? colors.scale[levelId as keyof typeof colors.scale]
+      backgroundColor: statusId
+        ? colors.scale[statusId as keyof typeof colors.scale]
         : colors.gray['300'],
-      borderColor: levelId
-        ? colors.scale[`${levelId}-dark` as keyof typeof colors.scale]
+      borderColor: statusId
+        ? colors.scale[`${statusId}-dark` as keyof typeof colors.scale]
         : colors.gray['400'],
     }}
     className={classNames(
@@ -22,7 +22,7 @@ export const AverageCircle: FC<{
       'flex justify-center items-center'
     )}
     aria-label={`Durschnittliche Wasserversorgung: ${
-      levelId ? getLevelLabel(levelId) || '' : 'unbekannt'
+      statusId ? getStatusLabel(statusId) || '' : 'unbekannt'
     }`}
   >
     <span
@@ -32,7 +32,7 @@ export const AverageCircle: FC<{
         'px-2 py-1'
       )}
     >
-      ⌀ <b className="ml-1 pr-1">{levelId ? getLevelLabel(levelId) : '-'}</b>
+      ⌀ <b className="ml-1 pr-1">{statusId ? getStatusLabel(statusId) : '-'}</b>
     </span>
   </div>
 )

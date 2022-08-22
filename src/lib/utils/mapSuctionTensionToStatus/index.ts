@@ -1,12 +1,12 @@
 export type WaterSupplyLabelType = 'Gut' | 'Mäßig' | 'Kritisch'
 
-export interface WaterSupplyLevelType {
+export interface WaterSupplyStatusType {
   suctionTensionRange: [number, number]
   label: WaterSupplyLabelType
   id: 'good' | 'medium' | 'critical'
 }
 
-export const WATER_SUPPLY_LEVELS: WaterSupplyLevelType[] = [
+export const WATER_SUPPLY_STATUSES: WaterSupplyStatusType[] = [
   {
     suctionTensionRange: [0, 25],
     label: 'Gut',
@@ -28,14 +28,14 @@ export const WATER_SUPPLY_LEVELS: WaterSupplyLevelType[] = [
  * Maps a real suction tension ("Saugspannung") value (usually between 0 and 240)
  * to one of the "levels" we have defined for the scale.
  * @param suctionTensionValue number
- * @returns WaterSupplyLevelType | undefined
+ * @returns WaterSupplyStatusType | undefined
  */
-export const mapSuctionTensionToLevel = (
+export const mapSuctionTensionToStatus = (
   suctionTensionValue: number
-): WaterSupplyLevelType | undefined => {
-  return WATER_SUPPLY_LEVELS.find((levelItem) => {
+): WaterSupplyStatusType | undefined => {
+  return WATER_SUPPLY_STATUSES.find((statusItem) => {
     const [minSuctionTensionValue, maxSuctionTensionValue] =
-      levelItem.suctionTensionRange
+      statusItem.suctionTensionRange
     return (
       suctionTensionValue > minSuctionTensionValue &&
       suctionTensionValue <= maxSuctionTensionValue

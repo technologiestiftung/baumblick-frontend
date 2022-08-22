@@ -1,4 +1,4 @@
-import { WaterSupplyLevelType } from '@lib/utils/mapSuctionTensionToLevel'
+import { WaterSupplyStatusType } from '@lib/utils/mapSuctionTensionToStatus'
 import { Story, Meta } from '@storybook/react'
 import { addDays } from 'date-fns'
 
@@ -21,9 +21,9 @@ Default.args = {
   data: Array.from(Array(14)).map((_, i: number) => {
     return {
       date: addDays(Date.now(), i),
-      waterSupplyLevelId: ['good', 'medium', 'critical'][
+      waterSupplyStatusId: ['good', 'medium', 'critical'][
         Math.floor(Math.random() * 3)
-      ] as WaterSupplyLevelType['id'],
+      ] as WaterSupplyStatusType['id'],
     }
   }),
 }

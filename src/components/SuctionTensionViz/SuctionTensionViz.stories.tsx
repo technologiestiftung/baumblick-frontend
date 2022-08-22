@@ -14,14 +14,14 @@ const Template: Story<SuctionTensionVizType> = (props) => (
 export const Default = Template.bind({})
 
 Default.args = {
-  depth30LevelId: 'critical',
-  depth60LevelId: 'good',
-  depth90LevelId: 'good',
-  averageLevelId: 'medium',
+  depth30StatusId: 'critical',
+  depth60StatusId: 'good',
+  depth90StatusId: 'good',
+  averageStatusId: 'medium',
 }
 
 export const WithMissingLevels = Template.bind({})
 
 WithMissingLevels.args = {
-  depth30LevelId: 'good',
+  depth30StatusId: 'good',
 }

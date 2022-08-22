@@ -3,8 +3,8 @@ import { FC, useEffect, useState } from 'react'
 import useTranslation from 'next-translate/useTranslation'
 import ReactDOM from 'react-dom'
 import { Pill } from '@components/Pill'
-import { getClassesByScaleId } from '@lib/utils/getClassesByScaleId'
-import { WaterSupplyLevelType } from '@lib/utils/mapSuctionTensionToLevel'
+import { getClassesByStatusId } from '@lib/utils/getClassesByStatusId'
+import { WaterSupplyStatusType } from '@lib/utils/mapSuctionTensionToStatus'
 
 export interface SuctionTensionLegendType {
   hasShadow?: boolean
@@ -62,7 +62,7 @@ export const SuctionTensionLegend: FC<SuctionTensionLegendType> = ({
                     className={classNames(
                       'border',
                       Object.values(
-                        getClassesByScaleId(id as WaterSupplyLevelType['id'])
+                        getClassesByStatusId(id as WaterSupplyStatusType['id'])
                       )
                     )}
                   />

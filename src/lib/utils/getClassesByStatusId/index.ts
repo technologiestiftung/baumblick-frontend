@@ -1,7 +1,7 @@
-import { WaterSupplyLevelType } from '../mapSuctionTensionToLevel'
+import { WaterSupplyStatusType } from '../mapSuctionTensionToStatus'
 
-export const getClassesByScaleId = (
-  id: WaterSupplyLevelType['id'] | undefined
+export const getClassesByStatusId = (
+  id: WaterSupplyStatusType['id'] | undefined
 ): {
   bg: string
   border: string

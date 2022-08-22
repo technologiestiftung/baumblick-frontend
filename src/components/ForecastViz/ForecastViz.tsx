@@ -1,11 +1,11 @@
-import { getClassesByScaleId } from '@lib/utils/getClassesByScaleId'
-import { WaterSupplyLevelType } from '@lib/utils/mapSuctionTensionToLevel'
+import { getClassesByStatusId } from '@lib/utils/getClassesByStatusId'
+import { WaterSupplyStatusType } from '@lib/utils/mapSuctionTensionToStatus'
 import classNames from 'classnames'
 import { format, isToday } from 'date-fns'
 import { FC } from 'react'
 
 interface DataItem {
-  waterSupplyLevelId: WaterSupplyLevelType['id']
+  waterSupplyStatusId: WaterSupplyStatusType['id']
   date: Date
 }
 
@@ -35,7 +35,7 @@ export const ForecastViz: FC<ForecastVizPropType> = ({ data }) => {
               className={classNames(
                 'relative flex justify-center items-end',
                 'overflow-visible',
-                getClassesByScaleId(dataItem.waterSupplyLevelId).bg
+                getClassesByStatusId(dataItem.waterSupplyStatusId).bg
               )}
             >
               <span
