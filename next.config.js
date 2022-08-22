@@ -16,7 +16,10 @@ module.exports = nextTranslate({
 })
 
 function testEnvVars() {
-  console.info(process.env.NEXT_PUBLIC_SUPABASE_SDK_URL)
+  console.info(
+    'NEXT_PUBLIC_SUPABASE_SDK_URL',
+    process.env.NEXT_PUBLIC_SUPABASE_SDK_URL
+  )
 }
 
 testEnvVars()
