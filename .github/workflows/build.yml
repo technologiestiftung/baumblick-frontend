@@ -13,14 +13,11 @@ jobs:
     if: "!contains(github.event.head_commit.message, 'skip ci')"
     environment: Preview
     env:
-      NEXT_PUBLIC_MAPTILER_KEY: ${{secrets.NEXT_PUBLIC_MAPTILER_KEY}}
       NEXT_PUBLIC_TREE_TILES_URL: ${{secrets.NEXT_PUBLIC_TREE_TILES_URL}}
       NEXT_PUBLIC_MAPTILER_BASEMAP_URL: ${{secrets.NEXT_PUBLIC_MAPTILER_BASEMAP_URL}}
       NEXT_PUBLIC_MATOMO_URL: ${{secrets.NEXT_PUBLIC_MATOMO_URL}}
-      NEXT_PUBLIC_MATOMO_SITE_ID: ${{secrets.NEXT_PUBLIC_MATOMO_SITE_ID}}
-      NEXT_PUBLIC_SUPABASE_PASSTHROUGH_URL: ${{secrets.NEXT_PUBLIC_SUPABASE_PASSTHROUGH_URL}}
       NEXT_PUBLIC_SUPABASE_SDK_URL: ${{secrets.NEXT_PUBLIC_SUPABASE_SDK_URL}}
-      NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY}}
+      NEXT_PUBLIC_BASE_URL: ${{secrets.NEXT_PUBLIC_BASE_URL}}
     steps:
       - uses: actions/checkout@v3
       - name: Read .nvmrc
