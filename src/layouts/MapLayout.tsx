@@ -78,7 +78,6 @@ export const MapLayout: FC<MapLayoutType> = ({
           isMinimized={isMinimized}
         />
         <SuctionTensionLegend
-          collapsable={true}
           hasShadow={true}
           className={classNames(
             'transition-opacity',

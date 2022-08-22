@@ -21,15 +21,3 @@ Default.parameters = {
   },
 }
 Default.args = {}
-
-export const Collapsed = Template.bind({})
-Collapsed.parameters = {
-  nextRouter: {
-    query: {},
-    pathname: '/map',
-  },
-}
-Collapsed.args = {
-  collapsable: true,
-  initiallyCollapsed: true,
-}
