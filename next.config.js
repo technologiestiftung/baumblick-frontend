@@ -14,3 +14,9 @@ const mdx = withMDX({
 module.exports = nextTranslate({
   ...mdx,
 })
+
+function testEnvVars() {
+  console.info(process.env.NEXT_PUBLIC_SUPABASE_SDK_URL)
+}
+
+testEnvVars()
