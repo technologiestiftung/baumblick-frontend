@@ -4,7 +4,7 @@ import colors from '../src/style/colors'
 
 const getManifest = ({
   siteTitle = 'TreeWatch Berlin',
-  themeTextColor = colors['scale']['3'],
+  themeTextColor = colors['scale']['medium'],
   themeBackgroundColor = '#ffffff',
 }): string => `{
     "name": "${siteTitle}",
