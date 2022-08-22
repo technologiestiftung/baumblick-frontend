@@ -161,8 +161,7 @@ const TreePage: TreePageWithLayout = ({ treeData, csrfToken }) => {
       <div
         className={classNames(
           'max-w-3xl mx-auto',
-          'grid grid-cols-1 grid-rows-[124px,1fr] gap-0',
-          'md:border-l md:border-r border-gray-200'
+          'grid grid-cols-1 grid-rows-[124px,1fr] gap-0'
         )}
       >
         <button
@@ -193,7 +192,8 @@ const TreePage: TreePageWithLayout = ({ treeData, csrfToken }) => {
         </button>
         <div
           className={classNames(
-            'bg-white',
+            'bg-white rounded-t-2xl',
+            'md:border-l md:border-r border-gray-200',
             'row-start-2 row-span-1',
             'grid grid-cols-1 grid-rows-auto',
             'motion-safe:animate-slide-up'
