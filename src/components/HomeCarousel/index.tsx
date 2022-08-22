@@ -1,6 +1,6 @@
 import { Carousel } from '@components/Carousel'
+import { Pill } from '@components/Pill'
 import { SuctionTensionScale } from '@components/SuctionTensionScale'
-import classNames from 'classnames'
 import Trans from 'next-translate/Trans'
 import useTranslation from 'next-translate/useTranslation'
 import { FC } from 'react'
@@ -24,19 +24,6 @@ const HomeSlide: FC<HomeCarouselPropType> = ({
       </p>
     </div>
   </div>
-)
-
-const Pill: FC<{ className?: string }> = ({ className = '', children }) => (
-  <span
-    className={classNames(
-      className,
-      'h-4 w-4 font-sans text-center font-bold',
-      'inline-flex place-content-center leading-tight',
-      'text-xs text-gray-900/50 rounded-full'
-    )}
-  >
-    {children}
-  </span>
 )
 
 export const HomeCarousel: FC = () => {
