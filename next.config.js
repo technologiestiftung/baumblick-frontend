@@ -26,7 +26,7 @@ module.exports = nextTranslate({
   ...mdx,
   async headers() {
     const baseUrl = getUrlWithoutPath(process.env.NEXT_PUBLIC_BASE_URL)
-    const vercelUrl = getUrlWithoutPath(process.env.VERCEL_URL)
+    const vercelUrl = getUrlWithoutPath(`https://${process.env.VERCEL_URL}`)
     const matomoUrl = getUrlWithoutPath(process.env.NEXT_PUBLIC_MATOMO_URL)
     const tilesUrl = getUrlWithoutPath(process.env.NEXT_PUBLIC_TREE_TILES_URL)
     const basemapUrl = getUrlWithoutPath(
