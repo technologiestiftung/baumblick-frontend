@@ -1,5 +1,6 @@
 import { MapLayout } from '@layouts/MapLayout'
 import { mapRawQueryToState } from '@lib/utils/queryUtil'
+import { treeIdToUrlSlug } from '@lib/utils/urlUtil'
 import { GetServerSideProps, NextPage } from 'next'
 import router from 'next/router'
 import { ReactElement, ReactNode } from 'react'
@@ -33,7 +34,10 @@ MapPage.getLayout = function getLayout(page, props) {
         longitude={props.query?.longitude || undefined}
         zoom={props.query?.zoom || undefined}
         onTreeSelect={(treeId) => {
-          void router.push({ pathname: '/trees/[id]', query: { id: treeId } })
+          void router.push({
+            pathname: '/trees/[id]',
+            query: { id: treeIdToUrlSlug(treeId) },
+          })
         }}
         isMinimized={false}
       />

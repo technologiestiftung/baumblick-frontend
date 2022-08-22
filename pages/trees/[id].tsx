@@ -15,11 +15,16 @@ import { Carousel } from '@components/Carousel'
 import { NowcastDataType } from '@lib/requests/getNowcastData'
 import { Tabs } from '@components/Tabs'
 import useTranslation from 'next-translate/useTranslation'
+import { getScaleClassesByLevel } from '@lib/utils/getScaleClassesByLevel'
+import { treeUrlSlugToId } from '@lib/utils/urlUtil'
+import { FeedbackRequestsList } from '@components/FeedbackRequestsList'
+import csrf from '@lib/api/csrf'
 
 interface TreePageComponentPropType {
   treeData: TreeDataType
   latitude?: number
   longitude?: number
+  csrfToken: string
 }
 
 type TreePageWithLayout = NextPage<TreePageComponentPropType> & {
@@ -29,20 +34,32 @@ type TreePageWithLayout = NextPage<TreePageComponentPropType> & {
   ) => ReactNode
 }
 
-// eslint-disable-next-line @typescript-eslint/require-await
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+type CsrfTokenType = string
+
+export const getServerSideProps: GetServerSideProps<
+  TreePageComponentPropType
+> = async ({ params, req, res }) => {
   try {
-    const treeId = typeof params?.id === 'string' ? params.id : null
+    await csrf(req, res)
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //@ts-ignore
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+    const csrfToken = req.csrfToken() as CsrfTokenType
+
+    const treeId =
+      typeof params?.id === 'string' ? treeUrlSlugToId(params.id) : null
 
     if (!treeId || Array.isArray(treeId)) return { notFound: true }
 
-    const treeData = await getTreeData(treeId)
+    const treeData = await getTreeData(treeId, csrfToken)
 
     if (!treeData || treeData.length !== 1)
       throw new Error('No tree found for this request')
 
     return {
       props: {
+        csrfToken,
         title: treeData[0].art_dtsch,
         treeData: treeData[0],
         latitude: treeData[0].lat,
@@ -54,28 +71,6 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     return {
       notFound: true,
     }
-  }
-}
-
-const getRingClassesByLevel = (
-  level: number | undefined
-): {
-  bg: string
-  border: string
-} => {
-  switch (level) {
-    case 1:
-      return { bg: 'bg-scale-1', border: 'border-scale-1-dark' }
-    case 2:
-      return { bg: 'bg-scale-2', border: 'border-scale-2-dark' }
-    case 3:
-      return { bg: 'bg-scale-3', border: 'border-scale-3-dark' }
-    case 4:
-      return { bg: 'bg-scale-4', border: 'border-scale-4-dark' }
-    case 5:
-      return { bg: 'bg-scale-5', border: 'border-scale-5-dark' }
-    default:
-      return { bg: 'bg-gray-300', border: 'border-gray-400' }
   }
 }
 
@@ -136,7 +131,7 @@ const InfoList: FC<{
   </ul>
 )
 
-const TreePage: TreePageWithLayout = ({ treeData }) => {
+const TreePage: TreePageWithLayout = ({ treeData, csrfToken }) => {
   const { t } = useTranslation('common')
   const { push } = useRouter()
   const { hasScrolledPastThreshold } = useHasScrolledPastThreshold({
@@ -153,7 +148,7 @@ const TreePage: TreePageWithLayout = ({ treeData }) => {
     nowcastData && nowcastData[3].value
       ? mapSuctionTensionToLevel(nowcastData[3].value)
       : undefined
-  const circleColorClasses = getRingClassesByLevel(avgLevel)
+  const circleColorClasses = getScaleClassesByLevel(avgLevel)
 
   return (
     <div id="inidividual-tree-container">
@@ -271,7 +266,12 @@ const TreePage: TreePageWithLayout = ({ treeData }) => {
               },
               {
                 name: t('treeView.tabs.1'),
-                content: <div>Here comes the requests</div>,
+                content: (
+                  <FeedbackRequestsList
+                    treeData={treeData}
+                    csrfToken={csrfToken}
+                  />
+                ),
               },
             ]}
           />
