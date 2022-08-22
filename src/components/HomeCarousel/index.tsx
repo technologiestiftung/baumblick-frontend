@@ -30,13 +30,13 @@ export const HomeCarousel: FC = () => {
   const formattingComponents = {
     bold: <strong />,
     italic: <em />,
-    '1': (
+    good: (
       <Pill className="translate-y-0.5 bg-scale-good border-scale-good-dark" />
     ),
-    '2': (
+    medium: (
       <Pill className="translate-y-0.5 bg-scale-medium border-scale-medium-dark" />
     ),
-    '3': (
+    critical: (
       <Pill className="translate-y-0.5 bg-scale-critical border-scale-critical-dark" />
     ),
   }

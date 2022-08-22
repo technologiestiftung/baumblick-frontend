@@ -13,7 +13,7 @@
     "ctaLoading": "Lädt...",
     "slides": {
       "1": {
-        "text": "Auf dieser Karte wird angezeigt, wie gut die Berliner Bäume mit Wasser versorgt sind (<1/> Gut, <2/> Mäßig, <3/> Kritisch)",
+        "text": "Auf dieser Karte wird angezeigt, wie gut die Berliner Bäume mit Wasser versorgt sind (<good/> Gut, <medium/> Mäßig, <critical/> Kritisch)",
         "alt": "Ein Kartenausschnitt mit einigen farbigen Kreisen, die Bäume und deren Saugspannung darstellen"
       },
       "2": {
