@@ -13,13 +13,13 @@ const mdx = withMDX({
 
 const getUrlWithoutPath = (url) => {
   if (!url) return ''
-  try {
-    const newUrl = new URL(url)
-    return `${newUrl.protocol}//${newUrl.hostname}`
-  } catch (error) {
-    console.error(error)
-    return ''
-  }
+  // try {
+  const newUrl = new URL(url)
+  return `${newUrl.protocol}//${newUrl.hostname}`
+  // } catch (error) {
+  //   console.error(error)
+  //   return ''
+  // }
 }
 
 module.exports = nextTranslate({
