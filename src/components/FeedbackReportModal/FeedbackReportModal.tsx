@@ -70,7 +70,7 @@ export const FeedbackReportModal: FC<FeedbackReportModalPropType> = ({
             >
               <div
                 className={classNames(
-                  'bg-gray-100 w-full h-[120px] rounded-t-md overflow-hidden',
+                  'bg-gray-100 w-full h-[120px] rounded-t overflow-hidden',
                   !showImg && imageUrl && 'animate-pulse'
                 )}
               >
@@ -84,7 +84,7 @@ export const FeedbackReportModal: FC<FeedbackReportModalPropType> = ({
                   leaveTo="opacity-0"
                 >
                   <div
-                    className="w-full h-[120px] rounded-t-md bg-cover bg-center"
+                    className="w-full h-[120px] bg-cover bg-center"
                     style={{ backgroundImage: `url("${imageUrl || ''}")` }}
                   />
                 </Transition>
