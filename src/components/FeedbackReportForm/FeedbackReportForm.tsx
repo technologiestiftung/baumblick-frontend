@@ -61,7 +61,7 @@ export const FeedbackReportForm: FC<FeedbackReportFormPropType> = ({
       </div>
       <div
         className={classNames(
-          'w-full bg-gray-100 aspect-video rounded-l-md',
+          'w-full bg-gray-100 h-full rounded-l-md relative max-h-48',
           !showImg && imageUrl && 'animate-pulse'
         )}
       >
@@ -75,7 +75,7 @@ export const FeedbackReportForm: FC<FeedbackReportFormPropType> = ({
           leaveTo="opacity-0"
         >
           <div
-            className="w-full aspect-video rounded-l-md bg-cover bg-center"
+            className="absolute z-0 inset-0 rounded-l-md bg-cover bg-center"
             style={{ backgroundImage: `url("${imageUrl || ''}")` }}
           />
         </Transition>

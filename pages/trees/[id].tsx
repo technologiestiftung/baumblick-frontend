@@ -246,7 +246,7 @@ const TreePage: TreePageWithLayout = ({ treeData, csrfToken }) => {
           />
           <div
             className={classNames(
-              'fixed w-screen top-0 z-20 border-gray-300 pointer-events-none',
+              'fixed w-screen top-0 z-50 border-gray-300 pointer-events-none',
               'transition-all',
               hasScrolledPastThreshold
                 ? ' opacity-1 shadow-lg border-b'
