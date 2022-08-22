@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { csrf } from 'src/lib/api/csrf'
 import { supabaseServiceRoleClient } from './_supabase-service-role-client'
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -13,7 +14,7 @@ export default async function handler(
         } catch (csrfError) {
           return res.status(401).json({ error: 'not authorized' })
         }
-        const body = JSON.parse(req.body) as Record<string, unknown>
+        const body = req.body as Record<string, unknown>
 
         if (
           'issue_type_id' in body &&

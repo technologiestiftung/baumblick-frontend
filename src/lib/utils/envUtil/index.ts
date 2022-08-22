@@ -1,6 +1,3 @@
-export const SUPABASE_PASSTHROUGH_API_URL =
-  process.env.NEXT_PUBLIC_SUPABASE_PASSTHROUGH_URL || ''
-
 export const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
 
 export const NEXT_PUBLIC_MAPTILER_KEY =

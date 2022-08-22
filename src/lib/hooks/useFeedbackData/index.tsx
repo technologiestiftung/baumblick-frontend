@@ -20,7 +20,10 @@ export interface IssueTypeType {
   alreadyReported: boolean
 }
 
-type UseFeedbackDataType = (treeId: string) => {
+type UseFeedbackDataType = (
+  treeId: string,
+  csrfToken: string
+) => {
   issues: IssueTypeType[] | null
   isLoading: boolean
   error: string | null
@@ -89,7 +92,7 @@ const getIfAlreadyReported = (issueTypeId: number, treeId: string): boolean => {
   return false
 }
 
-export const useFeedbackData: UseFeedbackDataType = (treeId) => {
+export const useFeedbackData: UseFeedbackDataType = (treeId, csrfToken) => {
   const {
     data,
     error: sdkError,
@@ -115,7 +118,7 @@ export const useFeedbackData: UseFeedbackDataType = (treeId) => {
     reportIssue: async (issueTypeId: number): Promise<void> => {
       setIssueError(null)
       try {
-        await reportIssue({ issueTypeId, treeId })
+        await reportIssue({ issueTypeId, treeId, csrfToken })
         window.localStorage.setItem(
           getLocalStorageKey(treeId, issueTypeId),
           new Date().toISOString()

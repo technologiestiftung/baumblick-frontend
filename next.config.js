@@ -12,22 +12,27 @@ const mdx = withMDX({
 })
 
 const getUrlWithoutPath = (url) => {
-  const newUrl = new URL(url)
-  return `${newUrl.protocol}//${newUrl.hostname}`
+  if (!url) return ''
+  try {
+    const newUrl = new URL(url)
+    return `${newUrl.protocol}//${newUrl.hostname}`
+  } catch (error) {
+    console.error(error)
+    return ''
+  }
 }
 
 module.exports = nextTranslate({
   ...mdx,
   async headers() {
+    const baseUrl = getUrlWithoutPath(process.env.NEXT_PUBLIC_BASE_URL)
+    const vercelUrl = getUrlWithoutPath(process.env.VERCEL_URL)
     const matomoUrl = getUrlWithoutPath(process.env.NEXT_PUBLIC_MATOMO_URL)
     const tilesUrl = getUrlWithoutPath(process.env.NEXT_PUBLIC_TREE_TILES_URL)
     const basemapUrl = getUrlWithoutPath(
       process.env.NEXT_PUBLIC_MAPTILER_BASEMAP_URL
     )
     const sdkUrl = getUrlWithoutPath(process.env.NEXT_PUBLIC_SUPABASE_SDK_URL)
-    const passthroughUrl = getUrlWithoutPath(
-      process.env.NEXT_PUBLIC_SUPABASE_PASSTHROUGH_URL
-    )
     return [
       {
         source: '/(.*)',
@@ -39,11 +44,29 @@ module.exports = nextTranslate({
               `script-src 'self' 'unsafe-eval'`,
               `style-src 'self' 'unsafe-inline'`,
               `font-src 'self' data:`,
-              `img-src 'self' ${matomoUrl} ${tilesUrl} ${basemapUrl} ${sdkUrl} data: blob:`,
+              `img-src 'self' ${[
+                baseUrl,
+                vercelUrl,
+                matomoUrl,
+                tilesUrl,
+                basemapUrl,
+                sdkUrl,
+              ]
+                .filter(Boolean)
+                .join(' ')} data: blob:`,
               `frame-ancestors 'none'`,
               `worker-src 'self' blob:`,
               `child-src 'self' blob:`,
-              `connect-src 'self' ${sdkUrl} ${tilesUrl} ${passthroughUrl} ${basemapUrl} ${matomoUrl}`,
+              `connect-src 'self' ${[
+                baseUrl,
+                vercelUrl,
+                sdkUrl,
+                tilesUrl,
+                basemapUrl,
+                matomoUrl,
+              ]
+                .filter(Boolean)
+                .join(' ')}`,
             ].join('; '),
           },
         ],

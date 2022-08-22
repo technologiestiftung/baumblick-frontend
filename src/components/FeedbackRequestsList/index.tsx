@@ -7,14 +7,17 @@ import { FC, useState } from 'react'
 
 interface FeedbackRequestsListPropType {
   treeData: TreeDataType
+  csrfToken: string
 }
 
 export const FeedbackRequestsList: FC<FeedbackRequestsListPropType> = ({
   treeData,
+  csrfToken,
 }) => {
   const { t } = useTranslation('common')
   const { issues, reportIssue, isLoading, error } = useFeedbackData(
-    treeData.gml_id
+    treeData.gml_id,
+    csrfToken
   )
   const [openedIssueModal, setOpenedIssueModal] =
     useState<IssueTypeType | null>(null)
