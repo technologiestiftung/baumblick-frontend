@@ -6,7 +6,10 @@ import { getTreeData, TreeDataType } from '@lib/requests/getTreeData'
 import { useNowcastData } from '@lib/hooks/useNowcastData'
 import { TreeInfoHeader } from '@components/TreeInfoHeader'
 import { DataListItem } from '@components/DataListItem'
-import { mapSuctionTensionToLevel } from '@lib/utils/mapSuctionTensionToLevel'
+import {
+  mapSuctionTensionToLevel,
+  WaterSupplyLevelType,
+} from '@lib/utils/mapSuctionTensionToLevel'
 import { SuctionTensionViz } from '@components/SuctionTensionViz'
 import { useRouter } from 'next/router'
 import { Cross as CrossIcon } from '@components/Icons'
@@ -18,6 +21,8 @@ import useTranslation from 'next-translate/useTranslation'
 import { getClassesByScaleId } from '@lib/utils/getClassesByScaleId'
 import { treeUrlSlugToId } from '@lib/utils/urlUtil'
 import { getLevelLabel } from '@lib/getLevelLabel'
+import { ForecastViz } from '@components/ForecastViz'
+import { addDays } from 'date-fns'
 
 interface TreePageComponentPropType {
   treeData: TreeDataType
@@ -210,7 +215,17 @@ const TreePage: TreePageWithLayout = ({ treeData }) => {
                   averageLevelId={avgLevel}
                 />
               )}
-              <div className="bg-scale-4 h-full">Bar chart</div>
+              <ForecastViz
+                // TODO: Attention: this is sample data. Replace with actual data once we have access:
+                data={Array.from(Array(14)).map((_, i: number) => {
+                  return {
+                    date: addDays(Date.now(), i),
+                    waterSupplyLevelId: ['good', 'medium', 'critical'][
+                      Math.floor(Math.random() * 3)
+                    ] as WaterSupplyLevelType['id'],
+                  }
+                })}
+              />
             </Carousel>
           </div>
           <TreeInfoHeader
