@@ -1,6 +1,5 @@
 import { Carousel } from '@components/Carousel'
 import { Pill } from '@components/Pill'
-import { SuctionTensionScale } from '@components/SuctionTensionScale'
 import Trans from 'next-translate/Trans'
 import useTranslation from 'next-translate/useTranslation'
 import { FC } from 'react'
@@ -31,10 +30,14 @@ export const HomeCarousel: FC = () => {
   const formattingComponents = {
     bold: <strong />,
     italic: <em />,
-    legend: <SuctionTensionScale />,
-    '1': <Pill className="bg-scale-good border-scale-good-dark">1</Pill>,
-    '5': (
-      <Pill className="bg-scale-critical border-scale-critical-dark">5</Pill>
+    '1': (
+      <Pill className="translate-y-0.5 bg-scale-good border-scale-good-dark" />
+    ),
+    '2': (
+      <Pill className="translate-y-0.5 bg-scale-medium border-scale-medium-dark" />
+    ),
+    '3': (
+      <Pill className="translate-y-0.5 bg-scale-critical border-scale-critical-dark" />
     ),
   }
   return (
@@ -102,17 +105,6 @@ export const HomeCarousel: FC = () => {
       >
         <Trans
           i18nKey="common:home.slides.6.text"
-          components={formattingComponents}
-        />
-      </HomeSlide>
-      <HomeSlide
-        img={{
-          url: '/images/home-slider/7.svg',
-          alt: t('home.slides.7.alt'),
-        }}
-      >
-        <Trans
-          i18nKey="common:home.slides.7.text"
           components={formattingComponents}
         />
       </HomeSlide>
