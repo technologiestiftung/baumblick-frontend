@@ -49,9 +49,12 @@
   },
   "legend": {
     "map": {
-      "title": "Saugspannung",
-      "start": "Gering",
-      "end": "Hoch"
+      "title": "Wasserversorgung",
+      "levels": {
+        "good": "Gut",
+        "medium": "Mäßig",
+        "critical": "Kritisch"
+      }
     }
   },
   "legal": {

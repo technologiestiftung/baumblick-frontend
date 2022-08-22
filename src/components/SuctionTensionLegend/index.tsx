@@ -2,7 +2,9 @@ import classNames from 'classnames'
 import { FC, useEffect, useState } from 'react'
 import useTranslation from 'next-translate/useTranslation'
 import ReactDOM from 'react-dom'
-import { SuctionTensionScale } from '@components/SuctionTensionScale'
+import { Pill } from '@components/Pill'
+import { getClassesByScaleId } from '@lib/utils/getClassesByScaleId'
+import { WaterSupplyLevelType } from '@lib/utils/mapSuctionTensionToLevel'
 
 export interface SuctionTensionLegendType {
   collapsable?: boolean
@@ -21,6 +23,8 @@ export const SuctionTensionLegend: FC<SuctionTensionLegendType> = ({
   const [isCollapsed, setIsCollapsed] = useState(initiallyCollapsed)
   const [bodyNode, setBodyNode] = useState<HTMLElement | null>(null)
 
+  const levels = t('legend.map.levels', {}, { returnObjects: true })
+
   useEffect(() => {
     const domNode = document.querySelector('body')
     if (!domNode) return
@@ -35,7 +39,7 @@ export const SuctionTensionLegend: FC<SuctionTensionLegendType> = ({
   return ReactDOM.createPortal(
     <div className="fixed w-full left-0 top-2 md:top-4 pointer-events-none">
       <div className="w-full max-w-3xl mx-auto">
-        <span
+        <div
           {...(collapsable
             ? { role: 'button', tabIndex: 0, onClick: toggleCollapsed }
             : {})}
@@ -43,7 +47,7 @@ export const SuctionTensionLegend: FC<SuctionTensionLegendType> = ({
             className,
             'group ml-2 md:ml-4 pointer-events-auto',
             'inline-block',
-            'w-[130px] min-w-[80px]',
+            'w-[150px] min-w-[80px]',
             collapsable && isCollapsed && 'translate-y-3',
             collapsable && 'w-full px-3',
             collapsable &&
@@ -58,35 +62,35 @@ export const SuctionTensionLegend: FC<SuctionTensionLegendType> = ({
             hasShadow && !isCollapsed && 'shadow-md'
           )}
         >
-          {!isCollapsed && (
-            <h2 className="w-full text-sm font-semibold">
-              {t('legend.map.title')}
-            </h2>
-          )}
-          <span
-            className={classNames(
-              'w-full',
-              'inline-block',
-              'rounded-full',
-              isCollapsed && 'ring-2 ring-white',
-              collapsable &&
-                isCollapsed &&
-                'group-focus:outline-none group-focus:ring-2 group-focus:ring-gray-900 group-focus:ring-offset-2 group-focus:ring-offset-white'
-            )}
-          >
-            <SuctionTensionScale className="w-full float-left" />
-          </span>
-          {!isCollapsed && (
-            <>
-              <span className="text-xs font-semibold text-gray-800">
-                {t('legend.map.start')}
-              </span>
-              <span className="text-xs font-semibold text-gray-800">
-                {t('legend.map.end')}
-              </span>
-            </>
-          )}
-        </span>
+          <h2 className="w-full text-sm font-semibold">
+            {t('legend.map.title')}
+          </h2>
+          <ul>
+            {Object.entries(levels).map(([id, label]) => {
+              return (
+                <li
+                  key={id}
+                  className={classNames(
+                    'mt-1 first-of-type:mt-0',
+                    'flex gap-2 items-center'
+                  )}
+                >
+                  <Pill
+                    className={classNames(
+                      'border',
+                      Object.values(
+                        getClassesByScaleId(id as WaterSupplyLevelType['id'])
+                      )
+                    )}
+                  />
+                  <span className="text-xs font-semibold text-gray-800">
+                    {label}
+                  </span>
+                </li>
+              )
+            })}
+          </ul>
+        </div>
       </div>
     </div>,
     bodyNode

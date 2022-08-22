@@ -10,14 +10,17 @@ describe('SuctionTensionLegend component', () => {
         <SuctionTensionLegend collapsable />
       </I18nProvider>
     )
-    const title = screen.getByText(/Saugspannung/i)
+    const title = screen.getByText(/Wasserversorgung/i)
     expect(title).toBeInTheDocument()
 
-    const min = screen.getByText(/Gering/i)
-    expect(min).toBeInTheDocument()
+    const good = screen.getByText(/Gut/i)
+    expect(good).toBeInTheDocument()
 
-    const max = screen.getByText(/Hoch/i)
-    expect(max).toBeInTheDocument()
+    const medium = screen.getByText(/Mäßig/i)
+    expect(medium).toBeInTheDocument()
+
+    const critical = screen.getByText(/Kritisch/i)
+    expect(critical).toBeInTheDocument()
 
     const button = screen.getByRole('button')
     expect(button).toBeInTheDocument()
