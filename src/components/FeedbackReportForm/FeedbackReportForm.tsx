@@ -1,5 +1,6 @@
 import { Button } from '@components/Button'
 import { Check } from '@components/Icons'
+import { Transition } from '@headlessui/react'
 import { useImageLoadsSuccessfully } from '@lib/hooks/useLoadImage'
 import classNames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
@@ -29,7 +30,7 @@ export const FeedbackReportForm: FC<FeedbackReportFormPropType> = ({
     <div
       className={classNames(
         'grid p-6 gap-x-6 gap-y-2 border-b border-gray-200',
-        showImg && 'pr-0 grid-cols-[8fr,5fr]'
+        'pr-0 grid-cols-[8fr,5fr]'
       )}
     >
       <div>
@@ -39,7 +40,7 @@ export const FeedbackReportForm: FC<FeedbackReportFormPropType> = ({
           <div
             className={classNames(
               'grid grid-cols-[1fr,24px] gap-x-6',
-              showImg && 'col-span-2 mr-6',
+              'col-span-2 mr-6',
               'mt-4'
             )}
           >
@@ -53,22 +54,32 @@ export const FeedbackReportForm: FC<FeedbackReportFormPropType> = ({
           </div>
         )}
         {!alreadyReported && (
-          <Button
-            onClick={onButtonClick}
-            className={classNames(showImg && 'col-span-2 mr-6 ', 'mt-4')}
-            primary
-          >
+          <Button onClick={onButtonClick} className="col-span-2 mt-6" primary>
             {t('feedback.reportButton', { title })}
           </Button>
         )}
       </div>
-      {showImg && (
-        <img
-          src={imageUrl}
-          alt={t('feedback.imageAlt', { title })}
-          className=" object-cover h-full rounded-l-md"
-        />
-      )}
+      <div
+        className={classNames(
+          'w-full bg-gray-100 aspect-video rounded-l-md',
+          !showImg && imageUrl && 'animate-pulse'
+        )}
+      >
+        <Transition
+          show={!!showImg}
+          enter="transition-opacity duration-500"
+          enterFrom="opacity-0  delay-1000"
+          enterTo="opacity-100"
+          leave="transition-opacity duration-150"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0"
+        >
+          <div
+            className="w-full aspect-video rounded-l-md bg-cover bg-center"
+            style={{ backgroundImage: `url("${imageUrl || ''}")` }}
+          />
+        </Transition>
+      </div>
     </div>
   )
 }
