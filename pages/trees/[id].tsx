@@ -16,6 +16,7 @@ import { NowcastDataType } from '@lib/requests/getNowcastData'
 import { Tabs } from '@components/Tabs'
 import useTranslation from 'next-translate/useTranslation'
 import { getScaleClassesByLevel } from '@lib/utils/getScaleClassesByLevel'
+import { treeUrlSlugToId } from '@lib/utils/urlUtil'
 import { FeedbackRequestsList } from '@components/FeedbackRequestsList'
 
 interface TreePageComponentPropType {
@@ -34,7 +35,8 @@ type TreePageWithLayout = NextPage<TreePageComponentPropType> & {
 // eslint-disable-next-line @typescript-eslint/require-await
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   try {
-    const treeId = typeof params?.id === 'string' ? params.id : null
+    const treeId =
+      typeof params?.id === 'string' ? treeUrlSlugToId(params.id) : null
 
     if (!treeId || Array.isArray(treeId)) return { notFound: true }
 
