@@ -17,6 +17,7 @@ import { Tabs } from '@components/Tabs'
 import useTranslation from 'next-translate/useTranslation'
 import { getClassesByScaleId } from '@lib/utils/getClassesByScaleId'
 import { treeUrlSlugToId } from '@lib/utils/urlUtil'
+import { getLevelLabel } from '@lib/getLevelLabel'
 
 interface TreePageComponentPropType {
   treeData: TreeDataType
@@ -65,57 +66,59 @@ const InfoList: FC<{
   nowcastData: NowcastDataType[] | null
   nowcastIsLoading: boolean
   nowcastError: Error | null
-}> = ({ treeData, nowcastData, nowcastIsLoading, nowcastError }) => (
-  <ul className="z-10 relative bg-white">
-    <DataListItem
-      title="Saugspannung"
-      subtitle="⌀ aus 30, 60, 90 cm Tiefe"
-      value={
-        nowcastData &&
-        !nowcastIsLoading &&
-        !nowcastError &&
-        nowcastData[3].value
-          ? mapSuctionTensionToLevel(nowcastData[3].value)?.id
-          : '-'
-      }
-    />
-    <DataListItem
-      title="Regenmenge"
-      subtitle="Letzte 14 Tage"
-      // TODO: Attention, this is dummy data.
-      // Update when adding access to real data.
-      value={`${0} l`}
-    />
-    <DataListItem
-      title="Baumscheibe"
-      subtitle="Unversiegelter Bereich um den Stamm"
-      // TODO: Attention, this is dummy data.
-      // Update when adding access to real data.
-      value={`${3.1} qm`}
-    />
-    <DataListItem
-      title="Verschattung"
-      subtitle="Anteil an Schattenzeit pro Tag"
-      // TODO: Attention, this is dummy data.
-      // Update when adding access to real data.
-      value={`${65} %`}
-    />
-    <DataListItem
-      title="Gießwassermenge"
-      subtitle="Letzte 14 Tage"
-      // TODO: Attention, this is dummy data.
-      // Update when adding access to real data.
-      value={`${25} l`}
-    />
-    {treeData?.stammumfg && (
+}> = ({ treeData, nowcastData, nowcastIsLoading, nowcastError }) => {
+  const levelIdAverage =
+    nowcastData &&
+    !nowcastIsLoading &&
+    !nowcastError &&
+    nowcastData[3].value &&
+    mapSuctionTensionToLevel(nowcastData[3].value)?.id
+
+  return (
+    <ul className="z-10 relative bg-white">
       <DataListItem
-        title="Stammumfang"
-        subtitle="An der weitesten Stelle"
-        value={`${treeData.stammumfg} cm`}
+        title="Wasserversorgung"
+        subtitle="⌀ aus 30, 60, 90 cm Tiefe"
+        value={levelIdAverage ? getLevelLabel(levelIdAverage) : '-'}
       />
-    )}
-  </ul>
-)
+      <DataListItem
+        title="Regenmenge"
+        subtitle="Letzte 14 Tage"
+        // TODO: Attention, this is dummy data.
+        // Update when adding access to real data.
+        value={`${0} l`}
+      />
+      <DataListItem
+        title="Baumscheibe"
+        subtitle="Unversiegelter Bereich um den Stamm"
+        // TODO: Attention, this is dummy data.
+        // Update when adding access to real data.
+        value={`${3.1} qm`}
+      />
+      <DataListItem
+        title="Verschattung"
+        subtitle="Anteil an Schattenzeit pro Tag"
+        // TODO: Attention, this is dummy data.
+        // Update when adding access to real data.
+        value={`${65} %`}
+      />
+      <DataListItem
+        title="Gießwassermenge"
+        subtitle="Letzte 14 Tage"
+        // TODO: Attention, this is dummy data.
+        // Update when adding access to real data.
+        value={`${25} l`}
+      />
+      {treeData?.stammumfg && (
+        <DataListItem
+          title="Stammumfang"
+          subtitle="An der weitesten Stelle"
+          value={`${treeData.stammumfg} cm`}
+        />
+      )}
+    </ul>
+  )
+}
 
 const TreePage: TreePageWithLayout = ({ treeData }) => {
   const { t } = useTranslation('common')
