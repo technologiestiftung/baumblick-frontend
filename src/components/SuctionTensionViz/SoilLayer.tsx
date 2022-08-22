@@ -25,7 +25,7 @@ export const SoilLayer: FC<{
         'flex items-center',
         'transition-colors'
       )}
-      aria-label={`Tiefe: ${depth} cm, Stufe: ${
+      aria-label={`Tiefe: ${depth} cm, Wasserversorgung: ${
         levelId ? getLevelLabel(levelId) || '' : 'unbekannt'
       }`}
     >

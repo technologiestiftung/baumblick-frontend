@@ -21,7 +21,7 @@ export const AverageCircle: FC<{
       'border',
       'flex justify-center items-center'
     )}
-    aria-label={`Durchschnitt-Stufe: ${
+    aria-label={`Durschnittliche Wasserversorgung: ${
       levelId ? getLevelLabel(levelId) || '' : 'unbekannt'
     }`}
   >
