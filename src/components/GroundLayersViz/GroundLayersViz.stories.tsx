@@ -1,14 +1,14 @@
 import { Story, Meta } from '@storybook/react'
 
-import { SuctionTensionViz, SuctionTensionVizType } from '.'
+import { GroundLayersViz, GroundLayersVizType } from '.'
 
 export default {
-  title: 'UI Elements/SuctionTensionViz',
-  component: SuctionTensionViz,
+  title: 'UI Elements/GroundLayersViz',
+  component: GroundLayersViz,
 } as Meta
 
-const Template: Story<SuctionTensionVizType> = (props) => (
-  <SuctionTensionViz {...props} />
+const Template: Story<GroundLayersVizType> = (props) => (
+  <GroundLayersViz {...props} />
 )
 
 export const Default = Template.bind({})

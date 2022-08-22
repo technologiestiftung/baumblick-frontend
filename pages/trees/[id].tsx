@@ -10,7 +10,7 @@ import {
   mapSuctionTensionToStatus,
   WaterSupplyStatusType,
 } from '@lib/utils/mapSuctionTensionToStatus'
-import { SuctionTensionViz } from '@components/SuctionTensionViz'
+import { GroundLayersViz } from '@components/GroundLayersViz'
 import { useRouter } from 'next/router'
 import { Cross as CrossIcon } from '@components/Icons'
 import { useHasScrolledPastThreshold } from '@lib/hooks/useHasScrolledPastThreshold'
@@ -216,7 +216,7 @@ const TreePage: TreePageWithLayout = ({ treeData, csrfToken }) => {
           >
             <Carousel dotsClass="slick-dots w-2/6 md:w-1/4 mx-auto">
               {!nowcastError && (
-                <SuctionTensionViz
+                <GroundLayersViz
                   depth30StatusId={
                     nowcastData && nowcastData[0].value
                       ? mapSuctionTensionToStatus(nowcastData[0].value)?.id

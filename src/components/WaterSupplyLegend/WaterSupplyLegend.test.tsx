@@ -1,13 +1,13 @@
 import { render, screen } from '@testing-library/react'
 import I18nProvider from 'next-translate/I18nProvider'
-import { SuctionTensionLegend } from '.'
+import { WaterSupplyLegend } from '.'
 import common from '../../../locales/de/common.json'
 
-describe('SuctionTensionLegend component', () => {
+describe('WaterSupplyLegend component', () => {
   it('renders title, scale, labels and collapse button by default', () => {
     render(
       <I18nProvider lang="de" namespaces={{ common }}>
-        <SuctionTensionLegend />
+        <WaterSupplyLegend />
       </I18nProvider>
     )
     const title = screen.getByText(/Wasserversorgung/i)

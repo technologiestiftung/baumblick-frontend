@@ -6,12 +6,12 @@ import { Pill } from '@components/Pill'
 import { getClassesByStatusId } from '@lib/utils/getClassesByStatusId'
 import { WaterSupplyStatusType } from '@lib/utils/mapSuctionTensionToStatus'
 
-export interface SuctionTensionLegendType {
+export interface WaterSupplyLegendType {
   hasShadow?: boolean
   className?: string
 }
 
-export const SuctionTensionLegend: FC<SuctionTensionLegendType> = ({
+export const WaterSupplyLegend: FC<WaterSupplyLegendType> = ({
   hasShadow = false,
   className = '',
 }) => {

@@ -1,10 +1,10 @@
 import { render, screen } from '@testing-library/react'
-import { SuctionTensionViz } from '.'
+import { GroundLayersViz } from '.'
 
-describe('SuctionTensionViz', () => {
+describe('GroundLayersViz', () => {
   test('renders all statuses and average circle', () => {
     render(
-      <SuctionTensionViz
+      <GroundLayersViz
         depth30StatusId={'critical'}
         depth60StatusId={'good'}
         depth90StatusId={'medium'}
@@ -35,7 +35,7 @@ describe('SuctionTensionViz', () => {
 
   test('falls back to gray colors without provided values', () => {
     render(
-      <SuctionTensionViz
+      <GroundLayersViz
         depth30StatusId={'critical'}
         depth60StatusId={undefined}
         depth90StatusId={undefined}

@@ -6,14 +6,14 @@ import colors from '../../style/colors'
 import { AverageCircle } from './AverageCircle'
 import { SoilLayer } from './SoilLayer'
 
-export interface SuctionTensionVizType {
+export interface GroundLayersVizType {
   depth30StatusId: WaterSupplyStatusType['id'] | undefined
   depth60StatusId: WaterSupplyStatusType['id'] | undefined
   depth90StatusId: WaterSupplyStatusType['id'] | undefined
   averageStatusId: WaterSupplyStatusType['id'] | undefined
 }
 
-export const SuctionTensionViz: FC<SuctionTensionVizType> = ({
+export const GroundLayersViz: FC<GroundLayersVizType> = ({
   depth30StatusId,
   depth60StatusId,
   depth90StatusId,

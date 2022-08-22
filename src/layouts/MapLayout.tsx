@@ -1,5 +1,5 @@
 import { TreesMap } from '@components/TreesMap'
-import { SuctionTensionLegend } from '@components/SuctionTensionLegend'
+import { WaterSupplyLegend } from '@components/WaterSupplyLegend'
 import { FC } from 'react'
 import { useHasScrolledPastThreshold } from '@lib/hooks/useHasScrolledPastThreshold'
 import classNames from 'classnames'
@@ -82,7 +82,7 @@ export const MapLayout: FC<MapLayoutType> = ({
           treeIdToSelect={treeIdToSelect}
           isMinimized={isMinimized}
         />
-        <SuctionTensionLegend
+        <WaterSupplyLegend
           hasShadow={true}
           className={classNames(
             'transition-opacity',

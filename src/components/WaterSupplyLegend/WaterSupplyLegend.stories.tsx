@@ -1,15 +1,15 @@
 import { Story, Meta } from '@storybook/react'
 
-import { SuctionTensionLegend, SuctionTensionLegendType } from '.'
+import { WaterSupplyLegend, WaterSupplyLegendType } from '.'
 
 export default {
-  title: 'Map/SuctionTensionLegend',
-  component: SuctionTensionLegend,
+  title: 'Map/WaterSupplyLegend',
+  component: WaterSupplyLegend,
 } as Meta
 
-const Template: Story<SuctionTensionLegendType> = (args) => (
+const Template: Story<WaterSupplyLegendType> = (args) => (
   <div className="absolute bottom-2 left-2 w-[200px]">
-    <SuctionTensionLegend {...args} />
+    <WaterSupplyLegend {...args} />
   </div>
 )
 
