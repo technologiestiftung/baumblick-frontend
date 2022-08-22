@@ -19,6 +19,7 @@ import { getScaleClassesByLevel } from '@lib/utils/getScaleClassesByLevel'
 import { treeUrlSlugToId } from '@lib/utils/urlUtil'
 import { FeedbackRequestsList } from '@components/FeedbackRequestsList'
 import csrf from '@lib/api/csrf'
+import { useForecastData } from '@lib/hooks/useForecastData'
 
 interface TreePageComponentPropType {
   treeData: TreeDataType
@@ -142,7 +143,12 @@ const TreePage: TreePageWithLayout = ({ treeData, csrfToken }) => {
     data: nowcastData,
     error: nowcastError,
     isLoading: nowcastIsLoading,
-  } = useNowcastData(treeData.gml_id)
+  } = useNowcastData(treeData.gml_id, csrfToken)
+
+  const { data: forecastData, error: forecastError } = useForecastData(
+    treeData.gml_id,
+    csrfToken
+  )
 
   const avgLevel =
     nowcastData && nowcastData[3].value
@@ -221,7 +227,13 @@ const TreePage: TreePageWithLayout = ({ treeData, csrfToken }) => {
                   averageLevel={avgLevel}
                 />
               )}
-              <div className="bg-scale-4 h-full">Bar chart</div>
+              {!forecastError && forecastData && forecastData?.length > 0 && (
+                <div className="bg-scale-4 h-full">
+                  <code>
+                    <pre>{JSON.stringify(forecastData, null, 2)}</pre>
+                  </code>
+                </div>
+              )}
             </Carousel>
           </div>
           <TreeInfoHeader

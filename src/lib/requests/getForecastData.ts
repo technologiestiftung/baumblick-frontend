@@ -1,4 +1,3 @@
-import { SUPABASE_ANON_KEY } from '@lib/utils/envUtil'
 import { getBaseUrl } from '@lib/utils/urlUtil'
 import { startOfDay } from 'date-fns'
 
@@ -32,20 +31,14 @@ const TIMESTAMP_COLUMN = 'timestamp'
 const TODAY = startOfDay(Date.now()).toISOString()
 const FORECAST_MAX_ROWS = 14
 
-const REQUEST_OPTIONS = {
-  method: 'POST',
-  headers: {
-    Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-  },
-}
-
 /**
  * Fetches the forecast data for a tree (maximum 14 days).
  * @param treeId string
  * @returns Promise<ForecastDataType[] | undefined>
  */
 export const getForecastData = async (
-  treeId: string
+  treeId: string,
+  csrfToken: string
 ): Promise<ForecastDataType[] | undefined> => {
   if (!treeId) return
 
@@ -63,7 +56,13 @@ export const getForecastData = async (
   const response = await fetch(
     // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
     `${REQUEST_URL}?${REQUEST_PARAMS}`,
-    REQUEST_OPTIONS
+    {
+      method: 'POST',
+      headers: {
+        'CSRF-Token': csrfToken,
+        'Content-Type': 'application/json',
+      },
+    }
   )
 
   if (!response.ok) {
@@ -72,7 +71,7 @@ export const getForecastData = async (
     throw new Error(txt)
   }
 
-  const data = (await response.json()) as ForecastDataType[]
+  const data = (await response.json()) as { json: ForecastDataType[] }
 
-  return data
+  return data.json
 }

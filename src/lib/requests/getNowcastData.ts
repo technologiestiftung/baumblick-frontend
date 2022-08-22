@@ -1,4 +1,3 @@
-import { SUPABASE_ANON_KEY } from '@lib/utils/envUtil'
 import { getBaseUrl } from '@lib/utils/urlUtil'
 
 /**
@@ -26,20 +25,14 @@ const TABLE_NAME = 'nowcast'
 const TREE_ID_COLUMN_NAME = 'baum_id'
 const COLUMN_TO_SORT_BY = 'timestamp'
 
-const REQUEST_OPTIONS = {
-  method: 'POST',
-  headers: {
-    Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-  },
-}
-
 /**
  * Fetches the most recent nowcast data for a tree.
  * @param treeId string
  * @returns Promise<NowcastDataType[] | undefined>
  */
 export const getNowcastData = async (
-  treeId: string
+  treeId: string,
+  csrfToken: string
 ): Promise<NowcastDataType[] | undefined> => {
   if (!treeId) return
 
@@ -55,7 +48,13 @@ export const getNowcastData = async (
   const response = await fetch(
     // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
     `${REQUEST_URL}?${REQUEST_PARAMS}`,
-    REQUEST_OPTIONS
+    {
+      method: 'POST',
+      headers: {
+        'CSRF-Token': csrfToken,
+        'Content-Type': 'application/json',
+      },
+    }
   )
 
   if (!response.ok) {
