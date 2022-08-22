@@ -23,7 +23,7 @@ export const FeedbackRequestsList: FC<FeedbackRequestsListPropType> = ({
     useState<IssueTypeType | null>(null)
 
   return (
-    <>
+    <div className="relative bg-white z-0">
       <p className="px-8 py-8 font-serif md:text-lg">
         {t('feedback.introduction')}
       </p>
@@ -66,6 +66,6 @@ export const FeedbackRequestsList: FC<FeedbackRequestsListPropType> = ({
           </span>
         </div>
       )}
-    </>
+    </div>
   )
 }
