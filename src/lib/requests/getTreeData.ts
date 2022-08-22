@@ -1,7 +1,4 @@
-import {
-  SUPABASE_ANON_KEY,
-  SUPABASE_PASSTHROUGH_API_URL,
-} from '@lib/utils/envUtil'
+import { getBaseUrl } from '@lib/utils/urlUtil'
 
 /**
  * According to the database schema all values except gml_id are nullable.
@@ -45,21 +42,21 @@ const TABLE_NAME = 'trees'
 /** The API requires the search param to be the `gml_id` column */
 const TREE_ID_COLUMN_NAME = 'gml_id'
 
-const REQUEST_OPTIONS = {
-  method: 'POST',
-  headers: {
-    Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-  },
-}
-
 export const getTreeData = async (
-  treeId: string
+  treeId: string,
+  csrfToken: string
 ): Promise<TreeDataType[] | undefined> => {
   if (!treeId) return
 
-  const REQUEST_URL = `${SUPABASE_PASSTHROUGH_API_URL}/${TABLE_NAME}?${TREE_ID_COLUMN_NAME}=eq.${treeId}`
+  const REQUEST_URL = `${getBaseUrl()}/api/ml-api-passthrough/${TABLE_NAME}?${TREE_ID_COLUMN_NAME}=eq.${treeId}`
 
-  const response = await fetch(REQUEST_URL, REQUEST_OPTIONS)
+  const response = await fetch(REQUEST_URL, {
+    method: 'POST',
+    headers: {
+      'CSRF-Token': csrfToken,
+      'Content-Type': 'application/json',
+    },
+  })
 
   if (!response.ok) {
     const txt = await response.text()
@@ -67,7 +64,7 @@ export const getTreeData = async (
     throw new Error(txt)
   }
 
-  const data = (await response.json()) as TreeDataType[]
+  const data = (await response.json()) as { json: TreeDataType[] }
 
-  return data
+  return data.json
 }

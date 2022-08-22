@@ -1,7 +1,5 @@
-import {
-  SUPABASE_ANON_KEY,
-  SUPABASE_PASSTHROUGH_API_URL,
-} from '@lib/utils/envUtil'
+import { SUPABASE_ANON_KEY } from '@lib/utils/envUtil'
+import { getBaseUrl } from '@lib/utils/urlUtil'
 
 /**
  * According to the database schema all values except id are nullable.
@@ -45,7 +43,7 @@ export const getNowcastData = async (
 ): Promise<NowcastDataType[] | undefined> => {
   if (!treeId) return
 
-  const REQUEST_URL = `${SUPABASE_PASSTHROUGH_API_URL}/${TABLE_NAME}?${TREE_ID_COLUMN_NAME}=eq.${treeId}&order=${COLUMN_TO_SORT_BY}&limit=4&offset=0`
+  const REQUEST_URL = `${getBaseUrl()}/api/ml-api-passthrough/${TABLE_NAME}?${TREE_ID_COLUMN_NAME}=eq.${treeId}&order=${COLUMN_TO_SORT_BY}&limit=4&offset=0`
 
   const response = await fetch(REQUEST_URL, REQUEST_OPTIONS)
 
@@ -55,7 +53,7 @@ export const getNowcastData = async (
     throw new Error(txt)
   }
 
-  const data = (await response.json()) as NowcastDataType[]
+  const data = (await response.json()) as { json: NowcastDataType[] }
 
-  return data
+  return data.json
 }
