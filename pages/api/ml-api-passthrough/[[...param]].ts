@@ -72,14 +72,18 @@ export default async function handler(
         switch (url.pathname.replace('/api/ml-api-passthrough', '')) {
           case '/trees': {
             if (!searchParams.has('gml_id')) {
-              return res.status(400).json({ error: 'Missing gml_id' })
+              return res
+                .status(400)
+                .json({ error: 'Missing gml_id search parameter' })
             }
             break
           }
           case '/forecast':
           case '/nowcast': {
             if (!searchParams.has('baum_id')) {
-              return res.status(400).json({ error: 'Missing baum_id' })
+              return res
+                .status(400)
+                .json({ error: 'Missing baum_id search parameter' })
             }
             break
           }
