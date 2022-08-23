@@ -87,8 +87,8 @@ const InfoList: FC<{
     nowcastData &&
     !nowcastIsLoading &&
     !nowcastError &&
-    nowcastData[3].value &&
-    mapSuctionTensionToStatus(nowcastData[3].value)?.id
+    nowcastData[0].value &&
+    mapSuctionTensionToStatus(nowcastData[0].value)?.id
 
   return (
     <ul className="z-10 relative bg-white">
@@ -155,8 +155,8 @@ const TreePage: TreePageWithLayout = ({ treeData, csrfToken }) => {
   )
 
   const avgLevel =
-    nowcastData && nowcastData[3].value
-      ? mapSuctionTensionToStatus(nowcastData[3].value)?.id
+    nowcastData && nowcastData[0].value
+      ? mapSuctionTensionToStatus(nowcastData[0].value)?.id
       : undefined
   const circleColorClasses = getClassesByStatusId(avgLevel)
 
@@ -214,18 +214,18 @@ const TreePage: TreePageWithLayout = ({ treeData, csrfToken }) => {
               {!nowcastError && (
                 <GroundLayersViz
                   depth30StatusId={
-                    nowcastData && nowcastData[0].value
-                      ? mapSuctionTensionToStatus(nowcastData[0].value)?.id
+                    nowcastData && nowcastData[3].value
+                      ? mapSuctionTensionToStatus(nowcastData[3].value)?.id
                       : undefined
                   }
                   depth60StatusId={
-                    nowcastData && nowcastData[1].value
-                      ? mapSuctionTensionToStatus(nowcastData[1].value)?.id
+                    nowcastData && nowcastData[2].value
+                      ? mapSuctionTensionToStatus(nowcastData[2].value)?.id
                       : undefined
                   }
                   depth90StatusId={
-                    nowcastData && nowcastData[2].value
-                      ? mapSuctionTensionToStatus(nowcastData[2].value)?.id
+                    nowcastData && nowcastData[1].value
+                      ? mapSuctionTensionToStatus(nowcastData[1].value)?.id
                       : undefined
                   }
                   averageStatusId={avgLevel}
