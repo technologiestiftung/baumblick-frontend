@@ -52,7 +52,7 @@ export default async function handler(
 
 					`
 
-        return res.status(200).json({ result })
+        return res.status(200).json({ data: result })
       }
       default:
         return res
