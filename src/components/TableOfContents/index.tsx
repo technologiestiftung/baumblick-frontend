@@ -1,27 +1,22 @@
-import { InternalLink } from '@components/InternalLink'
 import classNames from 'classnames'
 import { DOMAttributes, FC } from 'react'
 
 const scaleClasses = [
-  'border-scale-1',
-  'border-scale-2',
-  'border-scale-3',
-  'border-scale-4',
-  'border-scale-5',
-  'border-scale-6',
-  'border-scale-7',
-  'border-scale-8',
+  'border-gradient-1',
+  'border-gradient-2',
+  'border-gradient-3',
+  'border-gradient-4',
+  'border-gradient-5',
 ]
 
 interface ChapterType {
-  path: string
   title: string
 }
 
 export interface TableOfContentsPropType {
   chapters: ChapterType[]
-  onChapterClick?: (chapter: ChapterType) => void
-  activeChapterPath?: string
+  onChapterClick?: (title: ChapterType['title']) => void
+  activeChapterTitle?: string
 }
 
 interface ChapterLinkPropType extends ChapterType {
@@ -31,7 +26,6 @@ interface ChapterLinkPropType extends ChapterType {
 }
 
 const ChapterLink: FC<ChapterLinkPropType> = ({
-  path,
   title,
   onClick = () => undefined,
   colorClass = scaleClasses[0],
@@ -39,42 +33,30 @@ const ChapterLink: FC<ChapterLinkPropType> = ({
 }) => {
   const onChapterClick: DOMAttributes<HTMLElement>['onClick'] = (evt) => {
     evt.preventDefault()
-    onClick({ path, title })
+    onClick(title)
+  }
+  const onKeyUp: DOMAttributes<HTMLElement>['onKeyUp'] = (evt) => {
+    if (evt.key !== 'enter') return
+    evt.preventDefault()
+    onClick(title)
   }
 
   const wrapperStyles = classNames('block')
   const linkStyles = classNames(
     colorClass,
-    'py-1 block transition-all',
-    'hover:text-gray-900',
-    'hover:border-l-8 hover:pl-5',
+    'py-1 block transition-all pr-4',
+    'hover:text-gray-900 text-left',
+    'hover:border-l-8 md:hover:border-l-10 hover:pl-5 md:hover:pl-8',
     isActive ? 'font-bold text-gray-900' : 'font-medium text-gray-600',
-    isActive ? 'border-l-[12px] pl-4' : 'border-l-4 pl-6'
+    isActive ? 'border-l-[12px] pl-4 md:pl-6' : 'border-l-4 pl-6 md:pl-8',
+    'focus:outline-none focus:ring-2 focus:ring-gray-900'
   )
 
-  if (path.startsWith('/')) {
-    return (
-      <li className={wrapperStyles}>
-        <InternalLink
-          href={path}
-          onClick={onChapterClick}
-          className={linkStyles}
-        >
-          {title}
-        </InternalLink>
-      </li>
-    )
-  }
   return (
     <li className={wrapperStyles}>
-      <a
-        href={path}
-        onClick={onChapterClick}
-        rel="noreferrer nofollow"
-        className={linkStyles}
-      >
+      <button onClick={onChapterClick} onKeyUp={onKeyUp} className={linkStyles}>
         {title}
-      </a>
+      </button>
     </li>
   )
 }
@@ -82,15 +64,15 @@ const ChapterLink: FC<ChapterLinkPropType> = ({
 export const TableOfContents: FC<TableOfContentsPropType> = ({
   chapters,
   onChapterClick = () => undefined,
-  activeChapterPath,
+  activeChapterTitle,
 }) => (
   <ul className={classNames()}>
     {chapters.map((chapter, idx) => (
       <ChapterLink
-        key={chapter.path}
+        key={chapter.title}
         {...chapter}
         onClick={onChapterClick}
-        isActive={chapter.path === activeChapterPath}
+        isActive={chapter.title === activeChapterTitle}
         colorClass={scaleClasses[Math.min(idx, scaleClasses.length - 1)]}
       />
     ))}

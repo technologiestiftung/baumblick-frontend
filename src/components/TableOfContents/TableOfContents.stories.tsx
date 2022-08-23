@@ -13,44 +13,34 @@ const Template: Story<TableOfContentsPropType> = (props) => (
 
 const chapters = [
   {
-    path: '#chapter-1',
     title: 'This is chapter 1',
   },
   {
-    path: '#chapter-2',
-    title: 'This is another chapter, the second one',
+    title: 'This is chapter 2',
   },
   {
-    path: '#chapter-3',
-    title: 'Last but not least',
+    title: 'This is chapter 3',
   },
   {
-    path: '#chapter-4',
-    title: 'This is chapter 1',
+    title: 'This is chapter 4',
   },
   {
-    path: '#chapter-5',
-    title: 'This is another chapter, the second one',
+    title: 'This is chapter 5',
   },
   {
-    path: '#chapter-6',
-    title: 'Last but not least',
+    title: 'This is chapter 6',
   },
   {
-    path: '#chapter-7',
-    title: 'Last but not least',
+    title: 'This is chapter 7',
   },
   {
-    path: '#chapter-8',
-    title: 'This is chapter 1',
+    title: 'This is chapter 8',
   },
   {
-    path: '#chapter-9',
-    title: 'This is another chapter, the second one',
+    title: 'This is chapter 9',
   },
   {
-    path: '#chapter-10',
-    title: 'Last but not least',
+    title: 'This is chapter 10',
   },
 ]
 
@@ -75,6 +65,6 @@ WithActiveItem.parameters = {
   },
 }
 WithActiveItem.args = {
-  activeChapterPath: chapters[3].path,
+  activeChapterTitle: chapters[3].title,
   chapters,
 }

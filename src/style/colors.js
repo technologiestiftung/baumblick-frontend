@@ -1,9 +1,5 @@
-const {
-  colors: { white },
-} = require('tailwindcss/defaultTheme')
-
 const colors = {
-  white,
+  white: '#ffffff',
   gray: {
     '50': '#f9fafb',
     '100': '#f3f4f6',
@@ -17,22 +13,19 @@ const colors = {
     '900': '#111827',
   },
   scale: {
-    '1': '#fbe993',
-    '1-dark': '#F1DA6A',
-    '2': '#DAE897',
-    '2-dark': '#C5D676',
-    '3': '#BDE3A3',
-    '3-dark': '#A1CE83',
-    '4': '#A2DFAF',
-    '4-dark': '#83C992',
-    '5': '#8CD5BD',
-    '5-dark': '#71BCA3',
-    '6': '#77D0CC',
-    '6-dark': '#5CB7B3',
-    '7': '#6BC7D6',
-    '7-dark': '#4FB0BF',
-    '8': '#53BCDC',
-    '8-dark': '#37A2C3',
+    good: '#53BCDC',
+    'good-dark': '#4AAAC8',
+    medium: '#80DEB6',
+    'medium-dark': '#73C9A5',
+    critical: '#FBE993',
+    'critical-dark': '#E2D385',
+  },
+  gradient: {
+    '1': '#53BCDC',
+    '2': '#52CFCF',
+    '3': '#80DEB6',
+    '4': '#BBE69D',
+    '5': '#FBE993',
   },
 }
 

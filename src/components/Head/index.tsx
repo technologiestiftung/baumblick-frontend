@@ -28,7 +28,7 @@ interface HeadPropType {
 
 export const Head: FC<Partial<HeadPropType>> = ({
   description = '',
-  siteTitle = 'Berliner Qtrees',
+  siteTitle = 'TreeWatch Berlin',
   pageTitle = 'Karte',
   fbAppId = '',
   keywords = [
@@ -43,7 +43,7 @@ export const Head: FC<Partial<HeadPropType>> = ({
     'Birds on Mars',
     'CityLAB',
   ],
-  themeColor = colors['scale']['3'],
+  themeColor = colors['scale']['medium'],
   locales = ['de'],
   locale = 'de',
   twitterUsername = 'TSBBerlin',

@@ -1,0 +1,77 @@
+import { getBaseUrl } from '@lib/utils/urlUtil'
+import { startOfDay } from 'date-fns'
+
+/**
+ * According to the database schema all values except id are nullable.
+ */
+export type ForecastDataType = {
+  id: number
+  /** `baum_id? is what `gml_id` is in the the trees table.
+   * (Unfortunately it is marked as nullable in the database schema)
+   */
+  baum_id?: string
+  /** 1 = value for 30cm depth.
+   *  2 = value for 60cm depth.
+   *  3 = value for 90cm depth.
+   *  4 = value for average.
+   */
+  type_id?: number
+  timestamp?: string
+  value?: number
+  created_at?: string
+  model_id?: string
+}
+
+const TABLE_NAME = 'forecast'
+const TREE_ID_COLUMN_NAME = 'baum_id'
+const TYPE_ID_COLUMN_NAME = 'type_id'
+const TYPE_ID_FOR_AVERAGE = '4'
+
+const TIMESTAMP_COLUMN = 'timestamp'
+const TODAY = startOfDay(Date.now()).toISOString()
+const FORECAST_MAX_ROWS = 14
+
+/**
+ * Fetches the forecast data for a tree (maximum 14 days).
+ * @param treeId string
+ * @returns Promise<ForecastDataType[] | undefined>
+ */
+export const getForecastData = async (
+  treeId: string,
+  csrfToken: string
+): Promise<ForecastDataType[] | undefined> => {
+  if (!treeId) return
+
+  const REQUEST_URL = `${getBaseUrl()}/api/ml-api-passthrough/${TABLE_NAME}`
+
+  const REQUEST_PARAMS = new URLSearchParams({
+    [TREE_ID_COLUMN_NAME]: `eq.${treeId}`,
+    [TYPE_ID_COLUMN_NAME]: `eq.${TYPE_ID_FOR_AVERAGE}`,
+    [TIMESTAMP_COLUMN]: `gte.${TODAY}`,
+    order: `${TIMESTAMP_COLUMN}`,
+    limit: `${FORECAST_MAX_ROWS}`,
+    offset: '0',
+  })
+
+  const response = await fetch(
+    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+    `${REQUEST_URL}?${REQUEST_PARAMS}`,
+    {
+      method: 'POST',
+      headers: {
+        'CSRF-Token': csrfToken,
+        'Content-Type': 'application/json',
+      },
+    }
+  )
+
+  if (!response.ok) {
+    const txt = await response.text()
+    console.error(txt)
+    throw new Error(txt)
+  }
+
+  const data = (await response.json()) as { json: ForecastDataType[] }
+
+  return data.json
+}

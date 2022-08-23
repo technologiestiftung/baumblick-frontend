@@ -1,0 +1,84 @@
+{
+  "name": {
+    "short": "TreeWatch",
+    "addition": "",
+    "full": "TreeWatch"
+  },
+  "url": "qtrees.ai",
+  "time": {
+    "minShortened": "Min"
+  },
+  "home": {
+    "cta": "Baum finden",
+    "ctaLoading": "Lädt...",
+    "slides": {
+      "1": {
+        "text": "Auf dieser Karte wird angezeigt, wie gut die Berliner Bäume mit Wasser versorgt sind (<good/> Gut, <medium/> Mäßig, <critical/> Kritisch)",
+        "alt": "Ein Kartenausschnitt mit einigen farbigen Kreisen, die Bäume und deren Saugspannung darstellen"
+      },
+      "2": {
+        "text": "Die Wasserversorgung kann <bold>je nach Bodentiefe variieren</bold>. Den Wurzeln gelingt es nämlich nicht immer Wasser aufzunehmen, selbst wenn der Boden an der Oberfläche feucht ist.",
+        "alt": "Die Silhouette eines Baumes und seiner Wurzeln. Der Grund ist in drei Farben geschichtet. Auf jeder Ebene befindet sich ein Emoji mit einem Text. Auf der ersten Ebene: Blauer Hintergrund, fröhliches Emoji, der Text 'Gering'. Auf der zweiten Ebene: Grüner Hintergrund, neutrales Emoji und der Text 'Durchschnittlich'. Auf der tiefsten Ebene: Gelber Hintergrund, erschöpftes Emoji und der Text 'Hoch'."
+      },
+      "3": {
+        "text": "Bei circa 100 Bäumen wurden 3 Sensoren eingepflanzt. Diese messen die Wasserversorgung <bold>in drei unterschiedlich tiefen Bodenschichten</bold> (-30, -60, -90 cm).",
+        "alt": "Die Silhouette eines Baumes und seiner Wurzeln. Der Grund ist in drei Farben geschichtet. Auf jeder Ebene befindet sich ein Sensor-Symbol mit der Beschriftungen: -30cm, -60cm, -90cm."
+      },
+      "4": {
+        "text": "Auch Faktoren wie <bold>Regen, Schatten oder Sonneneinstrahlung</bold> beeinflussen den Status der Wasserversorgung. Deshalb werden auch diese Daten erhoben.",
+        "alt": "Eine Wolke von Symbolen, die eine Sonne, Regen, Schatten, eine Gießkanne und eine Karte darstellen. Eine geschweifte Klammer, die alle Symbole umfasst und mit einem Vorwärtspfeil in die rechte untere Ecke des Bildes führt, wo ein Screenshot der Benutzeroberfläche zeigt, wie diese Informationen in der Benutzeroberfläche angezeigt werden (Listenansicht)."
+      },
+      "5": {
+        "text": "Die Messwerte der Sensoren werden mit diesen zusätzlichen Daten kombiniert. Auf dieser Datengrundlage <bold>errechnet eine KI</bold> die tagesaktuelle Wasserversorgung anderer Bäume.",
+        "alt": "Eine Wolke von Symbolen, die eine Sonne, Regen, Schatten, eine Gießkanne und eine Karte darstellen. Eine geschweifte Klammer, die alle Symbole umfasst und mit einem Vorwärtspfeil in die Mitte führt. In der Mitte ein Symbol für ein neuronales Netz mit dem Text AI. Von letzterem Text und Symbol führt ein Pfeil zu einem Screenshot einer Karte mit vielen farbigen Baumkreisen."
+      },
+      "6": {
+        "text": "Finde heraus, wie gut die Bäume in deiner Umgebung mit Wasser versorgt sind. <bold>Klicke auf den Button unten!</bold>",
+        "alt": "Ein Button mit einem Geolocation-Symbol und den Worten 'Baum finden'. Ein Pfeil verbindet das Wort 'Klick' und den Button."
+      }
+    }
+  },
+  "stories": {
+    "title": "Stories",
+    "backToStoriesLink": "Zurück zu der Stories",
+    "contentsLink": "Inhalte"
+  },
+  "legend": {
+    "map": {
+      "title": "Wasserversorgung",
+      "levels": {
+        "good": "Gut",
+        "medium": "Mäßig",
+        "critical": "Kritisch"
+      }
+    }
+  },
+  "legal": {
+    "imprint": "Impressum",
+    "privacy": "Datenschutz"
+  },
+  "share": {
+    "treeShareTitle": "Baum teilen",
+    "copyFieldlabel": "Kopiere die folgende URL",
+    "copiedFeedback": "In Zwischenablage kopiert!"
+  },
+  "treeView": {
+    "tabs": {
+      "0": "Infos",
+      "1": "Mitwirken"
+    }
+  },
+  "feedback": {
+    "imageAlt": "So kann/können „{{title}}“ aussehen",
+    "reportButton": "{{title}} melden",
+    "proximityWord": "Nähe",
+    "modalHelp": "Bitte bestätige, dass du beim Baum <bold>„{{treeName}}“</bold> {{address}} die Eigenschaft <bold>„{{title}}“</bold> erkannt hast.",
+    "modalConfirm": "Melden",
+    "modalCancel": "Abbrechen",
+    "confirmationTitle": "Danke! Erfolgreich gemeldet!",
+    "confirmationDescription": "Ab morgen kannst du es wieder melden",
+    "introduction": "Deine Meldungen können uns helfen, unsere Vorhersagemodell zu verbessern.",
+    "loading": "Die Meldeeigenschaften werden geladen...",
+    "error": "Es ist beim Laden der Meldeeigenschaften ein Fehler aufgetreten:"
+  }
+}

@@ -1,34 +1,53 @@
-import { mapRawQueryToState } from '@lib/utils/queryUtil'
 import { ParsedUrlQuery } from 'querystring'
-import { StrictMode, FC } from 'react'
+import { StrictMode, FC, ReactElement, ReactNode } from 'react'
 import { Head } from '@components/Head'
+import 'maplibre-gl/dist/maplibre-gl.css'
 import '../src/style/global.css'
 import { useMatomo } from '@lib/hooks/useMatomo'
 import { MainMenu } from '@components/MainMenu'
+import { NextPage } from 'next'
+import type { AppProps as NextAppProps } from 'next/app'
+import classNames from 'classnames'
 
-interface PagePropType extends Record<string, unknown> {
+type AppProps<P = unknown> = {
+  pageProps: P
+} & Omit<NextAppProps<P>, 'pageProps'>
+
+export interface PagePropType extends Record<string, unknown> {
   title?: string
   query: ParsedUrlQuery
 }
 
-interface ComponentPropType {
-  title?: string
-  query?: ReturnType<typeof mapRawQueryToState>
+export type NextPageWithLayout = NextPage & {
+  getLayout?: (page: ReactElement, pageProps: PagePropType) => ReactNode
 }
 
-const App: FC<{
-  Component: FC<ComponentPropType>
-  pageProps: PagePropType
-}> = ({ Component, pageProps }) => {
+type AppPropsWithLayout = AppProps<PagePropType> & {
+  Component: NextPageWithLayout
+}
+
+const App: FC<AppPropsWithLayout> = ({
+  Component,
+  pageProps,
+}: AppPropsWithLayout) => {
   useMatomo()
-  const parsedQuery = pageProps.query ? mapRawQueryToState(pageProps.query) : {}
+
+  const getLayout = Component.getLayout ?? ((page) => page)
 
   return (
     <StrictMode>
       <Head pageTitle={pageProps.title || ''} />
-      <div className="fixed inset-0 bottom-16 overflow-x-hidden overflow-y-auto">
-        <Component {...pageProps} query={parsedQuery} />
-      </div>
+      <main
+        className={classNames(
+          'fixed top-0 md:left-[12px] md:w-[calc(100vw-12px)] z-0 min-h-[calc(100%-4rem)]',
+          'bottom-16 grid',
+          'overflow-x-hidden md:overflow-x-visible overflow-y-auto '
+        )}
+      >
+        <div className="w-screen max-w-3xl mx-auto">
+          {getLayout(<Component {...pageProps} />, pageProps)}
+        </div>
+      </main>
       <MainMenu />
     </StrictMode>
   )

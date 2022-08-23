@@ -22,7 +22,7 @@ export const OtherPage = Template.bind({})
 OtherPage.parameters = {
   nextRouter: {
     query: {},
-    pathname: '/map',
+    pathname: '/tree',
   },
 }
 OtherPage.args = {}

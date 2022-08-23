@@ -15,6 +15,16 @@ jest.mock('maplibre-gl/dist/maplibre-gl', () => ({
 
 fetchMock.enableMocks()
 
+global.matchMedia =
+  global.matchMedia ||
+  function () {
+    return {
+      matches: false,
+      addListener: jest.fn(),
+      removeListener: jest.fn(),
+    }
+  }
+
 window.URL.createObjectURL = jest.fn().mockReturnValue('')
 performance.mark = jest.fn()
 
