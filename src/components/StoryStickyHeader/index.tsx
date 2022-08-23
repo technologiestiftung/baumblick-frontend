@@ -7,11 +7,11 @@ import { FC } from 'react'
 import colors from 'src/style/colors'
 
 const scaleClasses = [
-  'bg-scale-1',
-  'bg-scale-2',
-  'bg-scale-3',
-  'bg-scale-4',
-  'bg-scale-5',
+  'bg-gradient-1',
+  'bg-gradient-2',
+  'bg-gradient-3',
+  'bg-gradient-4',
+  'bg-gradient-5',
 ]
 
 interface StoryStickyHeaderPropsType {
@@ -42,9 +42,9 @@ export const StoryStickyHeader: FC<StoryStickyHeaderPropsType> = ({
         </InternalLink>
         <story.Icon
           size={32}
-          color1={colors.scale['1']}
-          color2={colors.scale['2']}
-          color3={colors.scale['3']}
+          color1={colors.gradient['1']}
+          color2={colors.gradient['2']}
+          color3={colors.gradient['3']}
         />
         <span className="font-bold text-lg block whitespace-nowrap text-ellipsis overflow-hidden">
           {story.title}

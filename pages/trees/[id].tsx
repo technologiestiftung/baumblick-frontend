@@ -6,8 +6,8 @@ import { getTreeData, TreeDataType } from '@lib/requests/getTreeData'
 import { useNowcastData } from '@lib/hooks/useNowcastData'
 import { TreeInfoHeader } from '@components/TreeInfoHeader'
 import { DataListItem } from '@components/DataListItem'
-import { mapSuctionTensionToLevel } from '@lib/utils/mapSuctionTensionToLevel'
-import { SuctionTensionViz } from '@components/SuctionTensionViz'
+import { mapSuctionTensionToStatus } from '@lib/utils/mapSuctionTensionToStatus'
+import { GroundLayersViz } from '@components/GroundLayersViz'
 import { useRouter } from 'next/router'
 import { Cross as CrossIcon } from '@components/Icons'
 import { useHasScrolledPastThreshold } from '@lib/hooks/useHasScrolledPastThreshold'
@@ -15,8 +15,10 @@ import { Carousel } from '@components/Carousel'
 import { NowcastDataType } from '@lib/requests/getNowcastData'
 import { Tabs } from '@components/Tabs'
 import useTranslation from 'next-translate/useTranslation'
-import { getScaleClassesByLevel } from '@lib/utils/getScaleClassesByLevel'
+import { getClassesByStatusId } from '@lib/utils/getClassesByStatusId'
 import { treeUrlSlugToId } from '@lib/utils/urlUtil'
+import { getStatusLabel } from '@lib/utils/getStatusLabel'
+import { ForecastViz } from '@components/ForecastViz'
 import { FeedbackRequestsList } from '@components/FeedbackRequestsList'
 import csrf from '@lib/api/csrf'
 import { useForecastData } from '@lib/hooks/useForecastData'
@@ -80,57 +82,59 @@ const InfoList: FC<{
   nowcastData: NowcastDataType[] | null
   nowcastIsLoading: boolean
   nowcastError: Error | null
-}> = ({ treeData, nowcastData, nowcastIsLoading, nowcastError }) => (
-  <ul className="z-10 relative bg-white">
-    <DataListItem
-      title="Saugspannung"
-      subtitle="⌀ aus 30, 60, 90 cm Tiefe"
-      value={
-        nowcastData &&
-        !nowcastIsLoading &&
-        !nowcastError &&
-        nowcastData[3].value
-          ? mapSuctionTensionToLevel(nowcastData[3].value)
-          : '-'
-      }
-    />
-    <DataListItem
-      title="Regenmenge"
-      subtitle="Letzte 14 Tage"
-      // TODO: Attention, this is dummy data.
-      // Update when adding access to real data.
-      value={`${0} l`}
-    />
-    <DataListItem
-      title="Baumscheibe"
-      subtitle="Unversiegelter Bereich um den Stamm"
-      // TODO: Attention, this is dummy data.
-      // Update when adding access to real data.
-      value={`${3.1} qm`}
-    />
-    <DataListItem
-      title="Verschattung"
-      subtitle="Anteil an Schattenzeit pro Tag"
-      // TODO: Attention, this is dummy data.
-      // Update when adding access to real data.
-      value={`${65} %`}
-    />
-    <DataListItem
-      title="Gießwassermenge"
-      subtitle="Letzte 14 Tage"
-      // TODO: Attention, this is dummy data.
-      // Update when adding access to real data.
-      value={`${25} l`}
-    />
-    {treeData?.stammumfg && (
+}> = ({ treeData, nowcastData, nowcastIsLoading, nowcastError }) => {
+  const averageStatusId =
+    nowcastData &&
+    !nowcastIsLoading &&
+    !nowcastError &&
+    nowcastData[3].value &&
+    mapSuctionTensionToStatus(nowcastData[3].value)?.id
+
+  return (
+    <ul className="z-10 relative bg-white">
       <DataListItem
-        title="Stammumfang"
-        subtitle="An der weitesten Stelle"
-        value={`${treeData.stammumfg} cm`}
+        title="Wasserversorgung"
+        subtitle="⌀ aus 30, 60, 90 cm Tiefe"
+        value={averageStatusId ? getStatusLabel(averageStatusId) : '-'}
       />
-    )}
-  </ul>
-)
+      <DataListItem
+        title="Regenmenge"
+        subtitle="Letzte 14 Tage"
+        // TODO: Attention, this is dummy data.
+        // Update when adding access to real data.
+        value={`${0} l`}
+      />
+      <DataListItem
+        title="Baumscheibe"
+        subtitle="Unversiegelter Bereich um den Stamm"
+        // TODO: Attention, this is dummy data.
+        // Update when adding access to real data.
+        value={`${3.1} qm`}
+      />
+      <DataListItem
+        title="Verschattung"
+        subtitle="Anteil an Schattenzeit pro Tag"
+        // TODO: Attention, this is dummy data.
+        // Update when adding access to real data.
+        value={`${65} %`}
+      />
+      <DataListItem
+        title="Gießwassermenge"
+        subtitle="Letzte 14 Tage"
+        // TODO: Attention, this is dummy data.
+        // Update when adding access to real data.
+        value={`${25} l`}
+      />
+      {treeData?.stammumfg && (
+        <DataListItem
+          title="Stammumfang"
+          subtitle="An der weitesten Stelle"
+          value={`${treeData.stammumfg} cm`}
+        />
+      )}
+    </ul>
+  )
+}
 
 const TreePage: TreePageWithLayout = ({ treeData, csrfToken }) => {
   const { t } = useTranslation('common')
@@ -152,9 +156,9 @@ const TreePage: TreePageWithLayout = ({ treeData, csrfToken }) => {
 
   const avgLevel =
     nowcastData && nowcastData[3].value
-      ? mapSuctionTensionToLevel(nowcastData[3].value)
+      ? mapSuctionTensionToStatus(nowcastData[3].value)?.id
       : undefined
-  const circleColorClasses = getScaleClassesByLevel(avgLevel)
+  const circleColorClasses = getClassesByStatusId(avgLevel)
 
   return (
     <div id="inidividual-tree-container">
@@ -208,31 +212,36 @@ const TreePage: TreePageWithLayout = ({ treeData, csrfToken }) => {
           >
             <Carousel dotsClass="slick-dots w-2/6 md:w-1/4 mx-auto">
               {!nowcastError && (
-                <SuctionTensionViz
-                  depth30Level={
+                <GroundLayersViz
+                  depth30StatusId={
                     nowcastData && nowcastData[0].value
-                      ? mapSuctionTensionToLevel(nowcastData[0].value)
+                      ? mapSuctionTensionToStatus(nowcastData[0].value)?.id
                       : undefined
                   }
-                  depth60Level={
+                  depth60StatusId={
                     nowcastData && nowcastData[1].value
-                      ? mapSuctionTensionToLevel(nowcastData[1].value)
+                      ? mapSuctionTensionToStatus(nowcastData[1].value)?.id
                       : undefined
                   }
-                  depth90Level={
+                  depth90StatusId={
                     nowcastData && nowcastData[2].value
-                      ? mapSuctionTensionToLevel(nowcastData[2].value)
+                      ? mapSuctionTensionToStatus(nowcastData[2].value)?.id
                       : undefined
                   }
-                  averageLevel={avgLevel}
+                  averageStatusId={avgLevel}
                 />
               )}
               {!forecastError && forecastData && forecastData?.length > 0 && (
-                <div className="bg-scale-4 h-full">
-                  <code>
-                    <pre>{JSON.stringify(forecastData, null, 2)}</pre>
-                  </code>
-                </div>
+                <ForecastViz
+                  data={(
+                    forecastData.filter(
+                      ({ timestamp, value }) => timestamp && value
+                    ) as { timestamp: string; value: number }[]
+                  ).map(({ timestamp, value }) => ({
+                    date: new Date(timestamp),
+                    waterSupplyStatusId: mapSuctionTensionToStatus(value)?.id,
+                  }))}
+                />
               )}
             </Carousel>
           </div>
@@ -240,7 +249,6 @@ const TreePage: TreePageWithLayout = ({ treeData, csrfToken }) => {
             species={treeData.art_dtsch || 'Unbekannte Art'}
             age={treeData.standalter}
             height={treeData.baumhoehe}
-            level={avgLevel}
             statusBackgroundColor={circleColorClasses.bg}
             statusBorderColor={circleColorClasses.border}
           />
@@ -257,7 +265,6 @@ const TreePage: TreePageWithLayout = ({ treeData, csrfToken }) => {
               species={treeData.art_dtsch || 'Unbekannte Art'}
               age={treeData.standalter}
               height={treeData.baumhoehe}
-              level={avgLevel}
               statusBackgroundColor={circleColorClasses.bg}
               statusBorderColor={circleColorClasses.border}
               isCompressed={hasScrolledPastThreshold}

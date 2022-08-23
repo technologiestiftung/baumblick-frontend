@@ -13,7 +13,6 @@ import { ViewportProps } from '@lib/types/map'
 import {
   TREES_LAYER_ID,
   TREES_LAYER,
-  TREES_NUMBERS,
   TREES_SOURCE,
   TREES_SOURCE_ID,
   TREES_SOURCE_LAYER_ID,
@@ -167,7 +166,6 @@ export const TreesMap: FC<MapProps> = ({
 
       map.current.addSource(TREES_SOURCE_ID, TREES_SOURCE)
       map.current.addLayer(TREES_LAYER)
-      map.current.addLayer(TREES_NUMBERS)
 
       // If we have a treeIdToSelect on the initial map load, we already set the selected feature state, so that the selected style is applied:
       if (treeIdToSelect) {
