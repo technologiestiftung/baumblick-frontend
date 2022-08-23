@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { csrf } from 'src/lib/api/csrf'
-import { supabaseServiceRoleClient } from './_supabase-service-role-client'
+import { supabaseServiceRoleClient } from './_shared/_supabase-service-role-client'
 
 export default async function handler(
   req: NextApiRequest,

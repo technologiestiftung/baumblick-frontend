@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import fetch from 'cross-fetch'
-import sql from './_db'
+import sql from '../_shared/_db'
 //nextjs api route handler
 
 const ml_pgrest_host = process.env.ML_PGREST_HOST
