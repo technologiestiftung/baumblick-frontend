@@ -5,7 +5,7 @@ import { format, isToday } from 'date-fns'
 import { FC } from 'react'
 
 interface DataItem {
-  waterSupplyStatusId: WaterSupplyStatusType['id']
+  waterSupplyStatusId: WaterSupplyStatusType['id'] | undefined
   date: Date
 }
 

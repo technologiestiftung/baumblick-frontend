@@ -6,10 +6,7 @@ import { getTreeData, TreeDataType } from '@lib/requests/getTreeData'
 import { useNowcastData } from '@lib/hooks/useNowcastData'
 import { TreeInfoHeader } from '@components/TreeInfoHeader'
 import { DataListItem } from '@components/DataListItem'
-import {
-  mapSuctionTensionToStatus,
-  WaterSupplyStatusType,
-} from '@lib/utils/mapSuctionTensionToStatus'
+import { mapSuctionTensionToStatus } from '@lib/utils/mapSuctionTensionToStatus'
 import { GroundLayersViz } from '@components/GroundLayersViz'
 import { useRouter } from 'next/router'
 import { Cross as CrossIcon } from '@components/Icons'
@@ -22,7 +19,6 @@ import { getClassesByStatusId } from '@lib/utils/getClassesByStatusId'
 import { treeUrlSlugToId } from '@lib/utils/urlUtil'
 import { getStatusLabel } from '@lib/utils/getStatusLabel'
 import { ForecastViz } from '@components/ForecastViz'
-import { addDays } from 'date-fns'
 import { FeedbackRequestsList } from '@components/FeedbackRequestsList'
 import csrf from '@lib/api/csrf'
 import { useForecastData } from '@lib/hooks/useForecastData'
@@ -237,15 +233,14 @@ const TreePage: TreePageWithLayout = ({ treeData, csrfToken }) => {
               )}
               {!forecastError && forecastData && forecastData?.length > 0 && (
                 <ForecastViz
-                  // TODO: Attention: this is sample data. Replace with actual data once we have access:
-                  data={Array.from(Array(14)).map((_, i: number) => {
-                    return {
-                      date: addDays(Date.now(), i),
-                      waterSupplyStatusId: ['good', 'medium', 'critical'][
-                        Math.floor(Math.random() * 3)
-                      ] as WaterSupplyStatusType['id'],
-                    }
-                  })}
+                  data={(
+                    forecastData.filter(
+                      ({ timestamp, value }) => timestamp && value
+                    ) as { timestamp: string; value: number }[]
+                  ).map(({ timestamp, value }) => ({
+                    date: new Date(timestamp),
+                    waterSupplyStatusId: mapSuctionTensionToStatus(value)?.id,
+                  }))}
                 />
               )}
             </Carousel>
