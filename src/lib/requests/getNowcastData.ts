@@ -40,7 +40,7 @@ export const getNowcastData = async (
 
   const REQUEST_PARAMS = new URLSearchParams({
     [TREE_ID_COLUMN_NAME]: `eq.${treeId}`,
-    order: `${COLUMN_TO_SORT_BY}`,
+    order: `${COLUMN_TO_SORT_BY}.desc`,
     limit: '4',
     offset: '0',
   })
