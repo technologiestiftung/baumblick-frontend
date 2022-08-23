@@ -46,7 +46,7 @@ export const FeedbackReportForm: FC<FeedbackReportFormPropType> = ({
           >
             <h4 className="font-bold">{t('feedback.confirmationTitle')}</h4>
             <div className="row-span-2 flex items-center">
-              <Check color1={colors.scale['1']} />
+              <Check color1={colors.scale['good']} />
             </div>
             <p className="font-serif text-gray-500">
               {t('feedback.confirmationDescription')}

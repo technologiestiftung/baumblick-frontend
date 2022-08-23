@@ -2,11 +2,11 @@ import classNames from 'classnames'
 import { DOMAttributes, FC } from 'react'
 
 const scaleClasses = [
-  'border-scale-1',
-  'border-scale-2',
-  'border-scale-3',
-  'border-scale-4',
-  'border-scale-5',
+  'border-gradient-1',
+  'border-gradient-2',
+  'border-gradient-3',
+  'border-gradient-4',
+  'border-gradient-5',
 ]
 
 interface ChapterType {
