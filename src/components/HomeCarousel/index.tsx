@@ -49,7 +49,7 @@ export const HomeCarousel: FC = () => {
     '5': <Pill className="bg-scale-5 border-scale-5-dark">5</Pill>,
   }
   return (
-    <Carousel>
+    <Carousel wrapperClass="md:border-l md:border-r border-gray-200">
       <HomeSlide
         img={{
           url: '/images/home-slider/1.svg',

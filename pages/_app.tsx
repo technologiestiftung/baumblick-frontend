@@ -39,11 +39,12 @@ const App: FC<AppPropsWithLayout> = ({
       <Head pageTitle={pageProps.title || ''} />
       <main
         className={classNames(
-          'fixed top-0 left-0 w-full z-0 min-h-[calc(100%-4rem)]',
-          'overflow-x-hidden overflow-y-auto bottom-16 grid'
+          'fixed top-0 md:left-[12px] md:w-[calc(100vw-12px)] z-0 min-h-[calc(100%-4rem)]',
+          'bottom-16 grid',
+          'overflow-x-hidden md:overflow-x-visible overflow-y-auto '
         )}
       >
-        <div className="w-full max-w-3xl mx-auto">
+        <div className="w-screen max-w-3xl mx-auto">
           {getLayout(<Component {...pageProps} />, pageProps)}
         </div>
       </main>

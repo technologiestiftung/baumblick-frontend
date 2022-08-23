@@ -74,6 +74,19 @@
 		hyphenate-limit-after: 2;
 		hyphenate-limit-before: 3;
 	}
+
+	main::-webkit-scrollbar {
+		@apply w-3;
+	}
+
+	main::-webkit-scrollbar-track {
+		@apply bg-white;
+	}
+
+	main::-webkit-scrollbar-thumb {
+		@apply bg-gray-400 rounded-full text-white;
+		border: 3px solid;
+	}
 	
 	/* Prose styles (tailwindcss typography plugin) */
 	main .prose {
@@ -106,7 +119,7 @@
 
 /* Slick carousel adjustments */
 .slick-slider {
-	@apply h-full grid-cols-1 grid-rows-[1fr,auto] gap-4;
+	@apply h-full grid-cols-1 grid-rows-[1fr,auto] gap-4 ;
 	display: grid !important;
 }
 
