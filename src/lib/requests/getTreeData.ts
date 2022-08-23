@@ -64,7 +64,7 @@ export const getTreeData = async (
     throw new Error(txt)
   }
 
-  const data = (await response.json()) as { json: TreeDataType[] }
+  const { data } = (await response.json()) as { data: TreeDataType[] }
 
-  return data.json
+  return data
 }
