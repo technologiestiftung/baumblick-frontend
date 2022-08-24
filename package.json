@@ -1,7 +1,7 @@
 {
   "name": "treewatch-frontend",
   "license": "MIT",
-  "version": "1.0.0",
+  "version": "1.0.0-staging.1",
   "scripts": {
     "cm": "cz",
     "dev": "next dev",
