@@ -1,3 +1,4 @@
+import { WATER_SUPPLY_STATUSES } from '@lib/utils/mapSuctionTensionToStatus'
 import { LayerSpecification, SourceSpecification } from 'maplibre-gl'
 import colors from '../../style/colors'
 
@@ -28,38 +29,18 @@ const CIRCLE_STROKE_WIDTH = {
   highlighted: 5,
 }
 
-export const TREES_NUMBERS: LayerSpecification = {
-  id: TREES_NUMBERS_LAYER_ID,
-  type: 'symbol',
-  source: TREES_SOURCE_ID,
-  'source-layer': TREES_SOURCE_LAYER_ID,
-  filter: ['has', NOWCAST_AVERAGE_PROPERTY],
-  layout: {
-    'text-field': [
-      'case',
-      ['has', NOWCAST_AVERAGE_PROPERTY],
-      [
-        'step',
-        ['get', NOWCAST_AVERAGE_PROPERTY],
-        `1`,
-        50,
-        `2`,
-        100,
-        `3`,
-        150,
-        `4`,
-        200,
-        `5`,
-      ],
-      '',
-    ],
-    'text-size': 12,
-    'text-font': ['Bold'],
-  },
-  paint: {
-    'text-opacity': 0.5,
-  },
-  minzoom: 17,
+/**
+ * Constructs a flat array where color values and numbers alternate. Finishes with a color value for every value above the last number. This array is used as the stepper for the layer color scales.
+ * @param idSuffix string
+ * @returns (string | number)[]
+ */
+const getColorScale = (idSuffix = ''): (string | number)[] => {
+  return WATER_SUPPLY_STATUSES.flatMap<string | number>((statusItem) => {
+    return [
+      colors.scale[`${statusItem.id}${idSuffix}` as keyof typeof colors.scale],
+      statusItem.suctionTensionRange[1],
+    ]
+  }).slice(0, -1) // Removes the last number value because it not needed anymore
 }
 
 export const TREES_LAYER: LayerSpecification = {
@@ -76,19 +57,7 @@ export const TREES_LAYER: LayerSpecification = {
     'circle-color': [
       'case',
       ['has', NOWCAST_AVERAGE_PROPERTY],
-      [
-        'step',
-        ['get', NOWCAST_AVERAGE_PROPERTY],
-        colors.scale[`1`],
-        50,
-        colors.scale[`2`],
-        100,
-        colors.scale[`3`],
-        150,
-        colors.scale[`4`],
-        200,
-        colors.scale[`5`],
-      ],
+      ['step', ['get', NOWCAST_AVERAGE_PROPERTY], ...getColorScale()],
       colors.gray[200],
     ],
     'circle-stroke-width': [
@@ -105,19 +74,7 @@ export const TREES_LAYER: LayerSpecification = {
     'circle-stroke-color': [
       'case',
       ['has', NOWCAST_AVERAGE_PROPERTY],
-      [
-        'step',
-        ['get', NOWCAST_AVERAGE_PROPERTY],
-        colors.scale[`1-dark`],
-        50,
-        colors.scale[`2-dark`],
-        100,
-        colors.scale[`3-dark`],
-        150,
-        colors.scale[`4-dark`],
-        200,
-        colors.scale[`5-dark`],
-      ],
+      ['step', ['get', NOWCAST_AVERAGE_PROPERTY], ...getColorScale('-dark')],
       colors.gray[300],
     ],
     'circle-radius': [

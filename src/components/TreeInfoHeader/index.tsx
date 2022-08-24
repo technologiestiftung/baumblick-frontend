@@ -15,7 +15,6 @@ export interface TreeInfoHeaderType {
   statusBorderColor?: string
   isCompressed?: boolean
   additionalClasses?: string
-  level?: string | number
 }
 
 export const TreeInfoHeader: FC<TreeInfoHeaderType> = ({
@@ -26,7 +25,6 @@ export const TreeInfoHeader: FC<TreeInfoHeaderType> = ({
   statusBorderColor,
   isCompressed = false,
   additionalClasses = '',
-  level = '',
 }) => {
   return (
     <header
@@ -48,9 +46,7 @@ export const TreeInfoHeader: FC<TreeInfoHeaderType> = ({
               ? `${statusBackgroundColor} ${statusBorderColor}`
               : 'bg-gray-300 border-gray-400'
           )}
-        >
-          {level}
-        </div>
+        ></div>
       )}
       <Headline
         h1

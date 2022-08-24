@@ -71,7 +71,7 @@ export const getForecastData = async (
     throw new Error(txt)
   }
 
-  const data = (await response.json()) as { json: ForecastDataType[] }
+  const { data } = (await response.json()) as { data: ForecastDataType[] }
 
-  return data.json
+  return data
 }

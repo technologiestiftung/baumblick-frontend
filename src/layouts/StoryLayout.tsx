@@ -72,9 +72,9 @@ const StoryLayoutWithoutTranslation: FC = ({ children }) => {
           <story.Icon
             size={80}
             strokeWidth={4}
-            color1={colors.scale[1]}
-            color2={colors.scale[2]}
-            color3={colors.scale[3]}
+            color1={colors.gradient[1]}
+            color2={colors.gradient[2]}
+            color3={colors.gradient[3]}
           />
         </div>
         <Paragraph className="italic text-gray-500">
@@ -138,12 +138,15 @@ const StoryLayoutWithoutTranslation: FC = ({ children }) => {
             onClick={() => setShowStickyTOC((v) => !v)}
           >
             {showStickyTableOfContents ? (
-              <Cross color1={colors.scale['1']} color2={colors.scale['3']} />
+              <Cross
+                color1={colors.gradient['1']}
+                color2={colors.gradient['3']}
+              />
             ) : (
               <HamburgerMenu
-                color1={colors.scale['1']}
-                color2={colors.scale['2']}
-                color3={colors.scale['3']}
+                color1={colors.gradient['1']}
+                color2={colors.gradient['2']}
+                color3={colors.gradient['3']}
               />
             )}
             Inhalte

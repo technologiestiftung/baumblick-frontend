@@ -13,16 +13,19 @@ const colors = {
     '900': '#111827',
   },
   scale: {
+    good: '#53BCDC',
+    'good-dark': '#4AAAC8',
+    medium: '#80DEB6',
+    'medium-dark': '#73C9A5',
+    critical: '#FBE993',
+    'critical-dark': '#E2D385',
+  },
+  gradient: {
     '1': '#53BCDC',
-    '1-dark': '#4AAAC8',
     '2': '#52CFCF',
-    '2-dark': '#49BBBC',
     '3': '#80DEB6',
-    '3-dark': '#73C9A5',
     '4': '#BBE69D',
-    '4-dark': '#A8D08E',
     '5': '#FBE993',
-    '5-dark': '#E2D385',
   },
 }
 

@@ -1,29 +1,29 @@
 import { RootsIllustration } from '@components/RootsIllustration'
-import { SuctionTensionLevel } from '@lib/utils/mapSuctionTensionToLevel'
+import { WaterSupplyStatusType } from '@lib/utils/mapSuctionTensionToStatus'
 import classNames from 'classnames'
 import { FC } from 'react'
 import colors from '../../style/colors'
 import { AverageCircle } from './AverageCircle'
 import { SoilLayer } from './SoilLayer'
 
-export interface SuctionTensionVizType {
-  depth30Level: SuctionTensionLevel | undefined
-  depth60Level: SuctionTensionLevel | undefined
-  depth90Level: SuctionTensionLevel | undefined
-  averageLevel: SuctionTensionLevel | undefined
+export interface GroundLayersVizType {
+  depth30StatusId: WaterSupplyStatusType['id'] | undefined
+  depth60StatusId: WaterSupplyStatusType['id'] | undefined
+  depth90StatusId: WaterSupplyStatusType['id'] | undefined
+  averageStatusId: WaterSupplyStatusType['id'] | undefined
 }
 
-export const SuctionTensionViz: FC<SuctionTensionVizType> = ({
-  depth30Level,
-  depth60Level,
-  depth90Level,
-  averageLevel,
+export const GroundLayersViz: FC<GroundLayersVizType> = ({
+  depth30StatusId,
+  depth60StatusId,
+  depth90StatusId,
+  averageStatusId,
 }) => {
   return (
     <div className="relative overflow-hidden">
-      <SoilLayer depth={30} level={depth30Level} />
-      <SoilLayer depth={60} level={depth60Level} />
-      <SoilLayer depth={90} level={depth90Level} />
+      <SoilLayer depth={30} statusId={depth30StatusId} />
+      <SoilLayer depth={60} statusId={depth60StatusId} />
+      <SoilLayer depth={90} statusId={depth90StatusId} />
       <div
         className={classNames(
           'absolute top-0',
@@ -47,7 +47,7 @@ export const SuctionTensionViz: FC<SuctionTensionVizType> = ({
           'flex justify-center items-center'
         )}
       >
-        <AverageCircle level={averageLevel} />
+        <AverageCircle statusId={averageStatusId} />
       </div>
     </div>
   )

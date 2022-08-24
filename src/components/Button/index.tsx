@@ -48,11 +48,11 @@ const getStyles = ({ primary, disabled, className }: ButtonPropType): string =>
 
 const Scale: FC = () => (
   <div className="flex h-1 absolute bottom-0 left-0 right-0">
-    <span className="w-full h-1 bg-scale-1 rounded-bl" />
-    <span className="w-full h-1 bg-scale-2" />
-    <span className="w-full h-1 bg-scale-3" />
-    <span className="w-full h-1 bg-scale-4" />
-    <span className="w-full h-1 bg-scale-5 rounded-br" />
+    <span className="w-full h-1 bg-gradient-1 rounded-bl" />
+    <span className="w-full h-1 bg-gradient-2" />
+    <span className="w-full h-1 bg-gradient-3" />
+    <span className="w-full h-1 bg-gradient-4" />
+    <span className="w-full h-1 bg-gradient-5 rounded-br" />
   </div>
 )
 
