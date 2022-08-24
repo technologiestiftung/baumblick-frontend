@@ -53,7 +53,9 @@ export default async function handler(
           .map((item) => item.rainfall_in_mm)
           .reduce((prev, curr) => prev + curr, initialValue)
 
-        return res.status(200).json({ data: { table: result, sum } })
+        return res
+          .status(200)
+          .json({ data: { table: result, sum_rainfall_in_mm: sum } })
       }
       default:
         return res
