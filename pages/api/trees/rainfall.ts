@@ -22,14 +22,11 @@ export default async function handler(
             .json({ error: 'Missing gml_id search parameter' })
         }
 
-        const result = await sql`SELECT
-				jsonb_build_object(
-				'type', 'Feature',
-				'geometry',  ST_AsGeoJSON(grouped.geom)::jsonb,
-				'properties', to_jsonb(grouped.*) - 'geom'
-				) as geojson,
-				grouped.weekday,
-				grouped.daily_rainfall_sum_mm
+        const result = await sql<
+          { rainfall_in_mm: number; timestamp: string }[]
+        >`SELECT
+				grouped.weekday as "timestamp",
+				grouped.daily_rainfall_sum_mm as rainfall_in_mm
 			FROM (
 				SELECT
 					geometry AS geom,
@@ -51,8 +48,12 @@ export default async function handler(
 						;
 
 					`
+        const initialValue = 0
+        const sum = result
+          .map((item) => item.rainfall_in_mm)
+          .reduce((prev, curr) => prev + curr, initialValue)
 
-        return res.status(200).json({ data: result })
+        return res.status(200).json({ data: { table: result, sum } })
       }
       default:
         return res
