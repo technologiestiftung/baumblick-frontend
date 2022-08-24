@@ -1,3 +1,16 @@
+# [1.0.0-staging.2](https://github.com/technologiestiftung/treewatch-frontend/compare/v1.0.0-staging.1...v1.0.0-staging.2) (2022-08-24)
+
+
+### Bug Fixes
+
+* **sql:** Fix query to get the last 14 days of values from ([019c800](https://github.com/technologiestiftung/treewatch-frontend/commit/019c800e817ed97d36109e0d1de4680da5f5c104))
+
+
+### Features
+
+* Add sum of all data to the results ([1135a29](https://github.com/technologiestiftung/treewatch-frontend/commit/1135a2940541766c4021d8cfa48db54d437c60f1))
+* **rainfall:** Add api route to get rainfall data per tree ([6617bff](https://github.com/technologiestiftung/treewatch-frontend/commit/6617bff0b57e86e7724b9285914f4dc30b1dacfd))
+
 # 1.0.0-staging.1 (2022-08-24)
 
 
