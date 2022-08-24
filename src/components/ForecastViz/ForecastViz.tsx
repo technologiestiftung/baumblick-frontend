@@ -2,7 +2,7 @@ import { getClassesByStatusId } from '@lib/utils/getClassesByStatusId'
 import { getStatusLabel } from '@lib/utils/getStatusLabel'
 import { WaterSupplyStatusType } from '@lib/utils/mapSuctionTensionToStatus'
 import classNames from 'classnames'
-import { addDays, format, isSameDay, isToday } from 'date-fns'
+import { addDays, differenceInDays, format, isSameDay, isToday } from 'date-fns'
 import useTranslation from 'next-translate/useTranslation'
 import { FC } from 'react'
 
@@ -55,7 +55,14 @@ export const ForecastViz: FC<ForecastVizPropType> = ({ data }) => {
       className={classNames('w-full h-full', 'bg-white', 'grid gap-x-[2px]')}
       style={{ ...vizGridAxesClasses }}
     >
-      {nextDaysWithData.map((dataItem) => {
+      {nextDaysWithData.map((dataItem, i) => {
+        const showRelativeDateLabel =
+          i === Math.floor(nextDaysWithData.length / 2) ||
+          i === nextDaysWithData.length - 1
+        const daysDiff = differenceInDays(
+          dataItem.date,
+          nextDaysWithData[0].date
+        )
         return (
           <li
             key={dataItem.date.toISOString()}
@@ -77,7 +84,11 @@ export const ForecastViz: FC<ForecastVizPropType> = ({ data }) => {
                 'text-gray-900 text-opacity-50 font-semibold text-sm md:text-base whitespace-nowrap'
               )}
             >
-              {getDateLabel(dataItem.date)}
+              {`${getDateLabel(dataItem.date)} ${
+                showRelativeDateLabel
+                  ? `(${t(`treeView.forecastViz.relativeDays`, { daysDiff })})`
+                  : ``
+              }`.trim()}
             </span>
           </li>
         )
