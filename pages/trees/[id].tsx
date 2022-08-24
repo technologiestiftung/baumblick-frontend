@@ -22,6 +22,7 @@ import { ForecastViz } from '@components/ForecastViz'
 import { FeedbackRequestsList } from '@components/FeedbackRequestsList'
 import csrf from '@lib/api/csrf'
 import { useForecastData } from '@lib/hooks/useForecastData'
+import { combineNowAndForecastData } from '@lib/utils/forecastUtil/forecastUtil'
 
 interface TreePageComponentPropType {
   treeData: TreeDataType
@@ -160,6 +161,13 @@ const TreePage: TreePageWithLayout = ({ treeData, csrfToken }) => {
       : undefined
   const circleColorClasses = getClassesByStatusId(avgLevel)
 
+  const nowcastReady = forecastData && forecastData?.length > 0
+  const forecastReady = nowcastData && nowcastData.length === 4
+  const forecast =
+    nowcastReady && forecastReady
+      ? combineNowAndForecastData(nowcastData, forecastData)
+      : undefined
+
   return (
     <div id="inidividual-tree-container">
       <div
@@ -231,23 +239,7 @@ const TreePage: TreePageWithLayout = ({ treeData, csrfToken }) => {
                   averageStatusId={avgLevel}
                 />
               )}
-              {!forecastError && (
-                <ForecastViz
-                  data={
-                    forecastData && forecastData?.length > 0
-                      ? (
-                          forecastData.filter(
-                            ({ timestamp, value }) => timestamp && value
-                          ) as { timestamp: string; value: number }[]
-                        ).map(({ timestamp, value }) => ({
-                          date: new Date(timestamp),
-                          waterSupplyStatusId:
-                            mapSuctionTensionToStatus(value)?.id,
-                        }))
-                      : undefined
-                  }
-                />
-              )}
+              {!forecastError && <ForecastViz data={forecast} />}
             </Carousel>
           </div>
           <TreeInfoHeader
