@@ -17,7 +17,7 @@ const getDateLabel = (date: Date): string => {
   return `${format(date, 'dd.MM.')}${isToday(date) ? ' (Heute)' : ''}`
 }
 
-const NUMBER_OF_DAYS_TO_DISPLAY = 14
+const NUMBER_OF_DAYS_TO_DISPLAY = 15 // 14 days forecast + today for context
 const NOW = Date.now()
 
 const NEXT_14_DAYS_WITHOUT_DATA: DataItem[] = Array.from(
