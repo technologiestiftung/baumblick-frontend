@@ -1,14 +1,14 @@
 import { getBaseUrl } from '@lib/utils/urlUtil'
 
 type RawRainDataType = {
-  weekday: string
-  daily_rainfall_sum_mm: number
+  table: {
+    timestamp: string
+    rainfall_in_mm: number
+  }[]
+  sum_rainfall_in_mm: number
 }
 
-export type RainDataType = {
-  weekday: Date
-  daily_rainfall_sum_mm: number
-}
+export type RainDataType = number
 
 const TREE_ID_COLUMN_NAME = 'gml_id'
 
@@ -19,7 +19,7 @@ const TREE_ID_COLUMN_NAME = 'gml_id'
  */
 export const getRainData = async (
   treeId: string
-): Promise<RainDataType[] | undefined> => {
+): Promise<RainDataType | undefined> => {
   if (!treeId) return
 
   const REQUEST_URL = `${getBaseUrl()}/api/trees/rainfall`
@@ -36,10 +36,7 @@ export const getRainData = async (
     throw new Error(txt)
   }
 
-  const data = (await response.json()) as { data: RawRainDataType[] }
+  const { data } = (await response.json()) as { data: RawRainDataType }
 
-  return data.data.map(({ weekday, daily_rainfall_sum_mm }) => ({
-    weekday: new Date(weekday),
-    daily_rainfall_sum_mm,
-  }))
+  return data.sum_rainfall_in_mm
 }

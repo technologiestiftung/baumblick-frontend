@@ -84,7 +84,7 @@ const InfoList: FC<{
   nowcastData: NowcastDataType[] | null
   nowcastIsLoading: boolean
   nowcastError: Error | null
-  rainData: RainDataType[] | null
+  rainData: RainDataType | null
   rainIsLoading: boolean
   rainError: Error | null
 }> = ({ treeData, nowcastData, nowcastIsLoading, nowcastError, rainData }) => {
@@ -95,11 +95,6 @@ const InfoList: FC<{
     !nowcastError &&
     nowcastData[3].value &&
     mapSuctionTensionToStatus(nowcastData[3].value)?.id
-
-  const totalRain = rainData?.reduce(
-    (acc, item) => acc + item.daily_rainfall_sum_mm,
-    0
-  )
 
   return (
     <ul className="z-10 relative bg-white">
@@ -118,9 +113,9 @@ const InfoList: FC<{
         title={t(`treeView.infoList.rainAmount.label`)}
         subtitle={t(`treeView.infoList.rainAmount.hint`)}
         value={
-          totalRain
+          rainData
             ? t(`treeView.infoList.rainAmount.value`, {
-                value: totalRain.toFixed(1),
+                value: rainData.toFixed(1),
               })
             : '–'
         }
