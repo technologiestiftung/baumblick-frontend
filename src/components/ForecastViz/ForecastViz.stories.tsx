@@ -66,3 +66,9 @@ WithCroppedDays.args = {
     }
   }),
 }
+
+export const WithoutData = Template.bind({})
+
+WithoutData.args = {
+  data: undefined,
+}
