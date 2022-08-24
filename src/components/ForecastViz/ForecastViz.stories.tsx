@@ -15,10 +15,49 @@ const Template: Story<ForecastVizPropType> = (props) => (
   </div>
 )
 
-export const Default = Template.bind({})
+export const StartingToday = Template.bind({})
 
-Default.args = {
+StartingToday.args = {
   data: Array.from(Array(14)).map((_, i: number) => {
+    return {
+      date: addDays(Date.now(), i),
+      waterSupplyStatusId: ['good', 'medium', 'critical'][
+        Math.floor(Math.random() * 3)
+      ] as WaterSupplyStatusType['id'],
+    }
+  }),
+}
+
+export const NotStartingToday = Template.bind({})
+
+NotStartingToday.args = {
+  data: Array.from(Array(14)).map((_, i: number) => {
+    return {
+      date: addDays(Date.now(), i + 2),
+      waterSupplyStatusId: ['good', 'medium', 'critical'][
+        Math.floor(Math.random() * 3)
+      ] as WaterSupplyStatusType['id'],
+    }
+  }),
+}
+
+export const WithIncompleteDays = Template.bind({})
+
+WithIncompleteDays.args = {
+  data: Array.from(Array(4)).map((_, i: number) => {
+    return {
+      date: addDays(Date.now(), i),
+      waterSupplyStatusId: ['good', 'medium', 'critical'][
+        Math.floor(Math.random() * 3)
+      ] as WaterSupplyStatusType['id'],
+    }
+  }),
+}
+
+export const WithCroppedDays = Template.bind({})
+
+WithCroppedDays.args = {
+  data: Array.from(Array(25)).map((_, i: number) => {
     return {
       date: addDays(Date.now(), i),
       waterSupplyStatusId: ['good', 'medium', 'critical'][
