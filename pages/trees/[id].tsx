@@ -88,6 +88,7 @@ const InfoList: FC<{
   rainIsLoading: boolean
   rainError: Error | null
 }> = ({ treeData, nowcastData, nowcastIsLoading, nowcastError, rainData }) => {
+  const { t } = useTranslation('common')
   const averageStatusId =
     nowcastData &&
     !nowcastIsLoading &&
@@ -103,41 +104,55 @@ const InfoList: FC<{
   return (
     <ul className="z-10 relative bg-white">
       <DataListItem
-        title="Wasserversorgung"
-        subtitle="⌀ aus 30, 60, 90 cm Tiefe"
-        value={averageStatusId ? getStatusLabel(averageStatusId) : '-'}
+        title={t(`treeView.infoList.waterSupply.label`)}
+        subtitle={t(`treeView.infoList.waterSupply.hint`)}
+        value={
+          averageStatusId
+            ? t(`treeView.infoList.waterSupply.value`, {
+                value: getStatusLabel(averageStatusId),
+              })
+            : '-'
+        }
       />
       <DataListItem
-        title="Regenmenge"
-        subtitle="Letzte 14 Tage"
-        value={totalRain ? `${totalRain.toFixed(1)} mm` : '–'}
+        title={t(`treeView.infoList.rainAmount.label`)}
+        subtitle={t(`treeView.infoList.rainAmount.hint`)}
+        value={
+          totalRain
+            ? t(`treeView.infoList.rainAmount.value`, {
+                value: totalRain.toFixed(1),
+              })
+            : '–'
+        }
       />
       <DataListItem
-        title="Baumscheibe"
-        subtitle="Unversiegelter Bereich um den Stamm"
+        title={t(`treeView.infoList.treeDisc.label`)}
+        subtitle={t(`treeView.infoList.treeDisc.hint`)}
         // TODO: Attention, this is dummy data.
         // Update when adding access to real data.
-        value={`${3.1} qm`}
+        value={t(`treeView.infoList.treeDisc.value`, { value: 3.1 })}
       />
       <DataListItem
-        title="Verschattung"
-        subtitle="Anteil an Schattenzeit pro Tag"
+        title={t(`treeView.infoList.shading.label`)}
+        subtitle={t(`treeView.infoList.shading.hint`)}
         // TODO: Attention, this is dummy data.
         // Update when adding access to real data.
-        value={`${65} %`}
+        value={t(`treeView.infoList.shading.value`, { value: 65 })}
       />
       <DataListItem
-        title="Gießwassermenge"
-        subtitle="Letzte 14 Tage"
+        title={t(`treeView.infoList.wateringAmount.label`)}
+        subtitle={t(`treeView.infoList.wateringAmount.hint`)}
         // TODO: Attention, this is dummy data.
         // Update when adding access to real data.
-        value={`${25} l`}
+        value={t(`treeView.infoList.wateringAmount.value`, { value: 25 })}
       />
       {treeData?.stammumfg && (
         <DataListItem
-          title="Stammumfang"
-          subtitle="An der weitesten Stelle"
-          value={`${treeData.stammumfg} cm`}
+          title={t(`treeView.infoList.trunkCircumference.label`)}
+          subtitle={t(`treeView.infoList.trunkCircumference.hint`)}
+          value={t(`treeView.infoList.trunkCircumference.value`, {
+            value: treeData.stammumfg,
+          })}
         />
       )}
     </ul>
@@ -194,7 +209,7 @@ const TreePage: TreePageWithLayout = ({ treeData, csrfToken }) => {
               query: { latitude: treeData.lat, longitude: treeData.lng },
             })
           }}
-          aria-label="Kartenansicht"
+          aria-label={t(`treeView.mapAriaLabel`)}
         >
           <div
             className={classNames(
