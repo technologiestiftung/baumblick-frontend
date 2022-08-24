@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { csrf } from 'src/lib/api/csrf'
-import { supabaseServiceRoleClient } from './_supabase-service-role-client'
+import { supabaseServiceRoleClient } from './_shared/_supabase-service-role-client'
 
 export default async function handler(
   req: NextApiRequest,
@@ -33,7 +33,7 @@ export default async function handler(
           if (issuesError) {
             return res.status(400).json({ error: issuesError })
           }
-          return res.status(201).json({ issues })
+          return res.status(201).json({ data: issues })
         } else {
           return res.status(400).json({
             error:
@@ -44,8 +44,14 @@ export default async function handler(
       default:
         return res.status(404).json({ error: 'only POST method' })
     }
-  } catch (err) {
+  } catch (err: unknown) {
     console.error(err)
-    return res.status(500).json({ error: 'internal server error' })
+    if (err instanceof Error) {
+      return res
+        .status(500)
+        .json({ message: 'internal server error', error: err.message })
+    } else {
+      return res.status(500).json({ error: 'internal server error' })
+    }
   }
 }

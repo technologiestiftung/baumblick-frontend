@@ -49,29 +49,33 @@ export const WaterSupplyLegend: FC<WaterSupplyLegendType> = ({
             {t('legend.map.title')}
           </h2>
           <ul>
-            {Object.entries(levels).map(([id, label]) => {
-              return (
-                <li
-                  key={id}
-                  className={classNames(
-                    'mt-1 first-of-type:mt-0',
-                    'flex gap-2 items-center'
-                  )}
-                >
-                  <Pill
+            {Object.entries(levels)
+              .filter(([id]) => id !== 'unknown')
+              .map(([id, label]) => {
+                return (
+                  <li
+                    key={id}
                     className={classNames(
-                      'border',
-                      Object.values(
-                        getClassesByStatusId(id as WaterSupplyStatusType['id'])
-                      )
+                      'mt-1 first-of-type:mt-0',
+                      'flex gap-2 items-center'
                     )}
-                  />
-                  <span className="text-xs font-semibold text-gray-800">
-                    {label}
-                  </span>
-                </li>
-              )
-            })}
+                  >
+                    <Pill
+                      className={classNames(
+                        'border',
+                        Object.values(
+                          getClassesByStatusId(
+                            id as WaterSupplyStatusType['id']
+                          )
+                        )
+                      )}
+                    />
+                    <span className="text-xs font-semibold text-gray-800">
+                      {label}
+                    </span>
+                  </li>
+                )
+              })}
           </ul>
         </div>
       </div>

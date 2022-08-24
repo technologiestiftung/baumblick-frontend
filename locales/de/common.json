@@ -64,12 +64,57 @@
     "copiedFeedback": "In Zwischenablage kopiert!"
   },
   "treeView": {
+    "mapAriaLabel": "Kartenansicht",
+    "soilViz": {
+      "depthAriaLabel": "Tiefe: {{depth}} cm, Wasserversorgung: {{waterSupply}}",
+      "averageWaterSupply": "Durschnittliche Wasserversorgung: {{waterSupply}}",
+      "depthLabel": "{{depth}} cm"
+    },
     "tabs": {
       "0": "Infos",
       "1": "Mitwirken"
     },
     "forecastViz": {
       "relativeDays": "In {{daysDiff}} Tage"
+    },
+    "header": {
+      "height": "{{value}} m",
+      "plantYear": {
+        "one": "Vor {{count}} Jahr gepflanzt",
+        "other": "Vor {{count}} Jahren gepflanzt"
+      }
+    },
+    "infoList": {
+      "waterSupply": {
+        "label": "Wasserversorgung",
+        "hint": "⌀ aus 30, 60, 90 cm Tiefe",
+        "value": "{{value}}"
+      },
+      "rainAmount": {
+        "label": "Wassermenge",
+        "hint": "Letzte 14 Tage",
+        "value": "{{value}} mm"
+      },
+      "treeDisc": {
+        "label": "Baumscheibe",
+        "hint": "Unversiegelter Bereich um den Stamm",
+        "value": "{{value}} qm"
+      },
+      "shading": {
+        "label": "Verschattung",
+        "hint": "Anteil an Schattenzeit pro Tag",
+        "value": "{{value}} %"
+      },
+      "wateringAmount": {
+        "label": "Gießwassermenge",
+        "hint": "Letzte 14 Tage",
+        "value": "{{value}} l"
+      },
+      "trunkCircumference": {
+        "label": "Stammumfang",
+        "hint": "An der weitesten Stelle",
+        "value": "{{value}} cm"
+      }
     }
   },
   "feedback": {
