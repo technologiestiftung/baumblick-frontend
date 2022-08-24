@@ -5,6 +5,7 @@ import {
 } from '@components/Icons'
 import { TreeContextMenu } from '@components/TreeContextMenu'
 import classNames from 'classnames'
+import useTranslation from 'next-translate/useTranslation'
 import { FC } from 'react'
 
 export interface TreeInfoHeaderType {
@@ -26,6 +27,7 @@ export const TreeInfoHeader: FC<TreeInfoHeaderType> = ({
   isCompressed = false,
   additionalClasses = '',
 }) => {
+  const { t } = useTranslation('common')
   return (
     <header
       className={classNames(
@@ -62,13 +64,14 @@ export const TreeInfoHeader: FC<TreeInfoHeaderType> = ({
         <div className={classNames('col-span-3', 'flex flex-wrap gap-2')}>
           {height && (
             <span className="flex gap-1 font-serif">
-              <HeightIcon className="text-gray-400" /> {height}m
+              <HeightIcon className="text-gray-400" />
+              {t('treeView.header.height', { value: height })}
             </span>
           )}
           {age && (
             <span className="flex gap-1 font-serif">
               <PlantIcon className="text-gray-400" />
-              Vor {age} Jahr{age > 1 && 'en'} gepflanzt
+              {t('treeView.header.plantYear', { count: age })}
             </span>
           )}
         </div>

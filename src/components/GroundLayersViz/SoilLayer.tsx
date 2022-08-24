@@ -1,6 +1,7 @@
 import { getStatusLabel } from '@lib/utils/getStatusLabel'
 import { WaterSupplyStatusType } from '@lib/utils/mapSuctionTensionToStatus'
 import classNames from 'classnames'
+import useTranslation from 'next-translate/useTranslation'
 import { FC } from 'react'
 import colors from '../../style/colors'
 
@@ -8,6 +9,7 @@ export const SoilLayer: FC<{
   statusId: WaterSupplyStatusType['id'] | undefined
   depth: number
 }> = ({ depth, statusId }) => {
+  const { t } = useTranslation('common')
   return (
     <div
       style={{
@@ -25,9 +27,12 @@ export const SoilLayer: FC<{
         'flex items-center',
         'transition-colors'
       )}
-      aria-label={`Tiefe: ${depth} cm, Wasserversorgung: ${
-        statusId ? getStatusLabel(statusId) || '' : 'unbekannt'
-      }`}
+      aria-label={t(`treeView.soilViz.depthAriaLabel`, {
+        depth,
+        waterSupply: statusId
+          ? getStatusLabel(statusId) || ''
+          : t<string>(`legend.map.levels.unknown`),
+      })}
     >
       <span
         className={classNames(
@@ -36,8 +41,8 @@ export const SoilLayer: FC<{
           'px-2 py-1'
         )}
       >
-        {depth} cm{' '}
-        <b className="ml-1 pr-1">{statusId ? getStatusLabel(statusId) : '-'}</b>
+        {t(`treeView.soilViz.depthLabel`, { depth })}
+        <b className="ml-1 pr-1">{statusId ? getStatusLabel(statusId) : '–'}</b>
       </span>
     </div>
   )
