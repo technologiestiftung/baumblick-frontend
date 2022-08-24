@@ -231,16 +231,21 @@ const TreePage: TreePageWithLayout = ({ treeData, csrfToken }) => {
                   averageStatusId={avgLevel}
                 />
               )}
-              {!forecastError && forecastData && forecastData?.length > 0 && (
+              {!forecastError && (
                 <ForecastViz
-                  data={(
-                    forecastData.filter(
-                      ({ timestamp, value }) => timestamp && value
-                    ) as { timestamp: string; value: number }[]
-                  ).map(({ timestamp, value }) => ({
-                    date: new Date(timestamp),
-                    waterSupplyStatusId: mapSuctionTensionToStatus(value)?.id,
-                  }))}
+                  data={
+                    forecastData && forecastData?.length > 0
+                      ? (
+                          forecastData.filter(
+                            ({ timestamp, value }) => timestamp && value
+                          ) as { timestamp: string; value: number }[]
+                        ).map(({ timestamp, value }) => ({
+                          date: new Date(timestamp),
+                          waterSupplyStatusId:
+                            mapSuctionTensionToStatus(value)?.id,
+                        }))
+                      : undefined
+                  }
                 />
               )}
             </Carousel>
