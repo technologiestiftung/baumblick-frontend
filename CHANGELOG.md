@@ -1,3 +1,10 @@
+# [1.0.0-staging.3](https://github.com/technologiestiftung/treewatch-frontend/compare/v1.0.0-staging.2...v1.0.0-staging.3) (2022-08-24)
+
+
+### Features
+
+* **useRainData:** Add useRainData hook with data from API ([02fca85](https://github.com/technologiestiftung/treewatch-frontend/commit/02fca851effcecbae6c44b88fc17c64bf790b611))
+
 # [1.0.0-staging.2](https://github.com/technologiestiftung/treewatch-frontend/compare/v1.0.0-staging.1...v1.0.0-staging.2) (2022-08-24)
 
 
