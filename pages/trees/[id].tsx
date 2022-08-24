@@ -22,8 +22,8 @@ import { ForecastViz } from '@components/ForecastViz'
 import { FeedbackRequestsList } from '@components/FeedbackRequestsList'
 import csrf from '@lib/api/csrf'
 import { useForecastData } from '@lib/hooks/useForecastData'
-import { useRainData } from '@lib/hooks/useRainData'
-import { RainDataType } from '@lib/requests/getRainData'
+import { useTreeRainAmount } from '@lib/hooks/useTreeRainAmount'
+import { TreeRainAmountType } from '@lib/requests/getTreeRainAmount'
 
 interface TreePageComponentPropType {
   treeData: TreeDataType
@@ -84,7 +84,7 @@ const InfoList: FC<{
   nowcastData: NowcastDataType[] | null
   nowcastIsLoading: boolean
   nowcastError: Error | null
-  rainData: RainDataType | null
+  rainData: TreeRainAmountType | null
   rainIsLoading: boolean
   rainError: Error | null
 }> = ({ treeData, nowcastData, nowcastIsLoading, nowcastError, rainData }) => {
@@ -176,7 +176,7 @@ const TreePage: TreePageWithLayout = ({ treeData, csrfToken }) => {
     data: rainData,
     error: rainError,
     isLoading: rainIsLoading,
-  } = useRainData(treeData.gml_id)
+  } = useTreeRainAmount(treeData.gml_id)
 
   const avgLevel =
     nowcastData && nowcastData[3].value
