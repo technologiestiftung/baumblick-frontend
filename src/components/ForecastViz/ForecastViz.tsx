@@ -1,7 +1,9 @@
 import { getClassesByStatusId } from '@lib/utils/getClassesByStatusId'
+import { getStatusLabel } from '@lib/utils/getStatusLabel'
 import { WaterSupplyStatusType } from '@lib/utils/mapSuctionTensionToStatus'
 import classNames from 'classnames'
 import { addDays, format, isSameDay, isToday } from 'date-fns'
+import useTranslation from 'next-translate/useTranslation'
 import { FC } from 'react'
 
 interface DataItem {
@@ -20,7 +22,7 @@ const getDateLabel = (date: Date): string => {
 const NUMBER_OF_DAYS_TO_DISPLAY = 15 // 14 days forecast + today for context
 const NOW = Date.now()
 
-const NEXT_14_DAYS_WITHOUT_DATA: DataItem[] = Array.from(
+const nextDaysWithoutData: DataItem[] = Array.from(
   Array(NUMBER_OF_DAYS_TO_DISPLAY)
 ).map((_, i) => {
   return {
@@ -30,37 +32,43 @@ const NEXT_14_DAYS_WITHOUT_DATA: DataItem[] = Array.from(
 })
 
 export const ForecastViz: FC<ForecastVizPropType> = ({ data }) => {
-  const VIZ_GRID_AXES_CLASSES = {
+  const { t } = useTranslation('common')
+  const vizGridAxesClasses = {
     gridTemplateColumns: `repeat(${
       NUMBER_OF_DAYS_TO_DISPLAY || data?.length || 1
     }, minmax(0, 1fr))`,
   }
 
-  const NEXT_14_DAYS_WITH_DATA = NEXT_14_DAYS_WITHOUT_DATA.map(
-    (emptyDataItem) => {
-      return {
-        date: emptyDataItem.date,
-        waterSupplyStatusId:
-          data?.find((dataItem) => isSameDay(dataItem.date, emptyDataItem.date))
-            ?.waterSupplyStatusId || emptyDataItem.waterSupplyStatusId,
-      }
+  const nextDaysWithData = nextDaysWithoutData.map((emptyDataItem) => {
+    const waterSupply = data?.find(({ date }) =>
+      isSameDay(date, emptyDataItem.date)
+    )
+    return {
+      date: emptyDataItem.date,
+      waterSupplyStatusId:
+        waterSupply?.waterSupplyStatusId || emptyDataItem.waterSupplyStatusId,
     }
-  )
+  })
 
   return (
-    <div
+    <ul
       className={classNames('w-full h-full', 'bg-white', 'grid gap-x-[2px]')}
-      style={{ ...VIZ_GRID_AXES_CLASSES }}
+      style={{ ...vizGridAxesClasses }}
     >
-      {NEXT_14_DAYS_WITH_DATA.map((dataItem) => {
+      {nextDaysWithData.map((dataItem) => {
         return (
-          <div
+          <li
             key={dataItem.date.toISOString()}
             className={classNames(
               'relative flex justify-center items-end',
               'overflow-visible',
               getClassesByStatusId(dataItem.waterSupplyStatusId).bg
             )}
+            aria-label={`${getDateLabel(dataItem.date)}: ${
+              getStatusLabel(dataItem.waterSupplyStatusId || '') ||
+              t('legend.map.levels.unknown') ||
+              ''
+            }`}
           >
             <span
               className={classNames(
@@ -71,9 +79,9 @@ export const ForecastViz: FC<ForecastVizPropType> = ({ data }) => {
             >
               {getDateLabel(dataItem.date)}
             </span>
-          </div>
+          </li>
         )
       })}
-    </div>
+    </ul>
   )
 }

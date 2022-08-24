@@ -49,7 +49,8 @@
       "levels": {
         "good": "Gut",
         "medium": "Mäßig",
-        "critical": "Kritisch"
+        "critical": "Kritisch",
+        "unknown": "Unbekannt"
       }
     }
   },
