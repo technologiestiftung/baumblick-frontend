@@ -25,29 +25,29 @@ export default async function handler(
         const result = await sql<
           { rainfall_in_mm: number; timestamp: string }[]
         >`SELECT
-				grouped.weekday as "timestamp",
-				grouped.daily_rainfall_sum_mm as rainfall_in_mm
-			FROM (
-				SELECT
-					geometry AS geom,
-					date_trunc('day', timestamp)::date AS weekday,
-					sum(rainfall_mm) AS daily_rainfall_sum_mm
-				FROM
-					qtrees.api.radolan
-				GROUP BY
-					geometry,
-					weekday) AS grouped
-			WHERE ((weekday >= date_trunc('week', CURRENT_TIMESTAMP - INTERVAL '2 week')::date)
-				and(weekday < date_trunc('week', CURRENT_TIMESTAMP)))
-			AND ST_Contains(grouped.geom, (
-					SELECT
-						geometry FROM api.trees
-					WHERE
-						gml_id = ${searchParams.get('gml_id')}))
-					ORDER BY weekday DESC
-						;
+        grouped.weekday as "timestamp",
+        grouped.daily_rainfall_sum_mm as rainfall_in_mm
+      FROM (
+        SELECT
+          geometry AS geom,
+          date_trunc('day', timestamp)::date AS weekday,
+          sum(rainfall_mm) AS daily_rainfall_sum_mm
+        FROM
+          qtrees.api.radolan
+        GROUP BY
+          geometry,
+          weekday) AS grouped
+        WHERE
+          weekday >= CURRENT_DATE at time zone 'UTC' - interval '13 days'
+          AND ST_Contains(grouped.geom, (
+              SELECT
+                geometry FROM api.trees
+              WHERE
+            gml_id = ${searchParams.get('gml_id')}))
+          ORDER BY weekday DESC
+            ;
 
-					`
+          `
         const initialValue = 0
         const sum = result
           .map((item) => item.rainfall_in_mm)
