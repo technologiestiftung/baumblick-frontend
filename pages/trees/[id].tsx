@@ -22,6 +22,8 @@ import { ForecastViz } from '@components/ForecastViz'
 import { FeedbackRequestsList } from '@components/FeedbackRequestsList'
 import csrf from '@lib/api/csrf'
 import { useForecastData } from '@lib/hooks/useForecastData'
+import { useRainData } from '@lib/hooks/useRainData'
+import { RainDataType } from '@lib/requests/getRainData'
 
 interface TreePageComponentPropType {
   treeData: TreeDataType
@@ -82,13 +84,21 @@ const InfoList: FC<{
   nowcastData: NowcastDataType[] | null
   nowcastIsLoading: boolean
   nowcastError: Error | null
-}> = ({ treeData, nowcastData, nowcastIsLoading, nowcastError }) => {
+  rainData: RainDataType[] | null
+  rainIsLoading: boolean
+  rainError: Error | null
+}> = ({ treeData, nowcastData, nowcastIsLoading, nowcastError, rainData }) => {
   const averageStatusId =
     nowcastData &&
     !nowcastIsLoading &&
     !nowcastError &&
     nowcastData[3].value &&
     mapSuctionTensionToStatus(nowcastData[3].value)?.id
+
+  const totalRain = rainData?.reduce(
+    (acc, item) => acc + item.daily_rainfall_sum_mm,
+    0
+  )
 
   return (
     <ul className="z-10 relative bg-white">
@@ -100,9 +110,7 @@ const InfoList: FC<{
       <DataListItem
         title="Regenmenge"
         subtitle="Letzte 14 Tage"
-        // TODO: Attention, this is dummy data.
-        // Update when adding access to real data.
-        value={`${0} l`}
+        value={totalRain ? `${totalRain.toFixed(1)} mm` : '–'}
       />
       <DataListItem
         title="Baumscheibe"
@@ -153,6 +161,12 @@ const TreePage: TreePageWithLayout = ({ treeData, csrfToken }) => {
     treeData.gml_id,
     csrfToken
   )
+
+  const {
+    data: rainData,
+    error: rainError,
+    isLoading: rainIsLoading,
+  } = useRainData(treeData.gml_id)
 
   const avgLevel =
     nowcastData && nowcastData[3].value
@@ -276,10 +290,13 @@ const TreePage: TreePageWithLayout = ({ treeData, csrfToken }) => {
                 name: t('treeView.tabs.0'),
                 content: (
                   <InfoList
-                    nowcastIsLoading={nowcastIsLoading}
                     treeData={treeData}
                     nowcastData={nowcastData}
                     nowcastError={nowcastError}
+                    nowcastIsLoading={nowcastIsLoading}
+                    rainData={rainData}
+                    rainError={rainError}
+                    rainIsLoading={rainIsLoading}
                   />
                 ),
               },
