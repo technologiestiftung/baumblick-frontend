@@ -11,7 +11,7 @@ export const SoilLayer: FC<{
 }> = ({ depth, statusId }) => {
   const { t } = useTranslation('common')
   return (
-    <li
+    <div
       style={{
         backgroundColor: statusId
           ? colors.scale[statusId as keyof typeof colors.scale]
@@ -44,6 +44,6 @@ export const SoilLayer: FC<{
         {t(`treeView.soilViz.depthLabel`, { depth })}
         <b className="ml-1 pr-1">{statusId ? getStatusLabel(statusId) : '–'}</b>
       </span>
-    </li>
+    </div>
   )
 }

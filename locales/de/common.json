@@ -75,7 +75,7 @@
       "1": "Mitwirken"
     },
     "header": {
-      "height": "{{value}}m",
+      "height": "{{value}} m",
       "plantYear": {
         "one": "Vor {{count}} Jahr gepflanzt",
         "other": "Vor {{count}} Jahren gepflanzt"

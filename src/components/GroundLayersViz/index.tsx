@@ -21,11 +21,9 @@ export const GroundLayersViz: FC<GroundLayersVizType> = ({
 }) => {
   return (
     <div className="relative overflow-hidden">
-      <ul>
-        <SoilLayer depth={30} statusId={depth30StatusId} />
-        <SoilLayer depth={60} statusId={depth60StatusId} />
-        <SoilLayer depth={90} statusId={depth90StatusId} />
-      </ul>
+      <SoilLayer depth={30} statusId={depth30StatusId} />
+      <SoilLayer depth={60} statusId={depth60StatusId} />
+      <SoilLayer depth={90} statusId={depth90StatusId} />
       <div
         className={classNames(
           'absolute top-0',
