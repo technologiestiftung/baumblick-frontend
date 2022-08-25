@@ -1,3 +1,32 @@
+# [1.0.0-staging.5](https://github.com/technologiestiftung/treewatch-frontend/compare/v1.0.0-staging.4...v1.0.0-staging.5) (2022-08-25)
+
+
+### Bug Fixes
+
+* **QTREES-371:** fetch most recent nowcast data for tree ([eb5824e](https://github.com/technologiestiftung/treewatch-frontend/commit/eb5824e4f6a737e1e13fcc4e763491365e1b41f2))
+
+
+### Features
+
+* always return most recent row if there are duplicate type_id's ([eb1ed1c](https://github.com/technologiestiftung/treewatch-frontend/commit/eb1ed1c1f4c1ba26f2d734face96aa858ef6678f))
+* make nowcast return data more robust ([db5608f](https://github.com/technologiestiftung/treewatch-frontend/commit/db5608fc33109780e8dd0176194f21d6cf6cd582))
+
+# [1.0.0-staging.4](https://github.com/technologiestiftung/treewatch-frontend/compare/v1.0.0-staging.3...v1.0.0-staging.4) (2022-08-25)
+
+
+### Bug Fixes
+
+* typo ([64ffff4](https://github.com/technologiestiftung/treewatch-frontend/commit/64ffff47fc6861f66d8eb4b44fd742d59ea170f1))
+
+
+### Features
+
+* **ForecastViz:** Add Relative time indicator for half and end ([1a537f6](https://github.com/technologiestiftung/treewatch-frontend/commit/1a537f6e8973f7ed474d2dda0cef990977eb4151))
+* **ForecastViz:** Combine now and forecast data and pass it to the viz ([836f803](https://github.com/technologiestiftung/treewatch-frontend/commit/836f80329de5fb38aa1f5e3fbdae12e42f4cfc00))
+* **ForecastViz:** show it independently of forecast data ([398a48c](https://github.com/technologiestiftung/treewatch-frontend/commit/398a48c1e96f542257a3773f8b757073438017e2))
+* **ForecastViz:** show today + next 14 days ([554d586](https://github.com/technologiestiftung/treewatch-frontend/commit/554d586db58f4240fa09907f2322926d9844c0f6))
+* **QTREES-359:** ensure that we always show next 14 days in ForecastViz ([2d8a0dd](https://github.com/technologiestiftung/treewatch-frontend/commit/2d8a0dd9734a1d0ee9169a9d60fe5c68ab243ee1))
+
 # [1.0.0-staging.3](https://github.com/technologiestiftung/treewatch-frontend/compare/v1.0.0-staging.2...v1.0.0-staging.3) (2022-08-24)
 
 
