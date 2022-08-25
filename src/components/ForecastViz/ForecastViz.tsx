@@ -2,7 +2,7 @@ import { getClassesByStatusId } from '@lib/utils/getClassesByStatusId'
 import { getStatusLabel } from '@lib/utils/getStatusLabel'
 import { WaterSupplyStatusType } from '@lib/utils/mapSuctionTensionToStatus'
 import classNames from 'classnames'
-import { addDays, differenceInDays, format, isSameDay, isToday } from 'date-fns'
+import { addDays, differenceInDays, format, isSameDay } from 'date-fns'
 import useTranslation from 'next-translate/useTranslation'
 import { FC } from 'react'
 
@@ -13,31 +13,37 @@ interface DataItem {
 
 export interface ForecastVizPropType {
   data?: DataItem[]
+  today?: Date
 }
 
-const getDateLabel = (date: Date): string => {
-  return `${format(date, 'dd.MM.')}${isToday(date) ? ' (Heute)' : ''}`
+const getDateLabel = (date: Date, today: Date): string => {
+  return `${format(date, 'dd.MM.')}${isSameDay(date, today) ? ' (Heute)' : ''}`
 }
 
 const NUMBER_OF_DAYS_TO_DISPLAY = 15 // 14 days forecast + today for context
-const NOW = Date.now()
 
-const nextDaysWithoutData: DataItem[] = Array.from(
-  Array(NUMBER_OF_DAYS_TO_DISPLAY)
-).map((_, i) => {
-  return {
-    date: addDays(NOW, i),
-    waterSupplyStatusId: undefined,
-  }
-})
+const getNextDaysWithoutData = (
+  today: Date = new Date(),
+  numberOfDaysToDisplay: number = NUMBER_OF_DAYS_TO_DISPLAY
+): DataItem[] =>
+  Array.from(Array(numberOfDaysToDisplay)).map((_, i) => {
+    return {
+      date: addDays(today, i),
+      waterSupplyStatusId: undefined,
+    }
+  })
 
-export const ForecastViz: FC<ForecastVizPropType> = ({ data }) => {
+export const ForecastViz: FC<ForecastVizPropType> = ({
+  data,
+  today = new Date(),
+}) => {
   const { t } = useTranslation('common')
   const vizGridAxesClasses = {
     gridTemplateColumns: `repeat(${
       NUMBER_OF_DAYS_TO_DISPLAY || data?.length || 1
     }, minmax(0, 1fr))`,
   }
+  const nextDaysWithoutData = getNextDaysWithoutData(today)
 
   const nextDaysWithData = nextDaysWithoutData.map((emptyDataItem) => {
     const waterSupply = data?.find(({ date }) =>
@@ -59,10 +65,7 @@ export const ForecastViz: FC<ForecastVizPropType> = ({ data }) => {
         const showRelativeDateLabel =
           i === Math.floor(nextDaysWithData.length / 2) ||
           i === nextDaysWithData.length - 1
-        const daysDiff = differenceInDays(
-          dataItem.date,
-          nextDaysWithData[0].date
-        )
+        const daysDiff = differenceInDays(dataItem.date, today)
         return (
           <li
             key={dataItem.date.toISOString()}
@@ -71,7 +74,7 @@ export const ForecastViz: FC<ForecastVizPropType> = ({ data }) => {
               'overflow-visible',
               getClassesByStatusId(dataItem.waterSupplyStatusId).bg
             )}
-            aria-label={`${getDateLabel(dataItem.date)}: ${
+            aria-label={`${getDateLabel(dataItem.date, today)}: ${
               getStatusLabel(dataItem.waterSupplyStatusId || '') ||
               t('legend.map.levels.unknown') ||
               ''
@@ -84,7 +87,7 @@ export const ForecastViz: FC<ForecastVizPropType> = ({ data }) => {
                 'text-gray-900 text-opacity-50 font-semibold text-sm md:text-base whitespace-nowrap'
               )}
             >
-              {`${getDateLabel(dataItem.date)} ${
+              {`${getDateLabel(dataItem.date, today)} ${
                 showRelativeDateLabel
                   ? `(${t(`treeView.forecastViz.relativeDays`, { daysDiff })})`
                   : ``
