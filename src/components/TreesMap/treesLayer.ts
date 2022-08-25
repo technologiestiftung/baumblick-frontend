@@ -1,12 +1,15 @@
 import { WATER_SUPPLY_STATUSES } from '@lib/utils/mapSuctionTensionToStatus'
+import { startOfDay } from 'date-fns'
 import { LayerSpecification, SourceSpecification } from 'maplibre-gl'
 import colors from '../../style/colors'
 
 /** ID with which we can reference trees layer */
 export const TREES_LAYER_ID = 'trees'
 
-/** ID with which we can reference trees layer */
-export const TREES_NUMBERS_LAYER_ID = 'trees_numbers'
+/** ID with which we can reference the layer for outdated nowcast values
+ */
+export const OUTDATED_NOWCAST_INDICATORS_LAYER_ID =
+  'outdated_nowcast_indicators'
 
 /** Name of the source in the vector tileset */
 export const TREES_SOURCE_ID = 'outfull'
@@ -43,6 +46,37 @@ const getColorScale = (idSuffix = ''): (string | number)[] => {
   }).slice(0, -1) // Removes the last number value because it not needed anymore
 }
 
+/**
+ * Maplibre expression to check whether a nowcast timestamp is older than the start of this day (compares the string values which is not ideal, but there doesn't seem to be a way to cast to dates via expressions).
+ */
+const IS_OUTDATED_NOWCAST = [
+  '<=',
+  ['get', 'nowcast_timestamp_stamm'],
+  startOfDay(Date.now()).toString(),
+]
+
+export const OUTDATED_NOWCAST_INDICATORS: LayerSpecification = {
+  id: OUTDATED_NOWCAST_INDICATORS_LAYER_ID,
+  type: 'symbol',
+  source: TREES_SOURCE_ID,
+  'source-layer': TREES_SOURCE_LAYER_ID,
+  filter: ['has', NOWCAST_AVERAGE_PROPERTY],
+  layout: {
+    'text-field': [
+      'case',
+      ['all', ['has', NOWCAST_AVERAGE_PROPERTY], IS_OUTDATED_NOWCAST],
+      '!',
+      '',
+    ],
+    'text-size': 14,
+    'text-font': ['Bold'],
+  },
+  paint: {
+    'text-color': colors.gray[500],
+  },
+  minzoom: 15,
+}
+
 export const TREES_LAYER: LayerSpecification = {
   id: TREES_LAYER_ID,
   type: 'circle',
@@ -56,7 +90,7 @@ export const TREES_LAYER: LayerSpecification = {
   paint: {
     'circle-color': [
       'case',
-      ['has', NOWCAST_AVERAGE_PROPERTY],
+      ['all', ['has', NOWCAST_AVERAGE_PROPERTY], ['!', IS_OUTDATED_NOWCAST]],
       ['step', ['get', NOWCAST_AVERAGE_PROPERTY], ...getColorScale()],
       colors.gray[200],
     ],
@@ -73,7 +107,7 @@ export const TREES_LAYER: LayerSpecification = {
     ],
     'circle-stroke-color': [
       'case',
-      ['has', NOWCAST_AVERAGE_PROPERTY],
+      ['all', ['has', NOWCAST_AVERAGE_PROPERTY], ['!', IS_OUTDATED_NOWCAST]],
       ['step', ['get', NOWCAST_AVERAGE_PROPERTY], ...getColorScale('-dark')],
       colors.gray[300],
     ],

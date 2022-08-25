@@ -16,6 +16,7 @@ import {
   TREES_SOURCE,
   TREES_SOURCE_ID,
   TREES_SOURCE_LAYER_ID,
+  OUTDATED_NOWCAST_INDICATORS,
 } from './treesLayer'
 import { MapTilerLogo } from './MapTilerLogo'
 import classNames from 'classnames'
@@ -166,6 +167,7 @@ export const TreesMap: FC<MapProps> = ({
 
       map.current.addSource(TREES_SOURCE_ID, TREES_SOURCE)
       map.current.addLayer(TREES_LAYER)
+      map.current.addLayer(OUTDATED_NOWCAST_INDICATORS)
 
       // If we have a treeIdToSelect on the initial map load, we already set the selected feature state, so that the selected style is applied:
       if (treeIdToSelect) {
