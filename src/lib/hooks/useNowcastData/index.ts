@@ -1,9 +1,10 @@
 import { getNowcastData, NowcastDataType } from '@lib/requests/getNowcastData'
+import { MappedNowcastRowsType, mapRowsToDepths } from '@lib/utils/nowcastUtil'
 import useSWR from 'swr'
 
 interface useNowcastDataReturnType {
   isLoading: boolean
-  data: NowcastDataType[] | null
+  data: MappedNowcastRowsType | null
   error: Error | null
 }
 
@@ -19,7 +20,7 @@ export const useNowcastData = (
 
   return {
     isLoading: !data && !error,
-    data: data && data.length > 0 ? data : null,
+    data: data && data.length > 0 ? mapRowsToDepths(data) : null,
     error: error || null,
   }
 }
