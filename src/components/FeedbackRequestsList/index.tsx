@@ -6,7 +6,7 @@ import useTranslation from 'next-translate/useTranslation'
 import { FC, useState } from 'react'
 
 interface FeedbackRequestsListPropType {
-  treeData: TreeDataType
+  treeData: TreeDataType | undefined
   csrfToken: string
 }
 
@@ -16,7 +16,7 @@ export const FeedbackRequestsList: FC<FeedbackRequestsListPropType> = ({
 }) => {
   const { t } = useTranslation('common')
   const { issues, reportIssue, isLoading, error } = useFeedbackData(
-    treeData.gml_id,
+    treeData?.gml_id,
     csrfToken
   )
   const [openedIssueModal, setOpenedIssueModal] =
@@ -38,14 +38,14 @@ export const FeedbackRequestsList: FC<FeedbackRequestsListPropType> = ({
       <FeedbackReportModal
         title={openedIssueModal?.title || ' '}
         address={
-          (treeData.strname &&
-            treeData.hausnr &&
-            treeData.bezirk &&
-            `${treeData.strname} ${treeData.hausnr}, ${treeData.bezirk}`) ||
+          (treeData?.strname &&
+            treeData?.hausnr &&
+            treeData?.bezirk &&
+            `${treeData?.strname} ${treeData?.hausnr}, ${treeData?.bezirk}`) ||
           ''
         }
         imageUrl={openedIssueModal?.imageUrl}
-        treeName={treeData.art_dtsch || 'Baum'}
+        treeName={treeData?.art_dtsch || 'Baum'}
         isOpen={!!openedIssueModal}
         onConfirm={() => {
           if (!openedIssueModal) return

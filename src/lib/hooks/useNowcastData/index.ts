@@ -8,13 +8,13 @@ interface useNowcastDataReturnType {
 }
 
 export const useNowcastData = (
-  treeId: string,
+  treeId: string | undefined,
   csrfToken: string
 ): useNowcastDataReturnType => {
-  const params = [`Nowcast - Tree ID - ${treeId}`]
+  const params = [`Nowcast - Tree ID - ${treeId || 'nodata'}`]
   const { data, error } = useSWR<NowcastDataType[] | undefined, Error>(
     params,
-    () => getNowcastData(treeId, csrfToken)
+    () => (treeId ? getNowcastData(treeId, csrfToken) : undefined)
   )
 
   return {

@@ -11,12 +11,12 @@ interface useTreeRainAmountReturnType {
 }
 
 export const useTreeRainAmount = (
-  treeId: string
+  treeId: string | undefined
 ): useTreeRainAmountReturnType => {
-  const params = [`Rain - Tree ID - ${treeId}`]
+  const params = [`Rain - Tree ID - ${treeId || 'nodata'}`]
   const { data, error } = useSWR<TreeRainAmountType | undefined, Error>(
     params,
-    () => getTreeRainAmount(treeId)
+    () => (treeId ? getTreeRainAmount(treeId) : undefined)
   )
 
   return {
