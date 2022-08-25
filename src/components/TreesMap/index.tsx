@@ -26,6 +26,12 @@ import {
   NEXT_PUBLIC_MAPTILER_KEY,
 } from '@lib/utils/envUtil'
 
+interface OnSelectOutput {
+  id: string
+  latitude: number
+  longitude: number
+}
+
 interface MapProps {
   staticViewportProps?: {
     maxZoom: number
@@ -41,7 +47,7 @@ interface MapProps {
   latitude?: number
   longitude?: number
   treeIdToSelect?: string
-  onSelect?: (treeId: string) => void
+  onSelect?: (treeData: OnSelectOutput) => void
   onOutdatedNowcastCheck?: (isOutdated: boolean) => void
   isMinimized?: boolean
 }
@@ -50,6 +56,11 @@ type URLViewportType = Pick<ViewportProps, 'latitude' | 'longitude' | 'zoom'>
 
 const easeInOutQuad = (t: number): number =>
   t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1
+
+const transitionProps = {
+  transitionDuration: 2000,
+  transitionEasing: easeInOutQuad,
+}
 
 export const TreesMap: FC<MapProps> = ({
   initialViewportProps,
@@ -65,10 +76,6 @@ export const TreesMap: FC<MapProps> = ({
 }) => {
   const { replace, query, pathname } = useRouter()
   const mappedQuery = mapRawQueryToState(query)
-  const transitionProps = {
-    transitionDuration: 2000,
-    transitionEasing: easeInOutQuad,
-  }
 
   const map = useRef<Map | null>(null)
 
@@ -121,11 +128,23 @@ export const TreesMap: FC<MapProps> = ({
       if (!e.features) return
 
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-      const features = e.features
+      const features = e.features as {
+        properties: {
+          trees_gml_id?: string
+          trees_lat?: number
+          trees_lng?: number
+        }
+      }[]
 
       debouncedViewportChange.cancel()
+
+      const id = features[0].properties?.trees_gml_id
+      const latitude = features[0].properties?.trees_lat
+      const longitude = features[0].properties?.trees_lng
+
+      if (!id || !latitude || !longitude) return
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      onSelect(features[0].properties?.trees_gml_id)
+      onSelect({ id, latitude, longitude })
     },
     [debouncedViewportChange, onSelect]
   )

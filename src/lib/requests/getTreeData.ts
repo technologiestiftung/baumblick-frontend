@@ -43,8 +43,7 @@ const TABLE_NAME = 'trees'
 const TREE_ID_COLUMN_NAME = 'gml_id'
 
 export const getTreeData = async (
-  treeId: string,
-  csrfToken: string
+  treeId: string
 ): Promise<TreeDataType[] | undefined> => {
   if (!treeId) return
 
@@ -52,10 +51,7 @@ export const getTreeData = async (
 
   const response = await fetch(REQUEST_URL, {
     method: 'POST',
-    headers: {
-      'CSRF-Token': csrfToken,
-      'Content-Type': 'application/json',
-    },
+    headers: { 'Content-Type': 'application/json' },
   })
 
   if (!response.ok) {

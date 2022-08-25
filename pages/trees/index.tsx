@@ -33,10 +33,10 @@ MapPage.getLayout = function getLayout(page, props) {
         latitude={props.query?.latitude || undefined}
         longitude={props.query?.longitude || undefined}
         zoom={props.query?.zoom || undefined}
-        onTreeSelect={(treeId) => {
+        onTreeSelect={({ id, latitude, longitude }) => {
           void router.push({
             pathname: '/trees/[id]',
-            query: { id: treeIdToUrlSlug(treeId) },
+            query: { id: treeIdToUrlSlug(id), latitude, longitude },
           })
         }}
         onOutdatedNowcastCheck={(isOutdated) => {

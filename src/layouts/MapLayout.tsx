@@ -4,6 +4,13 @@ import { FC } from 'react'
 import { useHasScrolledPastThreshold } from '@lib/hooks/useHasScrolledPastThreshold'
 import classNames from 'classnames'
 import { InternalLink } from '@components/InternalLink'
+import { useTreeData } from '@lib/hooks/useTreeData'
+
+interface OnSelectOutput {
+  id: string
+  latitude: number
+  longitude: number
+}
 
 export const MAP_CONFIG = {
   minZoom: 11.5,
@@ -18,7 +25,7 @@ export interface MapLayoutType {
   longitude?: number
   treeIdToSelect?: string
   zoom?: number
-  onTreeSelect?: (treeId: string) => void
+  onTreeSelect?: (treeData: OnSelectOutput) => void
   onOutdatedNowcastCheck?: (isOutdated: boolean) => void
   isMinimized?: boolean
 }
@@ -33,6 +40,7 @@ export const MapLayout: FC<MapLayoutType> = ({
   isMinimized,
   children,
 }) => {
+  const { data } = useTreeData(treeIdToSelect)
   const { hasScrolledPastThreshold } = useHasScrolledPastThreshold({
     threshold: 5,
     scrollParent: 'main',
@@ -74,14 +82,14 @@ export const MapLayout: FC<MapLayoutType> = ({
             maxZoom: MAP_CONFIG.maxZoom,
           }}
           initialViewportProps={{
-            latitude: latitude || MAP_CONFIG.defaultLatitude,
-            longitude: longitude || MAP_CONFIG.defaultLongitude,
+            latitude: data?.lat || latitude || MAP_CONFIG.defaultLatitude,
+            longitude: data?.lng || longitude || MAP_CONFIG.defaultLongitude,
             zoom: zoom || MAP_CONFIG.defaultZoom,
           }}
           onSelect={onTreeSelect}
           onOutdatedNowcastCheck={onOutdatedNowcastCheck}
-          latitude={latitude}
-          longitude={longitude}
+          latitude={latitude || data?.lat}
+          longitude={longitude || data?.lng}
           treeIdToSelect={treeIdToSelect}
           isMinimized={isMinimized}
         />

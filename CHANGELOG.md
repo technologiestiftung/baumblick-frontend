@@ -1,3 +1,16 @@
+# [1.0.0-staging.6](https://github.com/technologiestiftung/treewatch-frontend/compare/v1.0.0-staging.5...v1.0.0-staging.6) (2022-08-25)
+
+
+### Bug Fixes
+
+* Reintroduce page title in [id] ([c14bd45](https://github.com/technologiestiftung/treewatch-frontend/commit/c14bd45cf73e105cd976018d2852d6b4f672fb79))
+
+
+### Features
+
+* **TreesMap:** Instant navigation to tree ([9926a2e](https://github.com/technologiestiftung/treewatch-frontend/commit/9926a2eba34590342547b3f403f671a432888e9d))
+* **TreeView:** Load trees on the client side so it feels quicker ([cc7aadd](https://github.com/technologiestiftung/treewatch-frontend/commit/cc7aadda3fe2fe127ceeeefd5d39d55cd73aaac8))
+
 # [1.0.0-staging.5](https://github.com/technologiestiftung/treewatch-frontend/compare/v1.0.0-staging.4...v1.0.0-staging.5) (2022-08-25)
 
 
