@@ -75,7 +75,7 @@
       "1": "Mitwirken"
     },
     "forecastViz": {
-      "relativeDays": "In {{daysDiff}} Tage"
+      "relativeDays": "In {{daysDiff}} Tagen"
     },
     "header": {
       "height": "{{value}} m",
