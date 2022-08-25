@@ -41,7 +41,7 @@ const App: FC<AppPropsWithLayout> = ({
         className={classNames(
           'fixed top-0 md:left-[12px] md:w-[calc(100vw-12px)] z-0 min-h-[calc(100%-4rem)]',
           'bottom-16 grid',
-          'overflow-x-hidden md:overflow-x-visible overflow-y-auto '
+          'overflow-x-hidden md:overflow-x-visible overflow-y-scroll '
         )}
       >
         <div className="w-screen max-w-3xl mx-auto">

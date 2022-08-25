@@ -63,7 +63,7 @@ export const getNowcastData = async (
     throw new Error(txt)
   }
 
-  const data = (await response.json()) as { json: NowcastDataType[] }
+  const { data } = (await response.json()) as { data: NowcastDataType[] }
 
-  return data.json
+  return data
 }

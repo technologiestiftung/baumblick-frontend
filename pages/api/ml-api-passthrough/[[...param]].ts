@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import fetch from 'cross-fetch'
-import sql from './_db'
+import sql from '../_shared/_db'
 //nextjs api route handler
 
 const ml_pgrest_host = process.env.ML_PGREST_HOST
@@ -59,7 +59,7 @@ export default async function handler(
         }
         const token = result[0].login.substring(1, result[0].login.length - 1)
         if (!req.url) {
-          return res.status(400).json({ error: 'Missing url' })
+          return res.status(500).json({ error: 'Missing url in request' })
         }
 
         let url = new URL(
@@ -72,14 +72,18 @@ export default async function handler(
         switch (url.pathname.replace('/api/ml-api-passthrough', '')) {
           case '/trees': {
             if (!searchParams.has('gml_id')) {
-              return res.status(400).json({ error: 'Missing gml_id' })
+              return res
+                .status(400)
+                .json({ error: 'Missing gml_id search parameter' })
             }
             break
           }
           case '/forecast':
           case '/nowcast': {
             if (!searchParams.has('baum_id')) {
-              return res.status(400).json({ error: 'Missing baum_id' })
+              return res
+                .status(400)
+                .json({ error: 'Missing baum_id search parameter' })
             }
             break
           }
@@ -111,17 +115,25 @@ export default async function handler(
             (p) => p !== '/' && p !== '/rpc/login'
           )
           if (!paths.includes(url.pathname)) {
-            return res.status(400).json({ paths })
+            return res.status(404).json({ error: 'not found', message: paths })
           }
         }
 
-        return res.status(req.method === 'POST' ? 201 : 200).json({ json })
+        return res
+          .status(req.method === 'POST' ? 201 : 200)
+          .json({ data: json })
       }
       default:
         return res.status(404).json({ error: 'only POST method' })
     }
-  } catch (err) {
-    console.error(err)
-    return res.status(500).json({ error: 'internal server error', err })
+  } catch (err: unknown) {
+    if (process.env.NODE_ENV !== 'production') console.error(err)
+    if (err instanceof Error) {
+      return res
+        .status(500)
+        .json({ message: 'internal server error', error: err.message })
+    } else {
+      return res.status(500).json({ error: 'internal server error' })
+    }
   }
 }

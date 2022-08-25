@@ -1,15 +1,19 @@
 import { render, screen } from '@testing-library/react'
+import I18nProvider from 'next-translate/I18nProvider'
 import { GroundLayersViz } from '.'
+import commoDE from '../../../locales/de/common.json'
 
 describe('GroundLayersViz', () => {
   test('renders all statuses and average circle', () => {
     render(
-      <GroundLayersViz
-        depth30StatusId={'critical'}
-        depth60StatusId={'good'}
-        depth90StatusId={'medium'}
-        averageStatusId={'medium'}
-      />
+      <I18nProvider lang={'de'} namespaces={{ common: commoDE }}>
+        <GroundLayersViz
+          depth30StatusId={'critical'}
+          depth60StatusId={'good'}
+          depth90StatusId={'medium'}
+          averageStatusId={'medium'}
+        />
+      </I18nProvider>
     )
 
     const level30El = screen.getByLabelText(
@@ -35,12 +39,14 @@ describe('GroundLayersViz', () => {
 
   test('falls back to gray colors without provided values', () => {
     render(
-      <GroundLayersViz
-        depth30StatusId={'critical'}
-        depth60StatusId={undefined}
-        depth90StatusId={undefined}
-        averageStatusId={undefined}
-      />
+      <I18nProvider lang={'de'} namespaces={{ common: commoDE }}>
+        <GroundLayersViz
+          depth30StatusId={'critical'}
+          depth60StatusId={undefined}
+          depth90StatusId={undefined}
+          averageStatusId={undefined}
+        />
+      </I18nProvider>
     )
 
     const level30El = screen.getByLabelText(
@@ -49,17 +55,17 @@ describe('GroundLayersViz', () => {
     expect(level30El).toBeInTheDocument()
 
     const level60El = screen.getByLabelText(
-      `Tiefe: 60 cm, Wasserversorgung: unbekannt`
+      `Tiefe: 60 cm, Wasserversorgung: Unbekannt`
     )
     expect(level60El).toBeInTheDocument()
 
     const level90El = screen.getByLabelText(
-      `Tiefe: 90 cm, Wasserversorgung: unbekannt`
+      `Tiefe: 90 cm, Wasserversorgung: Unbekannt`
     )
     expect(level90El).toBeInTheDocument()
 
     const averageEl = screen.getByLabelText(
-      `Durschnittliche Wasserversorgung: unbekannt`
+      `Durschnittliche Wasserversorgung: Unbekannt`
     )
     expect(averageEl).toBeInTheDocument()
   })
