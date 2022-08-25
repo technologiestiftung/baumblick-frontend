@@ -10,8 +10,8 @@ import { FC } from 'react'
 
 export interface TreeInfoHeaderType {
   species: string
-  height?: number
-  age?: number
+  height?: number | string
+  age?: number | string
   statusBackgroundColor?: string
   statusBorderColor?: string
   isCompressed?: boolean

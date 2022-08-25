@@ -2,7 +2,7 @@ import { FC, ReactElement, ReactNode } from 'react'
 import { MapLayout } from '@layouts/MapLayout'
 import classNames from 'classnames'
 import { GetServerSideProps, NextPage } from 'next'
-import { getTreeData, TreeDataType } from '@lib/requests/getTreeData'
+import { TreeDataType } from '@lib/requests/getTreeData'
 import { useNowcastData } from '@lib/hooks/useNowcastData'
 import { TreeInfoHeader } from '@components/TreeInfoHeader'
 import { DataListItem } from '@components/DataListItem'
@@ -25,12 +25,14 @@ import { combineNowAndForecastData } from '@lib/utils/forecastUtil/forecastUtil'
 import { useTreeRainAmount } from '@lib/hooks/useTreeRainAmount'
 import { TreeRainAmountType } from '@lib/requests/getTreeRainAmount'
 import { MappedNowcastRowsType } from '@lib/utils/mapRowsToDepths'
+import { useTreeData } from '@lib/hooks/useTreeData'
+import { mapRawQueryToState } from '@lib/utils/queryUtil'
+import { Head } from '@components/Head'
 
 interface TreePageComponentPropType {
-  treeData: TreeDataType
-  latitude?: number
-  longitude?: number
+  treeId: TreeDataType['gml_id']
   csrfToken: string
+  query?: ReturnType<typeof mapRawQueryToState>
 }
 
 type TreePageWithLayout = NextPage<TreePageComponentPropType> & {
@@ -44,7 +46,7 @@ type CsrfTokenType = string
 
 export const getServerSideProps: GetServerSideProps<
   TreePageComponentPropType
-> = async ({ params, req, res }) => {
+> = async ({ params, query, req, res }) => {
   try {
     await csrf(req, res)
 
@@ -58,18 +60,11 @@ export const getServerSideProps: GetServerSideProps<
 
     if (!treeId || Array.isArray(treeId)) return { notFound: true }
 
-    const treeData = await getTreeData(treeId, csrfToken)
-
-    if (!treeData || treeData.length !== 1)
-      throw new Error('No tree found for this request')
-
     return {
       props: {
         csrfToken,
-        title: treeData[0].art_dtsch,
-        treeData: treeData[0],
-        latitude: treeData[0].lat,
-        longitude: treeData[0].lng,
+        treeId,
+        query,
       },
     }
   } catch (error) {
@@ -155,7 +150,7 @@ const InfoList: FC<{
   )
 }
 
-const TreePage: TreePageWithLayout = ({ treeData, csrfToken }) => {
+const TreePage: TreePageWithLayout = ({ treeId, csrfToken }) => {
   const { t } = useTranslation('common')
   const { push } = useRouter()
   const { hasScrolledPastThreshold } = useHasScrolledPastThreshold({
@@ -163,13 +158,19 @@ const TreePage: TreePageWithLayout = ({ treeData, csrfToken }) => {
   })
 
   const {
+    data: treeData,
+    error: treeDataError,
+    isLoading: treeDataLoading,
+  } = useTreeData(treeId)
+
+  const {
     data: nowcastData,
     error: nowcastError,
     isLoading: nowcastIsLoading,
-  } = useNowcastData(treeData.gml_id, csrfToken)
+  } = useNowcastData(treeData?.gml_id, csrfToken)
 
   const { data: forecastData, error: forecastError } = useForecastData(
-    treeData.gml_id,
+    treeData?.gml_id,
     csrfToken
   )
 
@@ -177,7 +178,12 @@ const TreePage: TreePageWithLayout = ({ treeData, csrfToken }) => {
     data: rainData,
     error: rainError,
     isLoading: rainIsLoading,
-  } = useTreeRainAmount(treeData.gml_id)
+  } = useTreeRainAmount(treeData?.gml_id)
+
+  if (treeDataError) {
+    void push('/404')
+    return null
+  }
 
   const avgLevel =
     nowcastData && nowcastData.depthAverageRow?.value
@@ -194,6 +200,7 @@ const TreePage: TreePageWithLayout = ({ treeData, csrfToken }) => {
 
   return (
     <div id="inidividual-tree-container">
+      {treeData?.art_dtsch && <Head pageTitle={treeData.art_dtsch} />}
       <div
         className={classNames(
           'max-w-3xl mx-auto',
@@ -209,7 +216,7 @@ const TreePage: TreePageWithLayout = ({ treeData, csrfToken }) => {
           onClick={() => {
             void push({
               pathname: '/trees',
-              query: { latitude: treeData.lat, longitude: treeData.lng },
+              query: { latitude: treeData?.lat, longitude: treeData?.lng },
             })
           }}
           aria-label={t(`treeView.mapAriaLabel`)}
@@ -270,9 +277,13 @@ const TreePage: TreePageWithLayout = ({ treeData, csrfToken }) => {
             </Carousel>
           </div>
           <TreeInfoHeader
-            species={treeData.art_dtsch || 'Unbekannte Art'}
-            age={treeData.standalter}
-            height={treeData.baumhoehe}
+            species={
+              treeDataLoading
+                ? t('loading')
+                : treeData?.art_dtsch || 'Unbekannte Art'
+            }
+            age={treeData?.standalter}
+            height={treeData?.baumhoehe}
             statusBackgroundColor={circleColorClasses.bg}
             statusBorderColor={circleColorClasses.border}
           />
@@ -286,9 +297,13 @@ const TreePage: TreePageWithLayout = ({ treeData, csrfToken }) => {
             )}
           >
             <TreeInfoHeader
-              species={treeData.art_dtsch || 'Unbekannte Art'}
-              age={treeData.standalter}
-              height={treeData.baumhoehe}
+              species={
+                !treeDataLoading && treeData
+                  ? treeData?.art_dtsch || 'Unbekannte Art'
+                  : '–'
+              }
+              age={treeData?.standalter}
+              height={treeData?.baumhoehe}
               statusBackgroundColor={circleColorClasses.bg}
               statusBorderColor={circleColorClasses.border}
               isCompressed={hasScrolledPastThreshold}
@@ -314,7 +329,7 @@ const TreePage: TreePageWithLayout = ({ treeData, csrfToken }) => {
                 name: t('treeView.tabs.1'),
                 content: (
                   <FeedbackRequestsList
-                    treeData={treeData}
+                    treeData={treeData || undefined}
                     csrfToken={csrfToken}
                   />
                 ),
@@ -331,10 +346,10 @@ TreePage.getLayout = function getLayout(page, props) {
   return (
     <>
       <MapLayout
-        latitude={props.latitude}
-        longitude={props.longitude}
-        treeIdToSelect={props.treeData.gml_id}
         isMinimized={true}
+        treeIdToSelect={props.treeId}
+        latitude={props.query?.latitude || undefined}
+        longitude={props.query?.longitude || undefined}
       />
       {page}
     </>

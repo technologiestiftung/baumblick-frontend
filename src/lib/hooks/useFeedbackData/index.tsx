@@ -21,7 +21,7 @@ export interface IssueTypeType {
 }
 
 type UseFeedbackDataType = (
-  treeId: string,
+  treeId: string | undefined,
   csrfToken: string
 ) => {
   issues: IssueTypeType[] | null
@@ -81,7 +81,11 @@ const cleanLocalStorage = (): void => {
 const getLocalStorageKey = (treeId: string, issueTypeId: number): string =>
   `${LOCAL_STORAGE_PREFIX}-${treeId}-${issueTypeId}`
 
-const getIfAlreadyReported = (issueTypeId: number, treeId: string): boolean => {
+const getIfAlreadyReported = (
+  issueTypeId: number,
+  treeId: string | undefined
+): boolean => {
+  if (!treeId) return false
   const lsItem = window.localStorage.getItem(
     getLocalStorageKey(treeId, issueTypeId)
   )
@@ -97,10 +101,14 @@ export const useFeedbackData: UseFeedbackDataType = (treeId, csrfToken) => {
     data,
     error: sdkError,
     mutate,
-  } = useSWR<IssueTypeType[], Error>('issue_types', async () => {
-    setIssueError(null)
-    return getIssueTypes(treeId)
-  })
+  } = useSWR<IssueTypeType[] | undefined, Error>(
+    `feedback_data${!treeId ? '-nodata' : ''}`,
+    async () => {
+      if (!treeId) return undefined
+      setIssueError(null)
+      return getIssueTypes(treeId)
+    }
+  )
   const [issueError, setIssueError] = useState<string | null>(null)
 
   useEffect(() => {
@@ -116,6 +124,7 @@ export const useFeedbackData: UseFeedbackDataType = (treeId, csrfToken) => {
     isLoading: data === null,
     error: issueError || sdkError?.message || null,
     reportIssue: async (issueTypeId: number): Promise<void> => {
+      if (!treeId) return
       setIssueError(null)
       try {
         await reportIssue({ issueTypeId, treeId, csrfToken })
