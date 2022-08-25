@@ -55,6 +55,11 @@ const IS_OUTDATED_NOWCAST = [
   startOfDay(Date.now()).toString(),
 ]
 
+/**
+ * Zoom level from which on we display the indicators for outdated nowcast trees.
+ */
+export const OUTDATED_NOWCAST_INDICATOR_ZOOM_THRESHOLD = 15
+
 export const OUTDATED_NOWCAST_INDICATORS: LayerSpecification = {
   id: OUTDATED_NOWCAST_INDICATORS_LAYER_ID,
   type: 'symbol',
@@ -74,7 +79,7 @@ export const OUTDATED_NOWCAST_INDICATORS: LayerSpecification = {
   paint: {
     'text-color': colors.gray[500],
   },
-  minzoom: 15,
+  minzoom: OUTDATED_NOWCAST_INDICATOR_ZOOM_THRESHOLD,
 }
 
 export const TREES_LAYER: LayerSpecification = {

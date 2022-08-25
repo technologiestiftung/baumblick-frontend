@@ -17,6 +17,7 @@ import {
   TREES_SOURCE_ID,
   TREES_SOURCE_LAYER_ID,
   OUTDATED_NOWCAST_INDICATORS,
+  OUTDATED_NOWCAST_INDICATOR_ZOOM_THRESHOLD,
 } from './treesLayer'
 import { MapTilerLogo } from './MapTilerLogo'
 import classNames from 'classnames'
@@ -171,7 +172,7 @@ export const TreesMap: FC<MapProps> = ({
           ) || false
 
         const viewportDisplaysOutdatedIndicators =
-          e.target.transform._zoom >= 15
+          e.target.transform._zoom >= OUTDATED_NOWCAST_INDICATOR_ZOOM_THRESHOLD
 
         onOutdatedNowcastCheck(
           viewportHasOutdatedNowcasts && viewportDisplaysOutdatedIndicators
