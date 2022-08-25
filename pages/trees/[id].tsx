@@ -24,7 +24,7 @@ import { useForecastData } from '@lib/hooks/useForecastData'
 import { combineNowAndForecastData } from '@lib/utils/forecastUtil/forecastUtil'
 import { useTreeRainAmount } from '@lib/hooks/useTreeRainAmount'
 import { TreeRainAmountType } from '@lib/requests/getTreeRainAmount'
-import { MappedNowcastRowsType } from '@lib/utils/nowcastUtil/mapRowsToDepths'
+import { MappedNowcastRowsType } from '@lib/utils/mapRowsToDepths'
 
 interface TreePageComponentPropType {
   treeData: TreeDataType

@@ -2,7 +2,7 @@ import { getNowcastData, NowcastDataType } from '@lib/requests/getNowcastData'
 import {
   MappedNowcastRowsType,
   mapRowsToDepths,
-} from '@lib/utils/nowcastUtil/mapRowsToDepths'
+} from '@lib/utils/mapRowsToDepths'
 import useSWR from 'swr'
 
 interface useNowcastDataReturnType {
