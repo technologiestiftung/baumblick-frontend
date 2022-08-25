@@ -74,6 +74,9 @@
       "0": "Infos",
       "1": "Mitwirken"
     },
+    "forecastViz": {
+      "relativeDays": "In {{daysDiff}} Tagen"
+    },
     "header": {
       "height": "{{value}} m",
       "plantYear": {
