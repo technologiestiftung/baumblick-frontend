@@ -1,3 +1,16 @@
+# [1.0.0-staging.5](https://github.com/technologiestiftung/treewatch-frontend/compare/v1.0.0-staging.4...v1.0.0-staging.5) (2022-08-25)
+
+
+### Bug Fixes
+
+* **QTREES-371:** fetch most recent nowcast data for tree ([eb5824e](https://github.com/technologiestiftung/treewatch-frontend/commit/eb5824e4f6a737e1e13fcc4e763491365e1b41f2))
+
+
+### Features
+
+* always return most recent row if there are duplicate type_id's ([eb1ed1c](https://github.com/technologiestiftung/treewatch-frontend/commit/eb1ed1c1f4c1ba26f2d734face96aa858ef6678f))
+* make nowcast return data more robust ([db5608f](https://github.com/technologiestiftung/treewatch-frontend/commit/db5608fc33109780e8dd0176194f21d6cf6cd582))
+
 # [1.0.0-staging.4](https://github.com/technologiestiftung/treewatch-frontend/compare/v1.0.0-staging.3...v1.0.0-staging.4) (2022-08-25)
 
 
