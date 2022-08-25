@@ -12,7 +12,6 @@ import { useRouter } from 'next/router'
 import { Cross as CrossIcon } from '@components/Icons'
 import { useHasScrolledPastThreshold } from '@lib/hooks/useHasScrolledPastThreshold'
 import { Carousel } from '@components/Carousel'
-import { NowcastDataType } from '@lib/requests/getNowcastData'
 import { Tabs } from '@components/Tabs'
 import useTranslation from 'next-translate/useTranslation'
 import { getClassesByStatusId } from '@lib/utils/getClassesByStatusId'
@@ -25,6 +24,7 @@ import { useForecastData } from '@lib/hooks/useForecastData'
 import { combineNowAndForecastData } from '@lib/utils/forecastUtil/forecastUtil'
 import { useTreeRainAmount } from '@lib/hooks/useTreeRainAmount'
 import { TreeRainAmountType } from '@lib/requests/getTreeRainAmount'
+import { MappedNowcastRowsType } from '@lib/utils/mapRowsToDepths'
 
 interface TreePageComponentPropType {
   treeData: TreeDataType
@@ -82,7 +82,7 @@ export const getServerSideProps: GetServerSideProps<
 
 const InfoList: FC<{
   treeData: TreeDataType | null
-  nowcastData: NowcastDataType[] | null
+  nowcastData: MappedNowcastRowsType | null
   nowcastIsLoading: boolean
   nowcastError: Error | null
   rainData: TreeRainAmountType | null
@@ -94,8 +94,8 @@ const InfoList: FC<{
     nowcastData &&
     !nowcastIsLoading &&
     !nowcastError &&
-    nowcastData[3].value &&
-    mapSuctionTensionToStatus(nowcastData[3].value)?.id
+    nowcastData.depthAverageRow?.value &&
+    mapSuctionTensionToStatus(nowcastData.depthAverageRow?.value)?.id
 
   return (
     <ul className="z-10 relative bg-white">
@@ -180,16 +180,16 @@ const TreePage: TreePageWithLayout = ({ treeData, csrfToken }) => {
   } = useTreeRainAmount(treeData.gml_id)
 
   const avgLevel =
-    nowcastData && nowcastData[3].value
-      ? mapSuctionTensionToStatus(nowcastData[3].value)?.id
+    nowcastData && nowcastData.depthAverageRow?.value
+      ? mapSuctionTensionToStatus(nowcastData.depthAverageRow?.value)?.id
       : undefined
   const circleColorClasses = getClassesByStatusId(avgLevel)
 
   const nowcastReady = forecastData && forecastData?.length > 0
-  const forecastReady = nowcastData && nowcastData.length === 4
+  const forecastReady = nowcastData
   const forecast =
     nowcastReady && forecastReady
-      ? combineNowAndForecastData(nowcastData, forecastData)
+      ? combineNowAndForecastData(Object.values(nowcastData), forecastData)
       : undefined
 
   return (
@@ -246,18 +246,21 @@ const TreePage: TreePageWithLayout = ({ treeData, csrfToken }) => {
               {!nowcastError && (
                 <GroundLayersViz
                   depth30StatusId={
-                    nowcastData && nowcastData[0].value
-                      ? mapSuctionTensionToStatus(nowcastData[0].value)?.id
+                    nowcastData && nowcastData.depth30Row?.value
+                      ? mapSuctionTensionToStatus(nowcastData.depth30Row?.value)
+                          ?.id
                       : undefined
                   }
                   depth60StatusId={
-                    nowcastData && nowcastData[1].value
-                      ? mapSuctionTensionToStatus(nowcastData[1].value)?.id
+                    nowcastData && nowcastData.depth60Row?.value
+                      ? mapSuctionTensionToStatus(nowcastData.depth60Row?.value)
+                          ?.id
                       : undefined
                   }
                   depth90StatusId={
-                    nowcastData && nowcastData[2].value
-                      ? mapSuctionTensionToStatus(nowcastData[2].value)?.id
+                    nowcastData && nowcastData.depth90Row?.value
+                      ? mapSuctionTensionToStatus(nowcastData.depth90Row?.value)
+                          ?.id
                       : undefined
                   }
                   averageStatusId={avgLevel}
