@@ -27,6 +27,7 @@ import { useTreeRainAmount } from '@lib/hooks/useTreeRainAmount'
 import { TreeRainAmountType } from '@lib/requests/getTreeRainAmount'
 import { useTreeData } from '@lib/hooks/useTreeData'
 import { mapRawQueryToState } from '@lib/utils/queryUtil'
+import { Head } from '@components/Head'
 
 interface TreePageComponentPropType {
   treeId: TreeDataType['gml_id']
@@ -199,6 +200,7 @@ const TreePage: TreePageWithLayout = ({ treeId, csrfToken }) => {
 
   return (
     <div id="inidividual-tree-container">
+      {treeData?.art_dtsch && <Head pageTitle={treeData.art_dtsch} />}
       <div
         className={classNames(
           'max-w-3xl mx-auto',
