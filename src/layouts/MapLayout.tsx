@@ -19,6 +19,7 @@ export interface MapLayoutType {
   treeIdToSelect?: string
   zoom?: number
   onTreeSelect?: (treeId: string) => void
+  onOutdatedNowcastCheck?: (isOutdated: boolean) => void
   isMinimized?: boolean
 }
 
@@ -28,6 +29,7 @@ export const MapLayout: FC<MapLayoutType> = ({
   treeIdToSelect,
   zoom,
   onTreeSelect = () => undefined,
+  onOutdatedNowcastCheck = () => undefined,
   isMinimized,
   children,
 }) => {
@@ -77,6 +79,7 @@ export const MapLayout: FC<MapLayoutType> = ({
             zoom: zoom || MAP_CONFIG.defaultZoom,
           }}
           onSelect={onTreeSelect}
+          onOutdatedNowcastCheck={onOutdatedNowcastCheck}
           latitude={latitude}
           longitude={longitude}
           treeIdToSelect={treeIdToSelect}

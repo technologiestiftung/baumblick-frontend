@@ -41,6 +41,7 @@ interface MapProps {
   longitude?: number
   treeIdToSelect?: string
   onSelect?: (treeId: string) => void
+  onOutdatedNowcastCheck?: (isOutdated: boolean) => void
   isMinimized?: boolean
 }
 
@@ -58,6 +59,7 @@ export const TreesMap: FC<MapProps> = ({
   longitude,
   treeIdToSelect,
   onSelect = () => undefined,
+  onOutdatedNowcastCheck = () => undefined,
   isMinimized = false,
 }) => {
   const { replace, query, pathname } = useRouter()
@@ -158,6 +160,23 @@ export const TreesMap: FC<MapProps> = ({
       if (!map.current) return
 
       map.current.on('moveend', (e) => {
+        const renderedFeatures = map.current?.queryRenderedFeatures(undefined, {
+          layers: [TREES_LAYER_ID],
+        })
+
+        const viewportHasOutdatedNowcasts =
+          renderedFeatures?.some(
+            (feature) =>
+              new Date(feature.properties.nowcast_timestamp_stamm) <= new Date()
+          ) || false
+
+        const viewportDisplaysOutdatedIndicators =
+          e.target.transform._zoom >= 15
+
+        onOutdatedNowcastCheck(
+          viewportHasOutdatedNowcasts && viewportDisplaysOutdatedIndicators
+        )
+
         debouncedViewportChange({
           latitude: e.target.transform._center.lat,
           longitude: e.target.transform._center.lng,
