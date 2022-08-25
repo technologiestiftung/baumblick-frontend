@@ -45,17 +45,13 @@ export const getNowcastData = async (
     offset: '0',
   })
 
-  const response = await fetch(
-    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-    `${REQUEST_URL}?${REQUEST_PARAMS}`,
-    {
-      method: 'POST',
-      headers: {
-        'CSRF-Token': csrfToken,
-        'Content-Type': 'application/json',
-      },
-    }
-  )
+  const response = await fetch(`${REQUEST_URL}?${REQUEST_PARAMS.toString()}`, {
+    method: 'POST',
+    headers: {
+      'CSRF-Token': csrfToken,
+      'Content-Type': 'application/json',
+    },
+  })
 
   if (!response.ok) {
     const txt = await response.text()
