@@ -26,10 +26,12 @@ import { combineNowAndForecastData } from '@lib/utils/forecastUtil/forecastUtil'
 import { useTreeRainAmount } from '@lib/hooks/useTreeRainAmount'
 import { TreeRainAmountType } from '@lib/requests/getTreeRainAmount'
 import { useTreeData } from '@lib/hooks/useTreeData'
+import { mapRawQueryToState } from '@lib/utils/queryUtil'
 
 interface TreePageComponentPropType {
   treeId: TreeDataType['gml_id']
   csrfToken: string
+  query?: ReturnType<typeof mapRawQueryToState>
 }
 
 type TreePageWithLayout = NextPage<TreePageComponentPropType> & {
@@ -43,7 +45,7 @@ type CsrfTokenType = string
 
 export const getServerSideProps: GetServerSideProps<
   TreePageComponentPropType
-> = async ({ params, req, res }) => {
+> = async ({ params, query, req, res }) => {
   try {
     await csrf(req, res)
 
@@ -61,6 +63,7 @@ export const getServerSideProps: GetServerSideProps<
       props: {
         csrfToken,
         treeId,
+        query,
       },
     }
   } catch (error) {
@@ -337,7 +340,12 @@ const TreePage: TreePageWithLayout = ({ treeId, csrfToken }) => {
 TreePage.getLayout = function getLayout(page, props) {
   return (
     <>
-      <MapLayout isMinimized={true} treeIdToSelect={props.treeId} />
+      <MapLayout
+        isMinimized={true}
+        treeIdToSelect={props.treeId}
+        latitude={props.query?.latitude || undefined}
+        longitude={props.query?.longitude || undefined}
+      />
       {page}
     </>
   )

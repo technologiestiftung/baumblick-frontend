@@ -6,6 +6,12 @@ import classNames from 'classnames'
 import { InternalLink } from '@components/InternalLink'
 import { useTreeData } from '@lib/hooks/useTreeData'
 
+interface OnSelectOutput {
+  id: string
+  latitude: number
+  longitude: number
+}
+
 export const MAP_CONFIG = {
   minZoom: 11.5,
   maxZoom: 22,
@@ -19,7 +25,7 @@ export interface MapLayoutType {
   longitude?: number
   treeIdToSelect?: string
   zoom?: number
-  onTreeSelect?: (treeId: string) => void
+  onTreeSelect?: (treeData: OnSelectOutput) => void
   isMinimized?: boolean
 }
 
