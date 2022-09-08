@@ -25,7 +25,7 @@ export const Modal: FC<ModalType> = ({
       <Dialog
         open={isOpen}
         onClose={onClose}
-        className="fixed inset-0 overflow-y-auto"
+        className="fixed inset-0 z-10 overflow-y-auto"
       >
         <div className="min-h-screen px-4 flex justify-center items-center">
           <Transition.Child
