@@ -191,26 +191,38 @@ export const TreesMap: FC<MapProps> = ({
     map.current.on('load', function () {
       if (!map.current) return
 
-      // Outdated nowcast check - start
-      // We need to check on initial page load if there are outdated nowcasts visible
-      const renderedFeatures = map.current?.queryRenderedFeatures(undefined, {
-        layers: [TREES_LAYER_ID],
-      })
+      // This fires on every render (multiple times per second):
+      map.current.on('render', afterChangeComplete)
 
-      const viewportHasOutdatedNowcasts =
-        checkForOutdatedNowcasts(renderedFeatures)
+      function afterChangeComplete(): void {
+        // If the map is not fully loaded, we return early:
+        if (!map.current?.loaded()) return
 
-      const viewportDisplaysOutdatedIndicators =
-        !!viewport.zoom &&
-        viewport.zoom >= OUTDATED_NOWCAST_INDICATOR_ZOOM_THRESHOLD
+        // But if the map is loaded:
+        // We check if there are outdated nowcasts and dispatch
+        // the onOutdatedNowcastCheck function:
+        const renderedFeatures = map.current?.queryRenderedFeatures(undefined, {
+          layers: [TREES_LAYER_ID],
+        })
 
-      onOutdatedNowcastCheck(
-        viewportHasOutdatedNowcasts && viewportDisplaysOutdatedIndicators
-      )
-      // Outdated nowcast check - end
+        const viewportHasOutdatedNowcasts =
+          checkForOutdatedNowcasts(renderedFeatures)
+
+        const viewportDisplaysOutdatedIndicators =
+          !!viewport.zoom &&
+          viewport.zoom >= OUTDATED_NOWCAST_INDICATOR_ZOOM_THRESHOLD
+
+        onOutdatedNowcastCheck(
+          viewportHasOutdatedNowcasts && viewportDisplaysOutdatedIndicators
+        )
+
+        // After the map has been fully loaded and the nowcast checked,
+        // we can remove the handler:
+        map.current.off('render', afterChangeComplete)
+      }
 
       map.current.on('moveend', (e) => {
-        // Outdated nowcast check after map move - start
+        // OUTDATED NOWCAST CHECK - start
         // We want to constantly check whether outdated nowcasts are visible
         // when the map is moved.
         const renderedFeatures = map.current?.queryRenderedFeatures(undefined, {
@@ -228,7 +240,7 @@ export const TreesMap: FC<MapProps> = ({
         onOutdatedNowcastCheck(
           viewportHasOutdatedNowcasts && viewportDisplaysOutdatedIndicators
         )
-        // Outdated nowcast check after map move - start
+        // OUTDATED NOWCAST CHECK - end
 
         debouncedViewportChange({
           latitude: e.target.transform._center.lat,
