@@ -51,7 +51,7 @@ export const Modal: FC<ModalType> = ({
             <Dialog.Panel
               className={classNames(
                 'w-full max-w-md',
-                'pb-6',
+                'pb-5',
                 'rounded-md shadow-2xl',
                 'bg-white',
                 'overflow-hidden'
