@@ -179,6 +179,27 @@ export const TreesMap: FC<MapProps> = ({
     map.current.on('load', function () {
       if (!map.current) return
 
+      // NOTE: This part is almost the exact same code as the check in `moveend` below.
+      // TODO: DRY up!
+      const renderedFeatures = map.current?.queryRenderedFeatures(undefined, {
+        layers: [TREES_LAYER_ID],
+      })
+
+      const viewportHasOutdatedNowcasts =
+        renderedFeatures?.some(
+          (feature) =>
+            new Date(feature.properties.nowcast_timestamp_stamm) <= new Date()
+        ) || false
+
+      const viewportDisplaysOutdatedIndicators =
+        !!viewport.zoom &&
+        viewport.zoom >= OUTDATED_NOWCAST_INDICATOR_ZOOM_THRESHOLD
+
+      onOutdatedNowcastCheck(
+        viewportHasOutdatedNowcasts && viewportDisplaysOutdatedIndicators
+      )
+      // DRY up end
+
       map.current.on('moveend', (e) => {
         const renderedFeatures = map.current?.queryRenderedFeatures(undefined, {
           layers: [TREES_LAYER_ID],
@@ -353,7 +374,7 @@ export const TreesMap: FC<MapProps> = ({
       <div
         id={mapId}
         className={classNames(
-          isMinimized ? 'h-[132px]' : 'h-full',
+          isMinimized ? 'h-[154px]' : 'h-full',
           'w-full inline-block',
           'bg-[#FBFBFC]'
         )}
