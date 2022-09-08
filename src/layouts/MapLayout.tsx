@@ -1,10 +1,11 @@
 import { TreesMap } from '@components/TreesMap'
 import { WaterSupplyLegend } from '@components/WaterSupplyLegend'
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { useHasScrolledPastThreshold } from '@lib/hooks/useHasScrolledPastThreshold'
 import classNames from 'classnames'
 import { InternalLink } from '@components/InternalLink'
 import { useTreeData } from '@lib/hooks/useTreeData'
+import { Modal } from '@components/Modal'
 
 interface OnSelectOutput {
   id: string
@@ -26,8 +27,21 @@ export interface MapLayoutType {
   treeIdToSelect?: string
   zoom?: number
   onTreeSelect?: (treeData: OnSelectOutput) => void
-  onOutdatedNowcastCheck?: (isOutdated: boolean) => void
   isMinimized?: boolean
+}
+
+const OutdatedNowcastHint: FC<{ onClick?: () => void }> = ({
+  onClick = () => undefined,
+}) => {
+  return (
+    <button
+      className="mt-1 flex gap-0 items-center bg-gray-200 rounded py-1 pr-1 w-full border border-gray-300"
+      onClick={onClick}
+    >
+      <span className="w-6 text-center text-xs text-gray-500 font-bold">!</span>
+      <span className="text-xs font-semibold">Daten veraltet</span>
+    </button>
+  )
 }
 
 export const MapLayout: FC<MapLayoutType> = ({
@@ -36,7 +50,6 @@ export const MapLayout: FC<MapLayoutType> = ({
   treeIdToSelect,
   zoom,
   onTreeSelect = () => undefined,
-  onOutdatedNowcastCheck = () => undefined,
   isMinimized,
   children,
 }) => {
@@ -45,6 +58,9 @@ export const MapLayout: FC<MapLayoutType> = ({
     threshold: 5,
     scrollParent: 'main',
   })
+
+  const [hasOutdatedNowcast, setHasOutdatedNowcast] = useState(false)
+  const [outdatedModalIsOpen, setOutdatedModalIsOpen] = useState(false)
 
   return (
     <>
@@ -87,7 +103,9 @@ export const MapLayout: FC<MapLayoutType> = ({
             zoom: zoom || MAP_CONFIG.defaultZoom,
           }}
           onSelect={onTreeSelect}
-          onOutdatedNowcastCheck={onOutdatedNowcastCheck}
+          onOutdatedNowcastCheck={(isOutdated) =>
+            setHasOutdatedNowcast(isOutdated)
+          }
           latitude={latitude || data?.lat}
           longitude={longitude || data?.lng}
           treeIdToSelect={treeIdToSelect}
@@ -99,7 +117,18 @@ export const MapLayout: FC<MapLayoutType> = ({
             'transition-opacity',
             hasScrolledPastThreshold && 'opacity-0 pointer-events-none'
           )}
-        />
+        >
+          {hasOutdatedNowcast && (
+            <OutdatedNowcastHint onClick={() => setOutdatedModalIsOpen(true)} />
+          )}
+        </WaterSupplyLegend>
+        {outdatedModalIsOpen && (
+          <Modal
+            title="Diese Vorhersage-Daten sind veraltet"
+            description="Bitte versuche es später nochmal."
+            onClose={() => setOutdatedModalIsOpen(false)}
+          />
+        )}
       </div>
       {children}
     </>

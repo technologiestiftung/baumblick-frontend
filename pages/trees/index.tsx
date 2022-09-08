@@ -39,9 +39,6 @@ MapPage.getLayout = function getLayout(page, props) {
             query: { id: treeIdToUrlSlug(id), latitude, longitude },
           })
         }}
-        onOutdatedNowcastCheck={(isOutdated) => {
-          console.log(isOutdated)
-        }}
         isMinimized={false}
       />
       {page}

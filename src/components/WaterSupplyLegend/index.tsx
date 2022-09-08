@@ -14,6 +14,7 @@ export interface WaterSupplyLegendType {
 export const WaterSupplyLegend: FC<WaterSupplyLegendType> = ({
   hasShadow = false,
   className = '',
+  children,
 }) => {
   const { t } = useTranslation('common')
   const [bodyNode, setBodyNode] = useState<HTMLElement | null>(null)
@@ -77,6 +78,7 @@ export const WaterSupplyLegend: FC<WaterSupplyLegendType> = ({
                 )
               })}
           </ul>
+          {children}
         </div>
       </div>
     </div>,
