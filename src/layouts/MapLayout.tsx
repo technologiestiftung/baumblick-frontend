@@ -6,6 +6,8 @@ import classNames from 'classnames'
 import { InternalLink } from '@components/InternalLink'
 import { useTreeData } from '@lib/hooks/useTreeData'
 import { Modal } from '@components/Modal'
+import useTranslation from 'next-translate/useTranslation'
+import { Button } from '@components/Button'
 
 interface OnSelectOutput {
   id: string
@@ -33,13 +35,17 @@ export interface MapLayoutType {
 const OutdatedNowcastHint: FC<{ onClick?: () => void }> = ({
   onClick = () => undefined,
 }) => {
+  const { t } = useTranslation('common')
+
   return (
     <button
       className="mt-1 flex gap-0 items-center bg-gray-200 rounded py-1 pr-1 w-full border border-gray-300"
       onClick={onClick}
     >
       <span className="w-6 text-center text-xs text-gray-500 font-bold">!</span>
-      <span className="text-xs font-semibold">Daten veraltet</span>
+      <span className="text-xs font-semibold">
+        {t('legend.map.outdated.label')}
+      </span>
     </button>
   )
 }
@@ -58,6 +64,7 @@ export const MapLayout: FC<MapLayoutType> = ({
     threshold: 5,
     scrollParent: 'main',
   })
+  const { t } = useTranslation('common')
 
   const [hasOutdatedNowcast, setHasOutdatedNowcast] = useState(false)
   const [outdatedModalIsOpen, setOutdatedModalIsOpen] = useState(false)
@@ -124,8 +131,13 @@ export const MapLayout: FC<MapLayoutType> = ({
         </WaterSupplyLegend>
         {outdatedModalIsOpen && (
           <Modal
-            title="Diese Vorhersage-Daten sind veraltet"
-            description="Bitte versuche es später nochmal."
+            title={t('legend.map.outdated.modal.title')}
+            description={t('legend.map.outdated.modal.description')}
+            footer={
+              <Button onClick={() => setOutdatedModalIsOpen(false)}>
+                {t('legend.map.outdated.modal.close')}
+              </Button>
+            }
             onClose={() => setOutdatedModalIsOpen(false)}
           />
         )}
