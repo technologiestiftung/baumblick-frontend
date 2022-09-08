@@ -78,7 +78,7 @@ export const MapLayout: FC<MapLayoutType> = ({
         )}
       >
         {!isMinimized && (
-          <div className="fixed w-full left-0 top-2 md:top-4 pointer-events-none z-10">
+          <div className="fixed w-full left-0 top-2 pointer-events-none z-10">
             <div className="w-full max-w-3xl flex justify-end mx-auto">
               <InternalLink
                 href="/"

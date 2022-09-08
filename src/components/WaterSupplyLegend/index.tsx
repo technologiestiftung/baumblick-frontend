@@ -30,7 +30,7 @@ export const WaterSupplyLegend: FC<WaterSupplyLegendType> = ({
   if (!bodyNode) return null
 
   return ReactDOM.createPortal(
-    <div className="fixed w-full left-0 top-2 md:top-4 pointer-events-none">
+    <div className="fixed w-full left-0 top-2 pointer-events-none">
       <div className="w-full max-w-3xl mx-auto">
         <div
           className={classNames(
