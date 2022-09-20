@@ -1,7 +1,7 @@
 ![](https://img.shields.io/badge/Built%20with%20%E2%9D%A4%EF%B8%8F-at%20Technologiestiftung%20Berlin-blue)
 
-# _Quantified Trees (Qtrees) – Citizens Frontend_
-> The [_Qtrees – Citizens Frontend_]() is an interactive map of Berlin that shows how thirsty the public trees of berlin are. More precisely, it visualizes the trees' ground suction tension. This suction tension represents the amount of energy tree roots are needing in order to suck out water from the ground. Using open data as well as sensors distributed under the ground of about a hundred trees, an AI developed by [Birds on Mars](https://www.birdsonmars.com/) is able to generate forecasts for the trees not equiped with sensors. This web-app is oriented towards the public and should inform about the AI-generated forecasts in a simple and intuitive way.
+# Quantified Trees – Baumblick
+> The app **Baumblick** is part of a federally funded project called [**Quantified Trees**](https://qtrees.ai/) (Qtrees). It is thus part of the German adoption strategy to climate change with focus on how to help city trees to not suffer and die because of rising temperatures and more and more frequent droughts. The app tells the story of each Berlin city tree by using a vast amount of open data like location and tree specific data. On an interactive map users can see how thirsty city trees of Berlin are. More precisely, it visualizes the trees' ground suction tension. This suction tension represents the amount of energy tree roots need in order to suck out water from the soil. Using open data as well as sensors distributed under the ground, an AI developed by [Birds on Mars](https://www.birdsonmars.com/) is able to generate nowcasts and a 14-days forecasts for each tree – even for those that are not equiped with sensors! The app is oriented towards the public and should inform in a simple and intuitive way.
 
 ## Context
 Climate change is causing increasingly hot, dry weather in many places. In recent years, Berlin has also experienced more hot days than ever before. Determining whether trees are in need of water isn't as easy as looking at the ground on the surface level. Many factors such as the tree's age, specie, plate size or ground quality play an important role. Old trees, for instance, tend to have deep roots and thereby be less dependent on additional watering. Overwatering can in fact be more detrimental to a tree than helpful.
@@ -57,7 +57,7 @@ vim .env # Use your favourite editor here
 ```
 
 ## Deployment
-_Qtrees – Citizens Frontend_ is deployed to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+**Qtrees – Baumblick** is deployed to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
 
 ## Contributors
 
@@ -93,32 +93,35 @@ Texts and content available as [CC BY](https://creativecommons.org/licenses/by/3
 <br />
 <br />
 <table>
-  <tr>
+  <tr style="vertical-align:top">
     <td>
       A project by:
       <br />
+      <br />
       <a src="https://www.technologiestiftung-berlin.de/en/">
-        <img width="150" src="https://logos.citylab-berlin.org/logo-technologiestiftung-berlin-en.svg" />
+        <img width="180" src="https://logos.citylab-berlin.org/logo-technologiestiftung-berlin-en.svg" />
       </a><br/>
       <a src="https://www.birdsonmars.com/">
-        <img width="100" src="https://logos.citylab-berlin.org/logo-birds-on-mars.png" /><br/>
+        <img width="180" src="https://logos.citylab-berlin.org/logo-birds-on-mars.png" /><br/>
       </a><br/>
       <a src="https://www.berlin.de/ba-mitte/politik-und-verwaltung/aemter/strassen-und-gruenflaechenamt/">
-        <img width="300" src="https://qtrees.ai/wp-content/uploads/2021/11/berlin_mitte_logo.png" /><br/>
+        <img width="180" src="https://qtrees.ai/wp-content/uploads/2021/11/berlin_mitte_logo.png" /><br/>
       </a><br/>
     </td>
     <td>
       Associated partners:
       <br />
-      <img width="200" src="https://qtrees.ai/wp-content/uploads/2022/06/B_BA_W_NE_Logo_DE_H_PT_4C-2048x342.png" />
+      <br />
+      <img width="180" src="https://qtrees.ai/wp-content/uploads/2022/06/B_BA_W_NE_Logo_DE_H_PT_4C-2048x342.png" />
       <br/>
-      <img width="200" src="https://qtrees.ai/wp-content/uploads/2022/06/logo_arbor_revital_20mm.png" />
+      <img width="180" src="https://qtrees.ai/wp-content/uploads/2022/06/logo_arbor_revital_20mm.png" />
     </td>
     <td>
       Sponsors:
       <br/>
-      <img width="160" src="https://qtrees.ai/wp-content/uploads/2022/04/BMUV_Fz_2021_Office_Farbe_de_c-1536x1122.png" />
-      <img width="160" src="https://qtrees.ai/wp-content/uploads/2021/12/zug-logo.png" />
+      <br />
+      <img width="180" src="https://qtrees.ai/wp-content/uploads/2022/04/BMUV_Fz_2021_Office_Farbe_de_c-1536x1122.png" />
+      <img width="180" src="https://qtrees.ai/wp-content/uploads/2021/12/zug-logo.png" />
     </td>
   </tr>
 </table>
