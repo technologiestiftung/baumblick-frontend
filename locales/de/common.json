@@ -68,7 +68,7 @@
     "mapAriaLabel": "Kartenansicht",
     "soilViz": {
       "depthAriaLabel": "Tiefe: {{depth}} cm, Wasserversorgung: {{waterSupply}}",
-      "averageWaterSupply": "Durchschnittliche Wasserversorgung: {{waterSupply}}",
+      "averageWaterSupply": "Durschnittliche Wasserversorgung: {{waterSupply}}",
       "depthLabel": "{{depth}} cm"
     },
     "tabs": {
