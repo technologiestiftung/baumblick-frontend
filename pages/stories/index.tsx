@@ -1,4 +1,4 @@
-import { Affiliate, Plant, WateringCan } from '@components/Icons'
+import { Affiliate, News, Plant, WateringCan } from '@components/Icons'
 import { StoriesOverviewHeader } from '@components/StoriesOverviewHeader'
 import { StoryLink, StoryLinkPropType } from '@components/StoryLink'
 import { GetServerSideProps } from 'next'
@@ -20,8 +20,8 @@ export const stories: Record<string, StoryLinkPropType> = {
       'Gießen ist gut. Kann man aber auch falsch machen. Haste net gedacht, wat?',
     Icon: WateringCan,
   },
-  'ki-fuer-die-berechnung-des-wasserbedarfs': {
-    path: `/stories/ki-fuer-die-berechnung-des-wasserbedarfs`,
+  'ki-berechnung-wasserbedarf': {
+    path: `/stories/ki-berechnung-wasserbedarf`,
     title: `Wie wird KI für die Berechnung des Wasserbedarfs eingesetzt?`,
     author: `Marcus Voß`,
     readingDurationInMinutes: 12,
@@ -52,8 +52,10 @@ export const stories: Record<string, StoryLinkPropType> = {
     title: `Das "Quantified Trees" Konsortium`,
     author: `Julia Zimmermann`,
     readingDurationInMinutes: 6,
-    excerpt: <>Das Konsortium: wer steckt hinter Qtrees und Baumblick?</>,
-    Icon: Plant,
+    excerpt: (
+      <>Das Konsortium: wer steckt hinter Quantified Trees und Baumblick?</>
+    ),
+    Icon: News,
   },
 }
 
