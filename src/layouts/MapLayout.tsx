@@ -68,7 +68,7 @@ export const MapLayout: FC<MapLayoutType> = ({
                   'hover:text-gray-900 hover:underline'
                 )}
               >
-                <img src="/logo.svg" alt="TreeWatch Logo" className="h-6" />
+                <img src="/logo.svg" alt="Baumblick Logo" className="h-6" />
               </InternalLink>
             </div>
           </div>
