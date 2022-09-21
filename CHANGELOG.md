@@ -1,3 +1,10 @@
+# [1.0.0-staging.7](https://github.com/technologiestiftung/treewatch-frontend/compare/v1.0.0-staging.6...v1.0.0-staging.7) (2022-09-21)
+
+
+### Bug Fixes
+
+* Use pathname instead of id in StoryLayout ([90709b2](https://github.com/technologiestiftung/treewatch-frontend/commit/90709b2726898a9ffa48678e3132bc644b66f18c))
+
 # [1.0.0-staging.6](https://github.com/technologiestiftung/treewatch-frontend/compare/v1.0.0-staging.5...v1.0.0-staging.6) (2022-08-25)
 
 
