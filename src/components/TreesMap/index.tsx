@@ -17,8 +17,6 @@ import {
   TREES_SOURCE,
   TREES_SOURCE_ID,
   TREES_SOURCE_LAYER_ID,
-  OUTDATED_NOWCAST_INDICATORS,
-  OUTDATED_NOWCAST_INDICATOR_ZOOM_THRESHOLD,
 } from './treesLayer'
 import { MapTilerLogo } from './MapTilerLogo'
 import classNames from 'classnames'
@@ -208,13 +206,7 @@ export const TreesMap: FC<MapProps> = ({
         const viewportHasOutdatedNowcasts =
           checkForOutdatedNowcasts(renderedFeatures)
 
-        const viewportDisplaysOutdatedIndicators =
-          !!viewport.zoom &&
-          viewport.zoom >= OUTDATED_NOWCAST_INDICATOR_ZOOM_THRESHOLD
-
-        onOutdatedNowcastCheck(
-          viewportHasOutdatedNowcasts && viewportDisplaysOutdatedIndicators
-        )
+        onOutdatedNowcastCheck(viewportHasOutdatedNowcasts)
 
         // After the map has been fully loaded and the nowcast checked,
         // we can remove the handler:
@@ -234,12 +226,7 @@ export const TreesMap: FC<MapProps> = ({
         const viewportHasOutdatedNowcasts =
           checkForOutdatedNowcasts(renderedFeatures)
 
-        const viewportDisplaysOutdatedIndicators =
-          e.target.transform._zoom >= OUTDATED_NOWCAST_INDICATOR_ZOOM_THRESHOLD
-
-        onOutdatedNowcastCheck(
-          viewportHasOutdatedNowcasts && viewportDisplaysOutdatedIndicators
-        )
+        onOutdatedNowcastCheck(viewportHasOutdatedNowcasts)
         // OUTDATED NOWCAST CHECK - end
 
         debouncedViewportChange({
@@ -251,7 +238,6 @@ export const TreesMap: FC<MapProps> = ({
 
       map.current.addSource(TREES_SOURCE_ID, TREES_SOURCE)
       map.current.addLayer(TREES_LAYER)
-      map.current.addLayer(OUTDATED_NOWCAST_INDICATORS)
 
       // If we have a treeIdToSelect on the initial map load, we already set the selected feature state, so that the selected style is applied:
       if (treeIdToSelect) {

@@ -53,13 +53,10 @@
         "critical": "Kritisch",
         "unknown": "Unbekannt"
       },
-      "outdated": {
-        "label": "Daten veraltet",
-        "modal": {
-          "title": "Daten zur Wasserversorgung veraltet",
-          "description": "Bäume, die auf der Karte mit einem '!' gekennzeichnet sind, haben leider keine tagesaktuellen Werte zur Wasserversorgung.",
-          "close": "Zurück"
-        }
+      "unknownLevelModal": {
+        "title": "Wasserversorgung unbekannt",
+        "description": "Bäume, die auf der Karte grau markiert sind, haben entweder noch keinen berechneten Wert für den heutigen Tag oder sie sind nicht Teil des Vorhersagemodells.",
+        "close": "Zurück"
       }
     }
   },

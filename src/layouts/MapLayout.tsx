@@ -32,24 +32,6 @@ export interface MapLayoutType {
   isMinimized?: boolean
 }
 
-const OutdatedNowcastHint: FC<{ onClick?: () => void }> = ({
-  onClick = () => undefined,
-}) => {
-  const { t } = useTranslation('common')
-
-  return (
-    <button
-      className="mt-1 flex gap-0 items-center bg-gray-200 rounded py-1 pr-1 w-full border border-gray-300"
-      onClick={onClick}
-    >
-      <span className="w-6 text-center text-xs text-gray-500 font-bold">!</span>
-      <span className="text-xs font-semibold">
-        {t('legend.map.outdated.label')}
-      </span>
-    </button>
-  )
-}
-
 export const MapLayout: FC<MapLayoutType> = ({
   latitude,
   longitude,
@@ -66,7 +48,6 @@ export const MapLayout: FC<MapLayoutType> = ({
   })
   const { t } = useTranslation('common')
 
-  const [hasOutdatedNowcast, setHasOutdatedNowcast] = useState(false)
   const [outdatedModalIsOpen, setOutdatedModalIsOpen] = useState(false)
 
   return (
@@ -110,9 +91,6 @@ export const MapLayout: FC<MapLayoutType> = ({
             zoom: zoom || MAP_CONFIG.defaultZoom,
           }}
           onSelect={onTreeSelect}
-          onOutdatedNowcastCheck={(isOutdated) =>
-            setHasOutdatedNowcast(isOutdated)
-          }
           latitude={latitude || data?.lat}
           longitude={longitude || data?.lng}
           treeIdToSelect={treeIdToSelect}
@@ -124,18 +102,16 @@ export const MapLayout: FC<MapLayoutType> = ({
             'transition-opacity',
             hasScrolledPastThreshold && 'opacity-0 pointer-events-none'
           )}
-        >
-          {hasOutdatedNowcast && (
-            <OutdatedNowcastHint onClick={() => setOutdatedModalIsOpen(true)} />
-          )}
-        </WaterSupplyLegend>
+          showNoDataItem={true} // TODO: We could think if we make this dependent on hasOutdatedNowcast and whether trees with no data aree visible
+          onNoDataItemClick={() => setOutdatedModalIsOpen(true)}
+        />
         {outdatedModalIsOpen && (
           <Modal
-            title={t('legend.map.outdated.modal.title')}
-            description={t('legend.map.outdated.modal.description')}
+            title={t('legend.map.unknownLevelModal.title')}
+            description={t('legend.map.unknownLevelModal.description')}
             footer={
               <Button onClick={() => setOutdatedModalIsOpen(false)}>
-                {t('legend.map.outdated.modal.close')}
+                {t('legend.map.unknownLevelModal.close')}
               </Button>
             }
             onClose={() => setOutdatedModalIsOpen(false)}
