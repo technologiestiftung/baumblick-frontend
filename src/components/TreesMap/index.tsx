@@ -47,7 +47,7 @@ interface MapProps {
   longitude?: number
   treeIdToSelect?: string
   onSelect?: (treeData: OnSelectOutput) => void
-  onOutdatedNowcastCheck?: (isOutdated: boolean) => void
+  onOutdatedNowcastChange?: (isOutdated: boolean) => void
   isMinimized?: boolean
 }
 
@@ -81,7 +81,7 @@ export const TreesMap: FC<MapProps> = ({
   longitude,
   treeIdToSelect,
   onSelect = () => undefined,
-  onOutdatedNowcastCheck = () => undefined,
+  onOutdatedNowcastChange = () => undefined,
   isMinimized = false,
 }) => {
   const { replace, query, pathname } = useRouter()
@@ -198,7 +198,7 @@ export const TreesMap: FC<MapProps> = ({
 
         // But if the map is loaded:
         // We check if there are outdated nowcasts and dispatch
-        // the onOutdatedNowcastCheck function:
+        // the onOutdatedNowcastChange function:
         const renderedFeatures = map.current?.queryRenderedFeatures(undefined, {
           layers: [TREES_LAYER_ID],
         })
@@ -206,7 +206,7 @@ export const TreesMap: FC<MapProps> = ({
         const viewportHasOutdatedNowcasts =
           checkForOutdatedNowcasts(renderedFeatures)
 
-        onOutdatedNowcastCheck(viewportHasOutdatedNowcasts)
+        onOutdatedNowcastChange(viewportHasOutdatedNowcasts)
 
         // After the map has been fully loaded and the nowcast checked,
         // we can remove the handler:
@@ -226,7 +226,7 @@ export const TreesMap: FC<MapProps> = ({
         const viewportHasOutdatedNowcasts =
           checkForOutdatedNowcasts(renderedFeatures)
 
-        onOutdatedNowcastCheck(viewportHasOutdatedNowcasts)
+        onOutdatedNowcastChange(viewportHasOutdatedNowcasts)
         // OUTDATED NOWCAST CHECK - end
 
         debouncedViewportChange({
