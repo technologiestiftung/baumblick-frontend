@@ -32,7 +32,7 @@ const App: FC<AppPropsWithLayout> = ({
 }: AppPropsWithLayout) => {
   useMatomo()
 
-  const getLayout = Component.getLayout ?? ((page) => page)
+  const getLayout = Component.getLayout ?? ((page) => <>{page}</>)
 
   return (
     <StrictMode>
