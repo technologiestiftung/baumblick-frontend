@@ -28,7 +28,7 @@ export const Header: FC<{
           'hover:text-gray-900 hover:underline'
         )}
       >
-        <img src="/logo.svg" alt="TreeWatch Logo" className="h-6" />
+        <img src="/logo.svg" alt="Baumblick Logo" className="h-6" />
         <span className={compact ? 'font-medium' : 'font-bold'}>
           {t('name.short')}
         </span>

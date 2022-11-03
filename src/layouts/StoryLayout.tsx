@@ -20,7 +20,7 @@ import commonDE from '../../locales/de/common.json'
 
 const StoryLayoutWithoutTranslation: FC = ({ children }) => {
   const { t } = useTranslation('common')
-  const { query } = useRouter()
+  const { pathname } = useRouter()
   const contentRef = useRef<HTMLElement | null>(null)
   const [contentParent, setContentParent] = useState<HTMLElement | null>(null)
   const [showStickyTableOfContents, setShowStickyTOC] = useState(false)
@@ -30,9 +30,10 @@ const StoryLayoutWithoutTranslation: FC = ({ children }) => {
     useHasScrolledPastThreshold({
       threshold: 600,
     })
+  const id = pathname.replace(`/stories/`, ``)
   const story =
-    typeof query.id === 'string' && query.id in stories
-      ? stories[query.id]
+    typeof id === 'string' && id in stories
+      ? stories[id]
       : Object.values(stories)[0]
 
   useEffect(() => {

@@ -3,7 +3,7 @@ import { Component } from 'react'
 import colors from '../src/style/colors'
 
 const getManifest = ({
-  siteTitle = 'TreeWatch Berlin',
+  siteTitle = 'Baumblick Berlin',
   themeTextColor = colors['scale']['medium'],
   themeBackgroundColor = '#ffffff',
 }): string => `{

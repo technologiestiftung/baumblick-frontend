@@ -1,4 +1,4 @@
-import { Affiliate, Plant, WateringCan } from '@components/Icons'
+import { Affiliate, News, Plant, WateringCan } from '@components/Icons'
 import { StoriesOverviewHeader } from '@components/StoriesOverviewHeader'
 import { StoryLink, StoryLinkPropType } from '@components/StoryLink'
 import { GetServerSideProps } from 'next'
@@ -8,98 +8,54 @@ export const stories: Record<string, StoryLinkPropType> = {
   'wie-giesse-ich-richtig': {
     path: `/stories/wie-giesse-ich-richtig`,
     title: `Wie gieße ich richtig?`,
-    author: `Markus Voß`,
-    readingDurationInMinutes: 2,
+    author: `Grünflächenamt Berlin-Mitte`,
+    readingDurationInMinutes: 3,
     excerpt: (
       <>
-        TreeWatch zeigt dir den{' '}
+        Baumblick zeigt dir den{' '}
         <strong>Wasserstand der Berliner Stadtbäume</strong>.
       </>
     ),
     leadParagraph:
-      'Gießen ist gut. Kann man aber auch falsch machen. Haste net gedacht oder wat?',
+      'Gießen ist gut. Kann man aber auch falsch machen. Haste net gedacht, wat?',
     Icon: WateringCan,
   },
-  'wie-ist-ki-fuer-die-berechnung-des-wasserbedarfs-eingesetzt': {
-    path: `/stories/wie-ist-ki-fuer-die-berechnung-des-wasserbedarfs-eingesetzt`,
-    title: `Wie ist KI für die Berechnung des Wasserbedarfs eingesetzt?`,
-    author: `Juan Carlos Carvajal Bermúdez`,
-    readingDurationInMinutes: 20,
+  'ki-berechnung-wasserbedarf': {
+    path: `/stories/ki-berechnung-wasserbedarf`,
+    title: `Wie wird KI für die Berechnung des Wasserbedarfs eingesetzt?`,
+    author: `Marcus Voß`,
+    readingDurationInMinutes: 12,
     excerpt: (
       <>
-        Küsntliche Intelligenz kann fehlende <strong>Sensordaten</strong>{' '}
-        ergänzen.
+        Wie kann künstliche Intelligenz{' '}
+        <strong>Messwerte von Sensoren vorhersagen</strong> – auch wenn diese
+        gar nicht existieren?
       </>
     ),
     Icon: Affiliate,
   },
-  'das-quantified-trees-konsortium': {
-    path: `/stories/das-quantified-trees-konsortium`,
-    title: `Das "Quantified Trees" Konsortium`,
-    author: `Julia Zimmermann`,
-    readingDurationInMinutes: 12,
+  'saugspannung-und-sensoren': {
+    path: `/stories/saugspannung-und-sensoren`,
+    title: `Über Saugspannung und Sensoren`,
+    author: `Arbor Revital`,
+    readingDurationInMinutes: 4,
     excerpt: (
       <>
-        Das Konsortium will dem Baumsterben langfristig entgegenwirken, indem es
-        ein durch künstliche Intelligenz unterstütztes Vorhersagesystem
-        entwickelt
+        Was genau ist eine Saugspannung und welche Sensoren nutzt die Stadt
+        Berlin bereits?
       </>
     ),
     Icon: Plant,
   },
-  'wie-ist-ki-fuer-die-berechnung-des-wasserbedarfs-eingesetzt-2': {
-    path: `/stories/wie-ist-ki-fuer-die-berechnung-des-wasserbedarfs-eingesetzt`,
-    title: `Wie ist KI für die Berechnung des Wasserbedarfs eingesetzt?`,
-    author: `Juan Carlos Carvajal Bermúdez`,
-    readingDurationInMinutes: 20,
-    excerpt: (
-      <>
-        Küsntliche Intelligenz kann fehlende <strong>Sensordaten</strong>{' '}
-        ergänzen.
-      </>
-    ),
-    Icon: Affiliate,
-  },
-  'das-quantified-trees-konsortium-2': {
-    path: `/stories/das-quantified-trees-konsortium`,
+  'qtrees-konsortium': {
+    path: `/stories/qtrees-konsortium`,
     title: `Das "Quantified Trees" Konsortium`,
     author: `Julia Zimmermann`,
-    readingDurationInMinutes: 12,
+    readingDurationInMinutes: 6,
     excerpt: (
-      <>
-        Das Konsortium will dem Baumsterben langfristig entgegenwirken, indem es
-        ein durch künstliche Intelligenz unterstütztes Vorhersagesystem
-        entwickelt
-      </>
+      <>Das Konsortium: wer steckt hinter Quantified Trees und Baumblick?</>
     ),
-    Icon: Plant,
-  },
-  'wie-ist-ki-fuer-die-berechnung-des-wasserbedarfs-eingesetzt-3': {
-    path: `/stories/wie-ist-ki-fuer-die-berechnung-des-wasserbedarfs-eingesetzt`,
-    title: `Wie ist KI für die Berechnung des Wasserbedarfs eingesetzt?`,
-    author: `Juan Carlos Carvajal Bermúdez`,
-    readingDurationInMinutes: 20,
-    excerpt: (
-      <>
-        Küsntliche Intelligenz kann fehlende <strong>Sensordaten</strong>{' '}
-        ergänzen.
-      </>
-    ),
-    Icon: Affiliate,
-  },
-  'das-quantified-trees-konsortium-3': {
-    path: `/stories/das-quantified-trees-konsortium`,
-    title: `Das "Quantified Trees" Konsortium`,
-    author: `Julia Zimmermann`,
-    readingDurationInMinutes: 12,
-    excerpt: (
-      <>
-        Das Konsortium will dem Baumsterben langfristig entgegenwirken, indem es
-        ein durch künstliche Intelligenz unterstütztes Vorhersagesystem
-        entwickelt
-      </>
-    ),
-    Icon: Plant,
+    Icon: News,
   },
 }
 
