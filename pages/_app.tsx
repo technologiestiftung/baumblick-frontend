@@ -9,20 +9,16 @@ import { NextPage } from 'next'
 import type { AppProps as NextAppProps } from 'next/app'
 import classNames from 'classnames'
 
-type AppProps<P = unknown> = {
-  pageProps: P
-} & Omit<NextAppProps<P>, 'pageProps'>
-
 export interface PagePropType extends Record<string, unknown> {
   title?: string
   query: ParsedUrlQuery
 }
 
-export type NextPageWithLayout = NextPage & {
+export type NextPageWithLayout = NextPage<PagePropType> & {
   getLayout?: (page: ReactElement, pageProps: PagePropType) => ReactNode
 }
 
-type AppPropsWithLayout = AppProps<PagePropType> & {
+type AppPropsWithLayout = NextAppProps<PagePropType> & {
   Component: NextPageWithLayout
 }
 
