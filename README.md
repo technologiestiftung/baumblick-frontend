@@ -35,13 +35,16 @@ Because we use a customized basemap hosted on MapTiler, you also need to provide
 
 Both variables can be found in our shared vault.
 
+#### Database
+
+The Postgres database is hosted on AWS. See the documentation for setting it up in this repo [github.com/technologiestiftung/qtrees-ai-data](https://github.com/technologiestiftung/qtrees-ai-data)
 #### Trees vector tiles
 
-We fetch the trees vector tileset from our self-hosted tileserver. Add the URL to that tileset to the environment variable `NEXT_PUBLIC_TREE_TILES_URL`. Find the variable in our shared vault as well.
+We fetch the trees vector tileset from our self-hosted tileserver. Add the URL to that tileset to the environment variable `NEXT_PUBLIC_TREE_TILES_URL`. Find the variable in our shared vault as well. You can find the source code for the server here [github.com/technologiestiftung/qtrees-vectortiles-generator/](https://github.com/technologiestiftung/qtrees-vectortiles-generator/)
 
-#### Trees API (using Supabase)
+#### Trees API (using Next API routes)
 
-We use a small "passthrough" API which exposes all the data that is required. The API is deployed as a Supabase Edge Function. Make sure to include the necessary environment variables as specified in `.env.example`.
+We use a small "passthrough" API which exposes all the data that is required. The Postgres Database (AWS RDS) has a [PostgRest](https://github.com/PostgREST/postgrest) instance running on an AWS EC2 in front of it. The API is deployed as a Next.js API Routes. It mostly passes the requests through and does some sanity checks. Some API routes currently have a direct connection to the database. This will be replaced with remote procedure calls through PostgREST eventually. See the related files under [pages/api](pages/api/). Make sure to include the necessary environment variables as specified in `.env.example`.
 
 ### Installation
 
