@@ -1,7 +1,7 @@
 import { Header } from '@components/Header'
 import { GetServerSideProps } from 'next'
 import { FC } from 'react'
-import LottieProgressPlayer from '@components/LottieProgressPlayer'
+import { SideBySideScrollAnimation } from '@components/SideBySideScrollAnimation'
 import { LegalLinks } from '@components/LegalLinks'
 import { GPSButton } from '@components/GPSButton'
 
@@ -18,13 +18,7 @@ export const Home: FC = () => {
     <>
       <div className="grid grid-cols-1 grid-rows-[auto,1fr,auto] h-full">
         <Header />
-        <LottieProgressPlayer
-          animationData={{}}
-          minFrame={0}
-          maxFrame={81}
-          progress={4}
-          renderer={'svg'}
-        />
+        <SideBySideScrollAnimation />
         <div className="px-4 py-8 mx-auto max-w-md w-full">
           <GPSButton />
           <LegalLinks />
