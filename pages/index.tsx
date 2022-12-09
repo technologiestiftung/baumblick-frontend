@@ -1,7 +1,7 @@
 import { Header } from '@components/Header'
 import { GetServerSideProps } from 'next'
 import { FC } from 'react'
-import { HomeCarousel } from '@components/HomeCarousel'
+import LottieProgressPlayer from '@components/LottieProgressPlayer'
 import { LegalLinks } from '@components/LegalLinks'
 import { GPSButton } from '@components/GPSButton'
 
@@ -18,7 +18,13 @@ export const Home: FC = () => {
     <>
       <div className="grid grid-cols-1 grid-rows-[auto,1fr,auto] h-full">
         <Header />
-        <HomeCarousel />
+        <LottieProgressPlayer
+          animationData={{}}
+          minFrame={0}
+          maxFrame={81}
+          progress={4}
+          renderer={'svg'}
+        />
         <div className="px-4 py-8 mx-auto max-w-md w-full">
           <GPSButton />
           <LegalLinks />
