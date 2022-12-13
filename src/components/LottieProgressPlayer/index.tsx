@@ -24,21 +24,22 @@ const LottieProgressPlayer: FC<LottieProgressPlayerProps> = ({
   const animation = useMemo(() => {
     if (!animationData || !lottieContainerElement) {
       return null
+    } else {
+      if (lottieContainerElement.children.length === 0) {
+        const anim = lottie.loadAnimation({
+          container: lottieContainerElement,
+          animationData,
+          renderer,
+          loop: true,
+          autoplay: false,
+          rendererSettings: {
+            preserveAspectRatio, // Supports the same options as the svg element's preserveAspectRatio property
+          },
+        })
+        return anim
+      }
     }
-    const anim = lottie.loadAnimation({
-      container: lottieContainerElement,
-      animationData,
-      renderer,
-      loop: true,
-      autoplay: false,
-      rendererSettings: {
-        preserveAspectRatio, // Supports the same options as the svg element's preserveAspectRatio property
-      },
-    })
-    anim.goToAndStop(0, true)
-
-    return anim
-  }, [lottieContainerElement, preserveAspectRatio, renderer])
+  }, [animationData, lottieContainerElement, preserveAspectRatio, renderer])
 
   const handleLottieRef = useCallback(
     (element: HTMLDivElement) => {

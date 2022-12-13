@@ -45,7 +45,7 @@ const App: FC<AppPropsWithLayout> = ({
         )}
       >
         <div className="w-screen max-w-3xl mx-auto">
-          {getLayout(<Component {...pageProps} />, pageProps)}
+          {getLayout(<Component />, pageProps)}
         </div>
       </main>
       <MainMenu />
