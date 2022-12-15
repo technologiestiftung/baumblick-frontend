@@ -8,16 +8,14 @@ interface Position {
 }
 
 // helper function
-const getScrollPosition = (
-  element?: React.MutableRefObject<HTMLElement>
-): Position => {
+const getScrollPosition = (element?: Element | null): Position => {
   const isBrowser = typeof window !== `undefined`
   if (!isBrowser) {
     return { x: 0, y: 0, height: 0 }
   }
 
   // if no element is declared, track the scroll position of the document body
-  const target = element ? element.current : document.body
+  const target = element ? element : document.body
 
   if (target) {
     const { left, top, height } = target.getBoundingClientRect()
@@ -35,8 +33,9 @@ interface EffectProps {
   inside: number
 }
 interface UseInViewProgressProps {
-  windowHeight: number
-  element: React.MutableRefObject<HTMLElement>
+  windowHeight: number | undefined
+  scrollEventElementId: string
+  trackedElementRef: React.RefObject<Element> | null
   deps: DependencyList
   effect: (props: EffectProps) => void
   wait?: number
@@ -47,20 +46,23 @@ const useInViewProgress = (props: UseInViewProgressProps): void => {
     windowHeight: height,
     effect,
     deps,
-    element,
-    wait,
+    scrollEventElementId,
+    trackedElementRef,
+    wait = 10,
     offset = 0,
   } = props
   const throttleTimeout = useRef<NodeJS.Timeout | null>(null)
 
+  const trackedElement = trackedElementRef?.current
+
   // when a bounding element is given, track its position instead of the elements position
-  const position = useRef(getScrollPosition(element))
+  const position = useRef(getScrollPosition(trackedElement))
   const prevInside = useRef(0)
 
   const callback = useCallback(() => {
     // get the current position
-    const currPos = getScrollPosition(element)
-    if (currPos) {
+    const currPos = getScrollPosition(trackedElement)
+    if (currPos && height) {
       const posY = currPos.y + offset
 
       let inside = 0
@@ -88,9 +90,10 @@ const useInViewProgress = (props: UseInViewProgressProps): void => {
       // reset throttle timeout
       throttleTimeout.current = null
     }
-  }, [effect, element, offset, height])
+  }, [effect, trackedElement, offset, height])
 
   useEffect(() => {
+    const scrollEventElement = document.querySelector(scrollEventElementId)
     const handleScroll = (): void => {
       if (wait) {
         if (throttleTimeout.current === null) {
@@ -101,11 +104,13 @@ const useInViewProgress = (props: UseInViewProgressProps): void => {
       }
     }
 
-    window.addEventListener('scroll', handleScroll)
+    scrollEventElement?.addEventListener('scroll', handleScroll)
 
-    return () => window.removeEventListener('scroll', handleScroll)
+    return () => {
+      scrollEventElement?.removeEventListener('scroll', handleScroll)
+    }
     // eslint-disable-next-line  @typescript-eslint/no-unsafe-assignment, react-hooks/exhaustive-deps
-  }, [callback, wait, ...deps])
+  }, [callback, scrollEventElementId, wait, ...deps])
 }
 
 export default useInViewProgress

@@ -203,6 +203,7 @@ main button.maplibregl-ctrl-zoom-in span {
     background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMiIgaGVpZ2h0PSIyMiIgdmlld0JveD0iMCAwIDIyIDIyIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC01IC01KSI+PHBvbHlnb24gcG9pbnRzPSIwIDAgMzIgMCAzMiAzMiAwIDMyIi8+PGxpbmUgeDE9IjE2IiB4Mj0iMTYiIHkxPSI2LjY2NyIgeTI9IjI1LjMzMyIgc3Ryb2tlPSIjMTExODI3IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS13aWR0aD0iMiIvPjxsaW5lIHgxPSI2LjY2NyIgeDI9IjI1LjMzMyIgeTE9IjE2IiB5Mj0iMTYiIHN0cm9rZT0iIzExMTgyNyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2Utd2lkdGg9IjIiLz48L2c+PC9zdmc+") !important;
 }
 
+/* Scrollytelling */
 main .side-by-side__wrapper {
   box-sizing: border-box;
   width: 100%;
@@ -221,6 +222,7 @@ main .side-by-side__inner {
   overflow: hidden;
   position: relative;
   grid-template-rows: repeat(2, 1fr);
+
   @media (min-width: 1024px) {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 1fr;
@@ -243,4 +245,13 @@ main .side-by-side__inner .side-by-side__lottie {
   @media (min-width: 1024px) {
     max-height: 100vh;
   }
+}
+main .lottie-container{
+	height: 100%;
+} 
+
+main .scroll-block {
+  height: 150vh;
+  background-color: rgba(255, 255, 100, 0.2);
+  border: 1px solid red;
 }

@@ -33,11 +33,11 @@ const App: FC<AppPropsWithLayout> = ({
   useMatomo()
 
   const getLayout = Component.getLayout ?? ((page) => page)
-
   return (
     <StrictMode>
       <Head pageTitle={pageProps.title || ''} />
       <main
+        id="main"
         className={classNames(
           'fixed top-0 md:left-[12px] md:w-[calc(100vw-12px)] z-0 min-h-[calc(100%-4rem)]',
           'bottom-16 grid',

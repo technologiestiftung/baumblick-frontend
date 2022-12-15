@@ -16,7 +16,7 @@ const LottieProgressPlayer: FC<LottieProgressPlayerProps> = ({
   minFrame,
   maxFrame,
   renderer = 'svg',
-  preserveAspectRatio = 'xMidYMid slice',
+  preserveAspectRatio = 'xMidYMid meet',
 }: LottieProgressPlayerProps) => {
   const [lottieContainerElement, setLottieContainerElement] =
     useState<HTMLDivElement | null>()
@@ -25,6 +25,7 @@ const LottieProgressPlayer: FC<LottieProgressPlayerProps> = ({
     if (!animationData || !lottieContainerElement) {
       return null
     } else {
+      // append svg only once
       if (lottieContainerElement.children.length === 0) {
         const anim = lottie.loadAnimation({
           container: lottieContainerElement,
@@ -67,7 +68,7 @@ const LottieProgressPlayer: FC<LottieProgressPlayerProps> = ({
     goToFrame(progress)
   }, [goToFrame, progress, minFrame, maxFrame])
 
-  return <div ref={handleLottieRef} />
+  return <div className="lottie-container" ref={handleLottieRef} />
 }
 
 export default memo(LottieProgressPlayer)
