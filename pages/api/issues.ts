@@ -19,17 +19,17 @@ export default async function handler(
         if (
           'issue_type_id' in body &&
           typeof body.issue_type_id === 'number' &&
-          'gml_id' in body &&
-          typeof body.gml_id === 'string'
+          'id' in body &&
+          typeof body.id === 'string'
         ) {
-          const { gml_id, issue_type_id } = body
+          const { id, issue_type_id } = body
           // make call to supabase using SERVICE_ROLE_KEY
           // dont expose SERVICE_ROLE_KEY to client
           const { data: issues, error: issuesError } =
             await supabaseServiceRoleClient
               .from('issues')
 
-              .insert([{ issue_type_id, gml_id }])
+              .insert([{ issue_type_id, id }])
           if (issuesError) {
             return res.status(400).json({ error: issuesError })
           }
@@ -37,7 +37,7 @@ export default async function handler(
         } else {
           return res.status(400).json({
             error:
-              'body is missing `gml_id` of type `string` or `issue_type_id` of type `number`',
+              'body is missing `id` of type `string` or `issue_type_id` of type `number`',
           })
         }
       }
