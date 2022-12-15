@@ -1,0 +1,15 @@
+@host = {{$processEnv ML_PGREST_HOST}}
+@port = {{$processEnv ML_PGREST_PORT}}
+
+### Health Check
+GET {{host}}:{{port}}
+Accept: application/json
+content-type: application/json
+
+### Get a specific tree
+
+GET {{host}}:{{port}}/trees?id=eq.1
+Accept: application/json
+content-type: application/json
+
+
