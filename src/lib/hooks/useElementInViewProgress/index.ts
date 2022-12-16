@@ -94,6 +94,7 @@ const useInViewProgress = (props: UseInViewProgressProps): void => {
 
   useEffect(() => {
     const scrollEventElement = document.querySelector(scrollEventElementId)
+
     const handleScroll = (): void => {
       if (wait) {
         if (throttleTimeout.current === null) {

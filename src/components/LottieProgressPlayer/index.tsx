@@ -37,6 +37,7 @@ const LottieProgressPlayer: FC<LottieProgressPlayerProps> = ({
             preserveAspectRatio, // Supports the same options as the svg element's preserveAspectRatio property
           },
         })
+        anim.goToAndStop(150)
         return anim
       }
     }
