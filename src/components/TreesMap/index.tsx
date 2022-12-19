@@ -126,7 +126,7 @@ export const TreesMap: FC<MapProps> = ({
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
       const features = e.features as {
         properties: {
-          trees_gml_id?: string
+          trees_id?: string
           trees_lat?: number
           trees_lng?: number
         }
@@ -134,7 +134,7 @@ export const TreesMap: FC<MapProps> = ({
 
       debouncedViewportChange.cancel()
 
-      const id = features[0].properties?.trees_gml_id
+      const id = features[0].properties?.trees_id
       const latitude = features[0].properties?.trees_lat
       const longitude = features[0].properties?.trees_lng
 

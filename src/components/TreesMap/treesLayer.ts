@@ -21,7 +21,7 @@ export const TREES_SOURCE: SourceSpecification = {
   tiles: [process.env.NEXT_PUBLIC_TREE_TILES_URL as string],
   maxzoom: 14,
   minzoom: 0,
-  promoteId: 'trees_gml_id',
+  promoteId: 'trees_id',
 }
 
 const CIRCLE_STROKE_WIDTH = {
