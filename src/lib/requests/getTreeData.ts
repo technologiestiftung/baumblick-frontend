@@ -1,12 +1,12 @@
 import { getBaseUrl } from '@lib/utils/urlUtil'
 
 /**
- * According to the database schema all values except gml_id are nullable.
- * The gml_id is what is the baum_id in the nowcast table.
+ * According to the database schema all values except id are nullable.
+ * The id is what is the tree_id in the nowcast table.
  */
 export type TreeDataType = {
-  gml_id: string
-  baumid?: string
+  id: string
+  treeId?: string
   standortnr?: string
   kennzeich?: string
   namenr?: string
@@ -39,8 +39,8 @@ export type TreeDataType = {
 }
 
 const TABLE_NAME = 'trees'
-/** The API requires the search param to be the `gml_id` column */
-const TREE_ID_COLUMN_NAME = 'gml_id'
+/** The API requires the search param to be the `id` column */
+const TREE_ID_COLUMN_NAME = 'id'
 
 export const getTreeData = async (
   treeId: string

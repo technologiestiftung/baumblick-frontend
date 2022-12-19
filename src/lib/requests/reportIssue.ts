@@ -16,7 +16,7 @@ export const reportIssue = async (issue: {
     },
     body: JSON.stringify({
       issue_type_id: issueTypeId,
-      gml_id: treeId,
+      id: treeId,
     }),
   })
 

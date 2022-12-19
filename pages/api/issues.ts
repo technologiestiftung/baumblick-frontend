@@ -28,7 +28,6 @@ export default async function handler(
           const { data: issues, error: issuesError } =
             await supabaseServiceRoleClient
               .from('issues')
-
               .insert([{ issue_type_id, id }])
           if (issuesError) {
             return res.status(400).json({ error: issuesError })

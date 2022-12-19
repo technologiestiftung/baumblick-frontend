@@ -30,7 +30,7 @@ import { mapRawQueryToState } from '@lib/utils/queryUtil'
 import { Head } from '@components/Head'
 
 interface TreePageComponentPropType {
-  treeId: TreeDataType['gml_id']
+  treeId: TreeDataType['id']
   csrfToken: string
   query?: ReturnType<typeof mapRawQueryToState>
 }
@@ -167,10 +167,10 @@ const TreePage: TreePageWithLayout = ({ treeId, csrfToken }) => {
     data: nowcastData,
     error: nowcastError,
     isLoading: nowcastIsLoading,
-  } = useNowcastData(treeData?.gml_id, csrfToken)
+  } = useNowcastData(treeData?.id, csrfToken)
 
   const { data: forecastData, error: forecastError } = useForecastData(
-    treeData?.gml_id,
+    treeData?.id,
     csrfToken
   )
 
@@ -178,7 +178,7 @@ const TreePage: TreePageWithLayout = ({ treeId, csrfToken }) => {
     data: rainData,
     error: rainError,
     isLoading: rainIsLoading,
-  } = useTreeRainAmount(treeData?.gml_id)
+  } = useTreeRainAmount(treeData?.id)
 
   if (treeDataError) {
     void push('/404')

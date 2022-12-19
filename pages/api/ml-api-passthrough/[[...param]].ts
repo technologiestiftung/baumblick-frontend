@@ -80,10 +80,10 @@ export default async function handler(
           }
           case '/forecast':
           case '/nowcast': {
-            if (!searchParams.has('id')) {
+            if (!searchParams.has('tree_id')) {
               return res
                 .status(400)
-                .json({ error: 'Missing id search parameter' })
+                .json({ error: 'Missing tree_id search parameter' })
             }
             break
           }
