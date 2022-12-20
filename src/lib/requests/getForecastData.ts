@@ -15,7 +15,7 @@ export type ForecastDataType = {
    *  3 = value for 90cm depth.
    *  4 = value for average.
    */
-  type_id?: number
+  forecast_type_id?: number
   timestamp?: string
   value?: number
   created_at?: string
@@ -24,7 +24,7 @@ export type ForecastDataType = {
 
 const TABLE_NAME = 'forecast'
 const TREE_ID_COLUMN_NAME = 'tree_id'
-const TYPE_ID_COLUMN_NAME = 'type_id'
+const TYPE_ID_COLUMN_NAME = 'forecast_type_id'
 const TYPE_ID_FOR_AVERAGE = '4'
 
 const TIMESTAMP_COLUMN = 'timestamp'
