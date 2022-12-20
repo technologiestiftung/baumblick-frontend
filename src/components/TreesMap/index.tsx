@@ -16,6 +16,7 @@ import {
   TREES_SOURCE,
   TREES_SOURCE_ID,
   TREES_SOURCE_LAYER_ID,
+  TREES_ID_KEY,
 } from './treesLayer'
 import { MapTilerLogo } from './MapTilerLogo'
 import classNames from 'classnames'
@@ -126,7 +127,7 @@ export const TreesMap: FC<MapProps> = ({
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
       const features = e.features as {
         properties: {
-          trees_gml_id?: string
+          [TREES_ID_KEY]?: string
           trees_lat?: number
           trees_lng?: number
         }
@@ -134,9 +135,10 @@ export const TreesMap: FC<MapProps> = ({
 
       debouncedViewportChange.cancel()
 
-      const id = features[0].properties?.trees_gml_id
-      const latitude = features[0].properties?.trees_lat
-      const longitude = features[0].properties?.trees_lng
+      const properties = features[0].properties || {}
+      const id = properties[TREES_ID_KEY]
+      const latitude = properties.trees_lat
+      const longitude = properties.trees_lng
 
       if (!id || !latitude || !longitude) return
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access

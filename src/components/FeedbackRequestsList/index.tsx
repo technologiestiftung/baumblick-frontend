@@ -16,7 +16,7 @@ export const FeedbackRequestsList: FC<FeedbackRequestsListPropType> = ({
 }) => {
   const { t } = useTranslation('common')
   const { issues, reportIssue, isLoading, error } = useFeedbackData(
-    treeData?.gml_id,
+    treeData?.id,
     csrfToken
   )
   const [openedIssueModal, setOpenedIssueModal] =

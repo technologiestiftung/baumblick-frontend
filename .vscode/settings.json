@@ -13,7 +13,11 @@
     "titleBar.activeBackground": "#2F4B7C",
     "titleBar.activeForeground": "#FFFFFF",
     "titleBar.inactiveBackground": "#2F4B7C99",
-    "titleBar.inactiveForeground": "#FFFFFF99"
+    "titleBar.inactiveForeground": "#FFFFFF99",
+    "commandCenter.border": "#e7e7e799",
+    "sash.hoverBorder": "#3d61a1",
+    "statusBarItem.remoteBackground": "#2f4b7c",
+    "statusBarItem.remoteForeground": "#e7e7e7"
   },
   "peacock.color": "#2F4B7C",
   "workbench.colorTheme": "GitHub Dark",
