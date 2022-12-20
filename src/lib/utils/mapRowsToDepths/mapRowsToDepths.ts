@@ -8,7 +8,7 @@ export interface MappedNowcastRowsType {
 }
 
 /**
- * Maps raw nowcast rows to named fields according to their type (type_id 1 -> -30cm, type_id 2 -> 60cm, type_id 3 -> 90cm, type_id 4 -> average)
+ * Maps raw nowcast rows to named fields according to their type (forecast_type_id 1 -> -30cm, forecast_type_id 2 -> 60cm, forecast_type_id 3 -> 90cm, forecast_type_id 4 -> average)
  * @param nowcastRows NowcastDataType[]
  * @returns MappedNowcastRowsType
  */
@@ -25,9 +25,9 @@ export const mapRowsToDepths = (
     return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
   })
   return {
-    depth30Row: descendingRows.find((row) => row.type_id === 1),
-    depth60Row: descendingRows.find((row) => row.type_id === 2),
-    depth90Row: descendingRows.find((row) => row.type_id === 3),
-    depthAverageRow: descendingRows.find((row) => row.type_id === 4),
+    depth30Row: descendingRows.find((row) => row.forecast_type_id === 1),
+    depth60Row: descendingRows.find((row) => row.forecast_type_id === 2),
+    depth90Row: descendingRows.find((row) => row.forecast_type_id === 3),
+    depthAverageRow: descendingRows.find((row) => row.forecast_type_id === 4),
   }
 }
