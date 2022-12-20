@@ -4,8 +4,6 @@ import { JSONValue } from '@lib/types/lottie'
 interface LottieProgressPlayerProps {
   animationData: JSONValue
   progress: number
-  minFrame: number
-  maxFrame: number
   renderer?: 'canvas' | 'svg'
   preserveAspectRatio?: 'xMidYMid slice' | 'xMidYMid meet'
 }
@@ -13,8 +11,6 @@ interface LottieProgressPlayerProps {
 const LottieProgressPlayer: FC<LottieProgressPlayerProps> = ({
   animationData,
   progress,
-  minFrame,
-  maxFrame,
   renderer = 'svg',
   preserveAspectRatio = 'xMidYMid meet',
 }: LottieProgressPlayerProps) => {
@@ -37,7 +33,7 @@ const LottieProgressPlayer: FC<LottieProgressPlayerProps> = ({
             preserveAspectRatio, // Supports the same options as the svg element's preserveAspectRatio property
           },
         })
-        anim.goToAndStop(150)
+        anim.goToAndStop(129)
         return anim
       }
     }
@@ -67,7 +63,7 @@ const LottieProgressPlayer: FC<LottieProgressPlayerProps> = ({
 
   useEffect(() => {
     goToFrame(progress)
-  }, [goToFrame, progress, minFrame, maxFrame])
+  }, [goToFrame, progress])
 
   return <div className="lottie-container" ref={handleLottieRef} />
 }
