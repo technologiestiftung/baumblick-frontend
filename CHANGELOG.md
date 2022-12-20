@@ -1,3 +1,10 @@
+# [1.0.0-staging.8](https://github.com/technologiestiftung/baumblick-frontend/compare/v1.0.0-staging.7...v1.0.0-staging.8) (2022-12-20)
+
+
+### Features
+
+* Add new images for issues ([a189712](https://github.com/technologiestiftung/baumblick-frontend/commit/a1897124e5e30067650692f1318d78a39d6ba431))
+
 # [1.0.0-staging.7](https://github.com/technologiestiftung/treewatch-frontend/compare/v1.0.0-staging.6...v1.0.0-staging.7) (2022-09-21)
 
 
