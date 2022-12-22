@@ -46,6 +46,14 @@ Content-Type: application/json
 
 {"username":"{{postgerest_user}}","pass":"{{postgrest_password}}"}
 
+### call the rainfall function
+POST {{postgrest_host}}:{{postgrest_port}}/rpc/rainfall
+Accept: application/json
+Content-Type: application/json
+
+{"id":"{{tree_id}}"}
+
+
 #  ██▒   █▓ ██▓ ▄▄▄
 # ▓██░   █▒▓██▒▒████▄
 #  ▓██  █▒░▒██▒▒██  ▀█▄
