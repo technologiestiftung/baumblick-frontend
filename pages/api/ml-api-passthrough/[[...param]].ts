@@ -1,15 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import fetch from 'cross-fetch'
+import { envVarError } from './envVarError'
 
 const ml_pgrest_host = process.env.ML_PGREST_HOST
 const ml_pgrest_port = process.env.ML_PGREST_PORT
 
-function envVarError(missingVar: string): never {
-  const prefix = 'Missing environment variable:'
-  const msg = `${prefix} ${missingVar}`
-  console.error(msg)
-  throw new Error(msg)
-}
 export function setLimit(url: URL, amount: number): URL {
   const limit = url.searchParams.get('limit')
   if (limit) {
