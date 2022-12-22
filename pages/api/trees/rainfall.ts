@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { postgrest } from '../_shared/_postgrest'
+import { createClient } from '../_shared/_postgrest'
 
 interface Rainfall {
   rainfall_in_mm: number
@@ -10,6 +10,7 @@ export default async function handler(
   res: NextApiResponse
 ): Promise<void> {
   try {
+    const postgrest = createClient()
     switch (req.method) {
       case 'GET': {
         if (req.url === undefined) {
