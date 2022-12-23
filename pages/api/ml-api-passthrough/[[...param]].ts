@@ -74,7 +74,6 @@ export default async function handler(
         const response = await fetch(targetUrl, {
           headers: {
             ContenType: 'application/json',
-            // Authorization: `Bearer ${token}`
           },
         })
 
