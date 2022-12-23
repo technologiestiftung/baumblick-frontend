@@ -37,7 +37,7 @@ export default async function handler(
           // with that token cunstruct a new authenticated client
           // and make a request with that to post an issue
 
-          const { data: login, error: loginError } = await postgrest.rpc<
+          const { data: loginData, error: loginError } = await postgrest.rpc<
             'login',
             {
               Args: { username: string; pass: string }
@@ -51,11 +51,11 @@ export default async function handler(
           if (loginError) {
             return res.status(401).json({ error: 'internal server error' })
           }
-          if (!login) {
+          if (!loginData) {
             return res.status(401).json({ error: 'login failed' })
           }
           const { tree_id, issue_type_id } = body
-          const authPostgrest = createClient(login[0].token)
+          const authPostgrest = createClient(loginData[0].token)
 
           const { data: issues, error: issuesError } = await authPostgrest
             .from('issues')
