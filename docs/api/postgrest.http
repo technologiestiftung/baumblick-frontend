@@ -46,7 +46,17 @@ Content-Type: application/json
 
 {"username":"{{postgerest_user}}","pass":"{{postgrest_password}}"}
 
-### call the rainfall function
+### add issue to a tree
+# needs some refactor of schema in QTREES-442
+
+POST {{postgrest_host}}:{{postgrest_port}}/issues
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{postgrest_token}}
+
+{"id":1,"tree_id":"{{tree_id}}","issue_type_id":{{issue_type_id}}}
+
+### call the rainfall function WIP
 POST {{postgrest_host}}:{{postgrest_port}}/rpc/rainfall
 Accept: application/json
 Content-Type: application/json
