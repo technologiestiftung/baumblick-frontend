@@ -20,5 +20,11 @@ const { url, key } = getSupabaseCredentials()
 const supabase = createClient(url, key)
 /**
  * @deprecated
+ *
  */
-export { supabase }
+export {
+  /**
+   * @deprecated
+   */
+  supabase,
+}
