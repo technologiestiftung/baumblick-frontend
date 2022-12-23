@@ -1,5 +1,8 @@
 import { createClient } from '@supabase/supabase-js'
 
+/**
+ * @deprecated
+ */
 export const getSupabaseCredentials = (): {
   url: string
   key: string
@@ -15,5 +18,7 @@ export const getSupabaseCredentials = (): {
 
 const { url, key } = getSupabaseCredentials()
 const supabase = createClient(url, key)
-
+/**
+ * @deprecated
+ */
 export { supabase }
