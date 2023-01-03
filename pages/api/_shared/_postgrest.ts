@@ -1,3 +1,4 @@
+import { Database } from '@lib/types/database'
 import { PostgrestClient } from '@supabase/postgrest-js'
 import { envVarError } from './_env-var-error'
 const ml_pgrest_host = process.env.ML_PGREST_HOST
@@ -5,7 +6,7 @@ const ml_pgrest_port = process.env.ML_PGREST_PORT
 
 export function createClient(
   token?: string
-): PostgrestClient<any, 'public', any> {
+): PostgrestClient<Database, 'api', Database['api']> {
   if (ml_pgrest_port === undefined) {
     envVarError('ML_PGREST_PORT')
   }

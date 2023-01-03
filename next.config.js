@@ -32,7 +32,13 @@ module.exports = nextTranslate({
     const basemapUrl = getUrlWithoutPath(
       process.env.NEXT_PUBLIC_MAPTILER_BASEMAP_URL
     )
-    const sdkUrl = getUrlWithoutPath(process.env.NEXT_PUBLIC_SUPABASE_SDK_URL)
+    /**
+     * This might not be needed
+     */
+    const postgrestUrl = getUrlWithoutPath(
+      `${process.env.ML_PGREST_HOST}:${process.env.ML_PGREST_PORT}`
+    )
+
     return [
       {
         source: '/(.*)',
@@ -50,7 +56,7 @@ module.exports = nextTranslate({
                 matomoUrl,
                 tilesUrl,
                 basemapUrl,
-                sdkUrl,
+                postgrestUrl,
               ]
                 .filter(Boolean)
                 .join(' ')} data: blob:`,
@@ -60,10 +66,10 @@ module.exports = nextTranslate({
               `connect-src 'self' ${[
                 baseUrl,
                 vercelUrl,
-                sdkUrl,
                 tilesUrl,
                 basemapUrl,
                 matomoUrl,
+                postgrestUrl,
               ]
                 .filter(Boolean)
                 .join(' ')}`,
