@@ -1,10 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { createClient } from '../_shared/_postgrest'
 
-interface Rainfall {
-  rainfall_in_mm: number
-  timestamp: string
-}
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -25,31 +21,26 @@ export default async function handler(
         if (!searchParams.has('id')) {
           return res.status(400).json({ error: 'Missing id search parameter' })
         }
-        const { data, error } = await postgrest.rpc<
-          'rainfall',
-          {
-            Args: { id: string }
-            Returns: Rainfall
-          }
-        >('rainfall', {
+        // TODO: Test rainfall function once it is implemented in the database
+        const { data: rainfalls, error } = await postgrest.rpc('rainfall', {
           id: searchParams.get('id') as string,
         })
         if (error) {
           throw new Error(error.message)
         }
-        if (!data) {
+        if (!rainfalls) {
           throw new Error('data is undefined')
         }
 
         const initialValue = 0
-
-        const sum = data
+        // TODO: This might fail due to typing
+        const sum = rainfalls[0]
           .map((item) => item.rainfall_in_mm)
           .reduce((prev, curr) => prev + curr, initialValue)
 
         return res
           .status(200)
-          .json({ data: { table: data, sum_rainfall_in_mm: sum } })
+          .json({ data: { table: rainfalls, sum_rainfall_in_mm: sum } })
       }
       default:
         return res

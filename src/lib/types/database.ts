@@ -1,10 +1,32 @@
 // best would be to generate this using some tool
 export interface Database {
   api: {
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    Views: {}
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    Functions: {}
+    Views: {
+      [_ in never]: never
+    }
+    Functions: {
+      /**
+       * This Function is not yet implemented in the database
+       */
+      rainfall: {
+        Args: {
+          id: string
+        }
+        Returns: {
+          date: string
+          rainfall_in_mm: number
+        }[]
+      }
+      login: {
+        Args: {
+          username: string
+          pass: string
+        }
+        Returns: {
+          token: string
+        }
+      }
+    }
     Tables: {
       issue_types: {
         Row: {
@@ -26,16 +48,14 @@ export interface Database {
           tree_id: string
         }
         Insert: {
-          id: number
           issue_type_id: number
-          created_at: string
+          created_at?: string
           tree_id: string
         }
         Update: {
-          id: number
-          issue_type_id: number
-          created_at: string
-          tree_id: string
+          issue_type_id?: number
+          created_at?: string
+          tree_id?: string
         }
       }
     }
