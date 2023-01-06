@@ -6,7 +6,7 @@ const ml_pgrest_port = process.env.ML_PGREST_PORT
 
 export function createClient(
   token?: string
-): PostgrestClient<Database, 'api', Database['api']> {
+): PostgrestClient<Database, 'public', Database['public']> {
   if (ml_pgrest_port === undefined) {
     envVarError('ML_PGREST_PORT')
   }
