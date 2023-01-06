@@ -18,12 +18,14 @@ export default async function handler(
         )
 
         const { searchParams } = url
-        if (!searchParams.has('id')) {
-          return res.status(400).json({ error: 'Missing id search parameter' })
+        if (!searchParams.has('tree_id')) {
+          return res
+            .status(400)
+            .json({ error: 'Missing tree_id search parameter' })
         }
         // TODO: Test rainfall function once it is implemented in the database
         const { data: rainfalls, error } = await postgrest.rpc('rainfall', {
-          id: searchParams.get('id') as string,
+          tree_id: searchParams.get('tree_id') as string,
         })
         if (error) {
           throw new Error(error.message)
@@ -31,10 +33,9 @@ export default async function handler(
         if (!rainfalls) {
           throw new Error('data is undefined')
         }
-
         const initialValue = 0
         // TODO: This might fail due to typing
-        const sum = rainfalls[0]
+        const sum: number = rainfalls
           .map((item) => item.rainfall_in_mm)
           .reduce((prev, curr) => prev + curr, initialValue)
 
@@ -45,7 +46,7 @@ export default async function handler(
       default:
         return res
           .status(404)
-          .json({ error: 'only GET method with id search parameter' })
+          .json({ error: 'only GET method with tree_id search parameter' })
     }
   } catch (error: unknown) {
     const statusCode = 500
