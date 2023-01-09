@@ -37,16 +37,13 @@ export default async function handler(
           // with that token cunstruct a new authenticated client
           // and make a request with that to post an issue
 
-          const { data: loginData, error: loginError } = await postgrest.rpc<
+          const { data: loginData, error: loginError } = await postgrest.rpc(
             'login',
             {
-              Args: { username: string; pass: string }
-              Returns: { token: string }
+              username: ml_pgrest_username,
+              pass: ml_pgrest_pass,
             }
-          >('login', {
-            username: ml_pgrest_username,
-            pass: ml_pgrest_pass,
-          })
+          )
 
           if (loginError) {
             return res.status(401).json({ error: 'internal server error' })
@@ -54,14 +51,29 @@ export default async function handler(
           if (!loginData) {
             return res.status(401).json({ error: 'login failed' })
           }
-          const { tree_id, issue_type_id } = body
-          const authPostgrest = createClient(loginData[0].token)
 
-          const { data: issues, error: issuesError } = await authPostgrest
-            .from('issues')
-            .insert([{ issue_type_id, tree_id: tree_id }])
+          const { tree_id, issue_type_id } = body
+
+          //TODO: [QTREES-445] Improve types for postgrest-js. Typings for rpc function tell us that we get an array {token: string}[] but we get an object {token: string}
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          const authenticatedPostgrest = createClient(loginData.token)
+
+          const { data: issues, error: issuesError } =
+            await authenticatedPostgrest
+              .from('issues')
+              .insert([{ issue_type_id, tree_id: tree_id }])
+              .select()
+          //
+          // FIXME: [QTREES-444] Database error. User has no rights to use sequence issues_id_seq
+          //{"error":{"code":"42501","details":null,"hint":null, "message":"permission denied for sequence issues_id_seq"}}
+          // needsto be fixed in the DB
           if (issuesError) {
+            console.error(issuesError)
             return res.status(400).json({ error: issuesError })
+          }
+          if (!issues) {
+            return res.status(400).json({ error: 'no issues' })
           }
           return res.status(201).json({ data: issues })
         } else {
