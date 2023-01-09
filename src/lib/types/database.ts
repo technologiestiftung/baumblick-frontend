@@ -1,6 +1,6 @@
 // best would be to generate this using some tool
 export interface Database {
-  api: {
+  public: {
     Views: {
       [_ in never]: never
     }
@@ -10,21 +10,19 @@ export interface Database {
        */
       rainfall: {
         Args: {
-          id: string
+          tree_id: string
         }
         Returns: {
           date: string
           rainfall_in_mm: number
-        }[]
+        }
       }
       login: {
         Args: {
           username: string
           pass: string
         }
-        Returns: {
-          token: string
-        }
+        Returns: { token: string }
       }
     }
     Tables: {
