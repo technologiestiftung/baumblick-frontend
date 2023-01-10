@@ -1,7 +1,7 @@
 import { Database } from '@lib/types/database'
 import { getBaseUrl } from '@lib/utils/urlUtil'
 
-type IssueTypesDataType = Database['api']['Tables']['issue_types']['Row']
+type IssueTypesDataType = Database['public']['Tables']['issue_types']['Row']
 const TABLE_NAME = 'issue_types'
 export const getIssueTypesData = async (): Promise<
   IssueTypesDataType[] | undefined
