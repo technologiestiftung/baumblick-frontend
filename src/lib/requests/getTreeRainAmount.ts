@@ -1,10 +1,6 @@
 import { getBaseUrl } from '@lib/utils/urlUtil'
 
 type RawTreeRainAmountType = {
-  table: {
-    date: string
-    rainfall_in_mm: number
-  }[]
   sum_rainfall_in_mm: number
 }
 

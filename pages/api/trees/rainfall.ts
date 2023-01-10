@@ -34,14 +34,11 @@ export default async function handler(
           throw new Error('data is undefined')
         }
         const initialValue = 0
-        // TODO: This might fail due to typing
         const sum: number = rainfalls
           .map((item) => item.rainfall_in_mm)
-          .reduce((prev, curr) => prev + curr, initialValue)
+          .reduce((prev: number, curr: number) => prev + curr, initialValue)
 
-        return res
-          .status(200)
-          .json({ data: { table: rainfalls, sum_rainfall_in_mm: sum } })
+        return res.status(200).json({ data: { sum_rainfall_in_mm: sum } })
       }
       default:
         return res
