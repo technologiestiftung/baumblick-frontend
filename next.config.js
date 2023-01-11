@@ -32,9 +32,6 @@ module.exports = nextTranslate({
     const basemapUrl = getUrlWithoutPath(
       process.env.NEXT_PUBLIC_MAPTILER_BASEMAP_URL
     )
-    /**
-     * This might not be needed
-     */
     const postgrestUrl = getUrlWithoutPath(
       `${process.env.ML_PGREST_HOST}:${process.env.ML_PGREST_PORT}`
     )
