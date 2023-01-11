@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import fetch from 'cross-fetch'
-import { envVarError } from '../_shared/_env-var-error'
+import { envVarError } from '../_shared/env-var-error'
 
 const ml_pgrest_host = process.env.ML_PGREST_HOST
 const ml_pgrest_port = process.env.ML_PGREST_PORT

@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { csrf } from 'src/lib/api/csrf'
-import { envVarError } from './_shared/_env-var-error'
-import { createClient } from './_shared/_postgrest'
+import { envVarError } from './_shared/env-var-error'
+import { createClient } from './_shared/postgrest'
 
 const ml_pgrest_username = process.env.ML_PGREST_USER
 const ml_pgrest_pass = process.env.ML_PGREST_PASSWORD

@@ -1,6 +1,6 @@
 import { Database } from '@lib/types/database'
 import { PostgrestClient } from '@supabase/postgrest-js'
-import { envVarError } from './_env-var-error'
+import { envVarError } from './env-var-error'
 const ml_pgrest_host = process.env.ML_PGREST_HOST
 const ml_pgrest_port = process.env.ML_PGREST_PORT
 

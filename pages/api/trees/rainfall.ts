@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { createClient } from '../_shared/_postgrest'
+import { createClient } from '../_shared/postgrest'
 
 export default async function handler(
   req: NextApiRequest,
