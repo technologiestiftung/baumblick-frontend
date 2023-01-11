@@ -64,10 +64,6 @@ export default async function handler(
               .from('issues')
               .insert([{ issue_type_id, tree_id: tree_id }])
               .select()
-          //
-          // FIXME: [QTREES-444] Database error. User has no rights to use sequence issues_id_seq
-          //{"error":{"code":"42501","details":null,"hint":null, "message":"permission denied for sequence issues_id_seq"}}
-          // needsto be fixed in the DB
           if (issuesError) {
             console.error(issuesError)
             return res.status(400).json({ error: issuesError })
