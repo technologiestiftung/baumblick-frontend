@@ -58,7 +58,7 @@
   }
 
 	body {
-		@apply max-w-3xl mx-auto relative md:border-r md:border-l border-gray-200;
+		@apply relative md:border-r md:border-l border-gray-200;
 	}
 
 	a,
@@ -117,6 +117,16 @@
 	}
 }
 
+.main-menu {
+	bottom: 0px;
+}
+
+@media (min-width: 1200px) {
+	.main-menu {
+		bottom: unset;
+		top: 0px;
+	}
+}
 /* Slick carousel adjustments */
 .slick-slider {
 	@apply h-full grid-cols-1 grid-rows-[1fr,auto] gap-4 ;
@@ -211,7 +221,8 @@ main .side-by-side__wrapper {
   top: 0;
   padding: 16px;
   height: 100vh;
-  @media (min-width: 600px) {
+
+  @media screen and (min-width: 600px) {
     padding: 32px;
   }
 }
