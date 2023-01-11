@@ -116,17 +116,48 @@
 			}
 	}
 }
-
+/* Main menu */
 .main-menu {
 	bottom: 0px;
 }
-
 @media (min-width: 1200px) {
 	.main-menu {
 		bottom: unset;
 		top: 0px;
 	}
 }
+
+/* Intro */
+.hero__wrapper {
+	width: 100%;
+	height: calc(100vh - 4rem);
+	background-color: #FFEBB8;
+}
+.hero__image-container {
+	width: 100%;
+}
+.hero__image-container img {
+	width: 100%;
+}
+
+.hero__content-container {
+	display: grid;
+	margin: 16px;
+	color: #111827;
+	font-family: 'Manrope', sans-serif;
+	font-weight: 600;
+}
+.hero__headline {
+	font-size: 36px;
+	line-height: 43.2px;
+	margin-bottom: 8px;
+}
+.hero__text {
+	font-size: 16px;
+	line-height: 24px;
+	margin-bottom: 32px;
+}
+
 /* Slick carousel adjustments */
 .slick-slider {
 	@apply h-full grid-cols-1 grid-rows-[1fr,auto] gap-4 ;

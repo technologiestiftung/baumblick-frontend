@@ -44,9 +44,7 @@ const App: FC<AppPropsWithLayout> = ({
           'overflow-x-hidden md:overflow-x-visible overflow-y-scroll '
         )}
       >
-        <div className="w-screen max-w-3xl mx-auto">
-          {getLayout(<Component />, pageProps)}
-        </div>
+        <div className="w-screen">{getLayout(<Component />, pageProps)}</div>
       </main>
       <MainMenu />
     </>
