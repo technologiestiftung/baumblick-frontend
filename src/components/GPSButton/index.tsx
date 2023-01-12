@@ -35,7 +35,7 @@ export const GPSButton: FC = () => {
       className={`w-full ${isLoading ? 'animate-pulse' : ''} `}
     >
       <GPSIcon className="text-gray-400" />
-      {isLoading ? t('home.ctaLoading') : t('home.cta')}
+      {isLoading ? t('home.cta.loading') : t('home.cta.findTree')}
     </Button>
   )
 }

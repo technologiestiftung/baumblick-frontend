@@ -10,8 +10,13 @@
   },
   "loading": "Lädt...",
   "home": {
-    "cta": "Baum finden",
-    "ctaLoading": "Lädt...",
+    "cta": {
+      "findTree": "Baum finden",
+      "loading": "Lädt...",
+      "learnMore": "Mehr erfahren",
+      "github": "Zum Github Repository",
+      "project": "Zur Projektwebsite"
+    },
     "hero": {
       "title": "Willkommen bei Baumblick",
       "text": "Die App, die dir einen Ein- und Ausblick in den Zustand und die Wasserversorgung der Stadtbäume Berlins gibt."
@@ -47,6 +52,18 @@
         "text": "Finde heraus, wie gut die Bäume in deiner Umgebung mit Wasser versorgt sind. <bold>Klicke auf den Button unten!</bold>",
         "alt": "Ein Button mit einem Geolocation-Symbol und den Worten 'Baum finden'. Ein Pfeil verbindet das Wort 'Klick' und den Button."
       }
+    },
+    "outro":  {
+      "headline": "Open Source Daten",
+      "text": {
+        "1": "Du möchtest Baumblick für eine andere Stadt umsetzen? Auch kein Problem, denn der komplette Quellcode ist Open Source Code und unser KI-Modell nutzt bis auf wenige Ausnahmen ausschließlich offene Daten. Schau in unserem Repo auf GitHub vorbei:",
+        "2": "Wenn du mehr über das Forschungsprojekt Quantified Trees erfahren möchtest, dann besuche uns auf qtrees.ai:"
+      }
+    },
+    "partners": {
+      "consortium": "Konsortium",
+      "associated": "Assoziierte Partner",
+      "funding": "Fördergeber"
     }
   },
   "stories": {

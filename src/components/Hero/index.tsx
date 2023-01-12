@@ -1,6 +1,6 @@
 import useTranslation from 'next-translate/useTranslation'
 import { FC } from 'react'
-import { ArrowDownHero } from '@components/Icons/ArrowDownHero'
+import { ArrowDown } from '@components/Icons/ArrowDown'
 
 export const Hero: FC = () => {
   const { t } = useTranslation('common')
@@ -17,7 +17,8 @@ export const Hero: FC = () => {
           </h1>
           <p className="hero__content-container__text">{t('home.hero.text')}</p>
         </div>
-        <ArrowDownHero className="hero__content-container__arrow" />
+
+        <ArrowDown className="hero__content-container__arrow" />
       </div>
     </div>
   )

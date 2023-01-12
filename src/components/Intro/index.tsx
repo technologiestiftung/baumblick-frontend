@@ -2,7 +2,7 @@ import useTranslation from 'next-translate/useTranslation'
 import { FC } from 'react'
 import { Button } from '@components/Button'
 import { GPSButton } from '@components/GPSButton'
-import { ArrowDownHero } from '@components/Icons'
+import { ArrowDown } from '@components/Icons'
 
 export const Intro: FC = () => {
   const { t } = useTranslation('common')
@@ -29,7 +29,7 @@ export const Intro: FC = () => {
           <GPSButton />
 
           <Button primary className="w-full intro__button__learn-more">
-            <ArrowDownHero className="text-gray-400" />
+            <ArrowDown className="text-gray-400" />
             Mehr erfahren
           </Button>
         </div>

@@ -70,11 +70,6 @@ export const SideBySideScrollAnimation = (): JSX.Element => {
 
           <div className="side-by-side__right" ref={textWrapperRef}>
             <div style={{ transform: `translateY(${scrollProgress}px)` }}>
-              <h2 className="side-by-side__h2">Willkommen bei Baumblick</h2>
-              <p className="side-by-side__text text__copy--home">
-                Die App, die dir einen Ein- und Ausblick in den Zustand und die
-                Wasserversorgung der Stadtbäume Berlins gibt.
-              </p>
               <ScrollBlock
                 windowHeight={windowHeight}
                 callback={() => {
@@ -83,7 +78,7 @@ export const SideBySideScrollAnimation = (): JSX.Element => {
                 offset={offset}
               />
 
-              <h3 className="side-by-side__h3">Der Baum</h3>
+              <h2 className="side-by-side__h2 text__h2--home">Der Baum</h2>
               <p className="side-by-side__text text__copy--home">
                 In Berlin gibt es insgesamt xx verschiedene Baumarten die sich
                 allesamt nach Art, Alter, Größe, Kronendurchmesser und
@@ -99,7 +94,7 @@ export const SideBySideScrollAnimation = (): JSX.Element => {
                 offset={offset}
               />
 
-              <h3 className="side-by-side__h3">Umgebung</h3>
+              <h2 className="side-by-side__h2 text__h2--home">Umgebung</h2>
               <p className="side-by-side__text text__copy--home">
                 Trotz aller Diversität haben diese Bäume alle etwas gemeinsam:
                 sie stehen klimatischen und urbanen Herausforderungen gegenüber!
@@ -114,7 +109,7 @@ export const SideBySideScrollAnimation = (): JSX.Element => {
                 offset={offset}
               />
 
-              <h3 className="side-by-side__h3">Wetter</h3>
+              <h2 className="side-by-side__h2 text__h2--home">Wetter</h2>
               <p className="side-by-side__text text__copy--home">
                 Die wohl wichtigste Rolle für einen gesunden Baum, spielen die
                 Niederschlagsmengen und die Temperatur an einem Standort. Auch
@@ -129,7 +124,7 @@ export const SideBySideScrollAnimation = (): JSX.Element => {
                 offset={offset}
               />
 
-              <h3 className="side-by-side__h3">Schatten</h3>
+              <h2 className="side-by-side__h2 text__h2--home">Schatten</h2>
               <p className="side-by-side__text text__copy--home">
                 Besonders hohe oder stark verspiegelte Gebäude, sowie dicht
                 bebaute Kieze können eine besonders hohe Verschattung bzw.
@@ -144,7 +139,7 @@ export const SideBySideScrollAnimation = (): JSX.Element => {
                 offset={offset}
               />
 
-              <h3 className="side-by-side__h3">Bewässerung</h3>
+              <h2 className="side-by-side__h2 text__h2--home">Bewässerung</h2>
               <p className="side-by-side__text text__copy--home">
                 Ebenso wichtig für den Zustand eines Baumes sind die
                 zusätzlichen Bewässerungen der Grünflächenämter oder
@@ -160,7 +155,7 @@ export const SideBySideScrollAnimation = (): JSX.Element => {
                 offset={offset}
               />
 
-              <h3 className="side-by-side__h3">Sensordaten</h3>
+              <h2 className="side-by-side__h2 text__h2--home">Sensordaten</h2>
               <p className="side-by-side__text text__copy--home">
                 Um den Zustand eines Baumes besser zu verstehen, nutzt die Stadt
                 Berlin bereits Sensoren, die die Saugspannung in der Bodengrube
@@ -177,7 +172,7 @@ export const SideBySideScrollAnimation = (): JSX.Element => {
                 offset={offset}
               />
 
-              <h3 className="side-by-side__h3">KI Modell</h3>
+              <h2 className="side-by-side__h2 text__h2--home">KI Modell</h2>
               <p className="side-by-side__text">
                 Und genau hier kommt unser KI-basiertes Vorhersagemodell ins
                 Spiel. Mit Hilfe des Modells können wir auch die aktuelle

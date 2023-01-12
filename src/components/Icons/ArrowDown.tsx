@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { IconPropType } from './IconPropType'
 
-export const ArrowDownHero: FC<IconPropType> = ({
+export const ArrowDown: FC<IconPropType> = ({
   color1,
   strokeWidth = 2,
   size = 24,
