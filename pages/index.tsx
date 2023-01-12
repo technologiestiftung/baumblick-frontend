@@ -3,6 +3,7 @@ import { FC } from 'react'
 import { SideBySideScrollAnimation } from '@components/SideBySideScrollAnimation'
 import { LegalLinks } from '@components/LegalLinks'
 import { GPSButton } from '@components/GPSButton'
+import { ArrowDownHero } from '@components/Icons/ArrowDownHero'
 
 // eslint-disable-next-line @typescript-eslint/require-await
 export const getServerSideProps: GetServerSideProps = async ({ query }) => ({
@@ -21,11 +22,16 @@ export const Home: FC = () => {
         </div>
 
         <div className="hero__content-container">
-          <h1 className="hero__headline">Willkommen bei Baumblick</h1>
-          <p className="hero__text">
-            Die App, die dir einen Ein- und Ausblick in den Zustand und die
-            Wasserversorgung der Stadtbäume Berlins gibt.
-          </p>
+          <div className="hero__content-container__text-container">
+            <h1 className="hero__content-container__headline">
+              Willkommen bei Baumblick
+            </h1>
+            <p className="hero__content-container__text">
+              Die App, die dir einen Ein- und Ausblick in den Zustand und die
+              Wasserversorgung der Stadtbäume Berlins gibt.
+            </p>
+          </div>
+          <ArrowDownHero className="hero__content-container__arrow" />
         </div>
       </div>
 
