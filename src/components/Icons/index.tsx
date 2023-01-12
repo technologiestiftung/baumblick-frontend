@@ -1,6 +1,7 @@
 export { Affiliate } from './Affiliate'
 export { ArrowLeft } from './ArrowLeft'
 export { ArrowDownLeft } from './ArrowDownLeft'
+export { ArrowDownHero } from './ArrowDownHero'
 export { ArrowAutofitHeight } from './ArrowAutofitHeight'
 export { ArrowUpRight } from './ArrowUpRight'
 export { ArrowsDiagonalMinimize2 } from './ArrowsDiagonalMinimize2'

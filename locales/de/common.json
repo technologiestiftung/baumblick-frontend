@@ -12,6 +12,16 @@
   "home": {
     "cta": "Baum finden",
     "ctaLoading": "Lädt...",
+    "hero": {
+      "title": "Willkommen bei Baumblick",
+      "text": "Die App, die dir einen Ein- und Ausblick in den Zustand und die Wasserversorgung der Stadtbäume Berlins gibt."
+    },
+    "intro": {
+      "text": {
+        "1": "Die App Baumblick gibt dir spannende Einblicke in die Berlins Stadtbäume und ihrer Wasserversorgung. Die App wurde im Zuge des Forschungsprojekts Quantified Trees (QTrees) entwickelt und soll den direkten Auswirkungen des Klimawandels auf Stadtbäume entgegenwirken. Dabei stehen Stadtbäume diversen klimatischen und urbanen Herausforderungen gegenüber.",
+        "2": "Finde jetzt heraus, wie wir mit Hilfe eines KI-Vorhersagemodells den Stadtbäume helfen und wie du mitmachen kannst."
+      }
+    },
     "slides": {
       "1": {
         "text": "Auf dieser Karte wird angezeigt, wie gut die Berliner Bäume mit Wasser versorgt sind (<good/> Gut, <medium/> Mäßig, <critical/> Kritisch)",

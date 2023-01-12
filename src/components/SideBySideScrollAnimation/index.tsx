@@ -71,7 +71,7 @@ export const SideBySideScrollAnimation = (): JSX.Element => {
           <div className="side-by-side__right" ref={textWrapperRef}>
             <div style={{ transform: `translateY(${scrollProgress}px)` }}>
               <h2 className="side-by-side__h2">Willkommen bei Baumblick</h2>
-              <p className="side-by-side__text">
+              <p className="side-by-side__text text__copy--home">
                 Die App, die dir einen Ein- und Ausblick in den Zustand und die
                 Wasserversorgung der Stadtbäume Berlins gibt.
               </p>
@@ -84,7 +84,7 @@ export const SideBySideScrollAnimation = (): JSX.Element => {
               />
 
               <h3 className="side-by-side__h3">Der Baum</h3>
-              <p className="side-by-side__text">
+              <p className="side-by-side__text text__copy--home">
                 In Berlin gibt es insgesamt xx verschiedene Baumarten die sich
                 allesamt nach Art, Alter, Größe, Kronendurchmesser und
                 Stammumfang unterscheiden lassen. Die Stadt Berlin erfasst die
@@ -100,7 +100,7 @@ export const SideBySideScrollAnimation = (): JSX.Element => {
               />
 
               <h3 className="side-by-side__h3">Umgebung</h3>
-              <p className="side-by-side__text">
+              <p className="side-by-side__text text__copy--home">
                 Trotz aller Diversität haben diese Bäume alle etwas gemeinsam:
                 sie stehen klimatischen und urbanen Herausforderungen gegenüber!
                 Dabei beeinflussen die vielene Umgebungsparameter die Vitalität
@@ -115,7 +115,7 @@ export const SideBySideScrollAnimation = (): JSX.Element => {
               />
 
               <h3 className="side-by-side__h3">Wetter</h3>
-              <p className="side-by-side__text">
+              <p className="side-by-side__text text__copy--home">
                 Die wohl wichtigste Rolle für einen gesunden Baum, spielen die
                 Niederschlagsmengen und die Temperatur an einem Standort. Auch
                 auf einer vermeintlich kleinen Fläche wie Berlin können diese
@@ -130,7 +130,7 @@ export const SideBySideScrollAnimation = (): JSX.Element => {
               />
 
               <h3 className="side-by-side__h3">Schatten</h3>
-              <p className="side-by-side__text">
+              <p className="side-by-side__text text__copy--home">
                 Besonders hohe oder stark verspiegelte Gebäude, sowie dicht
                 bebaute Kieze können eine besonders hohe Verschattung bzw.
                 verstärkte UV-Strahlung mit sich bringen. Diese wiederum hat
@@ -145,7 +145,7 @@ export const SideBySideScrollAnimation = (): JSX.Element => {
               />
 
               <h3 className="side-by-side__h3">Bewässerung</h3>
-              <p className="side-by-side__text">
+              <p className="side-by-side__text text__copy--home">
                 Ebenso wichtig für den Zustand eines Baumes sind die
                 zusätzlichen Bewässerungen der Grünflächenämter oder
                 Bürger:innen Berlins, die die Bäume besonders während der
@@ -161,7 +161,7 @@ export const SideBySideScrollAnimation = (): JSX.Element => {
               />
 
               <h3 className="side-by-side__h3">Sensordaten</h3>
-              <p className="side-by-side__text">
+              <p className="side-by-side__text text__copy--home">
                 Um den Zustand eines Baumes besser zu verstehen, nutzt die Stadt
                 Berlin bereits Sensoren, die die Saugspannung in der Bodengrube
                 eines Baumes messen. Die Saugspannung gibt Aufschluss darüber,
