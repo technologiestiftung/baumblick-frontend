@@ -27,7 +27,6 @@ type UseFeedbackDataType = (
 const getIssueTypes = async (treeId: string): Promise<IssueTypeType[]> => {
   const data = await getIssueTypesData()
 
-  // if (error) throw error
   if (!data || data.length === 0) throw new Error('No issu types found!')
   return data.map((issueTypeType) => ({
     ...issueTypeType,
