@@ -46,10 +46,10 @@ export default async function handler(
           )
 
           if (loginError) {
-            return res.status(401).json({ error: 'internal server error' })
+            return res.status(401).json({ error: 'not authorized' })
           }
           if (!loginData) {
-            return res.status(401).json({ error: 'login failed' })
+            return res.status(401).json({ error: 'not authorized' })
           }
 
           const { tree_id, issue_type_id } = body
@@ -69,7 +69,7 @@ export default async function handler(
             return res.status(400).json({ error: issuesError })
           }
           if (!issues) {
-            return res.status(400).json({ error: 'no issues' })
+            return res.status(400).json({ error: 'no issues created' })
           }
           return res.status(201).json({ data: issues })
         } else {
