@@ -10,7 +10,7 @@ type RawTreeRainAmountType = {
 
 export type TreeRainAmountType = number
 
-const TREE_ID_COLUMN_NAME = 'gml_id'
+const TREE_ID_COLUMN_NAME = 'id'
 
 /**
  * Fetches the rain data for a tree (in mm for the current day).

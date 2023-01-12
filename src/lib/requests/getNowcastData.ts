@@ -5,16 +5,16 @@ import { getBaseUrl } from '@lib/utils/urlUtil'
  */
 export type NowcastDataType = {
   id: number
-  /** `baum_id? is what `gml_id` is in the the trees table.
+  /** `tree_id? is what `id` is in the the trees table.
    * (Unfortunately it is marked as nullable in the database schema)
    */
-  baum_id?: string
+  tree_id?: string
   /** 1 = value for 30cm depth.
    *  2 = value for 60cm depth.
    *  3 = value for 90cm depth.
    *  4 = value for average.
    */
-  type_id?: number
+  forecast_type_id?: number
   timestamp?: string
   value?: number
   created_at?: string
@@ -22,7 +22,7 @@ export type NowcastDataType = {
 }
 
 const TABLE_NAME = 'nowcast'
-const TREE_ID_COLUMN_NAME = 'baum_id'
+const TREE_ID_COLUMN_NAME = 'tree_id'
 const COLUMN_TO_SORT_BY = 'timestamp'
 
 /**

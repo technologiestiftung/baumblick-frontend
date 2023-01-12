@@ -1,35 +1,25 @@
 import { ParsedUrlQuery } from 'querystring'
-import { FC, ReactElement, ReactNode } from 'react'
+import { FC } from 'react'
 import { Head } from '@components/Head'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import '../src/style/global.css'
+import { Page } from '@common/types/nextPage'
 import { useMatomo } from '@lib/hooks/useMatomo'
 import { MainMenu } from '@components/MainMenu'
-import { NextPage } from 'next'
 import type { AppProps as NextAppProps } from 'next/app'
 import classNames from 'classnames'
 
-type AppProps<P = unknown> = {
-  pageProps: P
-} & Omit<NextAppProps<P>, 'pageProps'>
-
-export interface PagePropType extends Record<string, unknown> {
+interface PagePropsType extends Record<string, unknown> {
   title?: string
   query: ParsedUrlQuery
 }
 
-export type NextPageWithLayout = NextPage & {
-  getLayout?: (page: ReactElement, pageProps: PagePropType) => ReactNode
+interface AppPropsType extends NextAppProps {
+  Component: Page
+  pageProps: PagePropsType
 }
 
-type AppPropsWithLayout = AppProps<PagePropType> & {
-  Component: NextPageWithLayout
-}
-
-const App: FC<AppPropsWithLayout> = ({
-  Component,
-  pageProps,
-}: AppPropsWithLayout) => {
+const App: FC<AppPropsType> = ({ Component, pageProps }) => {
   useMatomo()
 
   const getLayout = Component.getLayout ?? ((page) => page)

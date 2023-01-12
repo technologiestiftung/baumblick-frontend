@@ -16,10 +16,8 @@ export default async function handler(
         )
 
         const { searchParams } = url
-        if (!searchParams.has('gml_id')) {
-          return res
-            .status(400)
-            .json({ error: 'Missing gml_id search parameter' })
+        if (!searchParams.has('id')) {
+          return res.status(400).json({ error: 'Missing id search parameter' })
         }
 
         const result = await sql<
@@ -43,7 +41,7 @@ export default async function handler(
               SELECT
                 geometry FROM api.trees
               WHERE
-            gml_id = ${searchParams.get('gml_id')}))
+            id = ${searchParams.get('id')}))
           ORDER BY weekday DESC
             ;
 
@@ -60,7 +58,7 @@ export default async function handler(
       default:
         return res
           .status(404)
-          .json({ error: 'only GET method with gml_id search parameter' })
+          .json({ error: 'only GET method with id search parameter' })
     }
   } catch (error: unknown) {
     const statusCode = 500

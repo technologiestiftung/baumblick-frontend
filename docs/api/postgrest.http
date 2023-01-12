@@ -1,0 +1,109 @@
+@postgrest_host = {{$processEnv ML_PGREST_HOST}}
+
+@postgrest_port = {{$processEnv ML_PGREST_PORT}}
+
+@postgerest_user = {{$processEnv ML_PGREST_USER}}
+
+@postgrest_password = {{$processEnv ML_PGREST_PASSWORD}}
+
+@postgrest_token = {{$processEnv ML_PGREST_TOKEN}}
+
+@next_api_host = http://localhost
+
+@next_api_port = 3000
+
+@tree_id = 00008100:000bbafb
+
+@issue_type_id = 1
+
+### connect to postgrest dircetly
+### Health Check
+GET {{postgrest_host}}:{{postgrest_port}}
+Accept: application/json
+content-type: application/json
+
+### Get a specific tree
+
+GET {{postgrest_host}}:{{postgrest_port}}/trees?id=eq.{{tree_id}}
+Accept: application/json
+content-type: application/json
+
+### get a specific forecast
+
+GET {{postgrest_host}}:{{postgrest_port}}/forecast?id=eq.1
+Accept: application/json
+content-type: application/json
+Authorization: Bearer {{postgrest_token}}
+
+
+### login to postgrest to get a token
+# Save this token in your .env as ML_PGREST_TOKEN and make authorized requests
+# to the postgrest api
+
+POST {{postgrest_host}}:{{postgrest_port}}/rpc/login
+Accept: application/json
+Content-Type: application/json
+
+{"username":"{{postgerest_user}}","pass":"{{postgrest_password}}"}
+
+#  ██▒   █▓ ██▓ ▄▄▄
+# ▓██░   █▒▓██▒▒████▄
+#  ▓██  █▒░▒██▒▒██  ▀█▄
+#   ▒██ █░░░██░░██▄▄▄▄██
+#    ▒▀█░  ░██░ ▓█   ▓██▒
+#    ░ ▐░  ░▓   ▒▒   ▓▒█░
+#    ░ ░░   ▒ ░  ▒   ▒▒ ░
+#      ░░   ▒ ░  ░   ▒
+#       ░   ░        ░  ░
+#      ░
+#  ███▄    █ ▓█████ ▒██   ██▒▄▄▄█████▓▄▄▄██▀▀▀██████     ▄▄▄       ██▓███   ██▓
+#  ██ ▀█   █ ▓█   ▀ ▒▒ █ █ ▒░▓  ██▒ ▓▒  ▒██ ▒██    ▒    ▒████▄    ▓██░  ██▒▓██▒
+# ▓██  ▀█ ██▒▒███   ░░  █   ░▒ ▓██░ ▒░  ░██ ░ ▓██▄      ▒██  ▀█▄  ▓██░ ██▓▒▒██▒
+# ▓██▒  ▐▌██▒▒▓█  ▄  ░ █ █ ▒ ░ ▓██▓ ░▓██▄██▓  ▒   ██▒   ░██▄▄▄▄██ ▒██▄█▓▒ ▒░██░
+# ▒██░   ▓██░░▒████▒▒██▒ ▒██▒  ▒██▒ ░ ▓███▒ ▒██████▒▒    ▓█   ▓██▒▒██▒ ░  ░░██░
+# ░ ▒░   ▒ ▒ ░░ ▒░ ░▒▒ ░ ░▓ ░  ▒ ░░   ▒▓▒▒░ ▒ ▒▓▒ ▒ ░    ▒▒   ▓▒█░▒▓▒░ ░  ░░▓
+# ░ ░░   ░ ▒░ ░ ░  ░░░   ░▒ ░    ░    ▒ ░▒░ ░ ░▒  ░ ░     ▒   ▒▒ ░░▒ ░      ▒ ░
+#    ░   ░ ░    ░    ░    ░    ░      ░ ░ ░ ░  ░  ░       ░   ▒   ░░        ▒ ░
+#          ░    ░  ░ ░    ░           ░   ░       ░           ░  ░          ░
+
+###
+###
+###
+###
+###
+###
+### Use pass through
+
+### get a specific tree
+
+GET {{next_api_host}}:{{next_api_port}}/api/ml-api-passthrough/trees?id=eq.{{tree_id}}
+Accept: application/json
+content-type: application/json
+
+### get forecast
+
+GET {{next_api_host}}:{{next_api_port}}/api/ml-api-passthrough/forecast?id=eq.1
+Accept: application/json
+content-type: application/json
+
+### get forecast
+
+GET {{next_api_host}}:{{next_api_port}}/api/ml-api-passthrough/forecast_types
+Accept: application/json
+content-type: application/json
+
+
+### get rainfall
+
+GET {{next_api_host}}:{{next_api_port}}/api/trees/rainfall?id=eq.{{tree_id}}
+Accept: application/json
+content-type: application/json
+
+
+### get issues
+# since we dont have a CSRF token t his rewuest will fail when we do a request here
+POST {{next_api_host}}:{{next_api_port}}/api/issues
+Accept: application/json
+content-type: application/json
+
+{"id":"{{tree_id}}","issue_type_id":{{issue_type_id}}}
