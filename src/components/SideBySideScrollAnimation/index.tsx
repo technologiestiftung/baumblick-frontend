@@ -17,6 +17,8 @@ export const SideBySideScrollAnimation = (): JSX.Element => {
   const [wrapperHeight, setWrapperHeight] = useState(0)
   const [scrollProgress, setScrollProgress] = useState(0)
   const [animationFrame, setAnimationFrame] = useState(0)
+  const [activeScene] = useState(3)
+  const numScenes = 8
 
   useInViewProgress({
     windowHeight,
@@ -55,6 +57,22 @@ export const SideBySideScrollAnimation = (): JSX.Element => {
       id="side-by-side__container"
     >
       <div className="side-by-side__wrapper">
+        <div className="side-by-side__dot-navigation__container">
+          <ul className="side-by-side__dot-navigation__dot-list">
+            {Array(numScenes)
+              .fill(0, 0)
+              .map((_, index: number) => {
+                return (
+                  <li
+                    key={`dot-${index}`}
+                    className={`side-by-side__dot-navigation__dot ${
+                      index === activeScene ? 'active' : ''
+                    }`}
+                  />
+                )
+              })}
+          </ul>
+        </div>
         <div className="side-by-side__inner">
           <div className="side-by-side__left">
             <div className="side-by-side__lottie">

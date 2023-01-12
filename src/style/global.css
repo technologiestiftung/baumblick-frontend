@@ -50,6 +50,7 @@
 
 		--colorUiOrangeBackground: #FFEBB8;
 		--colorUiGreenBackground: #EEFAFA;
+		--colorUiBlackText: #111827;
   }
 
   html, body, #__next {
@@ -225,7 +226,7 @@
 
 .hero__content-container {
 	margin: 0 16px;
-	color: #111827;
+	color: var(--colorUiBlackText);
 	font-family: 'Manrope', sans-serif;
 	font-weight: 600;
 	margin-top: 8px;
@@ -358,6 +359,45 @@
 .scroll-block {
   height: 50vh;
 	margin-bottom: 160px;
+}
+
+.side-by-side__dot-navigation__container {
+	height: 100%;
+	position: absolute;
+	top: 0;
+	right: 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+.side-by-side__dot-navigation__dot-list {
+	margin: 0;
+	list-style: none;
+}
+.side-by-side__dot-navigation__dot {
+	--dot-size-mobile: 10px;
+	--dot-size-desktop: 16px;
+
+	width: var(--dot-size-mobile);
+	height: var(--dot-size-mobile);
+	border-radius: 50%;
+	border: 1.5px solid var(--colorUiBlackText);
+	background-color: white;
+	margin-bottom: 6px;
+	cursor: pointer;
+}
+.side-by-side__dot-navigation__dot::last-of-type {
+	margin-bottom: 0;
+}
+.side-by-side__dot-navigation__dot.active {
+	background-color: var(--colorUiBlackText);
+}
+@media (min-width: 1200px) {
+	.side-by-side__dot-navigation__dot {
+		width: var(--dot-size-desktop);
+		height: var(--dot-size-desktop);
+		margin-bottom: 8px;
+	}
 }
 
 /* Outro */
