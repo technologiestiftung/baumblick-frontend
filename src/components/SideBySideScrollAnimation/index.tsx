@@ -4,7 +4,7 @@ import ScrollBlock from './scroll-block'
 import { useWindowSize } from '@lib/hooks/useWindowSize'
 import useInViewProgress from '@lib/hooks/useElementInViewProgress'
 import { JSONValue } from '@lib/types/lottie'
-import animationImport from '../../../public/animation/TREESv3-ARIGATO.json'
+import animationImport from '../../../public/animation/TREES.json'
 const animationData = animationImport as JSONValue
 
 export const SideBySideScrollAnimation = (): JSX.Element => {
@@ -60,8 +60,6 @@ export const SideBySideScrollAnimation = (): JSX.Element => {
             <div className="side-by-side__lottie">
               <LottieProgressPlayer
                 animationData={animationData}
-                minFrame={0}
-                maxFrame={81}
                 progress={animationFrame}
                 renderer={'svg'}
               />
@@ -89,7 +87,7 @@ export const SideBySideScrollAnimation = (): JSX.Element => {
               <ScrollBlock
                 windowHeight={windowHeight}
                 callback={(p) => {
-                  setAnimationFrame(150 + Math.round(p * (388 - 150)))
+                  setAnimationFrame(129 + Math.round(p * (388 - 129)))
                 }}
                 offset={offset}
               />
@@ -167,7 +165,7 @@ export const SideBySideScrollAnimation = (): JSX.Element => {
               <ScrollBlock
                 windowHeight={windowHeight}
                 callback={(p) => {
-                  setAnimationFrame(1381 + Math.round(p * (1662 - 1382)))
+                  setAnimationFrame(1381 + Math.round(p * (1792 - 1382)))
                 }}
                 offset={offset}
               />
@@ -182,7 +180,7 @@ export const SideBySideScrollAnimation = (): JSX.Element => {
               <ScrollBlock
                 windowHeight={windowHeight}
                 callback={(p) => {
-                  setAnimationFrame(1662 + Math.round(p * (2100 - 1662)))
+                  setAnimationFrame(1792 + Math.round(p * (2100 - 1792)))
                 }}
                 offset={offset}
               />
