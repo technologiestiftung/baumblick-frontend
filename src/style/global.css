@@ -51,6 +51,8 @@
 		--colorUiOrangeBackground: #FFEBB8;
 		--colorUiGreenBackground: #EEFAFA;
 		--colorUiBlackText: #111827;
+		--colorUiMidGrey: #9EA3AE;
+		--colorUiLightGrey: #E5E7EB;
 
 		--dot-size-mobile: 10px;
 		--dot-size-desktop: 16px;
@@ -197,6 +199,16 @@
 	}
 }
 
+/* main wrapper */
+.main__wrapper {
+	min-height: calc(100% - 4rem);
+}
+@media (min-width: 1200px) {
+	.main__wrapper {
+		min-height: 100%;
+	}
+}
+
 /* body text style */
 .text__copy--home {
 	font-family: 'PT Serif', serif;
@@ -214,6 +226,37 @@
 	letter-spacing: 0em;
 	text-align: left;
 	margin-bottom: 16px;
+}
+
+/* Footer */
+.footer__wrapper {
+	height: 52px;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	border: 0 none;
+}
+.footer__link {
+	font-family: 'Manrop', sans-serif;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 16px;
+	color: var(--colorUiMidGrey);
+	line-height: 24px;
+
+	width: 150px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+@media (min-width: 1200px) {
+	.footer__wrapper {
+		justify-content: flex-start;
+		border-top: 1px solid var(--colorUiLightGrey);
+	}
+	.footer__link {
+
+	}
 }
 
 /* Hero */

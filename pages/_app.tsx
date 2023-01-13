@@ -29,7 +29,8 @@ const App: FC<AppPropsType> = ({ Component, pageProps }) => {
       <main
         id="main"
         className={classNames(
-          'fixed top-0 md:left-[12px] md:w-[calc(100vw-12px)] z-0 min-h-[calc(100%-4rem)]',
+          'main__wrapper',
+          'fixed top-0 z-0',
           'bottom-16 grid',
           'overflow-x-hidden md:overflow-x-visible overflow-y-scroll '
         )}
