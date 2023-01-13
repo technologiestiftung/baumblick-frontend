@@ -254,15 +254,12 @@
 		justify-content: flex-start;
 		border-top: 1px solid var(--colorUiLightGrey);
 	}
-	.footer__link {
-
-	}
 }
 
 /* Hero */
 .hero__wrapper {
 	width: 100%;
-	height: calc(100vh - 4rem); /* 4rem is menu height */ 
+	height: 100vh; 
 	background-color: var(--colorUiOrangeBackground);
 	display: grid;
   grid-template-rows: auto min-content;
@@ -302,6 +299,7 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: flex-start;
+	padding-bottom: 4rem; /* menu height */
 }
 .hero__content-container__headline {
 	font-size: 36px;
