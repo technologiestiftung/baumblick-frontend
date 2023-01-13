@@ -5,20 +5,32 @@ import { useWindowSize } from '@lib/hooks/useWindowSize'
 import useInViewProgress from '@lib/hooks/useElementInViewProgress'
 import { JSONValue } from '@lib/types/lottie'
 import animationImport from '../../../public/animation/TREES.json'
+import useTranslation from 'next-translate/useTranslation'
 const animationData = animationImport as JSONValue
 
 export const SideBySideScrollAnimation = (): JSX.Element => {
+  const { t } = useTranslation('common')
   const { height: windowHeight } = useWindowSize()
 
   const wrapperElement = useRef<HTMLDivElement>(null)
 
   const textWrapperRef: RefObject<HTMLDivElement> = useRef(null)
+  const stepRefs: Array<RefObject<HTMLHeadingElement>> = [
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
+  ]
   const [textHeight, setTextHeight] = useState(0)
   const [wrapperHeight, setWrapperHeight] = useState(0)
   const [scrollProgress, setScrollProgress] = useState(0)
   const [animationFrame, setAnimationFrame] = useState(0)
   const [activeScene] = useState(3)
-  const numScenes = 8
+  const keyframes = [129, 388, 626, 907, 1123, 1382, 1792, 2100]
 
   useInViewProgress({
     windowHeight,
@@ -49,7 +61,11 @@ export const SideBySideScrollAnimation = (): JSX.Element => {
     }
   }, [textWrapperRef, windowHeight])
 
-  const offset = windowHeight ? windowHeight * 0.35 : 300
+  // Per design, the in-view-trigger should be 62.5vh from the top. Our offset
+  // is calculated in pixels from the bottom, so it's 0.375 * windowHeight.
+  // With no windowHeight given, use a default of 300px.
+  const offset = windowHeight ? windowHeight * 0.375 : 300
+
   return (
     <div
       style={{ height: wrapperHeight }}
@@ -59,20 +75,26 @@ export const SideBySideScrollAnimation = (): JSX.Element => {
       <div className="side-by-side__wrapper">
         <div className="side-by-side__dot-navigation__container">
           <ul className="side-by-side__dot-navigation__dot-list">
-            {Array(numScenes)
-              .fill(0, 0)
-              .map((_, index: number) => {
-                return (
-                  <li
-                    key={`dot-${index}`}
+            {keyframes.map((_, index: number) => {
+              return (
+                <li key={`dot-${index}`}>
+                  <button
                     className={`side-by-side__dot-navigation__dot ${
                       index === activeScene ? 'active' : ''
                     }`}
+                    onClick={() => {
+                      stepRefs[index].current?.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'end',
+                      })
+                    }}
                   />
-                )
-              })}
+                </li>
+              )
+            })}
           </ul>
         </div>
+
         <div className="side-by-side__inner">
           <div className="side-by-side__left">
             <div className="side-by-side__lottie">
@@ -86,127 +108,37 @@ export const SideBySideScrollAnimation = (): JSX.Element => {
 
           <div className="side-by-side__right" ref={textWrapperRef}>
             <div style={{ transform: `translateY(${scrollProgress}px)` }}>
-              <ScrollBlock
-                windowHeight={windowHeight}
-                callback={() => {
-                  // noop
-                }}
-                offset={offset}
-              />
-
-              <h2 className="side-by-side__h2 text__h2--home">Der Baum</h2>
-              <p className="side-by-side__text text__copy--home">
-                In Berlin gibt es insgesamt xx verschiedene Baumarten die sich
-                allesamt nach Art, Alter, Größe, Kronendurchmesser und
-                Stammumfang unterscheiden lassen. Die Stadt Berlin erfasst die
-                Eigenschaften von über 800.000 Bäume bereits im öffentlichen
-                Baumkataster
-              </p>
-              <ScrollBlock
-                windowHeight={windowHeight}
-                callback={(p) => {
-                  setAnimationFrame(129 + Math.round(p * (388 - 129)))
-                }}
-                offset={offset}
-              />
-
-              <h2 className="side-by-side__h2 text__h2--home">Umgebung</h2>
-              <p className="side-by-side__text text__copy--home">
-                Trotz aller Diversität haben diese Bäume alle etwas gemeinsam:
-                sie stehen klimatischen und urbanen Herausforderungen gegenüber!
-                Dabei beeinflussen die vielene Umgebungsparameter die Vitalität
-                eines Baumes.
-              </p>
-              <ScrollBlock
-                windowHeight={windowHeight}
-                callback={(p) => {
-                  setAnimationFrame(388 + Math.round(p * (626 - 388)))
-                }}
-                offset={offset}
-              />
-
-              <h2 className="side-by-side__h2 text__h2--home">Wetter</h2>
-              <p className="side-by-side__text text__copy--home">
-                Die wohl wichtigste Rolle für einen gesunden Baum, spielen die
-                Niederschlagsmengen und die Temperatur an einem Standort. Auch
-                auf einer vermeintlich kleinen Fläche wie Berlin können diese
-                durch städtische Infrastruktur stark varriieren.
-              </p>
-              <ScrollBlock
-                windowHeight={windowHeight}
-                callback={(p) => {
-                  setAnimationFrame(626 + Math.round(p * (907 - 626)))
-                }}
-                offset={offset}
-              />
-
-              <h2 className="side-by-side__h2 text__h2--home">Schatten</h2>
-              <p className="side-by-side__text text__copy--home">
-                Besonders hohe oder stark verspiegelte Gebäude, sowie dicht
-                bebaute Kieze können eine besonders hohe Verschattung bzw.
-                verstärkte UV-Strahlung mit sich bringen. Diese wiederum hat
-                Einfluss auf die Evatranspiration eines Baumes.
-              </p>
-              <ScrollBlock
-                windowHeight={windowHeight}
-                callback={(p) => {
-                  setAnimationFrame(907 + Math.round(p * (1123 - 907)))
-                }}
-                offset={offset}
-              />
-
-              <h2 className="side-by-side__h2 text__h2--home">Bewässerung</h2>
-              <p className="side-by-side__text text__copy--home">
-                Ebenso wichtig für den Zustand eines Baumes sind die
-                zusätzlichen Bewässerungen der Grünflächenämter oder
-                Bürger:innen Berlins, die die Bäume besonders während der
-                Vegetationspersiode (März bis September) und den heißen Sommern
-                mit mehreren 100l Wasser gießen.
-              </p>
-              <ScrollBlock
-                windowHeight={windowHeight}
-                callback={(p) => {
-                  setAnimationFrame(1123 + Math.round(p * (1382 - 1123)))
-                }}
-                offset={offset}
-              />
-
-              <h2 className="side-by-side__h2 text__h2--home">Sensordaten</h2>
-              <p className="side-by-side__text text__copy--home">
-                Um den Zustand eines Baumes besser zu verstehen, nutzt die Stadt
-                Berlin bereits Sensoren, die die Saugspannung in der Bodengrube
-                eines Baumes messen. Die Saugspannung gibt Aufschluss darüber,
-                wie trocken oder feucht der Boden ist und hilft daher bei der
-                Optimierung der Bewässerung. Jedoch: jeden Baum einzeln zu
-                verkabeln ist nicht sinnhaft und bei weitem nicht nachhaltig.
-              </p>
-              <ScrollBlock
-                windowHeight={windowHeight}
-                callback={(p) => {
-                  setAnimationFrame(1381 + Math.round(p * (1792 - 1382)))
-                }}
-                offset={offset}
-              />
-
-              <h2 className="side-by-side__h2 text__h2--home">KI Modell</h2>
-              <p className="side-by-side__text">
-                Und genau hier kommt unser KI-basiertes Vorhersagemodell ins
-                Spiel. Mit Hilfe des Modells können wir auch die aktuelle
-                Saugspannung berechnen und für 14 Tage vorhersagen – selbst wenn
-                kein Sensor am Baum ist!
-              </p>
-              <ScrollBlock
-                windowHeight={windowHeight}
-                callback={(p) => {
-                  setAnimationFrame(1792 + Math.round(p * (2100 - 1792)))
-                }}
-                offset={offset}
-              />
-
-              <p className="side-by-side__text">
-                Du bist neugierig geworden? Dann erkunde jetzt unsere Karte und
-                erhalte mit einen Einblick in die Bäume in deiner Umgebung!
-              </p>
+              {keyframes.slice(0, keyframes.length).map((_, stepIndex) => {
+                return (
+                  <div key={`step-$`}>
+                    {stepIndex !== 0 && (
+                      <ScrollBlock
+                        windowHeight={windowHeight}
+                        callback={(p) => {
+                          setAnimationFrame(
+                            keyframes[stepIndex - 1] +
+                              Math.round(
+                                p *
+                                  (keyframes[stepIndex] -
+                                    keyframes[stepIndex - 1])
+                              )
+                          )
+                        }}
+                        offset={offset}
+                      />
+                    )}
+                    <h2
+                      ref={stepRefs[stepIndex]}
+                      className="side-by-side__h2 text__h2--home"
+                    >
+                      {t(`home.animation.steps.${stepIndex + 1}.title`)}
+                    </h2>
+                    <p className="side-by-side__text text__copy--home">
+                      {t(`home.animation.steps.${stepIndex + 1}.text`)}
+                    </p>
+                  </div>
+                )
+              })}
               <div style={{ height: '50vh' }} />
             </div>
           </div>

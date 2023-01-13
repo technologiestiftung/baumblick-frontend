@@ -51,6 +51,9 @@
 		--colorUiOrangeBackground: #FFEBB8;
 		--colorUiGreenBackground: #EEFAFA;
 		--colorUiBlackText: #111827;
+
+		--dot-size-mobile: 10px;
+		--dot-size-desktop: 16px;
   }
 
   html, body, #__next {
@@ -361,6 +364,7 @@
 	margin-bottom: 160px;
 }
 
+/* Scrollytelling dot navigation */
 .side-by-side__dot-navigation__container {
 	height: 100%;
 	position: absolute;
@@ -369,14 +373,13 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	z-index: 100;
 }
 .side-by-side__dot-navigation__dot-list {
 	margin: 0;
 	list-style: none;
 }
 .side-by-side__dot-navigation__dot {
-	--dot-size-mobile: 10px;
-	--dot-size-desktop: 16px;
 
 	width: var(--dot-size-mobile);
 	height: var(--dot-size-mobile);
