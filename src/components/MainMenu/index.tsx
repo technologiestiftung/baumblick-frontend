@@ -37,7 +37,7 @@ export const MainMenu: FC = () => {
       className={classNames(
         'main-menu',
         'fixed left-1/2 -translate-x-1/2 h-16 z-50',
-        'w-full bg-gray-300 border-t border-gray-300',
+        'w-full bg-white border-t border-gray-300',
         'flex gap-[1px] drop-shadow-lg'
       )}
     >
@@ -50,7 +50,8 @@ export const MainMenu: FC = () => {
             key={link.path}
             href={link.path}
             className={classNames(
-              'bg-white w-full relative',
+              'main-nav__link',
+              'bg-white relative',
               'group cursor-default',
               isActive ? 'text-gray-900' : 'text-gray-400',
               !isActive &&
@@ -61,6 +62,7 @@ export const MainMenu: FC = () => {
             )}
           >
             <link.Icon width={32} height={32} />
+            <span className="main-nav__link-label">{link.name}</span>
           </InternalLink>
         )
       })}

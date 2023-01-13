@@ -175,6 +175,28 @@
 	}
 }
 
+/* main nav */
+.main-nav__link {
+	flex: 1;
+	width: auto;
+	border-right-width: 1px;
+}
+
+.main-nav__link-label {
+	display: none;
+	margin-left: 8px;
+}
+@media (min-width: 1200px) {
+	.main-nav__link {
+		flex: unset;
+		width: 154px;
+		border-right-width: 0;
+	}
+	.main-nav__link-label {
+		display: inline-block;
+	}
+}
+
 /* body text style */
 .text__copy--home {
 	font-family: 'PT Serif', serif;
