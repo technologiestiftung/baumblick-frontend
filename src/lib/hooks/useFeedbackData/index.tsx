@@ -44,7 +44,7 @@ const formatDate = (d: Date = new Date()): string =>
   [
     d.getFullYear(),
     '-',
-    addLeadingZeros(d.getMonth()),
+    addLeadingZeros(d.getMonth() + 1),
     '-',
     addLeadingZeros(d.getDate()),
   ].join('')
