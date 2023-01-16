@@ -93,7 +93,7 @@ const InfoList: FC<{
     mapSuctionTensionToStatus(nowcastData.depthAverageRow?.value)?.id
 
   return (
-    <ul className="z-10 relative bg-white">
+    <ul className="relative z-10 bg-white">
       <DataListItem
         title={t(`treeView.infoList.waterSupply.label`)}
         subtitle={t(`treeView.infoList.waterSupply.hint`)}
@@ -119,21 +119,21 @@ const InfoList: FC<{
       <DataListItem
         title={t(`treeView.infoList.treeDisc.label`)}
         subtitle={t(`treeView.infoList.treeDisc.hint`)}
-        // TODO: Attention, this is dummy data.
+        // TODO: [QTREES-447] Remove dummy data for treeDisc
         // Update when adding access to real data.
         value={t(`treeView.infoList.treeDisc.value`, { value: 3.1 })}
       />
       <DataListItem
         title={t(`treeView.infoList.shading.label`)}
         subtitle={t(`treeView.infoList.shading.hint`)}
-        // TODO: Attention, this is dummy data.
+        // TODO: [QTREES-448] Remove dummy data for shading
         // Update when adding access to real data.
         value={t(`treeView.infoList.shading.value`, { value: 65 })}
       />
       <DataListItem
         title={t(`treeView.infoList.wateringAmount.label`)}
         subtitle={t(`treeView.infoList.wateringAmount.hint`)}
-        // TODO: Attention, this is dummy data.
+        // TODO: [QTREES-449] Remove dummy data for wateringAmount
         // Update when adding access to real data.
         value={t(`treeView.infoList.wateringAmount.value`, { value: 25 })}
       />
