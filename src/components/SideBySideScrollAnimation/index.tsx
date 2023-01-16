@@ -29,7 +29,7 @@ export const SideBySideScrollAnimation = (): JSX.Element => {
   const [wrapperHeight, setWrapperHeight] = useState(0)
   const [scrollProgress, setScrollProgress] = useState(0)
   const [animationFrame, setAnimationFrame] = useState(0)
-  const [activeScene] = useState(3)
+  const [activeScene, setActiveScene] = useState(0)
   const keyframes = [129, 388, 626, 907, 1123, 1382, 1792, 2100]
 
   useInViewProgress({
@@ -85,8 +85,10 @@ export const SideBySideScrollAnimation = (): JSX.Element => {
                     onClick={() => {
                       stepRefs[index].current?.scrollIntoView({
                         behavior: 'smooth',
-                        block: 'end',
+                        block: 'center',
                       })
+                      setActiveScene(index)
+                      setAnimationFrame(keyframes[index])
                     }}
                   />
                 </li>
@@ -107,10 +109,15 @@ export const SideBySideScrollAnimation = (): JSX.Element => {
           </div>
 
           <div className="side-by-side__right" ref={textWrapperRef}>
-            <div style={{ transform: `translateY(${scrollProgress}px)` }}>
+            <div
+              style={{
+                transform: `translateY(${scrollProgress}px)`,
+                // position: 'relative',
+              }}
+            >
               {keyframes.slice(0, keyframes.length).map((_, stepIndex) => {
                 return (
-                  <div key={`step-$`}>
+                  <div key={`step-$`} style={{ position: 'relative' }}>
                     {stepIndex !== 0 && (
                       <ScrollBlock
                         windowHeight={windowHeight}
@@ -123,16 +130,24 @@ export const SideBySideScrollAnimation = (): JSX.Element => {
                                     keyframes[stepIndex - 1])
                               )
                           )
+                          if (p > 0.95 && activeScene !== stepIndex) {
+                            setActiveScene(stepIndex)
+                          }
                         }}
                         offset={offset}
                       />
                     )}
-                    <h2
-                      ref={stepRefs[stepIndex]}
-                      className="side-by-side__h2 text__h2--home"
-                    >
-                      {t(`home.animation.steps.${stepIndex + 1}.title`)}
-                    </h2>
+                    <div style={{ position: 'relative' }}>
+                      <div
+                        id={`jump-link-${stepIndex}`}
+                        ref={stepRefs[stepIndex]}
+                        className="side-by-side__jump-link"
+                      />
+
+                      <h2 className="side-by-side__h2 text__h2--home">
+                        {t(`home.animation.steps.${stepIndex + 1}.title`)}
+                      </h2>
+                    </div>
                     <p className="side-by-side__text text__copy--home">
                       {t(`home.animation.steps.${stepIndex + 1}.text`)}
                     </p>
