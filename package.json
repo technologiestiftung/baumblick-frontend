@@ -44,11 +44,8 @@
     "use-debounce": "8.0.1"
   },
   "devDependencies": {
-    "@semantic-release/changelog": "6.0.1",
-    "@semantic-release/commit-analyzer": "9.0.2",
-    "@semantic-release/git": "10.0.1",
-    "@semantic-release/npm": "9.0.1",
-    "@semantic-release/release-notes-generator": "10.0.3",
+    "@saithodev/semantic-release-backmerge": "2.1.2",
+    "@technologiestiftung/semantic-release-config": "1.2.0",
     "@storybook/addon-actions": "6.5.13",
     "@storybook/addon-essentials": "6.5.13",
     "@storybook/addon-links": "6.5.13",
