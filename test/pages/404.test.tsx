@@ -12,7 +12,7 @@ describe('FourOFour', () => {
   test('should render the statusCode and message', () => {
     render(<FourOFour />)
 
-    const status = screen.getByText('400')
+    const status = screen.getByText('404')
     const message = screen.getByText('Diese Seite wurde nicht gefunden')
 
     expect(status).toBeInTheDocument()

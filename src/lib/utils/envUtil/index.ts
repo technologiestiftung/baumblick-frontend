@@ -1,0 +1,5 @@
+export const NEXT_PUBLIC_MAPTILER_KEY =
+  process.env.NEXT_PUBLIC_MAPTILER_KEY || ''
+
+export const NEXT_PUBLIC_MAPTILER_BASEMAP_URL =
+  process.env.NEXT_PUBLIC_MAPTILER_BASEMAP_URL || ''

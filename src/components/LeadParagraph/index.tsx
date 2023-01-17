@@ -18,8 +18,10 @@ export const LeadParagraph: FC<LeadParagraphPropType> = ({
       {...props}
       className={classNames(
         className,
+        'lead',
         'text-lg',
         'font-medium',
+        'font-sans',
         'text-gray-600',
         'mb-8'
       )}

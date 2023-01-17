@@ -1,63 +1,113 @@
 ![](https://img.shields.io/badge/Built%20with%20%E2%9D%A4%EF%B8%8F-at%20Technologiestiftung%20Berlin-blue)
 
 # Quantified Trees – Baumblick
-> The app **Baumblick** is part of a federally funded project called [**Quantified Trees**](https://qtrees.ai/) (Qtrees). It is thus part of the German adoption strategy to climate change with focus on how to help city trees to not suffer and die because of rising temperatures and more and more frequent droughts. The app tells the story of each Berlin city tree by using a vast amount of open data like location and tree specific data. On an interactive map users can see how thirsty city trees of Berlin are. More precisely, it visualizes the trees' ground suction tension. This suction tension represents the amount of energy tree roots need in order to suck out water from the soil. Using open data as well as sensors distributed under the ground, an AI developed by [Birds on Mars](https://www.birdsonmars.com/) is able to generate nowcasts and a 14-days forecasts for each tree – even for those that are not equiped with sensors! The app is oriented towards the public and should inform in a simple and intuitive way.
+> The app **Baumblick** is part of a federally funded project called [**Quantified Trees**](https://qtrees.ai/) (QTrees). It is thus part of the German adoption strategy to climate change with focus on how to help city trees to not suffer and die because of rising temperatures and more and more frequent droughts. The app tells the story of each Berlin city tree by using a vast amount of open data like location and tree specific data. On an interactive map users can see how thirsty city trees of Berlin are. More precisely, it visualizes the trees' ground suction tension. This suction tension represents the amount of energy tree roots need in order to suck out water from the soil. Using open data as well as sensors distributed under the ground, an AI developed by [Birds on Mars](https://www.birdsonmars.com/) is able to generate nowcasts and a 14-days forecasts for each tree – even for those that are not equipped with sensors! The app is oriented towards the public and should inform in a simple and intuitive way.
 
 ## Context
+
 Climate change is causing increasingly hot, dry weather in many places. In recent years, Berlin has also experienced more hot days than ever before. Determining whether trees are in need of water isn't as easy as looking at the ground on the surface level. Many factors such as the tree's age, specie, plate size or ground quality play an important role. Old trees, for instance, tend to have deep roots and thereby be less dependent on additional watering. Overwatering can in fact be more detrimental to a tree than helpful.
 
 This application is completely based on open data, much of which is administrative or weather data. Open data is now an important part of Berlin's administrative activities and not only creates transparency and openness, but also enables analysis and applications like this to make everyday life a little bit more pleasant. You can find more open data at the [Berlin Open Data Portal](https://daten.berlin.de/).
 
 ## Tech stack
+
 This website is a NextJS app configured with:
 
 - [Typescript](https://www.typescriptlang.org/)
 - Linting with [ESLint](https://eslint.org/)
 - Formatting with [Prettier](https://prettier.io/)
-- Linting, typechecking and formatting on by default using [`husky`](https://github.com/typicode/husky) for commit hooks
+- Linting, type checking and formatting on by default using [`husky`](https://github.com/typicode/husky) for commit hooks
 - Testing with [Jest](https://jestjs.io/) and [`react-testing-library`](https://testing-library.com/docs/react-testing-library/intro)
 
-## Install and contribute
+## Getting started
 
 ### Requirements
 
-#### [MapTiler](https://maptiler.com/)
-We use [MapTiler](https://maptiler.com/) for rendering the basemap in the background. You will need to put your MapTiler API key into the `NEXT_PUBLIC_MAPTILER_KEY` environment variable. Make also sure to add whatever URL the app is run on to the list of allowed URLs in your MapTiler configuration.
+#### Node.js
 
-Because we use a customized basemap hosted on MapTiler, you also need to provide the `NEXT_PUBLIC_MAPTILER_BASEMAP_URL`.
+This project is a Next.js app which requires you to have [Node.js](https://nodejs.org/en/) installed.
+
+#### MapTiler
+
+We use [MapTiler](https://maptiler.com/) for rendering the base map in the background. You will need to put your MapTiler API key into the `NEXT_PUBLIC_MAPTILER_KEY` environment variable. Make also sure to add whatever URL the app is run on to the list of allowed URLs in your MapTiler configuration.
+
+Because we use a customized base map hosted on MapTiler, you also need to provide the `NEXT_PUBLIC_MAPTILER_BASEMAP_URL`.
 
 Both variables can be found in our shared vault.
 
+#### Database
+
+The Postgres database is hosted on AWS. See the documentation for setting it up in this repo [github.com/technologiestiftung/qtrees-ai-data](https://github.com/technologiestiftung/qtrees-ai-data)
+
+We are using a [PostgREST](https://github.com/PostgREST/postgrest) layer in between the database and the frontend. See the documentation for setting it up in this repo [github.com/technologiestiftung/qtrees-ai-data](https://github.com/technologiestiftung/qtrees-ai-data) as well.
 #### Trees vector tiles
 
-We fetch the actual trees data from our self-hosted tileserver as a vector tileset. Add the URL to that tileset to the environment variable `NEXT_PUBLIC_TREE_TILES_URL`. Find the variable in our shared vault as well.
+We fetch the trees vector tileset from our self-hosted tile-server. Add the URL to that tileset to the environment variable `NEXT_PUBLIC_TREE_TILES_URL`. Find the variable in our shared vault as well. You can find the source code for the server here [github.com/technologiestiftung/qtrees-vectortiles-generator/](https://github.com/technologiestiftung/qtrees-vectortiles-generator/)
 
-#### [Matomo](https://matomo.org/)
-We use the Google Analytics alternative [Matomo](https://matomo.org/), which is more respectful of the users' privacy, in order to track the page-visits on the page.
+#### Trees API (using Next API routes)
 
-You will need a [Matomo](https://matomo.org/) account if you wish to use page analytics as well and configure the environment variables `NEXT_PUBLIC_MATOMO_URL` and `NEXT_PUBLIC_MATOMO_SITE_ID` for this purpose.
+We use a small "passthrough" API which exposes all the data that is required. The Postgres Database (AWS RDS) has a [PostgREST](https://github.com/PostgREST/postgrest) instance running on an AWS EC2 in front of it. The API is deployed as a Next.js API Routes. It mostly passes the requests through and does some sanity checks. Some API routes currently have a direct connection to the database. This will be replaced with remote procedure calls through PostgREST eventually. See the related files under [pages/api](pages/api/). Make sure to include the necessary environment variables as specified in `.env.example`.
 
 ### Installation
 
+Clone the repository to your local machine:
+
 ```bash
-# Clone the repo
-git clone git@github.com:technologiestiftung/qtrees-citizens-frontend.git
+git clone git@github.com:technologiestiftung/treewatch-frontend.git
+```
 
-# Move into the repo
-cd qtrees-citizens-frontend
+Move into the repository folder:
 
-# Install the npm dependencies
+```bash
+cd treewatch-frontend
+```
+
+Make sure you use the Node.js version specified in `.nvmrc`. Find out which Node version you're currently on with:
+
+```bash
+node --version
+```
+
+If this version differs from the one specified in `.nvmrc`, please install the required version, either manually, or using a tool such as [nvm](https://github.com/nvm-sh/nvm), which allows switching to the correct version via:
+
+```bash
+nvm use
+```
+
+With the correct Node version, install the dependencies:
+
+```bash
 npm install
+```
 
-# Create your own .env file
-cp .env.example .env
+To access the PostgREST API you will need to provide connection details in your environment. In this repository you can find a file `.env.example`. Duplicate this file and name it `.env`.
 
-# Edit the .env file with your own values
-vim .env # Use your favourite editor here
+In `.env` you must enter the connection details for Supabase as suggested in `.env.example`. If you do not know how to obtain the necessary details, please ask a repository maintainer for access.
+
+You are now ready to start a local development server on http://localhost:3000 via:
+
+```bash
+npm run dev
 ```
 
 ## Deployment
-**Qtrees – Baumblick** is deployed to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+
+**QTrees – Baumblick** is deployed to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+
+## Content
+
+The content of Baumblick can be customized. You can edit it in the following locations:
+
+- The images for the slides on the homepage are located under: `/images/home-slider/`.
+- The text for the slides and the alternative text for the images are located in `/locales/de/common.json`.
+- The index page of the available stories is located under `/pages/stories/index.tsx`. The path parameter should point to a valid file name, for example `/stories/my-file-name`.
+- The text for the expert articles "stories" can be edited in the individual files located under `/pages/stories`. The file format is MDX, a superset of Markdown. It can be edited with a markdown editor.
+
+## Page analytics
+
+We use [Matomo](https://matomo.org/) for website analytics. Matomo is respectful of the users' privacy, the page visits are tracked anonymously.
+
+In the production environment, a `NEXT_PUBLIC_MATOMO_URL` and `NEXT_PUBLIC_MATOMO_SITE_ID` is configured for this purpose.
 
 ## Contributors
 
@@ -68,8 +118,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/dnsos"><img src="https://avatars.githubusercontent.com/u/15640196?v=4?s=64" width="64px;" alt=""/><br /><sub><b>Dennis Ostendorf</b></sub></a><br /><a href="https://github.com/technologiestiftung/qtrees-citizens-frontend/commits?author=dnsos" title="Code">💻</a> <a href="https://github.com/technologiestiftung/qtrees-citizens-frontend/commits?author=dnsos" title="Documentation">📖</a></td>
-    <td align="center"><a href="https://vogelino.com/"><img src="https://avatars.githubusercontent.com/u/2759340?v=4?s=64" width="64px;" alt=""/><br /><sub><b>Lucas Vogel</b></sub></a><br /><a href="https://github.com/technologiestiftung/qtrees-citizens-frontend/commits?author=vogelino" title="Code">💻</a> <a href="https://github.com/technologiestiftung/qtrees-citizens-frontend/commits?author=vogelino" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/dnsos"><img src="https://avatars.githubusercontent.com/u/15640196?v=4?s=64" width="64px;" alt=""/><br /><sub><b>Dennis Ostendorf</b></sub></a><br /><a href="https://github.com/technologiestiftung/treewatch-frontend/commits?author=dnsos" title="Code">💻</a> <a href="https://github.com/technologiestiftung/treewatch-frontend/commits?author=dnsos" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://vogelino.com/"><img src="https://avatars.githubusercontent.com/u/2759340?v=4?s=64" width="64px;" alt=""/><br /><sub><b>Lucas Vogel</b></sub></a><br /><a href="https://github.com/technologiestiftung/treewatch-frontend/commits?author=vogelino" title="Code">💻</a> <a href="https://github.com/technologiestiftung/treewatch-frontend/commits?author=vogelino" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://fabianmoronzirfas.me"><img src="https://avatars.githubusercontent.com/u/315106?v=4?s=64" width="64px;" alt=""/><br /><sub><b>Fabian Morón Zirfas</b></sub></a><br /><a href="https://github.com/technologiestiftung/treewatch-frontend/commits?author=ff6347" title="Code">💻</a> <a href="#infra-ff6347" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
   </tr>
 </table>
 
@@ -81,9 +132,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
 
 
-## Content Licencing
+## Content Licensing
 
-Texts and content available as [CC BY](https://creativecommons.org/licenses/by/3.0/de/). 
+Texts and content available as [CC BY](https://creativecommons.org/licenses/by/3.0/de/).
 
 ## Credits
 
@@ -125,3 +176,4 @@ Texts and content available as [CC BY](https://creativecommons.org/licenses/by/3
     </td>
   </tr>
 </table>
+<!-- trigger build -->

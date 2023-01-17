@@ -1,34 +1,43 @@
-import { mapRawQueryToState } from '@lib/utils/queryUtil'
 import { ParsedUrlQuery } from 'querystring'
 import { StrictMode, FC } from 'react'
 import { Head } from '@components/Head'
+import 'maplibre-gl/dist/maplibre-gl.css'
 import '../src/style/global.css'
+import { Page } from '@common/types/nextPage'
 import { useMatomo } from '@lib/hooks/useMatomo'
 import { MainMenu } from '@components/MainMenu'
+import type { AppProps as NextAppProps } from 'next/app'
+import classNames from 'classnames'
 
-interface PagePropType extends Record<string, unknown> {
+interface PagePropsType extends Record<string, unknown> {
   title?: string
   query: ParsedUrlQuery
 }
 
-interface ComponentPropType {
-  title?: string
-  query?: ReturnType<typeof mapRawQueryToState>
+interface AppPropsType extends NextAppProps {
+  Component: Page
+  pageProps: PagePropsType
 }
 
-const App: FC<{
-  Component: FC<ComponentPropType>
-  pageProps: PagePropType
-}> = ({ Component, pageProps }) => {
+const App: FC<AppPropsType> = ({ Component, pageProps }) => {
   useMatomo()
-  const parsedQuery = pageProps.query ? mapRawQueryToState(pageProps.query) : {}
+
+  const getLayout = Component.getLayout ?? ((page) => page)
 
   return (
     <StrictMode>
       <Head pageTitle={pageProps.title || ''} />
-      <div className="fixed inset-0 bottom-16 overflow-x-hidden overflow-y-auto">
-        <Component {...pageProps} query={parsedQuery} />
-      </div>
+      <main
+        className={classNames(
+          'fixed top-0 md:left-[12px] md:w-[calc(100vw-12px)] z-0 min-h-[calc(100%-4rem)]',
+          'bottom-16 grid',
+          'overflow-x-hidden md:overflow-x-visible overflow-y-scroll '
+        )}
+      >
+        <div className="w-screen max-w-3xl mx-auto">
+          {getLayout(<Component {...pageProps} />, pageProps)}
+        </div>
+      </main>
       <MainMenu />
     </StrictMode>
   )
