@@ -3,18 +3,20 @@ import { FC } from 'react'
 export interface ProgressClockPropType {
   progress: number
   strokeColorBackground: string
+  fillColor: string
 }
 
 export const ProgressClock: FC<ProgressClockPropType> = ({
   progress,
-  strokeColorBackground,
+  strokeColorBackground = '#9EA3AE',
+  fillColor = '#111827',
 }) => (
   <div className="datavis-icons__progress-clock__wrapper">
     <div className="datavis-icons__progress-clock__hole" />
     <div
       className="datavis-icons__progress-clock__cone"
       style={{
-        background: `conic-gradient(black 0deg ${
+        background: `conic-gradient(${fillColor} 0deg ${
           progress * 360
         }deg, transparent ${progress * 360}deg 360deg)`,
       }}

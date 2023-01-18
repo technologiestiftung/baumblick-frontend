@@ -25,9 +25,13 @@ const IconWaterDrop: FC<IconWaterDropPropType> = ({
 
 export interface ProgressWaterDropPropType {
   numDrops: number
+  strokeColor?: string
+  fillColor?: string
 }
 export const ProgressWaterDrop: FC<ProgressWaterDropPropType> = ({
   numDrops,
+  strokeColor = '#9EA3AE',
+  fillColor = '#111827',
 }) => {
   return (
     <ul className="datavis-icons__progress-water-drop__wrapper">
@@ -40,7 +44,8 @@ export const ProgressWaterDrop: FC<ProgressWaterDropPropType> = ({
               key={`water-drop-${index}`}
             >
               <IconWaterDrop
-                fill={index + 1 <= 5 - numDrops ? 'white' : 'black'}
+                stroke={strokeColor}
+                fill={index + 1 <= 5 - numDrops ? 'white' : fillColor}
               />
             </li>
           )

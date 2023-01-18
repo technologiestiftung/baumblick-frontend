@@ -22,4 +22,5 @@ ProgressClockTemplate.parameters = {
 ProgressClockTemplate.args = {
   progress: 0.5,
   strokeColorBackground: '#9EA3AE',
+  fillColor: '#111827',
 }

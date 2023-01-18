@@ -21,4 +21,6 @@ ProgressWaterDropTemplate.parameters = {
 }
 ProgressWaterDropTemplate.args = {
   numDrops: 3,
+  strokeColor: '#9EA3AE',
+  fillColor: '#111827',
 }
