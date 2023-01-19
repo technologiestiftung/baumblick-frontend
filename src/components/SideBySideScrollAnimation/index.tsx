@@ -4,7 +4,7 @@ import ScrollBlock from './scroll-block'
 import { useWindowSize } from '@lib/hooks/useWindowSize'
 import useInViewProgress from '@lib/hooks/useElementInViewProgress'
 import { JSONValue } from '@lib/types/lottie'
-import animationImport from '../../../public/animation/TREES_new.json'
+import animationImport from '../../../public/animation/TREES_newV2.json'
 import useTranslation from 'next-translate/useTranslation'
 const animationData = animationImport as JSONValue
 
