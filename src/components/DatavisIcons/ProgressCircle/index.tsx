@@ -31,7 +31,7 @@ export const ProgressCircle: FC<ProgressCirclePropType> = ({
         <circle
           cx={size / 2}
           cy={size / 2}
-          r={adjustedSize / 2}
+          r={adjustedSize / 2 - 0.5}
           stroke={strokeColorBackground}
           strokeDasharray="2 2"
           strokeWidth="1"
