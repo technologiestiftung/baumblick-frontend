@@ -1,16 +1,10 @@
 import { reportIssue } from '@lib/requests/reportIssue'
-import { supabase } from '@lib/requests/supabase'
+
 import { useEffect, useState } from 'react'
 import useSWR from 'swr'
+import { getIssueTypesData } from '@lib/requests/getIssueTypesData'
 
 const LOCAL_STORAGE_PREFIX = 'issue'
-
-interface RawIssueTypeType {
-  id: number
-  title: string
-  description: string
-  image_url: string | null
-}
 
 export interface IssueTypeType {
   id: number
@@ -31,15 +25,8 @@ type UseFeedbackDataType = (
 }
 
 const getIssueTypes = async (treeId: string): Promise<IssueTypeType[]> => {
-  const { data, error } = await supabase.from<RawIssueTypeType>('issue_types')
-    .select(`
-    id,
-    title,
-    description,
-    image_url
-  `)
+  const data = await getIssueTypesData()
 
-  if (error) throw error
   if (!data || data.length === 0) throw new Error('No issu types found!')
   return data.map((issueTypeType) => ({
     ...issueTypeType,
@@ -57,7 +44,7 @@ const formatDate = (d: Date = new Date()): string =>
   [
     d.getFullYear(),
     '-',
-    addLeadingZeros(d.getMonth()),
+    addLeadingZeros(d.getMonth() + 1),
     '-',
     addLeadingZeros(d.getDate()),
   ].join('')

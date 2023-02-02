@@ -1,10 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import sql from '../_shared/_db'
+import { createClient } from '../_shared/postgrest'
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<void> {
   try {
+    const postgrest = createClient()
     switch (req.method) {
       case 'GET': {
         if (req.url === undefined) {
@@ -16,49 +18,32 @@ export default async function handler(
         )
 
         const { searchParams } = url
-        if (!searchParams.has('id')) {
-          return res.status(400).json({ error: 'Missing id search parameter' })
+        if (!searchParams.has('tree_id')) {
+          return res
+            .status(400)
+            .json({ error: 'Missing tree_id search parameter' })
         }
-
-        const result = await sql<
-          { rainfall_in_mm: number; timestamp: string }[]
-        >`SELECT
-        grouped.weekday as "timestamp",
-        grouped.daily_rainfall_sum_mm as rainfall_in_mm
-      FROM (
-        SELECT
-          geometry AS geom,
-          date_trunc('day', timestamp)::date AS weekday,
-          sum(rainfall_mm) AS daily_rainfall_sum_mm
-        FROM
-          qtrees.api.radolan
-        GROUP BY
-          geometry,
-          weekday) AS grouped
-        WHERE
-          weekday >= CURRENT_DATE at time zone 'UTC' - interval '13 days'
-          AND ST_Contains(grouped.geom, (
-              SELECT
-                geometry FROM api.trees
-              WHERE
-            id = ${searchParams.get('id')}))
-          ORDER BY weekday DESC
-            ;
-
-          `
+        // TODO: Test rainfall function once it is implemented in the database
+        const { data: rainfalls, error } = await postgrest.rpc('rainfall', {
+          tree_id: searchParams.get('tree_id') as string,
+        })
+        if (error) {
+          throw new Error(error.message)
+        }
+        if (!rainfalls) {
+          throw new Error('data is undefined')
+        }
         const initialValue = 0
-        const sum = result
+        const sum: number = rainfalls
           .map((item) => item.rainfall_in_mm)
-          .reduce((prev, curr) => prev + curr, initialValue)
+          .reduce((prev: number, curr: number) => prev + curr, initialValue)
 
-        return res
-          .status(200)
-          .json({ data: { table: result, sum_rainfall_in_mm: sum } })
+        return res.status(200).json({ data: { sum_rainfall_in_mm: sum } })
       }
       default:
         return res
           .status(404)
-          .json({ error: 'only GET method with id search parameter' })
+          .json({ error: 'only GET method with tree_id search parameter' })
     }
   } catch (error: unknown) {
     const statusCode = 500
