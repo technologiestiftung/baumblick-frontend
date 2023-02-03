@@ -65,7 +65,7 @@ const LottieProgressPlayer: FC<LottieProgressPlayerProps> = ({
     goToFrame(progress)
   }, [goToFrame, progress])
 
-  return <div className="lottie-container" ref={handleLottieRef} />
+  return <div className="h-full" ref={handleLottieRef} />
 }
 
 export default memo(LottieProgressPlayer)

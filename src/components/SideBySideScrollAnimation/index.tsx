@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef, RefObject } from 'react'
+import classNames from 'classnames'
 import LottieProgressPlayer from '@components/LottieProgressPlayer'
 import ScrollBlock from './scroll-block'
 import { useWindowSize } from '@lib/hooks/useWindowSize'
@@ -72,16 +73,18 @@ export const SideBySideScrollAnimation = (): JSX.Element => {
       ref={wrapperElement}
       id="side-by-side__container"
     >
-      <div className="side-by-side__wrapper">
-        <div className="side-by-side__dot-navigation__container">
-          <ul className="side-by-side__dot-navigation__dot-list">
+      <div className="box-border w-full sticky top-0 p-4 h-[100vh] screen600:p-8">
+        <div className="h-full absolute top-0 right-5 flex flex-col justify-center z-50">
+          <ul className="m-0 list-none">
             {keyframes.map((_, index: number) => {
               return (
                 <li key={`dot-${index}`}>
                   <button
-                    className={`side-by-side__dot-navigation__dot ${
-                      index === activeScene ? 'active' : ''
-                    }`}
+                    className={classNames(
+                      'w-2.5 h-2.5 rounded-full border-[1.5px] border-solid bg-white mb-1.5 cursor-pointer border-uiBlackText',
+                      'screen1200:w-4 screen1200:h-4 screen1200:mb-2',
+                      `${index === activeScene ? 'bg-uiBlackText' : ''}`
+                    )}
                     onClick={() => {
                       stepRefs[index].current?.scrollIntoView({
                         behavior: 'smooth',
@@ -97,9 +100,19 @@ export const SideBySideScrollAnimation = (): JSX.Element => {
           </ul>
         </div>
 
-        <div className="side-by-side__inner">
-          <div className="side-by-side__left">
-            <div className="side-by-side__lottie">
+        <div
+          className={classNames(
+            'w-full h-full grid overflow-hidden grid-rows-2',
+            'screen1200:grid-rows-1 screen1200:grid-cols-[5fr_7fr] screen1200:gap-8'
+          )}
+        >
+          <div>
+            <div
+              className={classNames(
+                'm-auto flex justify-center items-center w-full h-full max-h-[50vh]',
+                'screen1200:max-h-screen'
+              )}
+            >
               <LottieProgressPlayer
                 animationData={animationData}
                 progress={animationFrame}
@@ -108,7 +121,10 @@ export const SideBySideScrollAnimation = (): JSX.Element => {
             </div>
           </div>
 
-          <div className="side-by-side__right" ref={textWrapperRef}>
+          <div
+            className="overflow-hidden screen1200:row-start-1 screen1200:row-end-2"
+            ref={textWrapperRef}
+          >
             <div
               style={{
                 transform: `translateY(${scrollProgress}px)`,
@@ -144,14 +160,19 @@ export const SideBySideScrollAnimation = (): JSX.Element => {
                       <div
                         id={`jump-link-${stepIndex}`}
                         ref={stepRefs[stepIndex]}
-                        className="side-by-side__jump-link"
+                        className="absolute -top-10"
                       />
 
-                      <h2 className="side-by-side__h2 font-sans text-2xl font-normal tracking-normal text-left mb-4">
+                      <h2
+                        className={classNames(
+                          'mb-2 font-sans text-2xl font-normal tracking-normal text-left',
+                          'screen1200:mb-4 screen1920:mb-6'
+                        )}
+                      >
                         {t(`home.animation.steps.${stepIndex + 1}.title`)}
                       </h2>
                     </div>
-                    <p className="side-by-side__text font-serif text-base font-normal tracking-normal">
+                    <p className="font-serif text-base font-normal tracking-normal text-left">
                       {t(`home.animation.steps.${stepIndex + 1}.text`)}
                     </p>
                   </div>

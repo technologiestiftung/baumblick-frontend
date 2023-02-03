@@ -29,7 +29,7 @@ const ScrollBlock = ({
   })
 
   return (
-    <div className="scroll-block" ref={scrollBlockRef}>
+    <div className="h-[50vh] mb-40" ref={scrollBlockRef}>
       {children && children}
     </div>
   )

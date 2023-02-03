@@ -25,6 +25,7 @@ module.exports = {
     },
     extend: {
       screens: {
+        screen600: '600px',
         screen1200: '1200px',
         screen1440: '1440px',
         screen1920: '1920px',
@@ -42,6 +43,7 @@ module.exports = {
         uiBlackText: '#111827',
         uiMidGrey: '#9EA3AE',
         uiLightGrey: '#E5E7EB',
+        imageBlendColor: '#59B1B2',
       },
       animation: {
         'slide-up': 'slide-up 0.125s ease-in-out',
