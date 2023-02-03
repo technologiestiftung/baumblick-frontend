@@ -36,6 +36,13 @@ module.exports = {
         lg: '32rem',
         xl: '36rem',
       },
+      colors: {
+        uiOrangeBackground: '#FFEBB8',
+        uiGreenBackground: '#EEFAFA',
+        uiBlackText: '#111827',
+        uiMidGrey: '#9EA3AE',
+        uiLightGrey: '#E5E7EB',
+      },
       animation: {
         'slide-up': 'slide-up 0.125s ease-in-out',
       },

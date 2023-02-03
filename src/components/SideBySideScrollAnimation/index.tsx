@@ -147,11 +147,11 @@ export const SideBySideScrollAnimation = (): JSX.Element => {
                         className="side-by-side__jump-link"
                       />
 
-                      <h2 className="side-by-side__h2 text__h2--home">
+                      <h2 className="side-by-side__h2 font-sans text-2xl font-normal tracking-normal text-left mb-4">
                         {t(`home.animation.steps.${stepIndex + 1}.title`)}
                       </h2>
                     </div>
-                    <p className="side-by-side__text text__copy--home">
+                    <p className="side-by-side__text font-serif text-base font-normal tracking-normal">
                       {t(`home.animation.steps.${stepIndex + 1}.text`)}
                     </p>
                   </div>

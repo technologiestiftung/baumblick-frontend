@@ -19,12 +19,16 @@ export const Intro: FC = () => {
             />
           </div>
           <div className="intro__text-block">
-            <p className="intro__text text__copy--home">
-              {t('home.intro.text.1')}
-            </p>
-            <p className="intro__text text__copy--home">
-              {t('home.intro.text.2')}
-            </p>
+            {['home.intro.text.1', 'home.intro.text.2'].map((text, index) => {
+              return (
+                <p
+                  className="mb-4 last-of-type:mb-0 font-serif text-base font-normal tracking-normal"
+                  key={index}
+                >
+                  {t(text)}
+                </p>
+              )
+            })}
           </div>
 
           <GPSButton />

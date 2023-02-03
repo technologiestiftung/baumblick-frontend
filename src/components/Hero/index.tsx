@@ -1,24 +1,38 @@
 import useTranslation from 'next-translate/useTranslation'
 import { FC } from 'react'
 import { ArrowDown } from '@components/Icons/ArrowDown'
+import classNames from 'classnames'
 
 export const Hero: FC = () => {
   const { t } = useTranslation('common')
   return (
-    <div className="hero__wrapper">
-      <div className="hero__image-container">
-        <img src="/images/hero-image-1200px.png" alt="" />
+    <div
+      className={classNames(
+        'w-full h-screen grid grid-rows-[auto min-content] gap-0 bg-uiOrangeBackground',
+        'screen1200:grid-rows-[auto] screen1200:grid-cols-[1fr_1fr] screen1200:gap-6 screen1200:px-14',
+        'screen1440:gap-8'
+      )}
+    >
+      <div className="w-full overflow-hidden">
+        <img
+          className="w-full h-full object-cover"
+          src="/images/hero-image-1200px.png"
+          alt=""
+        />
       </div>
 
-      <div className="hero__content-container">
-        <div className="hero__content-container__text-container">
-          <h1 className="hero__content-container__headline">
-            {t('home.hero.title')}
-          </h1>
-          <p className="hero__content-container__text">{t('home.hero.text')}</p>
+      <div
+        className={classNames(
+          'font-sans font-semibold text-uiBlackText',
+          'mt-2 mx-4 flex flex-col justify-center items-start pb-16'
+        )}
+      >
+        <div>
+          <h1 className="text-4xl mb-2">{t('home.hero.title')}</h1>
+          <p className="text-base mb-20">{t('home.hero.text')}</p>
         </div>
 
-        <ArrowDown className="hero__content-container__arrow" />
+        <ArrowDown className="absolute bottom-6 self-center" />
       </div>
     </div>
   )

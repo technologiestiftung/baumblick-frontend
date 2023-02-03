@@ -29,7 +29,7 @@ const App: FC<AppPropsType> = ({ Component, pageProps }) => {
       <main
         id="main"
         className={classNames(
-          'main__wrapper',
+          'min-h[calc(100% - 4rem)] screen1200:min-h-full',
           'fixed top-0 z-0',
           'bottom-16 grid',
           'overflow-x-hidden md:overflow-x-visible overflow-y-scroll '

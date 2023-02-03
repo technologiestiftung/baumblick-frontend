@@ -10,7 +10,9 @@ export const Outro: FC = () => {
     <div className="outro__wrapper">
       <ContentGrid>
         <GridDefault>
-          <h2 className="text__h2--home">{t('home.outro.headline')}</h2>
+          <h2 className="font-sans text-2xl font-normal tracking-normal text-left mb-4">
+            {t('home.outro.headline')}
+          </h2>
 
           <p className="outro__text text-copy--home">
             {t('home.outro.text.1')}
