@@ -2,13 +2,14 @@ import useTranslation from 'next-translate/useTranslation'
 import { FC } from 'react'
 import { Button } from '@components/Button'
 import { QTrees, Github } from '@components/Icons'
+import { ContentGrid, GridDefault } from '@components/ContentGrid'
 
 export const Outro: FC = () => {
   const { t } = useTranslation('common')
   return (
     <div className="outro__wrapper">
-      <div className="content-grid">
-        <div className="content-grid__default">
+      <ContentGrid>
+        <GridDefault>
           <h2 className="text__h2--home">{t('home.outro.headline')}</h2>
 
           <p className="outro__text text-copy--home">
@@ -28,8 +29,8 @@ export const Outro: FC = () => {
             <QTrees className="text-gray-400" />
             {t('home.cta.project')}
           </Button>
-        </div>
-      </div>
+        </GridDefault>
+      </ContentGrid>
     </div>
   )
 }

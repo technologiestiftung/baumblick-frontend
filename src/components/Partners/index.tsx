@@ -1,11 +1,12 @@
 import useTranslation from 'next-translate/useTranslation'
 import { FC } from 'react'
+import { ContentGrid } from '@components/ContentGrid'
 
 export const Partners: FC = () => {
   const { t } = useTranslation('common')
   return (
     <div className="partners__wrapper">
-      <div className="content-grid">
+      <ContentGrid>
         <div className="partners__column-container">
           <div className="partners__column">
             <h4 className="partners__column-title">
@@ -58,7 +59,7 @@ export const Partners: FC = () => {
             </div>
           </div>
         </div>
-      </div>
+      </ContentGrid>
     </div>
   )
 }

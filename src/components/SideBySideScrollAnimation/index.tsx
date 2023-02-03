@@ -117,7 +117,10 @@ export const SideBySideScrollAnimation = (): JSX.Element => {
             >
               {keyframes.slice(0, keyframes.length).map((_, stepIndex) => {
                 return (
-                  <div key={`step-$`} style={{ position: 'relative' }}>
+                  <div
+                    key={`step-${stepIndex}`}
+                    style={{ position: 'relative' }}
+                  >
                     {stepIndex !== 0 && (
                       <ScrollBlock
                         windowHeight={windowHeight}

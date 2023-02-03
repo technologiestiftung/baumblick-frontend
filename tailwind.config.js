@@ -24,6 +24,11 @@ module.exports = {
       ...colorPalette,
     },
     extend: {
+      screens: {
+        screen1200: '1200px',
+        screen1440: '1440px',
+        screen1920: '1920px',
+      },
       minWidth: {
         xs: '20rem',
         sm: '24rem',

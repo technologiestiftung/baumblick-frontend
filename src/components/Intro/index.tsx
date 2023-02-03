@@ -3,13 +3,14 @@ import { FC } from 'react'
 import { Button } from '@components/Button'
 import { GPSButton } from '@components/GPSButton'
 import { ArrowDown } from '@components/Icons'
+import { ContentGrid, GridDefault } from '@components/ContentGrid'
 
 export const Intro: FC = () => {
   const { t } = useTranslation('common')
   return (
     <div className="intro__wrapper">
-      <div className="content-grid">
-        <div className="content-grid__default">
+      <ContentGrid>
+        <GridDefault>
           <div className="intro__image-container">
             <img
               className="intro__image"
@@ -32,8 +33,8 @@ export const Intro: FC = () => {
             <ArrowDown className="text-gray-400" />
             Mehr erfahren
           </Button>
-        </div>
-      </div>
+        </GridDefault>
+      </ContentGrid>
     </div>
   )
 }

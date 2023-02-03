@@ -125,79 +125,7 @@
 			}
 	}
 }
-/* Main menu */
-.main-menu {
-	bottom: 0px;
-}
-@media (min-width: 1200px) {
-	.main-menu {
-		bottom: unset;
-		top: 0px;
-	}
-}
 
-/* Grid */
-.content-grid {
-	width: 100%;
-	padding: 0 16px;
-	display: grid;
-	grid-gap: 16px;
-	grid-template-columns: repeat(6, 1fr);
-}
-.content-grid__default {
-	grid-column: 1 / -1;
-}
-@media (min-width: 768px) {
-	.content-grid {
-		padding: 0 24px;
-		grid-gap: 24px;
-		grid-template-columns: repeat(12, 1fr);
-	}
-	.content-grid__default {
-		grid-column: 3 / -3;
-	}
-}
-@media (min-width: 1200px) {
-	.content-grid {
-		padding: 0 32px;
-	}
-	.content-grid__default {
-		grid-column: 4 / -4;
-	}
-}
-@media (min-width: 1440px) {
-	.content-grid {
-		padding: 0 56px;
-		grid-gap: 32px
-	}
-}
-@media (min-width: 1920px) {
-	.content-grid {
-		padding: 0 72px;
-	}
-}
-
-/* main nav */
-.main-nav__link {
-	flex: 1;
-	width: auto;
-	border-right-width: 1px;
-}
-
-.main-nav__link-label {
-	display: none;
-	margin-left: 8px;
-}
-@media (min-width: 1200px) {
-	.main-nav__link {
-		flex: unset;
-		width: 154px;
-		border-right-width: 0;
-	}
-	.main-nav__link-label {
-		display: inline-block;
-	}
-}
 
 /* main wrapper */
 .main__wrapper {

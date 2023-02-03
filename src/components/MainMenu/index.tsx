@@ -35,7 +35,7 @@ export const MainMenu: FC = () => {
   return (
     <div
       className={classNames(
-        'main-menu',
+        'bottom-0 screen1200:top-0',
         'fixed left-1/2 -translate-x-1/2 h-16 z-50',
         'w-full bg-white border-t border-gray-300',
         'flex gap-[1px] drop-shadow-lg'
@@ -50,9 +50,10 @@ export const MainMenu: FC = () => {
             key={link.path}
             href={link.path}
             className={classNames(
-              'main-nav__link',
+              'w-auto border-r flex-1',
               'bg-white relative',
               'group cursor-default',
+              'screen1200:border-r-0 screen1200:w-40 screen1200:flex-none',
               isActive ? 'text-gray-900' : 'text-gray-400',
               !isActive &&
                 'hover:text-gray-600 hover:bg-gray-200 cursor-pointer',
@@ -62,7 +63,9 @@ export const MainMenu: FC = () => {
             )}
           >
             <link.Icon width={32} height={32} />
-            <span className="main-nav__link-label">{link.name}</span>
+            <span className="hidden ml-2 screen1200:inline-block">
+              {link.name}
+            </span>
           </InternalLink>
         )
       })}
