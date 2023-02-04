@@ -1,6 +1,6 @@
 import { Story, Meta } from '@storybook/react'
 
-import { DataListItem, DataListItemPropType } from '.'
+import { DataListItem, DataListItemPropType, DataVizIconType } from '.'
 
 export default {
   title: 'UI Elements/DataListItem',
@@ -21,32 +21,42 @@ const items = [
   {
     title: 'Wasserstand',
     subtitle: 'Durschnitt 30, 60, 90',
-    value: 'Versorgt',
+    valueLabel: 'Versorgt',
   },
   {
-    title: 'Regen',
+    title: 'Niederschlag',
     subtitle: 'Letzte 14 Tage',
-    value: '25l',
+    valueLabel: '30l',
+    iconType: 'water-drops' as DataVizIconType,
+    iconValue: 3,
   },
   {
     title: 'Baumscheibe',
-    subtitle: 'Durschnitt 2qm',
-    value: '2,2qm',
+    subtitle: 'Unversiegelter Bereich um den Stamm',
+    valueLabel: '2,2qm',
+    iconType: 'square' as DataVizIconType,
+    iconValue: 0.66,
   },
   {
     title: 'Verschattung',
     subtitle: 'Anteil an Schattenzeit',
-    value: '76%',
+    valueLabel: '76%',
+    iconType: 'clock' as DataVizIconType,
+    iconValue: 0.76,
   },
   {
-    title: 'Gießwassermenge',
+    title: 'Gießmenge',
     subtitle: 'Letzte 14 Tage',
-    value: '150l',
+    valueLabel: '30l',
+    iconType: 'water-drops' as DataVizIconType,
+    iconValue: 2,
   },
   {
-    title: 'Stammdurchmesser',
+    title: 'Stammumfang',
     subtitle: 'An der weiteste Stelle',
-    value: '33cm',
+    valueLabel: '33cm',
+    iconType: 'circle' as DataVizIconType,
+    iconValue: 0.33,
   },
 ]
 
