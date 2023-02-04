@@ -20,17 +20,17 @@ export const Partners: FC = () => {
               title: t('home.partners.consortium'),
               logos: [
                 {
-                  src: '/images/logos/logo-technologiestiftung-berlin.jpg',
+                  src: '/images/logos/logo-technologiestiftung-berlin-de.svg',
                   alt: '',
                   width: 280,
                 },
                 {
-                  src: '/images/logos/logo-birds-on-mars.jpg',
+                  src: '/images/logos/logo-birds-on-mars.png',
                   alt: '',
                   width: 220,
                 },
                 {
-                  src: '/images/logos/logo-bezirksamt-mitte.jpg',
+                  src: '/images/logos/ba-mitte-logo.png',
                   alt: '',
                   width: 300,
                 },
@@ -40,12 +40,12 @@ export const Partners: FC = () => {
               title: t('home.partners.associated'),
               logos: [
                 {
-                  src: '/images/logos/logo-bezirksamt-neukoelln.jpg',
+                  src: '/images/logos/ba-neukoelln-logo.png',
                   alt: '',
                   width: 300,
                 },
                 {
-                  src: '/images/logos/logo-arbor-revital.jpg',
+                  src: '/images/logos/logo-arbor-revital.png',
                   alt: '',
                   width: 250,
                 },
@@ -55,12 +55,12 @@ export const Partners: FC = () => {
               title: t('home.partners.funding'),
               logos: [
                 {
-                  src: '/images/logos/logo-zug.jpg',
+                  src: '/images/logos/logo-zug.svg',
                   alt: '',
                   width: 280,
                 },
                 {
-                  src: '/images/logos/logo-buns.jpg',
+                  src: '/images/logos/logo-buns.png',
                   alt: '',
                   width: 300,
                 },
