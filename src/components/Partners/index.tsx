@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
 import { FC } from 'react'
 import { ContentGrid } from '@components/ContentGrid'
@@ -5,59 +6,84 @@ import { ContentGrid } from '@components/ContentGrid'
 export const Partners: FC = () => {
   const { t } = useTranslation('common')
   return (
-    <div className="partners__wrapper">
+    <div className="w-full py-[5.625rem] screen1200:py-[20vh]">
       <ContentGrid>
-        <div className="partners__column-container">
-          <div className="partners__column">
-            <h4 className="partners__column-title">
-              {t('home.partners.consortium')}
-            </h4>
-            <div className="partners__column__logo-list">
-              <img
-                src="/images/logos/logo-technologiestiftung-berlin.jpg"
-                alt=""
-                style={{ width: 280 }}
-              />
-
-              <img
-                src="/images/logos/logo-birds-on-mars.jpg"
-                alt=""
-                style={{ width: 220 }}
-              />
-
-              <img src="/images/logos/logo-bezirksamt-mitte.jpg" alt="" />
+        <div
+          className={classNames(
+            'w-full flex flex-col col-start-1 col-span-6',
+            'md:col-start-4 md:col-span-6',
+            'screen1200:col-start-1 screen1200:col-span-12 screen1200:flex-row screen1200:justify-between'
+          )}
+        >
+          {[
+            {
+              title: t('home.partners.consortium'),
+              logos: [
+                {
+                  src: '/images/logos/logo-technologiestiftung-berlin.jpg',
+                  alt: '',
+                  width: 280,
+                },
+                {
+                  src: '/images/logos/logo-birds-on-mars.jpg',
+                  alt: '',
+                  width: 220,
+                },
+                {
+                  src: '/images/logos/logo-bezirksamt-mitte.jpg',
+                  alt: '',
+                  width: 300,
+                },
+              ],
+            },
+            {
+              title: t('home.partners.associated'),
+              logos: [
+                {
+                  src: '/images/logos/logo-bezirksamt-neukoelln.jpg',
+                  alt: '',
+                  width: 300,
+                },
+                {
+                  src: '/images/logos/logo-arbor-revital.jpg',
+                  alt: '',
+                  width: 250,
+                },
+              ],
+            },
+            {
+              title: t('home.partners.funding'),
+              logos: [
+                {
+                  src: '/images/logos/logo-zug.jpg',
+                  alt: '',
+                  width: 280,
+                },
+                {
+                  src: '/images/logos/logo-buns.jpg',
+                  alt: '',
+                  width: 300,
+                },
+              ],
+            },
+          ].map((column, columnIndex) => (
+            <div key={`col-${columnIndex}`} className="w-[18.75rem]">
+              <h4 className="font-sans text-base font-semibold tracking-normal text-left mb-6">
+                {column.title}
+              </h4>
+              <div className="mb-[5.625rem] screen1200:mb-0">
+                {column.logos.map((logo, logoIndex) => (
+                  <img
+                    key={`logo-${logoIndex}`}
+                    className="mb-8"
+                    src={logo.src}
+                    alt={logo.alt}
+                    style={{ width: logo.width }}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
-
-          <div className="partners__column">
-            <h4 className="partners__column-title">
-              {t('home.partners.associated')}
-            </h4>
-            <div className="partners__column__logo-list">
-              <img src="/images/logos/logo-bezirksamt-neukoelln.jpg" alt="" />
-
-              <img
-                src="/images/logos/logo-arbor-revital.jpg"
-                alt=""
-                style={{ width: 250 }}
-              />
-            </div>
-          </div>
-
-          <div className="partners__column">
-            <h4 className="partners__column-title">
-              {t('home.partners.funding')}
-            </h4>
-            <div className="partners__column__logo-list">
-              <img
-                src="/images/logos/logo-zug.jpg"
-                alt=""
-                style={{ width: 280 }}
-              />
-
-              <img src="/images/logos/logo-buns.jpg" alt="" />
-            </div>
-          </div>
+          ))}
         </div>
       </ContentGrid>
     </div>

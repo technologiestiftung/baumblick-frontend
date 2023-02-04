@@ -7,14 +7,14 @@ import { ContentGrid, GridDefault } from '@components/ContentGrid'
 export const Outro: FC = () => {
   const { t } = useTranslation('common')
   return (
-    <div className="outro__wrapper">
+    <div className="bg-uiOrangeBackground py-[5.625rem] screen1200:py-[20vh]">
       <ContentGrid>
         <GridDefault>
           <h2 className="font-sans text-2xl font-normal tracking-normal text-left mb-4">
             {t('home.outro.headline')}
           </h2>
 
-          <p className="outro__text text-copy--home">
+          <p className="mb-4 font-serif text-base font-normal tracking-normal">
             {t('home.outro.text.1')}
           </p>
 
@@ -23,7 +23,7 @@ export const Outro: FC = () => {
             {t('home.cta.github')}
           </Button>
 
-          <p className="outro__text text-copy--home">
+          <p className="mb-4 font-serif text-base font-normal tracking-normal">
             {t('home.outro.text.2')}
           </p>
 
