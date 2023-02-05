@@ -97,7 +97,7 @@ const InfoList: FC<{
       <DataListItem
         title={t(`treeView.infoList.waterSupply.label`)}
         subtitle={t(`treeView.infoList.waterSupply.hint`)}
-        value={
+        valueLabel={
           averageStatusId
             ? t(`treeView.infoList.waterSupply.value`, {
                 value: getStatusLabel(averageStatusId),
@@ -108,7 +108,7 @@ const InfoList: FC<{
       <DataListItem
         title={t(`treeView.infoList.rainAmount.label`)}
         subtitle={t(`treeView.infoList.rainAmount.hint`)}
-        value={
+        valueLabel={
           rainData
             ? t(`treeView.infoList.rainAmount.value`, {
                 value: rainData.toFixed(1),
@@ -121,27 +121,27 @@ const InfoList: FC<{
         subtitle={t(`treeView.infoList.treeDisc.hint`)}
         // TODO: [QTREES-447] Remove dummy data for treeDisc
         // Update when adding access to real data.
-        value={t(`treeView.infoList.treeDisc.value`, { value: 3.1 })}
+        valueLabel={t(`treeView.infoList.treeDisc.value`, { value: 3.1 })}
       />
       <DataListItem
         title={t(`treeView.infoList.shading.label`)}
         subtitle={t(`treeView.infoList.shading.hint`)}
         // TODO: [QTREES-448] Remove dummy data for shading
         // Update when adding access to real data.
-        value={t(`treeView.infoList.shading.value`, { value: 65 })}
+        valueLabel={t(`treeView.infoList.shading.value`, { value: 65 })}
       />
       <DataListItem
         title={t(`treeView.infoList.wateringAmount.label`)}
         subtitle={t(`treeView.infoList.wateringAmount.hint`)}
         // TODO: [QTREES-449] Remove dummy data for wateringAmount
         // Update when adding access to real data.
-        value={t(`treeView.infoList.wateringAmount.value`, { value: 25 })}
+        valueLabel={t(`treeView.infoList.wateringAmount.value`, { value: 25 })}
       />
       {treeData?.stammumfg && (
         <DataListItem
           title={t(`treeView.infoList.trunkCircumference.label`)}
           subtitle={t(`treeView.infoList.trunkCircumference.hint`)}
-          value={t(`treeView.infoList.trunkCircumference.value`, {
+          valueLabel={t(`treeView.infoList.trunkCircumference.value`, {
             value: treeData.stammumfg,
           })}
         />
