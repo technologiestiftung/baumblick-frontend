@@ -16,7 +16,7 @@ interface OnSelectOutput {
 export const MAP_CONFIG = {
   minZoom: 11.5,
   maxZoom: 22,
-  defaultLatitude: 52.520952,
+  defaultLatitude: 52.51,
   defaultLongitude: 13.400033,
 }
 
