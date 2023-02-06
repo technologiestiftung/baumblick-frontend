@@ -26,7 +26,7 @@ export const Issues: FC<
   const apiRequest: (withHeader: boolean) => void = (withHeader = true) => {
     fetch('http://localhost:3000/api/issues', {
       method: 'POST',
-      body: JSON.stringify({ gml_id: 'gml_id', issue_type_id: 1 }),
+      body: JSON.stringify({ id: 'id', issue_type_id: 1 }),
       headers: withHeader
         ? { 'CSRF-Token': csrfToken, 'Content-Type': 'application/json' }
         : undefined,

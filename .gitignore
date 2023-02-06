@@ -30,7 +30,7 @@ yarn-error.log*
 .env.development.local
 .env.test.local
 .env.production.local
-
+.envrc
 # vercel
 .vercel
 .next
@@ -41,3 +41,4 @@ yarn-error.log*
 
 # Storybook
 storybook-static
+.vscode/settings.json

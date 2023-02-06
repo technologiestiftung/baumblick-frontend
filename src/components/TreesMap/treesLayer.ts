@@ -5,6 +5,7 @@ import colors from '../../style/colors'
 
 /** ID with which we can reference trees layer */
 export const TREES_LAYER_ID = 'trees'
+export const TREES_ID_KEY = 'trees_id'
 
 /** ID with which we can reference the layer for outdated nowcast values
  */
@@ -24,7 +25,7 @@ export const TREES_SOURCE: SourceSpecification = {
   tiles: [process.env.NEXT_PUBLIC_TREE_TILES_URL as string],
   maxzoom: 14,
   minzoom: 0,
-  promoteId: 'trees_gml_id',
+  promoteId: TREES_ID_KEY,
 }
 
 const CIRCLE_STROKE_WIDTH = {

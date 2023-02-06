@@ -1,7 +1,7 @@
 ![](https://img.shields.io/badge/Built%20with%20%E2%9D%A4%EF%B8%8F-at%20Technologiestiftung%20Berlin-blue)
 
 # Quantified Trees – Baumblick
-> The app **Baumblick** is part of a federally funded project called [**Quantified Trees**](https://qtrees.ai/) (Qtrees). It is thus part of the German adoption strategy to climate change with focus on how to help city trees to not suffer and die because of rising temperatures and more and more frequent droughts. The app tells the story of each Berlin city tree by using a vast amount of open data like location and tree specific data. On an interactive map users can see how thirsty city trees of Berlin are. More precisely, it visualizes the trees' ground suction tension. This suction tension represents the amount of energy tree roots need in order to suck out water from the soil. Using open data as well as sensors distributed under the ground, an AI developed by [Birds on Mars](https://www.birdsonmars.com/) is able to generate nowcasts and a 14-days forecasts for each tree – even for those that are not equiped with sensors! The app is oriented towards the public and should inform in a simple and intuitive way.
+> The app **Baumblick** is part of a federally funded project called [**Quantified Trees**](https://qtrees.ai/) (QTrees). It is thus part of the German adoption strategy to climate change with focus on how to help city trees to not suffer and die because of rising temperatures and more and more frequent droughts. The app tells the story of each Berlin city tree by using a vast amount of open data like location and tree specific data. On an interactive map users can see how thirsty city trees of Berlin are. More precisely, it visualizes the trees' ground suction tension. This suction tension represents the amount of energy tree roots need in order to suck out water from the soil. Using open data as well as sensors distributed under the ground, an AI developed by [Birds on Mars](https://www.birdsonmars.com/) is able to generate nowcasts and a 14-days forecasts for each tree – even for those that are not equipped with sensors! The app is oriented towards the public and should inform in a simple and intuitive way.
 
 ## Context
 
@@ -16,7 +16,7 @@ This website is a NextJS app configured with:
 - [Typescript](https://www.typescriptlang.org/)
 - Linting with [ESLint](https://eslint.org/)
 - Formatting with [Prettier](https://prettier.io/)
-- Linting, typechecking and formatting on by default using [`husky`](https://github.com/typicode/husky) for commit hooks
+- Linting, type checking and formatting on by default using [`husky`](https://github.com/typicode/husky) for commit hooks
 - Testing with [Jest](https://jestjs.io/) and [`react-testing-library`](https://testing-library.com/docs/react-testing-library/intro)
 
 ## Getting started
@@ -29,19 +29,24 @@ This project is a Next.js app which requires you to have [Node.js](https://nodej
 
 #### MapTiler
 
-We use [MapTiler](https://maptiler.com/) for rendering the basemap in the background. You will need to put your MapTiler API key into the `NEXT_PUBLIC_MAPTILER_KEY` environment variable. Make also sure to add whatever URL the app is run on to the list of allowed URLs in your MapTiler configuration.
+We use [MapTiler](https://maptiler.com/) for rendering the base map in the background. You will need to put your MapTiler API key into the `NEXT_PUBLIC_MAPTILER_KEY` environment variable. Make also sure to add whatever URL the app is run on to the list of allowed URLs in your MapTiler configuration.
 
-Because we use a customized basemap hosted on MapTiler, you also need to provide the `NEXT_PUBLIC_MAPTILER_BASEMAP_URL`.
+Because we use a customized base map hosted on MapTiler, you also need to provide the `NEXT_PUBLIC_MAPTILER_BASEMAP_URL`.
 
 Both variables can be found in our shared vault.
 
+#### Database
+
+The Postgres database is hosted on AWS. See the documentation for setting it up in this repo [github.com/technologiestiftung/qtrees-ai-data](https://github.com/technologiestiftung/qtrees-ai-data)
+
+We are using a [PostgREST](https://github.com/PostgREST/postgrest) layer in between the database and the frontend. See the documentation for setting it up in this repo [github.com/technologiestiftung/qtrees-ai-data](https://github.com/technologiestiftung/qtrees-ai-data) as well.
 #### Trees vector tiles
 
-We fetch the trees vector tileset from our self-hosted tileserver. Add the URL to that tileset to the environment variable `NEXT_PUBLIC_TREE_TILES_URL`. Find the variable in our shared vault as well.
+We fetch the trees vector tileset from our self-hosted tile-server. Add the URL to that tileset to the environment variable `NEXT_PUBLIC_TREE_TILES_URL`. Find the variable in our shared vault as well. You can find the source code for the server here [github.com/technologiestiftung/qtrees-vectortiles-generator/](https://github.com/technologiestiftung/qtrees-vectortiles-generator/)
 
-#### Trees API (using Supabase)
+#### Trees API (using Next API routes)
 
-We use a small "passthrough" API which exposes all the data that is required. The API is deployed as a Supabase Edge Function. Make sure to include the necessary environment variables as specified in `.env.example`.
+We use a small "passthrough" API which exposes all the data that is required. The Postgres Database (AWS RDS) has a [PostgREST](https://github.com/PostgREST/postgrest) instance running on an AWS EC2 in front of it. The API is deployed as a Next.js API Routes. It mostly passes the requests through and does some sanity checks. Some API routes currently have a direct connection to the database. This will be replaced with remote procedure calls through PostgREST eventually. See the related files under [pages/api](pages/api/). Make sure to include the necessary environment variables as specified in `.env.example`.
 
 ### Installation
 
@@ -75,7 +80,7 @@ With the correct Node version, install the dependencies:
 npm install
 ```
 
-Because we use Supabase for accessing the database, you will need to provide connection details in your environment. In this repository you can find a file `.env.example`. Duplicate this file and name it `.env`.
+To access the PostgREST API you will need to provide connection details in your environment. In this repository you can find a file `.env.example`. Duplicate this file and name it `.env`.
 
 In `.env` you must enter the connection details for Supabase as suggested in `.env.example`. If you do not know how to obtain the necessary details, please ask a repository maintainer for access.
 
@@ -87,11 +92,11 @@ npm run dev
 
 ## Deployment
 
-**Qtrees – Baumblick** is deployed to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+**QTrees – Baumblick** is deployed to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
 
 ## Content
 
-The content of TreeWatch can be customized. You can edit it in the following locations:
+The content of Baumblick can be customized. You can edit it in the following locations:
 
 - The images for the slides on the homepage are located under: `/images/home-slider/`.
 - The text for the slides and the alternative text for the images are located in `/locales/de/common.json`.
@@ -127,7 +132,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
 
 
-## Content Licencing
+## Content Licensing
 
 Texts and content available as [CC BY](https://creativecommons.org/licenses/by/3.0/de/).
 
