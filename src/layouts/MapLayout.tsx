@@ -5,6 +5,7 @@ import { useHasScrolledPastThreshold } from '@lib/hooks/useHasScrolledPastThresh
 import classNames from 'classnames'
 import { InternalLink } from '@components/InternalLink'
 import { useTreeData } from '@lib/hooks/useTreeData'
+import { useHasMobileSize } from '@lib/hooks/useHasMobileSize'
 
 interface OnSelectOutput {
   id: string
@@ -15,7 +16,6 @@ interface OnSelectOutput {
 export const MAP_CONFIG = {
   minZoom: 11.5,
   maxZoom: 22,
-  defaultZoom: 14,
   defaultLatitude: 52.520952,
   defaultLongitude: 13.400033,
 }
@@ -43,6 +43,8 @@ export const MapLayout: FC<MapLayoutType> = ({
     threshold: 5,
     scrollParent: 'main',
   })
+
+  const hasMobileSize = useHasMobileSize()
 
   return (
     <>
@@ -82,7 +84,7 @@ export const MapLayout: FC<MapLayoutType> = ({
           initialViewportProps={{
             latitude: data?.lat || latitude || MAP_CONFIG.defaultLatitude,
             longitude: data?.lng || longitude || MAP_CONFIG.defaultLongitude,
-            zoom: zoom || MAP_CONFIG.defaultZoom,
+            zoom: zoom || hasMobileSize ? 12 : 10,
           }}
           onSelect={onTreeSelect}
           latitude={latitude || data?.lat}
