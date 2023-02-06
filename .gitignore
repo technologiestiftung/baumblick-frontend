@@ -41,3 +41,4 @@ yarn-error.log*
 
 # Storybook
 storybook-static
+.vscode/settings.json

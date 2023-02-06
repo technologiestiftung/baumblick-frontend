@@ -28,6 +28,13 @@ GET {{postgrest_host}}:{{postgrest_port}}/trees?id=eq.{{tree_id}}
 Accept: application/json
 content-type: application/json
 
+### get issue_types
+
+GET {{postgrest_host}}:{{postgrest_port}}/issue_types
+Accept: application/json
+content-type: application/json
+
+
 ### get a specific forecast
 
 GET {{postgrest_host}}:{{postgrest_port}}/forecast?id=eq.1
@@ -45,6 +52,24 @@ Accept: application/json
 Content-Type: application/json
 
 {"username":"{{postgerest_user}}","pass":"{{postgrest_password}}"}
+
+### add issue to a tree
+# needs some refactor of schema in QTREES-442
+
+POST {{postgrest_host}}:{{postgrest_port}}/issues
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {{postgrest_token}}
+
+{"tree_id":"{{tree_id}}","issue_type_id":{{issue_type_id}}}
+
+### call the rainfall function WIP
+POST {{postgrest_host}}:{{postgrest_port}}/rpc/rainfall
+Accept: application/json
+Content-Type: application/json
+
+{"tree_id":"{{tree_id}}"}
+
 
 #  ██▒   █▓ ██▓ ▄▄▄
 # ▓██░   █▒▓██▒▒████▄
@@ -88,22 +113,28 @@ content-type: application/json
 
 ### get forecast
 
-GET {{next_api_host}}:{{next_api_port}}/api/ml-api-passthrough/forecast_types
+GET {{next_api_host}}:{{next_api_port}}/api/ml-api-passthrough/sensor_types
 Accept: application/json
 content-type: application/json
 
 
 ### get rainfall
 
-GET {{next_api_host}}:{{next_api_port}}/api/trees/rainfall?id=eq.{{tree_id}}
+GET {{next_api_host}}:{{next_api_port}}/api/trees/rainfall?tree_id={{tree_id}}
 Accept: application/json
 content-type: application/json
 
 
-### get issues
+### POST issues
 # since we dont have a CSRF token t his rewuest will fail when we do a request here
-POST {{next_api_host}}:{{next_api_port}}/api/issues
+POST {{next_api_host}}:{{next_api_port}}/api/ml-api-passthrough/issues
 Accept: application/json
 content-type: application/json
 
 {"id":"{{tree_id}}","issue_type_id":{{issue_type_id}}}
+
+
+### Get isusue_types
+GET {{next_api_host}}:{{next_api_port}}/api/ml-api-passthrough/issue_types
+Accept: application/json
+content-type: application/json

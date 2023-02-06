@@ -1,16 +1,12 @@
 import { getBaseUrl } from '@lib/utils/urlUtil'
 
 type RawTreeRainAmountType = {
-  table: {
-    timestamp: string
-    rainfall_in_mm: number
-  }[]
   sum_rainfall_in_mm: number
 }
 
 export type TreeRainAmountType = number
 
-const TREE_ID_COLUMN_NAME = 'id'
+const TREE_ID_COLUMN_NAME = 'tree_id'
 
 /**
  * Fetches the rain data for a tree (in mm for the current day).

@@ -1,3 +1,16 @@
+# [1.0.0-staging.9](https://github.com/technologiestiftung/baumblick-frontend/compare/v1.0.0-staging.8...v1.0.0-staging.9) (2023-01-16)
+
+
+### Bug Fixes
+
+* **useFeedbackData:** Fix function formatDate that returned a month too early ([4069803](https://github.com/technologiestiftung/baumblick-frontend/commit/4069803fad7d1e5b48e4306a178de984f5851843))
+
+
+### Features
+
+* **api:** Remove token retrieval via login ([68c6ceb](https://github.com/technologiestiftung/baumblick-frontend/commit/68c6ceb4473ddd3b3dfa5ee586c80789142e1c14))
+* **postgrestjs:** Add posgrest js client ([4f103aa](https://github.com/technologiestiftung/baumblick-frontend/commit/4f103aa1a0e85d7057d4149903a2676a5111d18e))
+
 # [1.0.0-staging.8](https://github.com/technologiestiftung/baumblick-frontend/compare/v1.0.0-staging.7...v1.0.0-staging.8) (2022-12-20)
 
 

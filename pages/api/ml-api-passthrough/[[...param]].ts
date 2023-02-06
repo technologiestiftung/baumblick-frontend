@@ -1,19 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import fetch from 'cross-fetch'
-import sql from '../_shared/_db'
-//nextjs api route handler
+import { envVarError } from '../_shared/env-var-error'
 
 const ml_pgrest_host = process.env.ML_PGREST_HOST
-const ml_pgrest_user = process.env.ML_PGREST_USER
-const ml_pgrest_password = process.env.ML_PGREST_PASSWORD
 const ml_pgrest_port = process.env.ML_PGREST_PORT
 
-function envVarError(missingVar: string): never {
-  const prefix = 'Missing environment variable:'
-  const msg = `${prefix} ${missingVar}`
-  console.error(msg)
-  throw new Error(msg)
-}
 export function setLimit(url: URL, amount: number): URL {
   const limit = url.searchParams.get('limit')
   if (limit) {
@@ -26,20 +17,11 @@ export function setLimit(url: URL, amount: number): URL {
   return url
 }
 
-interface LoginType {
-  login: string
-}
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<void> {
   try {
-    if (ml_pgrest_user === undefined) {
-      envVarError('ML_PGREST_USER')
-    }
-    if (ml_pgrest_password === undefined) {
-      envVarError('ML_PGREST_PASSWORD')
-    }
     if (ml_pgrest_port === undefined) {
       envVarError('ML_PGREST_PORT')
     }
@@ -50,14 +32,6 @@ export default async function handler(
     switch (req.method) {
       case 'POST': // for migration purpose
       case 'GET': {
-        const result = await sql<
-          LoginType[]
-        >`SELECT api.login(${ml_pgrest_user}, ${ml_pgrest_password})`
-
-        if (result.length === 0) {
-          return res.status(401).json({ error: 'Unauthorized' })
-        }
-        const token = result[0].login.substring(1, result[0].login.length - 1)
         if (!req.url) {
           return res.status(500).json({ error: 'Missing url in request' })
         }
@@ -98,7 +72,9 @@ export default async function handler(
           ''
         )}${url.search}`
         const response = await fetch(targetUrl, {
-          headers: { Authorization: `Bearer ${token}` },
+          headers: {
+            ContenType: 'application/json',
+          },
         })
 
         if (!response.ok) {

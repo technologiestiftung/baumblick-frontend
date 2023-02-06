@@ -30,9 +30,7 @@ export const combineNowAndForecastData = (
   nowcastData: NowcastDataType[],
   forecastData: ForecastDataType[]
 ): CombinedNowAndForecastType[] => {
-  const nowcastAvg = nowcastData.find(
-    ({ forecast_type_id }) => forecast_type_id === 4
-  )
+  const nowcastAvg = nowcastData.find(({ type_id }) => type_id === 4)
   const combinedData = [nowcastAvg, ...forecastData]
   const filteredData = combinedData.filter(
     hasTimestampAndValue
