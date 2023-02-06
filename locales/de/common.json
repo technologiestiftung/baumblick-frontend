@@ -92,7 +92,7 @@
         "value": "{{value}}"
       },
       "rainAmount": {
-        "label": "Wassermenge",
+        "label": "Niederschlagsmenge",
         "hint": "Letzte 14 Tage",
         "value": "{{value}} mm"
       },
