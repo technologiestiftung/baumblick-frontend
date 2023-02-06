@@ -23,22 +23,41 @@ export default async function handler(
             .status(400)
             .json({ error: 'Missing tree_id search parameter' })
         }
-        // TODO: Test rainfall function once it is implemented in the database
-        const { data: rainfalls, error } = await postgrest.rpc('rainfall', {
-          tree_id: searchParams.get('tree_id') as string,
-        })
-        if (error) {
-          throw new Error(error.message)
+
+        const { data: rainfall_mat, error: rainfall_mat_error } =
+          await postgrest
+            .from('rainfall')
+            .select('tree_is,rainfall_in_mm')
+            .eq('tree_id', searchParams.get('tree_id') as string)
+        if (rainfall_mat_error) {
+          throw new Error(rainfall_mat_error.message)
         }
-        if (!rainfalls) {
+        if (!rainfall_mat) {
           throw new Error('data is undefined')
         }
-        const initialValue = 0
-        const sum: number = rainfalls
-          .map((item) => item.rainfall_in_mm)
-          .reduce((prev: number, curr: number) => prev + curr, initialValue)
 
-        return res.status(200).json({ data: { sum_rainfall_in_mm: sum } })
+        // const { data: rainfalls, error } = await postgrest.rpc('rainfall', {
+        //   tree_id: searchParams.get('tree_id') as string,
+        // })
+        // if (error) {
+        //   throw new Error(error.message)
+        // }
+        // if (!rainfalls) {
+        //   throw new Error('data is undefined')
+        // }
+        // const initialValue = 0
+        // const sum: number = rainfalls
+        //   /**
+        //    * @hint types generate via postgrest are wrong on this fnction.
+        //    * The return value of a rpc is alrready an array of objects
+        //    * so we need to remove the aditional array in the function return value
+        //    */
+        //   .map((item) => item.rainfall_in_mm)
+        //   .reduce((prev: number, curr: number) => prev + curr, initialValue)
+        // console.log(rainfall_mat, sum)
+        return res
+          .status(200)
+          .json({ data: { sum_rainfall_in_mm: rainfall_mat[0] } })
       }
       default:
         return res
