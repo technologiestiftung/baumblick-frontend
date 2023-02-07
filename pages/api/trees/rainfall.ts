@@ -27,7 +27,7 @@ export default async function handler(
         const { data: rainfall_mat, error: rainfall_mat_error } =
           await postgrest
             .from('rainfall')
-            .select('tree_is,rainfall_in_mm')
+            .select('tree_id,rainfall_in_mm')
             .eq('tree_id', searchParams.get('tree_id') as string)
         if (rainfall_mat_error) {
           throw new Error(rainfall_mat_error.message)
@@ -36,28 +36,16 @@ export default async function handler(
           throw new Error('data is undefined')
         }
 
-        // const { data: rainfalls, error } = await postgrest.rpc('rainfall', {
-        //   tree_id: searchParams.get('tree_id') as string,
-        // })
-        // if (error) {
-        //   throw new Error(error.message)
-        // }
-        // if (!rainfalls) {
-        //   throw new Error('data is undefined')
-        // }
-        // const initialValue = 0
-        // const sum: number = rainfalls
-        //   /**
-        //    * @hint types generate via postgrest are wrong on this fnction.
-        //    * The return value of a rpc is alrready an array of objects
-        //    * so we need to remove the aditional array in the function return value
-        //    */
-        //   .map((item) => item.rainfall_in_mm)
-        //   .reduce((prev: number, curr: number) => prev + curr, initialValue)
-        // console.log(rainfall_mat, sum)
-        return res
-          .status(200)
-          .json({ data: { sum_rainfall_in_mm: rainfall_mat[0] } })
+        // currently there are no type definitions for the materialized view
+        // that's why we just ignore the unsafe assignment for now
+        // and type it ourselves
+        const rainData = rainfall_mat as {
+          tree_id: string
+          rainfall_in_mm: number
+        }[]
+        return res.status(200).json({
+          data: { sum_rainfall_in_mm: rainData[0].rainfall_in_mm },
+        })
       }
       default:
         return res
