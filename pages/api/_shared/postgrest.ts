@@ -20,7 +20,3 @@ export function createClient(token?: string): PostgrestClient<Database> {
     },
   })
 }
-
-// export const postgrest = new PostgrestClient(
-//   `${ml_pgrest_host}:${ml_pgrest_port}`
-// )
