@@ -1,11 +1,11 @@
 module.exports = {
   useTabs: false,
   semi: false,
-  singleQuote: true, // setting it to true will use single quotes instead of double quotes
+  singleQuote: true,
   jsxSingleQuote: false,
   arrowParens: 'always',
   bracketSpacing: true,
-  endOfLine: 'auto',
+  endOfLine: 'lf',
   htmlWhitespaceSensitivity: 'css',
   insertPragma: false,
   jsxBracketSameLine: false,
