@@ -9,14 +9,14 @@ import { ContentGrid, GridDefault } from '@components/ContentGrid'
 export const Intro: FC = () => {
   const { t } = useTranslation('common')
   return (
-    <div className="bg-uiGreenBackground py-[5.625rem] screen1200:py-[20vh]">
+    <div className="bg-green py-[5.625rem] screen1200:py-[20vh]">
       <ContentGrid>
         <GridDefault>
           <div
             className={classNames(
               'relative',
               'after:block after:absolute after:top-0 after:w-full after:h-full',
-              'after:bg-imageBlendColor after:mix-blend-hue'
+              'after:bg-scale-good after:mix-blend-hue'
             )}
           >
             <img src="/images/intro-image.jpg" alt="" />

@@ -7,7 +7,7 @@ import { ContentGrid, GridDefault } from '@components/ContentGrid'
 export const Outro: FC = () => {
   const { t } = useTranslation('common')
   return (
-    <div className="bg-uiOrangeBackground py-[5.625rem] screen1200:py-[20vh]">
+    <div className="bg-orange py-[5.625rem] screen1200:py-[20vh]">
       <ContentGrid>
         <GridDefault>
           <h2 className="font-sans text-2xl font-normal tracking-normal text-left mb-4">

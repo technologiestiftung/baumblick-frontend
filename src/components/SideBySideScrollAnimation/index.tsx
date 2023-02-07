@@ -77,9 +77,9 @@ export const SideBySideScrollAnimation = (): JSX.Element => {
                 <li key={`dot-${index}`}>
                   <button
                     className={classNames(
-                      'w-2.5 h-2.5 rounded-full border-[1.5px] border-solid bg-white mb-1.5 cursor-pointer border-uiBlackText',
+                      'w-2.5 h-2.5 rounded-full border-[1.5px] border-solid bg-white mb-1.5 cursor-pointer border-gray-900',
                       'screen1200:w-4 screen1200:h-4 screen1200:mb-2',
-                      `${index === activeScene ? 'bg-uiBlackText' : ''}`
+                      `${index === activeScene ? 'bg-gray-900' : ''}`
                     )}
                     onClick={() => {
                       stepRefs[index].current?.scrollIntoView({

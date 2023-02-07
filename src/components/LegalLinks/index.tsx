@@ -8,7 +8,7 @@ export const LegalLinks: FC = () => {
     <section
       className={classNames(
         'h-[3.25rem] flex items-center border-none justify-evenly',
-        'screen1200:justify-start screen1200:border-t screen1200:border-solid screen1200:border-uiLightGrey'
+        'screen1200:justify-start screen1200:border-t screen1200:border-solid screen1200:border-gray-200'
       )}
     >
       {[
@@ -25,7 +25,7 @@ export const LegalLinks: FC = () => {
           key={linkIndex}
           className={classNames(
             'focus:outline-none focus:ring-offset-4 focus:ring-offset-white focus:ring-2 focus:ring-gray-900 hover:text-gray-900 transition-colors',
-            'font-sans text-uiMidGrey not-italic font-semibold text-base leading-6 w-40 flex justify-center items-center'
+            'font-sans text-gray-400 not-italic font-semibold text-base leading-6 w-40 flex justify-center items-center'
           )}
           href={link.href}
         >

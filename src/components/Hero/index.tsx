@@ -8,7 +8,7 @@ export const Hero: FC = () => {
   return (
     <div
       className={classNames(
-        'w-full h-screen grid grid-rows-[auto min-content] gap-0 bg-uiOrangeBackground',
+        'w-full h-screen grid grid-rows-[auto min-content] gap-0 bg-orange',
         'screen1200:grid-rows-[auto] screen1200:grid-cols-[1fr_1fr] screen1200:gap-6 screen1200:px-14',
         'screen1440:gap-8'
       )}
@@ -23,7 +23,7 @@ export const Hero: FC = () => {
 
       <div
         className={classNames(
-          'font-sans font-semibold text-uiBlackText',
+          'font-sans font-semibold text-gray-900',
           'mt-2 mx-4 flex flex-col justify-center items-start pb-16'
         )}
       >
