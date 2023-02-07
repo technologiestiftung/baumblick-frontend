@@ -2,7 +2,6 @@ import useTranslation from 'next-translate/useTranslation'
 import classNames from 'classnames'
 import { FC } from 'react'
 import { Button } from '@components/Button'
-import { GPSButton } from '@components/GPSButton'
 import { ArrowDown } from '@components/Icons'
 import { ContentGrid, GridDefault } from '@components/ContentGrid'
 
@@ -34,7 +33,9 @@ export const Intro: FC = () => {
             })}
           </div>
 
-          <GPSButton />
+          <Button href="/trees" primary className="w-full">
+            {t('home.cta.findTree')}
+          </Button>
 
           <Button primary className="w-full mt-4">
             <ArrowDown className="text-gray-400" />
