@@ -1,6 +1,7 @@
 import { Story, Meta } from '@storybook/react'
 
-import { DataListItem, DataListItemPropType, DataVizIconType } from '.'
+import { DataListItem, DataListItemPropType } from '.'
+import { DatavisIcon } from '@components/DatavisIcons/DatavisIcon'
 
 export default {
   title: 'UI Elements/DataListItem',
@@ -26,37 +27,37 @@ const items = [
   {
     title: 'Niederschlag',
     subtitle: 'Letzte 14 Tage',
-    valueLabel: '30l',
-    iconType: 'water-drops' as DataVizIconType,
-    iconValue: 3,
+    datavisIcon: (
+      <DatavisIcon iconType="water-drops" iconValue={2} valueLabel="30l" />
+    ),
   },
   {
     title: 'Baumscheibe',
     subtitle: 'Unversiegelter Bereich um den Stamm',
-    valueLabel: '2,2qm',
-    iconType: 'square' as DataVizIconType,
-    iconValue: 0.66,
+    datavisIcon: (
+      <DatavisIcon iconType="square" iconValue={0.66} valueLabel="2,2qm" />
+    ),
   },
   {
     title: 'Verschattung',
     subtitle: 'Anteil an Schattenzeit',
-    valueLabel: '76%',
-    iconType: 'clock' as DataVizIconType,
-    iconValue: 0.76,
+    datavisIcon: (
+      <DatavisIcon iconType="clock" iconValue={0.76} valueLabel="76%" />
+    ),
   },
   {
     title: 'Gießmenge',
     subtitle: 'Letzte 14 Tage',
-    valueLabel: '30l',
-    iconType: 'water-drops' as DataVizIconType,
-    iconValue: 2,
+    datavisIcon: (
+      <DatavisIcon iconType="water-drops" iconValue={2} valueLabel="30l" />
+    ),
   },
   {
     title: 'Stammumfang',
     subtitle: 'An der weiteste Stelle',
-    valueLabel: '33cm',
-    iconType: 'circle' as DataVizIconType,
-    iconValue: 0.33,
+    datavisIcon: (
+      <DatavisIcon iconType="circle" iconValue={0.33} valueLabel="33cm" />
+    ),
   },
 ]
 
