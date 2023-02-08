@@ -1,5 +1,5 @@
 import { ParsedUrlQuery } from 'querystring'
-import { FC, StrictMode } from 'react'
+import { FC } from 'react'
 import { Head } from '@components/Head'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import '../src/style/global.css'
@@ -24,7 +24,7 @@ const App: FC<AppPropsType> = ({ Component, pageProps }) => {
 
   const getLayout = Component.getLayout ?? ((page) => page)
   return (
-    <StrictMode>
+    <>
       <Head pageTitle={pageProps.title || ''} />
       <main
         id="main"
@@ -40,7 +40,7 @@ const App: FC<AppPropsType> = ({ Component, pageProps }) => {
         </div>
       </main>
       <MainMenu />
-    </StrictMode>
+    </>
   )
 }
 
