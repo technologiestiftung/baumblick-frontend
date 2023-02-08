@@ -12,7 +12,7 @@ export const Partners: FC = () => {
           className={classNames(
             'w-full flex flex-col col-start-1 col-span-6',
             'md:col-start-4 md:col-span-6',
-            'screen1200:col-start-1 screen1200:col-span-12 screen1200:flex-row screen1200:justify-between'
+            'lg:col-start-1 lg:col-span-12 lg:flex-row lg:justify-between'
           )}
         >
           {[
@@ -22,17 +22,17 @@ export const Partners: FC = () => {
                 {
                   src: '/images/logos/logo-technologiestiftung-berlin-de.svg',
                   alt: '',
-                  width: 280,
+                  width: 200,
                 },
                 {
                   src: '/images/logos/logo-birds-on-mars.png',
                   alt: '',
-                  width: 220,
+                  width: 170,
                 },
                 {
                   src: '/images/logos/ba-mitte-logo.png',
                   alt: '',
-                  width: 300,
+                  width: 220,
                 },
               ],
             },
@@ -42,12 +42,12 @@ export const Partners: FC = () => {
                 {
                   src: '/images/logos/ba-neukoelln-logo.png',
                   alt: '',
-                  width: 300,
+                  width: 220,
                 },
                 {
                   src: '/images/logos/logo-arbor-revital.png',
                   alt: '',
-                  width: 250,
+                  width: 220,
                 },
               ],
             },
@@ -57,12 +57,12 @@ export const Partners: FC = () => {
                 {
                   src: '/images/logos/logo-zug.svg',
                   alt: '',
-                  width: 280,
+                  width: 200,
                 },
                 {
                   src: '/images/logos/logo-buns.png',
                   alt: '',
-                  width: 300,
+                  width: 200,
                 },
               ],
             },
@@ -75,7 +75,7 @@ export const Partners: FC = () => {
                 {column.logos.map((logo, logoIndex) => (
                   <img
                     key={`logo-${logoIndex}`}
-                    className="mb-8"
+                    className="mb-12"
                     src={logo.src}
                     alt={logo.alt}
                     style={{ width: logo.width }}
