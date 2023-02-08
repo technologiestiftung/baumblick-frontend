@@ -1,6 +1,5 @@
 import useTranslation from 'next-translate/useTranslation'
 import { FC } from 'react'
-import { ArrowDown } from '@components/Icons/ArrowDown'
 import classNames from 'classnames'
 
 export const Hero: FC = () => {
@@ -31,8 +30,6 @@ export const Hero: FC = () => {
           <h1 className="text-4xl mb-2">{t('home.hero.title')}</h1>
           <p className="text-base mb-20">{t('home.hero.text')}</p>
         </div>
-
-        <ArrowDown className="absolute bottom-6 self-center" />
       </div>
     </div>
   )
