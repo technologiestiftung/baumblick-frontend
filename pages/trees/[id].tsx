@@ -29,7 +29,7 @@ import { useTreeData } from '@lib/hooks/useTreeData'
 import { mapRawQueryToState } from '@lib/utils/queryUtil'
 import { Head } from '@components/Head'
 import { DatavisIcon } from '@components/DatavisIcons/DatavisIcon'
-import { normalizeTrunkCircumference } from '@lib/utils/normalizeTrunkCircumference'
+import { normalizeValue } from '@lib/utils/normalizeValue'
 
 interface TreePageComponentPropType {
   treeId: TreeDataType['id']
@@ -149,7 +149,7 @@ const InfoList: FC<{
           datavisIcon={
             <DatavisIcon
               iconType="circle"
-              iconValue={normalizeTrunkCircumference(treeData.stammumfg)}
+              iconValue={normalizeValue(treeData.stammumfg, [0, 800])}
               valueLabel={t(`treeView.infoList.trunkCircumference.value`, {
                 value: treeData.stammumfg,
               })}

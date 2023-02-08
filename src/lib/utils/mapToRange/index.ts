@@ -1,3 +1,5 @@
+export type RangeType = [number, number]
+
 /**
  * Function that maps a value from one range to another
  * @param fromValue number
@@ -7,8 +9,8 @@
  */
 export const mapToRange = (
   fromValue: number,
-  [fromMin, fromMax]: [number, number],
-  [toMin, toMax]: [number, number]
+  [fromMin, fromMax]: RangeType,
+  [toMin, toMax]: RangeType
 ): number => {
   return ((fromValue - fromMin) / (fromMax - fromMin)) * (toMax - toMin) + toMin
 }
