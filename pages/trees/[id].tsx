@@ -110,23 +110,24 @@ const InfoList: FC<{
       <DataListItem
         title={t(`treeView.infoList.rainAmount.label`)}
         subtitle={t(`treeView.infoList.rainAmount.hint`)}
-        valueLabel={
-          rainData
-            ? t(`treeView.infoList.rainAmount.value`, {
-                value: rainData.toFixed(1),
-              })
-            : '–'
+        datavisIcon={
+          <DatavisIcon
+            iconType="water-drops"
+            iconValue={normalizeValue(Number(rainData?.toFixed(1)), [0, 500])}
+            valueLabel={t(`treeView.infoList.wateringAmount.value`, {
+              value: rainData?.toFixed(1),
+            })}
+          />
         }
       />
       <DataListItem
         title={t(`treeView.infoList.treeDisc.label`)}
         subtitle={t(`treeView.infoList.treeDisc.hint`)}
-        // TODO: [QTREES-447] Remove dummy data for treeDisc
-        // Update when adding access to real data.
-        valueLabel={t(`treeView.infoList.treeDisc.value`, { value: 3.1 })}
         datavisIcon={
           <DatavisIcon
             iconType="square"
+            // TODO: [QTREES-447] Remove dummy data for treeDisc
+            // Update when adding access to real data.
             iconValue={normalizeValue(3.1, [0, 10])}
             valueLabel={t(`treeView.infoList.treeDisc.value`, {
               value: 3.1,
@@ -137,12 +138,11 @@ const InfoList: FC<{
       <DataListItem
         title={t(`treeView.infoList.shading.label`)}
         subtitle={t(`treeView.infoList.shading.hint`)}
-        // TODO: [QTREES-448] Remove dummy data for shading
-        // Update when adding access to real data.
-        valueLabel={t(`treeView.infoList.shading.value`, { value: 65 })}
         datavisIcon={
           <DatavisIcon
             iconType="clock"
+            // TODO: [QTREES-448] Remove dummy data for shading
+            // Update when adding access to real data.
             iconValue={normalizeValue(65, [0, 100])}
             valueLabel={t(`treeView.infoList.shading.value`, {
               value: 65,
@@ -153,12 +153,11 @@ const InfoList: FC<{
       <DataListItem
         title={t(`treeView.infoList.wateringAmount.label`)}
         subtitle={t(`treeView.infoList.wateringAmount.hint`)}
-        // TODO: [QTREES-449] Remove dummy data for wateringAmount
-        // Update when adding access to real data.
-        valueLabel={t(`treeView.infoList.wateringAmount.value`, { value: 25 })}
         datavisIcon={
           <DatavisIcon
             iconType="water-drops"
+            // TODO: [QTREES-449] Remove dummy data for wateringAmount
+            // Update when adding access to real data.
             iconValue={normalizeValue(25, [0, 500])}
             valueLabel={t(`treeView.infoList.wateringAmount.value`, {
               value: 25,
@@ -170,9 +169,6 @@ const InfoList: FC<{
         <DataListItem
           title={t(`treeView.infoList.trunkCircumference.label`)}
           subtitle={t(`treeView.infoList.trunkCircumference.hint`)}
-          valueLabel={t(`treeView.infoList.trunkCircumference.value`, {
-            value: treeData.stammumfg,
-          })}
           datavisIcon={
             <DatavisIcon
               iconType="circle"
