@@ -17,6 +17,7 @@ export const Hero: FC = () => {
           className="w-full h-full object-cover"
           src="/images/hero-image-1200px.png"
           alt=""
+          aria-hidden={true}
         />
       </div>
 

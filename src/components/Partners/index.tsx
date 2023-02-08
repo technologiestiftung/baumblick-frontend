@@ -21,17 +21,17 @@ export const Partners: FC = () => {
               logos: [
                 {
                   src: '/images/logos/logo-technologiestiftung-berlin-de.svg',
-                  alt: '',
+                  alt: 'Logo Technologiestiftung Berlin',
                   width: 200,
                 },
                 {
                   src: '/images/logos/logo-birds-on-mars.png',
-                  alt: '',
+                  alt: 'Logo Birds on Mars',
                   width: 170,
                 },
                 {
                   src: '/images/logos/ba-mitte-logo.png',
-                  alt: '',
+                  alt: 'Logo Bezirksamt Mitte von Berlin',
                   width: 220,
                 },
               ],
@@ -41,12 +41,12 @@ export const Partners: FC = () => {
               logos: [
                 {
                   src: '/images/logos/ba-neukoelln-logo.png',
-                  alt: '',
+                  alt: 'Logo Bezirksamt Neukölln von Berlin',
                   width: 220,
                 },
                 {
                   src: '/images/logos/logo-arbor-revital.png',
-                  alt: '',
+                  alt: 'Logo Arbor Revital',
                   width: 220,
                 },
               ],
@@ -56,12 +56,12 @@ export const Partners: FC = () => {
               logos: [
                 {
                   src: '/images/logos/logo-zug.svg',
-                  alt: '',
+                  alt: 'Logo Zukunft Umwelt Gesellschaft',
                   width: 200,
                 },
                 {
                   src: '/images/logos/logo-buns.png',
-                  alt: '',
+                  alt: 'Logo Bundesministerium für Umwelt, Naturschutz und nukleare Sicherheit',
                   width: 200,
                 },
               ],
