@@ -1,4 +1,4 @@
-import { mapToRange } from './mapToRange'
+import { mapToRange } from '../mapToRange'
 
 const MIN_CIRCUMFERENCE = 0 // in mm
 const MAX_CIRCUMFERENCE = 800 // in mm
