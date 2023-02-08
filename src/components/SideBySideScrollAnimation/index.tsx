@@ -168,7 +168,7 @@ export const SideBySideScrollAnimation = (): JSX.Element => {
                         {t(`home.animation.steps.${stepIndex + 1}.title`)}
                       </h2>
                     </div>
-                    <p className="font-serif text-base font-normal tracking-normal text-left">
+                    <p className="font-serif text-base font-normal tracking-normal text-left pr-5">
                       {t(`home.animation.steps.${stepIndex + 1}.text`)}
                     </p>
                   </div>
