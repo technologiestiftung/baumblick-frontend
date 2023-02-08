@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import classNames from 'classnames'
 
 export interface IconWaterDropPropType {
   fill?: string
@@ -27,20 +28,25 @@ export interface ProgressWaterDropPropType {
   numDrops: number
   strokeColor?: string
   fillColor?: string
+  className?: string
 }
 export const ProgressWaterDrop: FC<ProgressWaterDropPropType> = ({
   numDrops,
   strokeColor = '#9EA3AE',
   fillColor = '#111827',
+  className,
 }) => {
   return (
-    <ul className="datavis-icons__progress-water-drop__wrapper">
+    <ul
+      dir="rtl" // right to left, so that drops overlap correctly whithout the need for z-indicies
+      className={classNames('inline-flex flex-row', className)}
+    >
       {Array(5)
         .fill(null, 0)
         .map((_, index) => {
           return (
             <li
-              className="datavis-icons__progress-water-drop__list-item"
+              className="-ml-[5px] last-of-type:ml-0"
               key={`water-drop-${index}`}
             >
               <IconWaterDrop

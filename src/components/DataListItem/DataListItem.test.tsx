@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import * as nextRouter from 'next/router'
 import { DataListItem } from '.'
+import { DatavisIcon } from '../DatavisIcons/DatavisIcon'
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
@@ -12,32 +13,47 @@ const items = [
   {
     title: 'Wasserstand',
     subtitle: 'Durschnitt 30, 60, 90',
-    value: 'Versorgt',
+    valueLabel: 'Versorgt',
   },
   {
-    title: 'Regen',
+    title: 'Niederschlag',
     subtitle: 'Letzte 14 Tage',
-    value: '25l',
+    valueLabel: '30l',
+    datavisIcon: (
+      <DatavisIcon iconType="water-drops" iconValue={2} valueLabel="30l" />
+    ),
   },
   {
     title: 'Baumscheibe',
-    subtitle: 'Durschnitt 2qm',
-    value: '2,2qm',
+    subtitle: 'Unversiegelter Bereich um den Stamm',
+    valueLabel: '2,2qm',
+    datavisIcon: (
+      <DatavisIcon iconType="square" iconValue={0.66} valueLabel="2,2qm" />
+    ),
   },
   {
     title: 'Verschattung',
     subtitle: 'Anteil an Schattenzeit',
-    value: '76%',
+    valueLabel: '76%',
+    datavisIcon: (
+      <DatavisIcon iconType="clock" iconValue={0.76} valueLabel="76%" />
+    ),
   },
   {
-    title: 'Gießwassermenge',
+    title: 'Gießmenge',
     subtitle: 'Letzte 14 Tage',
-    value: '150l',
+    valueLabel: '30l',
+    datavisIcon: (
+      <DatavisIcon iconType="water-drops" iconValue={2} valueLabel="30l" />
+    ),
   },
   {
-    title: 'Stammdurchmesser',
+    title: 'Stammumfang',
     subtitle: 'An der weiteste Stelle',
-    value: '33cm',
+    valueLabel: '33cm',
+    datavisIcon: (
+      <DatavisIcon iconType="circle" iconValue={0.33} valueLabel="33cm" />
+    ),
   },
 ]
 
@@ -47,7 +63,7 @@ describe('DataListItem', () => {
       const { unmount } = render(<DataListItem {...item} />)
       const title = screen.getByText(item.title)
       const subtitle = screen.getByText(item.subtitle)
-      const value = screen.getByText(item.value)
+      const value = screen.getByText(item.valueLabel)
 
       expect(title).toBeInTheDocument()
       expect(subtitle).toBeInTheDocument()
