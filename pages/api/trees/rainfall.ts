@@ -24,22 +24,21 @@ export default async function handler(
             .json({ error: 'Missing tree_id search parameter' })
         }
 
-        const { data: rainfall_mat, error: rainfall_mat_error } =
-          await postgrest
-            .from('rainfall')
-            .select('tree_id,rainfall_in_mm')
-            .eq('tree_id', searchParams.get('tree_id') as string)
-        if (rainfall_mat_error) {
-          throw new Error(rainfall_mat_error.message)
+        const { data: rainfall, error } = await postgrest
+          .from('rainfall')
+          .select('tree_id,rainfall_in_mm')
+          .eq('tree_id', searchParams.get('tree_id') as string)
+        if (error) {
+          throw new Error(error.message)
         }
-        if (!rainfall_mat) {
+        if (!rainfall) {
           throw new Error('data is undefined')
         }
 
         // currently there are no type definitions for the materialized view
         // that's why we just ignore the unsafe assignment for now
         // and type it ourselves
-        const rainData = rainfall_mat as {
+        const rainData = rainfall as {
           tree_id: string
           rainfall_in_mm: number
         }[]
