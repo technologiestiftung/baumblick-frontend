@@ -94,7 +94,7 @@
       "rainAmount": {
         "label": "Niederschlagsmenge",
         "hint": "Letzte 14 Tage",
-        "value": "{{value}} mm"
+        "value": "{{value}} l/qm"
       },
       "treeDisc": {
         "label": "Baumscheibe",
@@ -114,7 +114,7 @@
       "trunkCircumference": {
         "label": "Stammumfang",
         "hint": "An der weitesten Stelle",
-        "value": "{{value}} mm"
+        "value": "{{value}} cm"
       }
     }
   },
