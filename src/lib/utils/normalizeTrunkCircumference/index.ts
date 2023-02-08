@@ -1,7 +1,12 @@
 import { mapToRange } from '../mapToRange'
 
 const MIN_CIRCUMFERENCE = 0 // in mm
-const MAX_CIRCUMFERENCE = 800 // in mm
+export const MAX_CIRCUMFERENCE = 800 // in mm
+
+export const NORMALIZED_RANGE = {
+  min: 0,
+  max: 1,
+}
 
 /**
  * Function that normalizes a tree circumference to a value between 0 and 1.
@@ -10,5 +15,11 @@ const MAX_CIRCUMFERENCE = 800 // in mm
  */
 export const normalizeTrunkCircumference = (
   inputCircumference: number
-): number =>
-  mapToRange(inputCircumference, [MIN_CIRCUMFERENCE, MAX_CIRCUMFERENCE], [0, 1])
+): number => {
+  if (inputCircumference > MAX_CIRCUMFERENCE) return NORMALIZED_RANGE.max
+  return mapToRange(
+    inputCircumference,
+    [MIN_CIRCUMFERENCE, MAX_CIRCUMFERENCE],
+    [NORMALIZED_RANGE.min, NORMALIZED_RANGE.max]
+  )
+}
