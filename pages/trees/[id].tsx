@@ -28,6 +28,8 @@ import { MappedNowcastRowsType } from '@lib/utils/mapRowsToDepths'
 import { useTreeData } from '@lib/hooks/useTreeData'
 import { mapRawQueryToState } from '@lib/utils/queryUtil'
 import { Head } from '@components/Head'
+import { DatavisIcon } from '@components/DatavisIcons/DatavisIcon'
+import { normalizeTrunkCircumference } from '@lib/utils/normalizeTrunkCircumference'
 
 interface TreePageComponentPropType {
   treeId: TreeDataType['id']
@@ -144,6 +146,15 @@ const InfoList: FC<{
           valueLabel={t(`treeView.infoList.trunkCircumference.value`, {
             value: treeData.stammumfg,
           })}
+          datavisIcon={
+            <DatavisIcon
+              iconType="circle"
+              iconValue={normalizeTrunkCircumference(treeData.stammumfg)}
+              valueLabel={t(`treeView.infoList.trunkCircumference.value`, {
+                value: treeData.stammumfg,
+              })}
+            />
+          }
         />
       )}
     </ul>
