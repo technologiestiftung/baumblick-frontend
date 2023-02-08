@@ -29,12 +29,12 @@ export const WaterSupplyLegend: FC<WaterSupplyLegendType> = ({
   if (!bodyNode) return null
 
   return ReactDOM.createPortal(
-    <div className="fixed w-full left-0 top-2 md:top-4 pointer-events-none">
-      <div className="w-full max-w-3xl mx-auto">
+    <div className="fixed w-full left-0 top-2 lg:bottom-4 lg:top-auto pointer-events-none">
+      <div className="w-full">
         <div
           className={classNames(
             className,
-            'group ml-2 md:ml-4 pointer-events-auto',
+            'group ml-2 lg:ml-4 pointer-events-auto',
             'inline-block',
             'w-[150px] min-w-[80px]',
             'py-2 px-3',

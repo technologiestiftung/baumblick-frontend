@@ -194,7 +194,7 @@ main .maplibregl-ctrl-attrib.maplibregl-compact {
 }
 
 main .maplibregl-ctrl-group:not(:empty) {
-  @apply shadow-lg border border-gray-300;
+  @apply shadow-lg border border-gray-300 mr-2 lg:mr-4 last-of-type:mb-0;
 }
 
 main .maplibregl-ctrl-group button {
@@ -202,7 +202,8 @@ main .maplibregl-ctrl-group button {
 }
 
 main .maplibregl-control-container {
-	@apply fixed max-w-3xl bottom-16 left-1/2 -translate-x-1/2 w-full;
+	@apply fixed bottom-20 lg:!bottom-4 w-full;
+	bottom: 74px;
 }
 
 main .maplibregl-ctrl-attrib-button:focus,
@@ -241,4 +242,12 @@ main button.maplibregl-ctrl-zoom-out span {
 
 main button.maplibregl-ctrl-zoom-in span { 
     background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMiIgaGVpZ2h0PSIyMiIgdmlld0JveD0iMCAwIDIyIDIyIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC01IC01KSI+PHBvbHlnb24gcG9pbnRzPSIwIDAgMzIgMCAzMiAzMiAwIDMyIi8+PGxpbmUgeDE9IjE2IiB4Mj0iMTYiIHkxPSI2LjY2NyIgeTI9IjI1LjMzMyIgc3Ryb2tlPSIjMTExODI3IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS13aWR0aD0iMiIvPjxsaW5lIHgxPSI2LjY2NyIgeDI9IjI1LjMzMyIgeTE9IjE2IiB5Mj0iMTYiIHN0cm9rZT0iIzExMTgyNyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2Utd2lkdGg9IjIiLz48L2c+PC9zdmc+") !important;
+}
+
+main .maplibregl-ctrl-attrib {
+	@apply !pb-0 !mb-0 lg:!left-44;
+}
+
+main .maplibregl-ctrl-attrib-inner {
+	@apply text-sm;
 }
