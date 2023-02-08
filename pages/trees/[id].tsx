@@ -16,7 +16,6 @@ import { Tabs } from '@components/Tabs'
 import useTranslation from 'next-translate/useTranslation'
 import { getClassesByStatusId } from '@lib/utils/getClassesByStatusId'
 import { treeUrlSlugToId } from '@lib/utils/urlUtil'
-import { getStatusLabel } from '@lib/utils/getStatusLabel'
 import { ForecastViz } from '@components/ForecastViz'
 import { FeedbackRequestsList } from '@components/FeedbackRequestsList'
 import csrf from '@lib/api/csrf'
@@ -85,56 +84,11 @@ const InfoList: FC<{
   rainData: TreeRainAmountType | null
   rainIsLoading: boolean
   rainError: Error | null
-}> = ({ treeData, nowcastData, nowcastIsLoading, nowcastError, rainData }) => {
+}> = ({ treeData, rainData }) => {
   const { t } = useTranslation('common')
-  const averageStatusId =
-    nowcastData &&
-    !nowcastIsLoading &&
-    !nowcastError &&
-    nowcastData.depthAverageRow?.value &&
-    mapSuctionTensionToStatus(nowcastData.depthAverageRow?.value)?.id
 
   return (
     <ul className="relative z-10 bg-white">
-      <DataListItem
-        title={t(`treeView.infoList.waterSupply.label`)}
-        subtitle={t(`treeView.infoList.waterSupply.hint`)}
-        valueLabel={
-          averageStatusId
-            ? t(`treeView.infoList.waterSupply.value`, {
-                value: getStatusLabel(averageStatusId),
-              })
-            : '-'
-        }
-      />
-      <DataListItem
-        title={t(`treeView.infoList.rainAmount.label`)}
-        subtitle={t(`treeView.infoList.rainAmount.hint`)}
-        datavisIcon={
-          <DatavisIcon
-            iconType="water-drops"
-            iconValue={normalizeValue(Number(rainData?.toFixed(1)), [0, 500])}
-            valueLabel={t(`treeView.infoList.rainAmount.value`, {
-              value: rainData?.toFixed(1),
-            })}
-          />
-        }
-      />
-      <DataListItem
-        title={t(`treeView.infoList.treeDisc.label`)}
-        subtitle={t(`treeView.infoList.treeDisc.hint`)}
-        datavisIcon={
-          <DatavisIcon
-            iconType="square"
-            // TODO: [QTREES-447] Remove dummy data for treeDisc
-            // Update when adding access to real data.
-            iconValue={normalizeValue(3.1, [0, 10])}
-            valueLabel={t(`treeView.infoList.treeDisc.value`, {
-              value: 3.1,
-            })}
-          />
-        }
-      />
       <DataListItem
         title={t(`treeView.infoList.shading.label`)}
         subtitle={t(`treeView.infoList.shading.hint`)}
@@ -151,6 +105,19 @@ const InfoList: FC<{
         }
       />
       <DataListItem
+        title={t(`treeView.infoList.rainAmount.label`)}
+        subtitle={t(`treeView.infoList.rainAmount.hint`)}
+        datavisIcon={
+          <DatavisIcon
+            iconType="water-drops"
+            iconValue={normalizeValue(Number(rainData?.toFixed(1)), [0, 500])}
+            valueLabel={t(`treeView.infoList.rainAmount.value`, {
+              value: rainData?.toFixed(1),
+            })}
+          />
+        }
+      />
+      <DataListItem
         title={t(`treeView.infoList.wateringAmount.label`)}
         subtitle={t(`treeView.infoList.wateringAmount.hint`)}
         datavisIcon={
@@ -161,6 +128,21 @@ const InfoList: FC<{
             iconValue={normalizeValue(25, [0, 500])}
             valueLabel={t(`treeView.infoList.wateringAmount.value`, {
               value: 25,
+            })}
+          />
+        }
+      />
+      <DataListItem
+        title={t(`treeView.infoList.treeDisc.label`)}
+        subtitle={t(`treeView.infoList.treeDisc.hint`)}
+        datavisIcon={
+          <DatavisIcon
+            iconType="square"
+            // TODO: [QTREES-447] Remove dummy data for treeDisc
+            // Update when adding access to real data.
+            iconValue={normalizeValue(3.1, [0, 10])}
+            valueLabel={t(`treeView.infoList.treeDisc.value`, {
+              value: 3.1,
             })}
           />
         }
