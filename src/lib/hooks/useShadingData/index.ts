@@ -16,8 +16,6 @@ export const useShadingData = (
     treeId ? getShading(treeId, csrfToken) : undefined
   )
 
-  console.log(data)
-
   return {
     isLoading: !data && !error,
     data: data || null,
