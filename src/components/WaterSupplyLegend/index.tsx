@@ -5,15 +5,21 @@ import ReactDOM from 'react-dom'
 import { Pill } from '@components/Pill'
 import { getClassesByStatusId } from '@lib/utils/getClassesByStatusId'
 import { WaterSupplyStatusType } from '@lib/utils/mapSuctionTensionToStatus'
+import { Button } from '@components/Button'
 
 export interface WaterSupplyLegendType {
   hasShadow?: boolean
   className?: string
+  showNoDataItem?: boolean
+  onNoDataItemClick?: () => void
 }
 
 export const WaterSupplyLegend: FC<WaterSupplyLegendType> = ({
   hasShadow = false,
   className = '',
+  showNoDataItem = false,
+  onNoDataItemClick = () => undefined,
+  children,
 }) => {
   const { t } = useTranslation('common')
   const [bodyNode, setBodyNode] = useState<HTMLElement | null>(null)
@@ -29,14 +35,14 @@ export const WaterSupplyLegend: FC<WaterSupplyLegendType> = ({
   if (!bodyNode) return null
 
   return ReactDOM.createPortal(
-    <div className="fixed w-full left-0 top-2 md:top-4 pointer-events-none">
+    <div className="fixed w-full left-0 top-2 pointer-events-none">
       <div className="w-full max-w-3xl mx-auto">
         <div
           className={classNames(
             className,
             'group ml-2 md:ml-4 pointer-events-auto',
             'inline-block',
-            'w-[150px] min-w-[80px]',
+            'w-[160px] min-w-[80px]',
             'py-2 px-3',
             'bg-white',
             'rounded border border-gray-300',
@@ -76,7 +82,30 @@ export const WaterSupplyLegend: FC<WaterSupplyLegendType> = ({
                   </li>
                 )
               })}
+            {showNoDataItem && (
+              <li
+                key={`no-data-item`}
+                className={classNames(
+                  'mt-1 first-of-type:mt-0',
+                  'flex gap-2 items-center'
+                )}
+              >
+                <Pill
+                  className={classNames('border bg-white border-gray-400')}
+                />
+                <span className="text-xs font-semibold text-gray-800">
+                  {t('legend.map.levels.unknown')}
+                </span>
+                <Button
+                  className="px-1 py-0 text-xs text-gray-500"
+                  onClick={() => onNoDataItemClick()}
+                >
+                  ?
+                </Button>
+              </li>
+            )}
           </ul>
+          {children}
         </div>
       </div>
     </div>,

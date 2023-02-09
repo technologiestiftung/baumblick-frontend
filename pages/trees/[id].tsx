@@ -235,7 +235,7 @@ const TreePage: TreePageWithLayout = ({ treeId, csrfToken }) => {
       <div
         className={classNames(
           'max-w-3xl mx-auto',
-          'grid grid-cols-1 grid-rows-[124px,1fr] gap-0'
+          'grid grid-cols-1 grid-rows-[148px,1fr] gap-0'
         )}
       >
         <button

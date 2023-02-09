@@ -52,6 +52,11 @@
         "medium": "Mäßig",
         "critical": "Kritisch",
         "unknown": "Unbekannt"
+      },
+      "unknownLevelModal": {
+        "title": "Wasserversorgung unbekannt",
+        "description": "Bäume, die auf der Karte grau umrandet sind, sind Anlagenbäume und stehen in öffentlichen Grün- und Erholungsanlagen. Die Standortbedingungen dieser Bäume weichen stark von Straßenbäumen ab und sind daher nicht Teil des Vorhersagemodells.",
+        "close": "Zurück"
       }
     }
   },
