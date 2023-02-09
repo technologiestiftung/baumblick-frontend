@@ -53,7 +53,7 @@ const getColorScale = (idSuffix = ''): (string | number)[] => {
 const IS_OUTDATED_NOWCAST = [
   '<=',
   ['get', 'nowcast_timestamp_stamm'],
-  startOfDay(Date.now()).toString(),
+  startOfDay(Date.now()).toISOString(),
 ]
 
 export const TREES_LAYER: LayerSpecification = {
