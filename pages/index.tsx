@@ -3,7 +3,8 @@ import { GetServerSideProps } from 'next'
 import { FC } from 'react'
 import { HomeCarousel } from '@components/HomeCarousel'
 import { LegalLinks } from '@components/LegalLinks'
-import { GPSButton } from '@components/GPSButton'
+import { Button } from '@components/Button'
+import useTranslation from 'next-translate/useTranslation'
 
 // eslint-disable-next-line @typescript-eslint/require-await
 export const getServerSideProps: GetServerSideProps = async ({ query }) => ({
@@ -14,13 +15,16 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => ({
 })
 
 export const Home: FC = () => {
+  const { t } = useTranslation('common')
   return (
     <>
       <div className="grid grid-cols-1 grid-rows-[auto,1fr,auto] h-full">
         <Header />
         <HomeCarousel />
         <div className="px-4 py-8 mx-auto max-w-md w-full">
-          <GPSButton />
+          <Button href="/trees" primary className="w-full">
+            {t('home.cta')}
+          </Button>
           <LegalLinks />
         </div>
       </div>

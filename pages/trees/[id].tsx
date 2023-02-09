@@ -16,7 +16,6 @@ import { Tabs } from '@components/Tabs'
 import useTranslation from 'next-translate/useTranslation'
 import { getClassesByStatusId } from '@lib/utils/getClassesByStatusId'
 import { treeUrlSlugToId } from '@lib/utils/urlUtil'
-import { getStatusLabel } from '@lib/utils/getStatusLabel'
 import { ForecastViz } from '@components/ForecastViz'
 import { FeedbackRequestsList } from '@components/FeedbackRequestsList'
 import csrf from '@lib/api/csrf'
@@ -28,6 +27,8 @@ import { MappedNowcastRowsType } from '@lib/utils/mapRowsToDepths'
 import { useTreeData } from '@lib/hooks/useTreeData'
 import { mapRawQueryToState } from '@lib/utils/queryUtil'
 import { Head } from '@components/Head'
+import { DatavisIcon } from '@components/DatavisIcons/DatavisIcon'
+import { normalizeValue } from '@lib/utils/normalizeValue'
 
 interface TreePageComponentPropType {
   treeId: TreeDataType['id']
@@ -83,67 +84,82 @@ const InfoList: FC<{
   rainData: TreeRainAmountType | null
   rainIsLoading: boolean
   rainError: Error | null
-}> = ({ treeData, nowcastData, nowcastIsLoading, nowcastError, rainData }) => {
+}> = ({ treeData, rainData }) => {
   const { t } = useTranslation('common')
-  const averageStatusId =
-    nowcastData &&
-    !nowcastIsLoading &&
-    !nowcastError &&
-    nowcastData.depthAverageRow?.value &&
-    mapSuctionTensionToStatus(nowcastData.depthAverageRow?.value)?.id
 
   return (
     <ul className="relative z-10 bg-white">
       <DataListItem
-        title={t(`treeView.infoList.waterSupply.label`)}
-        subtitle={t(`treeView.infoList.waterSupply.hint`)}
-        value={
-          averageStatusId
-            ? t(`treeView.infoList.waterSupply.value`, {
-                value: getStatusLabel(averageStatusId),
-              })
-            : '-'
+        title={t(`treeView.infoList.shading.label`)}
+        subtitle={t(`treeView.infoList.shading.hint`)}
+        datavisIcon={
+          <DatavisIcon
+            iconType="clock"
+            // TODO: [QTREES-448] Remove dummy data for shading
+            // Update when adding access to real data.
+            iconValue={normalizeValue(65, [0, 100])}
+            valueLabel={t(`treeView.infoList.shading.value`, {
+              value: 65,
+            })}
+          />
         }
       />
       <DataListItem
         title={t(`treeView.infoList.rainAmount.label`)}
         subtitle={t(`treeView.infoList.rainAmount.hint`)}
-        value={
-          rainData
-            ? t(`treeView.infoList.rainAmount.value`, {
-                value: rainData.toFixed(1),
-              })
-            : '–'
+        datavisIcon={
+          <DatavisIcon
+            iconType="water-drops"
+            iconValue={normalizeValue(Number(rainData?.toFixed(1)), [0, 500])}
+            valueLabel={t(`treeView.infoList.rainAmount.value`, {
+              value: rainData?.toFixed(1),
+            })}
+          />
+        }
+      />
+      <DataListItem
+        title={t(`treeView.infoList.wateringAmount.label`)}
+        subtitle={t(`treeView.infoList.wateringAmount.hint`)}
+        datavisIcon={
+          <DatavisIcon
+            iconType="water-drops"
+            // TODO: [QTREES-449] Remove dummy data for wateringAmount
+            // Update when adding access to real data.
+            iconValue={normalizeValue(25, [0, 500])}
+            valueLabel={t(`treeView.infoList.wateringAmount.value`, {
+              value: 25,
+            })}
+          />
         }
       />
       <DataListItem
         title={t(`treeView.infoList.treeDisc.label`)}
         subtitle={t(`treeView.infoList.treeDisc.hint`)}
-        // TODO: [QTREES-447] Remove dummy data for treeDisc
-        // Update when adding access to real data.
-        value={t(`treeView.infoList.treeDisc.value`, { value: 3.1 })}
-      />
-      <DataListItem
-        title={t(`treeView.infoList.shading.label`)}
-        subtitle={t(`treeView.infoList.shading.hint`)}
-        // TODO: [QTREES-448] Remove dummy data for shading
-        // Update when adding access to real data.
-        value={t(`treeView.infoList.shading.value`, { value: 65 })}
-      />
-      <DataListItem
-        title={t(`treeView.infoList.wateringAmount.label`)}
-        subtitle={t(`treeView.infoList.wateringAmount.hint`)}
-        // TODO: [QTREES-449] Remove dummy data for wateringAmount
-        // Update when adding access to real data.
-        value={t(`treeView.infoList.wateringAmount.value`, { value: 25 })}
+        datavisIcon={
+          <DatavisIcon
+            iconType="square"
+            // TODO: [QTREES-447] Remove dummy data for treeDisc
+            // Update when adding access to real data.
+            iconValue={normalizeValue(3.1, [0, 10])}
+            valueLabel={t(`treeView.infoList.treeDisc.value`, {
+              value: 3.1,
+            })}
+          />
+        }
       />
       {treeData?.stammumfg && (
         <DataListItem
           title={t(`treeView.infoList.trunkCircumference.label`)}
           subtitle={t(`treeView.infoList.trunkCircumference.hint`)}
-          value={t(`treeView.infoList.trunkCircumference.value`, {
-            value: treeData.stammumfg,
-          })}
+          datavisIcon={
+            <DatavisIcon
+              iconType="circle"
+              iconValue={normalizeValue(treeData.stammumfg, [0, 800])}
+              valueLabel={t(`treeView.infoList.trunkCircumference.value`, {
+                value: treeData.stammumfg,
+              })}
+            />
+          }
         />
       )}
     </ul>

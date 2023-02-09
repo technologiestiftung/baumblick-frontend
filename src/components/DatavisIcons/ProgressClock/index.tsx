@@ -1,20 +1,27 @@
 import { FC } from 'react'
-
+import classNames from 'classnames'
 export interface ProgressClockPropType {
   progress: number
-  strokeColorBackground: string
-  fillColor: string
+  strokeColorBackground?: string
+  fillColor?: string
+  className?: string
 }
 
 export const ProgressClock: FC<ProgressClockPropType> = ({
   progress,
   strokeColorBackground = '#9EA3AE',
   fillColor = '#111827',
+  className,
 }) => (
-  <div className="datavis-icons__progress-clock__wrapper">
-    <div className="datavis-icons__progress-clock__hole" />
+  <div
+    className={classNames(
+      'relative w-[50px] h-[50px] flex justify-center items-center',
+      className
+    )}
+  >
+    <div className="absolute z-[2] w-[25px] h-[25px] bg-white rounded-full" />
     <div
-      className="datavis-icons__progress-clock__cone"
+      className="absolute z-1 w-full h-full rounded-full"
       style={{
         background: `conic-gradient(${fillColor} 0deg ${
           progress * 360
