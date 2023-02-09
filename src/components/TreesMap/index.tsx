@@ -24,6 +24,7 @@ import {
   NEXT_PUBLIC_MAPTILER_BASEMAP_URL,
   NEXT_PUBLIC_MAPTILER_KEY,
 } from '@lib/utils/envUtil'
+import { TreeDataType } from '@lib/requests/getTreeData'
 
 interface OnSelectOutput {
   id: string
@@ -43,8 +44,8 @@ interface MapProps {
   }
   mapId: string
   mapStyle?: string
-  latitude?: number
-  longitude?: number
+  latitude?: TreeDataType['lat']
+  longitude?: TreeDataType['lng']
   treeIdToSelect?: string
   onSelect?: (treeData: OnSelectOutput) => void
   isMinimized?: boolean

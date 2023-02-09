@@ -325,6 +325,13 @@ const TreePage: TreePageWithLayout = ({ treeId, csrfToken }) => {
               isCompressed={hasScrolledPastThreshold}
             />
           </div>
+          {!treeData?.street_tree && (
+            <div className="bg-white px-8 pb-7 z-10">
+              <p className="p-3 rounded border border-scale-good text-scale-good-dark font-medium leading-snug">
+                {t('treeView.parkTreeHint')}
+              </p>
+            </div>
+          )}
           <Tabs
             tabs={[
               {
