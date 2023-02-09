@@ -55,7 +55,7 @@
       },
       "unknownLevelModal": {
         "title": "Wasserversorgung unbekannt",
-        "description": "Bäume, die auf der Karte grau markiert sind, haben entweder noch keinen berechneten Wert für den heutigen Tag oder sie sind nicht Teil des Vorhersagemodells.",
+        "description": "Bäume, die auf der Karte grau umrandet sind, sind Anlagenbäume und stehen in öffentlichen Grün- und Erholungsanlagen. Die Standortbedingungen dieser Bäume weichen stark von Straßenbäumen ab und sind daher nicht Teil des KI-Vorhersagemodells.",
         "close": "Zurück"
       }
     }
