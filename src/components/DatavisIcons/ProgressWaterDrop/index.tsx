@@ -1,5 +1,6 @@
 import { FC } from 'react'
 import classNames from 'classnames'
+import colors from './../../../style/colors'
 
 export interface IconWaterDropPropType {
   fill?: string
@@ -32,8 +33,8 @@ export interface ProgressWaterDropPropType {
 }
 export const ProgressWaterDrop: FC<ProgressWaterDropPropType> = ({
   numDrops,
-  strokeColor = '#9EA3AE',
-  fillColor = '#111827',
+  strokeColor = colors.gray['400'],
+  fillColor = colors.gray['900'],
   className,
 }) => {
   return (

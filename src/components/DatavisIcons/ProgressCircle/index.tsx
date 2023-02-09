@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import colors from './../../../style/colors'
 
 export interface ProgressCirclePropType {
   progress: number
@@ -10,8 +11,8 @@ export interface ProgressCirclePropType {
 
 export const ProgressCircle: FC<ProgressCirclePropType> = ({
   progress,
-  strokeColorBackground = '#9EA3AE',
-  fillColor = '#111827',
+  strokeColorBackground = colors.gray['400'],
+  fillColor = colors.gray['900'],
   size = 50,
   className,
 }) => {
