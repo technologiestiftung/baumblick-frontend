@@ -91,7 +91,7 @@ export const WaterSupplyLegend: FC<WaterSupplyLegendType> = ({
                 )}
               >
                 <Pill
-                  className={classNames('border bg-gray-200 border-gray-300')}
+                  className={classNames('border bg-white border-gray-400')}
                 />
                 <span className="text-xs font-semibold text-gray-800">
                   {t('legend.map.levels.unknown')}

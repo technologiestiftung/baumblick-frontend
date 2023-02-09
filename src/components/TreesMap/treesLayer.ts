@@ -71,7 +71,7 @@ export const TREES_LAYER: LayerSpecification = {
       'case',
       ['all', ['has', NOWCAST_AVERAGE_PROPERTY], ['!', IS_OUTDATED_NOWCAST]],
       ['step', ['get', NOWCAST_AVERAGE_PROPERTY], ...getColorScale()],
-      colors.gray[200],
+      'rgba(255,255,255,0)',
     ],
     'circle-stroke-width': [
       'case',
@@ -88,7 +88,7 @@ export const TREES_LAYER: LayerSpecification = {
       'case',
       ['all', ['has', NOWCAST_AVERAGE_PROPERTY], ['!', IS_OUTDATED_NOWCAST]],
       ['step', ['get', NOWCAST_AVERAGE_PROPERTY], ...getColorScale('-dark')],
-      colors.gray[300],
+      colors.gray[400],
     ],
     'circle-radius': [
       'interpolate',
