@@ -91,14 +91,14 @@ const InfoList: FC<{
   shadingData: useShadingDataReturnType['data']
   shadingIsLoading: useShadingDataReturnType['isLoading']
   shadingError: useShadingDataReturnType['error']
-}> = ({ treeData, rainData, shadingData }) => {
+}> = ({ treeData, rainData, rainIsLoading, shadingData, shadingIsLoading }) => {
   const { t } = useTranslation('common')
 
   const shadingValue = shadingData && shadingData * 100 // original shadingData is between 0 - 1
 
   return (
     <ul className="relative z-10 bg-white">
-      {shadingValue && (
+      {shadingValue && !shadingIsLoading && (
         <DataListItem
           title={t(`treeView.infoList.shading.label`)}
           subtitle={t(`treeView.infoList.shading.hint`)}
@@ -113,19 +113,21 @@ const InfoList: FC<{
           }
         />
       )}
-      <DataListItem
-        title={t(`treeView.infoList.rainAmount.label`)}
-        subtitle={t(`treeView.infoList.rainAmount.hint`)}
-        datavisIcon={
-          <DatavisIcon
-            iconType="water-drops"
-            iconValue={normalizeValue(Number(rainData?.toFixed(1)), [0, 500])}
-            valueLabel={t(`treeView.infoList.rainAmount.value`, {
-              value: rainData?.toFixed(1),
-            })}
-          />
-        }
-      />
+      {rainData && !rainIsLoading && (
+        <DataListItem
+          title={t(`treeView.infoList.rainAmount.label`)}
+          subtitle={t(`treeView.infoList.rainAmount.hint`)}
+          datavisIcon={
+            <DatavisIcon
+              iconType="water-drops"
+              iconValue={normalizeValue(Number(rainData?.toFixed(1)), [0, 500])}
+              valueLabel={t(`treeView.infoList.rainAmount.value`, {
+                value: rainData?.toFixed(1),
+              })}
+            />
+          }
+        />
+      )}
       <DataListItem
         title={t(`treeView.infoList.wateringAmount.label`)}
         subtitle={t(`treeView.infoList.wateringAmount.hint`)}
