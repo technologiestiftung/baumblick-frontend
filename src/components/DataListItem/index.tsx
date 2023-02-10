@@ -1,18 +1,22 @@
 import { Headline } from '@components/Headline'
 import { Paragraph } from '@components/Paragraph'
 import classNames from 'classnames'
-import { FC, ReactNode } from 'react'
+import { FC } from 'react'
+
+export type DataVizIconType = 'clock' | 'water-drops' | 'circle' | 'square'
 
 export interface DataListItemPropType {
-  title: ReactNode
-  subtitle: ReactNode
-  value: ReactNode
+  title: string
+  subtitle: string
+  valueLabel?: string
+  datavisIcon?: JSX.Element
 }
 
 export const DataListItem: FC<DataListItemPropType> = ({
   title,
   subtitle,
-  value,
+  valueLabel,
+  datavisIcon,
 }) => (
   <li
     className={classNames(
@@ -20,8 +24,14 @@ export const DataListItem: FC<DataListItemPropType> = ({
       'border-b border-gray-200'
     )}
   >
-    <Headline h2>{title}</Headline>
-    <span className="text-2xl">{value}</span>
-    <Paragraph className="col-span-2 m-0">{subtitle}</Paragraph>
+    <div>
+      <Headline h2>{title}</Headline>
+      <Paragraph className="m-0">{subtitle}</Paragraph>
+    </div>
+    {datavisIcon}
+
+    {!datavisIcon && valueLabel && (
+      <span className="text-base">{valueLabel}</span>
+    )}
   </li>
 )

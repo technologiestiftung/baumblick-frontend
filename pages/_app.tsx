@@ -8,7 +8,6 @@ import { useMatomo } from '@lib/hooks/useMatomo'
 import { MainMenu } from '@components/MainMenu'
 import type { AppProps as NextAppProps } from 'next/app'
 import classNames from 'classnames'
-
 interface PagePropsType extends Record<string, unknown> {
   title?: string
   query: ParsedUrlQuery
@@ -22,7 +21,8 @@ interface AppPropsType extends NextAppProps {
 const App: FC<AppPropsType> = ({ Component, pageProps }) => {
   useMatomo()
 
-  const getLayout = Component.getLayout ?? ((page) => page)
+  const getLayout = Component.getLayout ?? ((page) => <>{page}</>)
+
   return (
     <>
       <Head pageTitle={pageProps.title || ''} />

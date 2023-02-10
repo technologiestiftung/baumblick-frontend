@@ -1,4 +1,5 @@
 import { getBaseUrl } from '@lib/utils/urlUtil'
+import { startOfDay } from 'date-fns'
 
 /**
  * According to the database schema all values except id are nullable.
@@ -23,7 +24,8 @@ export type NowcastDataType = {
 
 const TABLE_NAME = 'nowcast'
 const TREE_ID_COLUMN_NAME = 'tree_id'
-const COLUMN_TO_SORT_BY = 'timestamp'
+const TIMESTAMP_COLUMN = 'timestamp'
+const START_OF_TODAY = startOfDay(Date.now()).toISOString()
 
 /**
  * Fetches the most recent nowcast data for a tree.
@@ -40,7 +42,7 @@ export const getNowcastData = async (
 
   const REQUEST_PARAMS = new URLSearchParams({
     [TREE_ID_COLUMN_NAME]: `eq.${treeId}`,
-    order: `${COLUMN_TO_SORT_BY}.desc`,
+    [TIMESTAMP_COLUMN]: `gte.${START_OF_TODAY}`,
     limit: '4',
     offset: '0',
   })

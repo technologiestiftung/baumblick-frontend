@@ -13,6 +13,7 @@ module.exports = {
     'storybook-css-modules-preset',
     'storybook-addon-next-router',
   ],
+  staticDirs: ['../public'],
   webpackFinal: async (config) => {
     config.resolve.plugins = [
       new TsconfigPathsPlugin({ extensions: config.resolve.extensions }),
