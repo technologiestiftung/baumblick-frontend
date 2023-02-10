@@ -109,6 +109,7 @@ const InfoList: FC<{
   const shadingValue = !shadingIsLoading && shadingData && shadingData * 100
   const rainValue = !rainIsLoading && rainData
   const treeDiscValue = !treeDataIsLoading && treeData?.baumscheibe
+  const trunkCircumferenceValue = !treeDataIsLoading && treeData?.stammumfg
 
   return (
     <ul className="relative z-10 bg-white">
@@ -178,21 +179,23 @@ const InfoList: FC<{
           )
         }
       />
-      {!treeDataIsLoading && treeData?.stammumfg && (
-        <DataListItem
-          title={t(`treeView.infoList.trunkCircumference.label`)}
-          subtitle={t(`treeView.infoList.trunkCircumference.hint`)}
-          datavisIcon={
+      <DataListItem
+        title={t(`treeView.infoList.trunkCircumference.label`)}
+        subtitle={t(`treeView.infoList.trunkCircumference.hint`)}
+        datavisIcon={
+          trunkCircumferenceValue ? (
             <DatavisIcon
               iconType="circle"
-              iconValue={normalizeValue(treeData.stammumfg, [0, 800])}
+              iconValue={normalizeValue(trunkCircumferenceValue, [0, 800])}
               valueLabel={t(`treeView.infoList.trunkCircumference.value`, {
-                value: treeData.stammumfg,
+                value: trunkCircumferenceValue,
               })}
             />
-          }
-        />
-      )}
+          ) : (
+            <NoDataIndicator />
+          )
+        }
+      />
     </ul>
   )
 }
