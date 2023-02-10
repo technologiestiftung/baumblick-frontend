@@ -2,12 +2,9 @@ import { FC } from 'react'
 
 export const MapTilerLogo: FC = () => {
   return (
-    <div className="fixed left-0 bottom-16 w-full pointer-events-none">
-      <div className="max-w-3xl w-full flex justify-end mx-auto">
-        <a
-          href="https://www.maptiler.com"
-          className="pointer-events-auto mb-2 mr-20"
-        >
+    <div className="fixed right-20 bottom-[74px] lg:bottom-4 pointer-events-none">
+      <div className="flex justify-end">
+        <a href="https://www.maptiler.com" className="pointer-events-auto">
           <img
             src="https://api.maptiler.com/resources/logo.svg"
             alt="MapTiler Logo"

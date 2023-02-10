@@ -256,7 +256,7 @@ const TreePage: TreePageWithLayout = ({ treeId, csrfToken }) => {
         >
           <div
             className={classNames(
-              'absolute top-2 right-2',
+              'absolute top-2 lg:top-[69px] right-2',
               'p-2 bg-white rounded-full shadow-md hover:bg-gray-100',
               'border border-gray-300',
               'group-focus:ring-2 group-focus:ring-gray-900 group-focus:ring-offset-2',

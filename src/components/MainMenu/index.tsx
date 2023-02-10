@@ -35,9 +35,10 @@ export const MainMenu: FC = () => {
   return (
     <div
       className={classNames(
-        'fixed bottom-0 left-1/2 -translate-x-1/2 h-16',
-        'w-full bg-gray-300 border-t border-gray-300',
-        'flex gap-[1px] drop-shadow-lg max-w-3xl'
+        'bottom-0 lg:top-0',
+        'fixed left-1/2 -translate-x-1/2 h-16 z-50',
+        'w-full bg-white border-t border-gray-300',
+        'flex gap-[1px] drop-shadow-lg'
       )}
     >
       {links.map((link) => {
@@ -49,8 +50,10 @@ export const MainMenu: FC = () => {
             key={link.path}
             href={link.path}
             className={classNames(
-              'bg-white w-full relative',
+              'w-auto border-r flex-1',
+              'bg-white relative',
               'group cursor-default',
+              'lg:border-r-0 lg:w-40 lg:flex-none',
               isActive ? 'text-gray-900' : 'text-gray-400',
               !isActive &&
                 'hover:text-gray-600 hover:bg-gray-200 cursor-pointer',
@@ -60,6 +63,7 @@ export const MainMenu: FC = () => {
             )}
           >
             <link.Icon width={32} height={32} />
+            <span className="hidden ml-2 lg:inline-block">{link.name}</span>
           </InternalLink>
         )
       })}
