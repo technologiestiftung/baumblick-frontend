@@ -82,6 +82,8 @@ export const getServerSideProps: GetServerSideProps<
 
 const InfoList: FC<{
   treeData: TreeDataType | null
+  treeDataIsLoading: boolean
+  treeDataError: Error | null
   nowcastData: MappedNowcastRowsType | null
   nowcastIsLoading: boolean
   nowcastError: Error | null
@@ -91,7 +93,14 @@ const InfoList: FC<{
   shadingData: useShadingDataReturnType['data']
   shadingIsLoading: useShadingDataReturnType['isLoading']
   shadingError: useShadingDataReturnType['error']
-}> = ({ treeData, rainData, rainIsLoading, shadingData, shadingIsLoading }) => {
+}> = ({
+  treeData,
+  treeDataIsLoading,
+  rainData,
+  rainIsLoading,
+  shadingData,
+  shadingIsLoading,
+}) => {
   const { t } = useTranslation('common')
 
   const shadingValue = shadingData && shadingData * 100 // original shadingData is between 0 - 1
@@ -143,22 +152,22 @@ const InfoList: FC<{
           />
         }
       />
-      <DataListItem
-        title={t(`treeView.infoList.treeDisc.label`)}
-        subtitle={t(`treeView.infoList.treeDisc.hint`)}
-        datavisIcon={
-          <DatavisIcon
-            iconType="square"
-            // TODO: [QTREES-447] Remove dummy data for treeDisc
-            // Update when adding access to real data.
-            iconValue={normalizeValue(3.1, [0, 10])}
-            valueLabel={t(`treeView.infoList.treeDisc.value`, {
-              value: 3.1,
-            })}
-          />
-        }
-      />
-      {treeData?.stammumfg && (
+      {!treeDataIsLoading && treeData?.baumscheibe && (
+        <DataListItem
+          title={t(`treeView.infoList.treeDisc.label`)}
+          subtitle={t(`treeView.infoList.treeDisc.hint`)}
+          datavisIcon={
+            <DatavisIcon
+              iconType="square"
+              iconValue={normalizeValue(treeData?.baumscheibe, [0, 10])}
+              valueLabel={t(`treeView.infoList.treeDisc.value`, {
+                value: treeData?.baumscheibe,
+              })}
+            />
+          }
+        />
+      )}
+      {!treeDataIsLoading && treeData?.stammumfg && (
         <DataListItem
           title={t(`treeView.infoList.trunkCircumference.label`)}
           subtitle={t(`treeView.infoList.trunkCircumference.hint`)}
@@ -349,6 +358,8 @@ const TreePage: TreePageWithLayout = ({ treeId, csrfToken }) => {
                 content: (
                   <InfoList
                     treeData={treeData}
+                    treeDataIsLoading={treeDataLoading}
+                    treeDataError={treeDataError}
                     nowcastData={nowcastData}
                     nowcastError={nowcastError}
                     nowcastIsLoading={nowcastIsLoading}
