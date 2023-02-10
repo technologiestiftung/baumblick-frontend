@@ -91,10 +91,10 @@ export const Button: FC<ButtonPropType> = (props) => {
   }
   return (
     <a
+      {...restProps}
       className={getStyles(props)}
       rel="noreferrer noopener"
       target="_blank"
-      {...restProps}
     >
       {renderChildren(props)}
     </a>
