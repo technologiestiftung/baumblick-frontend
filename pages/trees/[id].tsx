@@ -213,8 +213,6 @@ const TreePage: TreePageWithLayout = ({ treeId, csrfToken }) => {
     isLoading: rainIsLoading,
   } = useTreeRainAmount(treeData?.id)
 
-  console.log(rainData, rainError, rainIsLoading)
-
   if (treeDataError) {
     void push('/404')
     return null
