@@ -18,7 +18,11 @@ export const Outro: FC = () => {
             {t('home.outro.text.1')}
           </p>
 
-          <Button primary className="w-full mb-12">
+          <Button
+            primary
+            href="https://github.com/technologiestiftung/baumblick-frontend/"
+            className="w-full mb-12"
+          >
             <Github className="text-gray-400" />
             {t('home.cta.github')}
           </Button>
@@ -27,7 +31,7 @@ export const Outro: FC = () => {
             {t('home.outro.text.2')}
           </p>
 
-          <Button primary className="w-full">
+          <Button primary href="https://qtrees.ai/" className="w-full">
             <QTrees className="text-gray-400" />
             {t('home.cta.project')}
           </Button>
