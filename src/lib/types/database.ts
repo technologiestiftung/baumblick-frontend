@@ -374,6 +374,7 @@ export interface Database {
           art_bot: string | null
           art_dtsch: string | null
           baumhoehe: number | null
+          baumscheibe: number | null
           bezirk: string | null
           created_at: string | null
           eigentuemer: string | null

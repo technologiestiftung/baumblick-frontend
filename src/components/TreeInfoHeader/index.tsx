@@ -4,14 +4,15 @@ import {
   Plant as PlantIcon,
 } from '@components/Icons'
 import { TreeContextMenu } from '@components/TreeContextMenu'
+import { TreeDataType } from '@lib/requests/getTreeData'
 import classNames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
 import { FC } from 'react'
 
 export interface TreeInfoHeaderType {
   species: string
-  height?: number | string
-  age?: number | string
+  height?: TreeDataType['baumhoehe']
+  age?: TreeDataType['standalter']
   statusBackgroundColor?: string
   statusBorderColor?: string
   isCompressed?: boolean

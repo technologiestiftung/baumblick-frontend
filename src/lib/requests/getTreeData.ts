@@ -1,42 +1,7 @@
+import { Database } from '@lib/types/database'
 import { getBaseUrl } from '@lib/utils/urlUtil'
 
-/**
- * According to the database schema all values except id are nullable.
- * The id is what is the tree_id in the nowcast table.
- */
-export type TreeDataType = {
-  id: string
-  treeId?: string
-  standortnr?: string
-  kennzeich?: string
-  namenr?: string
-  /** Genus in German  */
-  art_dtsch?: string
-  /** Botanical genus  */
-  art_bot?: string
-  gattung_deutsch?: string
-  hausnr?: string
-  strname?: string
-  pflanzjahr?: number
-  standalter?: number
-  /** Circumference of the tree trunk  */
-  stammumfg?: number
-  baumhoehe?: number
-  bezirk?: string
-  eigentuemer?: string
-  zusatz?: string
-  /** Diameter of the treetop  */
-  kronedurch?: number
-  /** `geometry` is actually a PostGIS Point type but we receive it already parsed. */
-  geometry?: {
-    type: 'Point'
-    coordinates: [number, number]
-  }
-  lat?: number
-  lng?: number
-  created_at?: string
-  updated_at?: string
-}
+export type TreeDataType = Database['public']['Tables']['trees']['Row']
 
 const TABLE_NAME = 'trees'
 /** The API requires the search param to be the `id` column */
