@@ -80,6 +80,8 @@ export const getServerSideProps: GetServerSideProps<
   }
 }
 
+const NoDataIndicator: FC = () => <span>–</span>
+
 const InfoList: FC<{
   treeData: TreeDataType | null
   treeDataIsLoading: boolean
@@ -103,15 +105,18 @@ const InfoList: FC<{
 }) => {
   const { t } = useTranslation('common')
 
-  const shadingValue = shadingData && shadingData * 100 // original shadingData is between 0 - 1
+  // Original shadingData is between 0 - 1, so we multiply by 100:
+  const shadingValue = !shadingIsLoading && shadingData && shadingData * 100
+  const rainValue = !rainIsLoading && rainData
+  const treeDiscValue = !treeDataIsLoading && treeData?.baumscheibe
 
   return (
     <ul className="relative z-10 bg-white">
-      {shadingValue && !shadingIsLoading && (
-        <DataListItem
-          title={t(`treeView.infoList.shading.label`)}
-          subtitle={t(`treeView.infoList.shading.hint`)}
-          datavisIcon={
+      <DataListItem
+        title={t(`treeView.infoList.shading.label`)}
+        subtitle={t(`treeView.infoList.shading.hint`)}
+        datavisIcon={
+          shadingValue ? (
             <DatavisIcon
               iconType="clock"
               iconValue={normalizeValue(shadingValue, [0, 100])}
@@ -119,24 +124,28 @@ const InfoList: FC<{
                 value: shadingValue.toFixed(0),
               })}
             />
-          }
-        />
-      )}
-      {rainData && !rainIsLoading && (
-        <DataListItem
-          title={t(`treeView.infoList.rainAmount.label`)}
-          subtitle={t(`treeView.infoList.rainAmount.hint`)}
-          datavisIcon={
+          ) : (
+            <NoDataIndicator />
+          )
+        }
+      />
+      <DataListItem
+        title={t(`treeView.infoList.rainAmount.label`)}
+        subtitle={t(`treeView.infoList.rainAmount.hint`)}
+        datavisIcon={
+          rainValue ? (
             <DatavisIcon
               iconType="water-drops"
-              iconValue={normalizeValue(Number(rainData?.toFixed(1)), [0, 500])}
+              iconValue={normalizeValue(rainValue, [0, 500])}
               valueLabel={t(`treeView.infoList.rainAmount.value`, {
-                value: rainData?.toFixed(1),
+                value: rainValue.toFixed(1),
               })}
             />
-          }
-        />
-      )}
+          ) : (
+            <NoDataIndicator />
+          )
+        }
+      />
       <DataListItem
         title={t(`treeView.infoList.wateringAmount.label`)}
         subtitle={t(`treeView.infoList.wateringAmount.hint`)}
@@ -152,21 +161,23 @@ const InfoList: FC<{
           />
         }
       />
-      {!treeDataIsLoading && treeData?.baumscheibe && (
-        <DataListItem
-          title={t(`treeView.infoList.treeDisc.label`)}
-          subtitle={t(`treeView.infoList.treeDisc.hint`)}
-          datavisIcon={
+      <DataListItem
+        title={t(`treeView.infoList.treeDisc.label`)}
+        subtitle={t(`treeView.infoList.treeDisc.hint`)}
+        datavisIcon={
+          treeDiscValue ? (
             <DatavisIcon
               iconType="square"
-              iconValue={normalizeValue(treeData?.baumscheibe, [0, 10])}
+              iconValue={normalizeValue(treeDiscValue, [0, 10])}
               valueLabel={t(`treeView.infoList.treeDisc.value`, {
                 value: treeData?.baumscheibe,
               })}
             />
-          }
-        />
-      )}
+          ) : (
+            <NoDataIndicator />
+          )
+        }
+      />
       {!treeDataIsLoading && treeData?.stammumfg && (
         <DataListItem
           title={t(`treeView.infoList.trunkCircumference.label`)}
