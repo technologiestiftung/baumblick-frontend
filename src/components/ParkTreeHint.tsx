@@ -4,11 +4,17 @@ import { FC } from 'react'
 import colors from 'src/style/colors'
 import { RootsIllustration } from './RootsIllustration'
 
+const HorizontalLine: FC<{ className?: string }> = ({ className }) => (
+  <hr
+    className={classNames(className, 'bg-gray-400 w-full h-px border-0 z-10')}
+  />
+)
+
 export const ParkTreeHint: FC = () => {
   const { t } = useTranslation('common')
 
   return (
-    <div className="bg-gray-300 z-10 h-60 relative">
+    <div className={classNames('bg-gray-300', 'h-60', 'z-10', 'relative')}>
       <div
         className={classNames(
           'absolute top-0',
@@ -25,10 +31,24 @@ export const ParkTreeHint: FC = () => {
           )}
         />
       </div>
-      <hr className="absolute top-1/3 bg-gray-400 w-full h-px border-0 z-10" />
-      <hr className="absolute top-2/3 bg-gray-400 w-full h-px border-0 z-10" />
-      <div className="pt-8 pb-0 w-full h-full flex items-end justify-center">
-        <p className="px-8 pt-6 pb-5 bg-gray-100 rounded-t-2xl font-semibold leading-snug text-sm w-full z-20">
+      <HorizontalLine className="absolute top-1/3" />
+      <HorizontalLine className="absolute top-2/3" />
+      <div
+        className={classNames(
+          'w-full h-full',
+          'pt-8 pb-0',
+          'flex items-end justify-center'
+        )}
+      >
+        <p
+          className={classNames(
+            'w-full',
+            'px-8 pt-6 pb-5',
+            'bg-gray-100 rounded-t-2xl',
+            'font-semibold leading-snug text-sm',
+            'z-20'
+          )}
+        >
           {t('treeView.parkTreeHint')}
         </p>
       </div>
