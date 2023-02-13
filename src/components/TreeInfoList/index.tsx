@@ -9,7 +9,9 @@ import { normalizeValue } from '@lib/utils/normalizeValue'
 import useTranslation from 'next-translate/useTranslation'
 import { FC } from 'react'
 
-const NoDataIndicator: FC = () => <span>–</span>
+const NoDataIndicator: FC = () => (
+  <hr className="w-4 h-px border border-gray-600 translate-y-4" />
+)
 
 interface TreeInfoListType {
   treeData: TreeDataType | null
