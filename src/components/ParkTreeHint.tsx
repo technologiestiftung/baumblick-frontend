@@ -28,7 +28,7 @@ export const ParkTreeHint: FC = () => {
       <hr className="absolute top-1/3 bg-gray-400 w-full h-px border-0 z-10" />
       <hr className="absolute top-2/3 bg-gray-400 w-full h-px border-0 z-10" />
       <div className="pt-8 pb-0 w-full h-full flex items-end justify-center">
-        <p className="px-8 pt-6 pb-5 bg-gray-900 text-white rounded-t-2xl font-semibold leading-snug text-sm w-full z-20">
+        <p className="px-8 pt-6 pb-5 bg-gray-100 rounded-t-2xl font-semibold leading-snug text-sm w-full z-20">
           {t('treeView.parkTreeHint')}
         </p>
       </div>
