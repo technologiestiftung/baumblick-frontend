@@ -6,7 +6,7 @@ import { ContentGrid, GridDefault } from '@components/ContentGrid'
 export const Intro: FC = () => {
   const { t } = useTranslation('common')
   return (
-    <div className="bg-green py-[5.625rem] screen1200:py-[20vh]">
+    <div className="bg-turquoise py-[5.625rem] screen1200:py-[20vh]">
       <ContentGrid>
         <GridDefault>
           <img
