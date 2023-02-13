@@ -23,12 +23,12 @@ export default async function handler(
   res: NextApiResponse
 ): Promise<void> {
   if (!SUPABASE_GDK_ANON_KEY) {
-    const error = new Error('env var SUPABASE_ANON_KEY is missing')
+    const error = new Error('env var SUPABASE_GDK_ANON_KEY is missing')
     console.error(error)
     return res.status(500).json({ error })
   }
   if (!SUPABASE_GDK_API_URL) {
-    const error = new Error('env var SUPABASE_API_URL is missing')
+    const error = new Error('env var SUPABASE_GDK_API_URL is missing')
     console.error(error)
     return res.status(500).json({ error })
   }
