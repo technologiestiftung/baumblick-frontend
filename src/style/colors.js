@@ -27,6 +27,8 @@ const colors = {
     '4': '#BBE69D',
     '5': '#FBE993',
   },
+  orange: '#FFEBB8',
+  green: '#EEFAFA',
 }
 
 module.exports = colors

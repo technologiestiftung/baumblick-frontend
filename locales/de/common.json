@@ -10,33 +10,69 @@
   },
   "loading": "Lädt...",
   "home": {
-    "cta": "Baum finden",
-    "ctaLoading": "Lädt...",
-    "slides": {
-      "1": {
-        "text": "Auf dieser Karte wird angezeigt, wie gut die Berliner Bäume mit Wasser versorgt sind (<good/> Gut, <medium/> Mäßig, <critical/> Kritisch)",
-        "alt": "Ein Kartenausschnitt mit einigen farbigen Kreisen, die Bäume und deren Saugspannung darstellen"
-      },
-      "2": {
-        "text": "Die Wasserversorgung kann <bold>je nach Bodentiefe variieren</bold>. Den Wurzeln gelingt es nämlich nicht immer Wasser aufzunehmen, selbst wenn der Boden an der Oberfläche feucht ist.",
-        "alt": "Die Silhouette eines Baumes und seiner Wurzeln. Der Grund ist in drei Farben geschichtet. Auf jeder Ebene befindet sich ein Emoji mit einem Text. Auf der ersten Ebene: Blauer Hintergrund, fröhliches Emoji, der Text 'Gering'. Auf der zweiten Ebene: Grüner Hintergrund, neutrales Emoji und der Text 'Durchschnittlich'. Auf der tiefsten Ebene: Gelber Hintergrund, erschöpftes Emoji und der Text 'Hoch'."
-      },
-      "3": {
-        "text": "Berlin verwendet sogenannte Saugspannungs-Sensoren, um die stichpunktartig die Wasserversorgung der Bäume einschätzen zu können. Diese Sensoren messen die Saugspannung <bold>in drei unterschiedlich tiefen Bodenschichten</bold> (-30, -60, -90 cm).",
-        "alt": "Die Silhouette eines Baumes und seiner Wurzeln. Der Grund ist in drei Farben geschichtet. Auf jeder Ebene befindet sich ein Sensor-Symbol mit der Beschriftungen: -30cm, -60cm, -90cm."
-      },
-      "4": {
-        "text": "Auch Faktoren wie <bold>Regen, Schatten oder Sonneneinstrahlung</bold> beeinflussen den Status der Wasserversorgung. Deshalb werden auch diese Daten erhoben.",
-        "alt": "Eine Wolke von Symbolen, die eine Sonne, Regen, Schatten, eine Gießkanne und eine Karte darstellen. Eine geschweifte Klammer, die alle Symbole umfasst und mit einem Vorwärtspfeil in die rechte untere Ecke des Bildes führt, wo ein Screenshot der Benutzeroberfläche zeigt, wie diese Informationen in der Benutzeroberfläche angezeigt werden (Listenansicht)."
-      },
-      "5": {
-        "text": "Die Messwerte der Sensoren werden mit diesen zusätzlichen Daten kombiniert. Auf dieser Datengrundlage <bold>errechnet eine KI-Modell</bold> die tagesaktuelle Wasserversorgung aller Bäume – selbst wenn diese nicht mit Sensoren ausgestattet sind.",
-        "alt": "Eine Wolke von Symbolen, die eine Sonne, Regen, Schatten, eine Gießkanne und eine Karte darstellen. Eine geschweifte Klammer, die alle Symbole umfasst und mit einem Vorwärtspfeil in die Mitte führt. In der Mitte ein Symbol für ein neuronales Netz mit dem Text AI. Von letzterem Text und Symbol führt ein Pfeil zu einem Screenshot einer Karte mit vielen farbigen Baumkreisen."
-      },
-      "6": {
-        "text": "Finde heraus, wie gut die Bäume in deiner Umgebung mit Wasser versorgt sind. <bold>Klicke auf den Button unten!</bold>",
-        "alt": "Ein Button mit einem Geolocation-Symbol und den Worten 'Baum finden'. Ein Pfeil verbindet das Wort 'Klick' und den Button."
+    "cta": {
+      "findTree": "Baum finden",
+      "learnMore": "Mehr erfahren",
+      "github": "Zum Github Repository",
+      "project": "Zur Projektwebsite"
+    },
+    "hero": {
+      "title": "Willkommen bei Baumblick",
+      "text": "Die App, die dir einen Ein- und Ausblick in den Zustand und die Wasserversorgung der Stadtbäume Berlins gibt."
+    },
+    "intro": {
+      "text": {
+        "1": "Die App Baumblick gibt dir spannende Einblicke in die Berlins Stadtbäume und ihrer Wasserversorgung. Die App wurde im Zuge des Forschungsprojekts Quantified Trees (QTrees) entwickelt und soll den direkten Auswirkungen des Klimawandels auf Stadtbäume entgegenwirken. Dabei stehen Stadtbäume diversen klimatischen und urbanen Herausforderungen gegenüber.",
+        "2": "Finde jetzt heraus, wie wir mit Hilfe eines KI-Vorhersagemodells den Stadtbäume helfen und wie du mitmachen kannst."
       }
+    },
+    "animation": {
+      "steps": {
+        "1": {
+          "title": "Der Baum",
+          "text": "In Berlin gibt es insgesamt xx verschiedene Baumarten die sich allesamt nach Art, Alter, Größe, Kronendurchmesser und Stammumfang unterscheiden lassen. Die Stadt Berlin erfasst die Eigenschaften von über 800.000 Bäume bereits im öffentlichen Baumkataster."
+        },
+        "2": {
+          "title": "Umgebung",
+          "text": "Trotz aller Diversität haben diese Bäume alle etwas gemeinsam: sie stehen klimatischen und urbanen Herausforderungen gegenüber! Dabei beeinflussen die vielene Umgebungsparameter die Vitalität eines Baumes."
+        },
+        "3": {
+          "title": "Wetter",
+          "text": "Die wohl wichtigste Rolle für einen gesunden Baum, spielen die Niederschlagsmengen und die Temperatur an einem Standort. Auch auf einer vermeintlich kleinen Fläche wie Berlin können diese durch städtische Infrastruktur stark varriieren."
+        },
+        "4": {
+          "title": "Schatten",
+          "text": "Besonders hohe oder stark verspiegelte Gebäude, sowie dicht bebaute Kieze können eine besonders hohe Verschattung bzw. verstärkte UV-Strahlung mit sich bringen. Diese wiederum hat Einfluss auf die Evatranspiration eines Baumes."
+        },
+        "5": {
+          "title": "Bewässerung",
+          "text": "Ebenso wichtig für den Zustand eines Baumes sind die zusätzlichen Bewässerungen der Grünflächenämter oder Bürger:innen Berlins, die die Bäume besonders während der Vegetationspersiode (März bis September) und den heißen Sommern mit mehreren 100l Wasser gießen."
+        },
+        "6": {
+          "title": "Sensordaten",
+          "text": "Um den Zustand eines Baumes besser zu verstehen, nutzt die Stadt Berlin bereits Sensoren, die die Saugspannung in der Bodengrube eines Baumes messen. Die Saugspannung gibt Aufschluss darüber, wie trocken oder feucht der Boden ist und hilft daher bei der Optimierung der Bewässerung. Jedoch: jeden Baum einzeln zu verkabeln ist nicht sinnhaft und bei weitem nicht nachhaltig."
+        },
+        "7": {
+          "title": "KI Modell",
+          "text": "Und genau hier kommt unser KI-basiertes Vorhersagemodell ins Spiel. Mit Hilfe des Modells können wir auch die aktuelle Saugspannung berechnen und für 14 Tage vorhersagen – selbst wenn kein Sensor am Baum ist!"
+        },
+        "8": {
+          "title": "",
+          "text": "Du bist neugierig geworden? Dann erkunde jetzt unsere Karte und erhalte mit einen Einblick in die Bäume in deiner Umgebung!"
+        }
+      }
+    },
+    "outro":  {
+      "headline": "Open Source Daten",
+      "text": {
+        "1": "Du möchtest Baumblick für eine andere Stadt umsetzen? Auch kein Problem, denn der komplette Quellcode ist Open Source Code und unser KI-Modell nutzt bis auf wenige Ausnahmen ausschließlich offene Daten. Schau in unserem Repo auf GitHub vorbei:",
+        "2": "Wenn du mehr über das Forschungsprojekt Quantified Trees erfahren möchtest, dann besuche uns auf qtrees.ai:"
+      }
+    },
+    "partners": {
+      "consortium": "Konsortium",
+      "associated": "Assoziierte Partner",
+      "funding": "Fördergeber"
     }
   },
   "stories": {
@@ -52,6 +88,11 @@
         "medium": "Mäßig",
         "critical": "Kritisch",
         "unknown": "Unbekannt"
+      },
+      "unknownLevelModal": {
+        "title": "Wasserversorgung unbekannt",
+        "description": "Bäume, die auf der Karte grau umrandet sind, sind Anlagenbäume und stehen in öffentlichen Grün- und Erholungsanlagen. Die Standortbedingungen dieser Bäume weichen stark von Straßenbäumen ab und sind daher nicht Teil des Vorhersagemodells.",
+        "close": "Zurück"
       }
     }
   },

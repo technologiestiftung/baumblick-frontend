@@ -24,6 +24,18 @@ module.exports = {
       ...colorPalette,
     },
     extend: {
+      // TODO: Ideally we want to use Tailwind's built-in breakpoints as
+      // much as possible. This might be possible because these custom
+      // breakpoints are (partially) close to Tailwind's breakpoints.
+      // For now I'm leaving them as-is because I can't ensure that the
+      // homepage scrollytelling works with Tailwind's breakpoints.
+      // This requires some deeper visual testing.
+      screens: {
+        screen600: '600px',
+        screen1200: '1200px',
+        screen1440: '1440px',
+        screen1920: '1920px',
+      },
       minWidth: {
         xs: '20rem',
         sm: '24rem',

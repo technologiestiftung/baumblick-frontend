@@ -30,6 +30,10 @@ import { Head } from '@components/Head'
 import { DatavisIcon } from '@components/DatavisIcons/DatavisIcon'
 import { normalizeValue } from '@lib/utils/normalizeValue'
 import { ParkTreeHint } from '@components/ParkTreeHint'
+import {
+  useShadingData,
+  useShadingDataReturnType,
+} from '@lib/hooks/useShadingData'
 
 interface TreePageComponentPropType {
   treeId: TreeDataType['id']
@@ -77,16 +81,36 @@ export const getServerSideProps: GetServerSideProps<
   }
 }
 
+const NoDataIndicator: FC = () => <span>–</span>
+
 const InfoList: FC<{
   treeData: TreeDataType | null
+  treeDataIsLoading: boolean
+  treeDataError: Error | null
   nowcastData: MappedNowcastRowsType | null
   nowcastIsLoading: boolean
   nowcastError: Error | null
   rainData: TreeRainAmountType | null
   rainIsLoading: boolean
   rainError: Error | null
-}> = ({ treeData, rainData }) => {
+  shadingData: useShadingDataReturnType['data']
+  shadingIsLoading: useShadingDataReturnType['isLoading']
+  shadingError: useShadingDataReturnType['error']
+}> = ({
+  treeData,
+  treeDataIsLoading,
+  rainData,
+  rainIsLoading,
+  shadingData,
+  shadingIsLoading,
+}) => {
   const { t } = useTranslation('common')
+
+  // Original shadingData is between 0 - 1, so we multiply by 100:
+  const shadingValue = !shadingIsLoading && shadingData && shadingData * 100
+  const rainValue = !rainIsLoading && rainData
+  const treeDiscValue = !treeDataIsLoading && treeData?.baumscheibe
+  const trunkCircumferenceValue = !treeDataIsLoading && treeData?.stammumfg
 
   return (
     <ul className="relative z-10 bg-white">
@@ -94,34 +118,36 @@ const InfoList: FC<{
         title={t(`treeView.infoList.shading.label`)}
         subtitle={t(`treeView.infoList.shading.hint`)}
         datavisIcon={
-          <DatavisIcon
-            iconType="clock"
-            // TODO: [QTREES-448] Remove dummy data for shading
-            // Update when adding access to real data.
-            iconValue={normalizeValue(65, [0, 100])}
-            valueLabel={t(`treeView.infoList.shading.value`, {
-              value: 65,
-            })}
-          />
-        }
-      />
-      {rainData && (
-        <DataListItem
-          title={t(`treeView.infoList.rainAmount.label`)}
-          subtitle={t(`treeView.infoList.rainAmount.hint`)}
-          datavisIcon={
+          shadingValue ? (
             <DatavisIcon
-              iconType="water-drops"
-              iconValue={Math.round(
-                normalizeValue(Math.round(rainData), [0, 500])
-              )}
-              valueLabel={t(`treeView.infoList.rainAmount.value`, {
-                value: rainData?.toFixed(1),
+              iconType="clock"
+              iconValue={normalizeValue(shadingValue, [0, 100])}
+              valueLabel={t(`treeView.infoList.shading.value`, {
+                value: shadingValue.toFixed(0),
               })}
             />
-          }
-        />
-      )}
+          ) : (
+            <NoDataIndicator />
+          )
+        }
+      />
+      <DataListItem
+        title={t(`treeView.infoList.rainAmount.label`)}
+        subtitle={t(`treeView.infoList.rainAmount.hint`)}
+        datavisIcon={
+          rainValue ? (
+            <DatavisIcon
+              iconType="water-drops"
+              iconValue={Math.round(normalizeValue(rainValue, [0, 500]))}
+              valueLabel={t(`treeView.infoList.rainAmount.value`, {
+                value: rainValue.toFixed(1),
+              })}
+            />
+          ) : (
+            <NoDataIndicator />
+          )
+        }
+      />
       <DataListItem
         title={t(`treeView.infoList.wateringAmount.label`)}
         subtitle={t(`treeView.infoList.wateringAmount.hint`)}
@@ -141,32 +167,36 @@ const InfoList: FC<{
         title={t(`treeView.infoList.treeDisc.label`)}
         subtitle={t(`treeView.infoList.treeDisc.hint`)}
         datavisIcon={
-          <DatavisIcon
-            iconType="square"
-            // TODO: [QTREES-447] Remove dummy data for treeDisc
-            // Update when adding access to real data.
-            iconValue={normalizeValue(3.1, [0, 10])}
-            valueLabel={t(`treeView.infoList.treeDisc.value`, {
-              value: 3.1,
-            })}
-          />
-        }
-      />
-      {treeData?.stammumfg && (
-        <DataListItem
-          title={t(`treeView.infoList.trunkCircumference.label`)}
-          subtitle={t(`treeView.infoList.trunkCircumference.hint`)}
-          datavisIcon={
+          treeDiscValue ? (
             <DatavisIcon
-              iconType="circle"
-              iconValue={normalizeValue(treeData.stammumfg, [0, 800])}
-              valueLabel={t(`treeView.infoList.trunkCircumference.value`, {
-                value: treeData.stammumfg,
+              iconType="square"
+              iconValue={normalizeValue(treeDiscValue, [0, 10])}
+              valueLabel={t(`treeView.infoList.treeDisc.value`, {
+                value: treeData?.baumscheibe,
               })}
             />
-          }
-        />
-      )}
+          ) : (
+            <NoDataIndicator />
+          )
+        }
+      />
+      <DataListItem
+        title={t(`treeView.infoList.trunkCircumference.label`)}
+        subtitle={t(`treeView.infoList.trunkCircumference.hint`)}
+        datavisIcon={
+          trunkCircumferenceValue ? (
+            <DatavisIcon
+              iconType="circle"
+              iconValue={normalizeValue(trunkCircumferenceValue, [0, 800])}
+              valueLabel={t(`treeView.infoList.trunkCircumference.value`, {
+                value: trunkCircumferenceValue,
+              })}
+            />
+          ) : (
+            <NoDataIndicator />
+          )
+        }
+      />
     </ul>
   )
 }
@@ -189,6 +219,12 @@ const TreePage: TreePageWithLayout = ({ treeId, csrfToken }) => {
     error: nowcastError,
     isLoading: nowcastIsLoading,
   } = useNowcastData(treeData?.id, csrfToken)
+
+  const {
+    data: shadingData,
+    error: shadingError,
+    isLoading: shadingIsLoading,
+  } = useShadingData(treeData?.id, csrfToken)
 
   const { data: forecastData, error: forecastError } = useForecastData(
     treeData?.id,
@@ -225,7 +261,7 @@ const TreePage: TreePageWithLayout = ({ treeId, csrfToken }) => {
       <div
         className={classNames(
           'max-w-3xl mx-auto',
-          'grid grid-cols-1 grid-rows-[124px,1fr] gap-0'
+          'grid grid-cols-1 grid-rows-[148px,1fr] gap-0'
         )}
       >
         <button
@@ -244,7 +280,7 @@ const TreePage: TreePageWithLayout = ({ treeId, csrfToken }) => {
         >
           <div
             className={classNames(
-              'absolute top-2 right-2',
+              'absolute top-2 lg:top-[69px] right-2',
               'p-2 bg-white rounded-full shadow-md hover:bg-gray-100',
               'border border-gray-300',
               'group-focus:ring-2 group-focus:ring-gray-900 group-focus:ring-offset-2',
@@ -343,12 +379,17 @@ const TreePage: TreePageWithLayout = ({ treeId, csrfToken }) => {
                 content: (
                   <InfoList
                     treeData={treeData}
+                    treeDataIsLoading={treeDataLoading}
+                    treeDataError={treeDataError}
                     nowcastData={nowcastData}
                     nowcastError={nowcastError}
                     nowcastIsLoading={nowcastIsLoading}
                     rainData={rainData}
                     rainError={rainError}
                     rainIsLoading={rainIsLoading}
+                    shadingData={shadingData}
+                    shadingError={shadingError}
+                    shadingIsLoading={shadingIsLoading}
                   />
                 ),
               },
