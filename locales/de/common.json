@@ -150,7 +150,7 @@
       },
       "wateringAmount": {
         "label": "Gießwassermenge",
-        "hint": "Letzte 14 Tage",
+        "hint": "Letzte 60 Tage",
         "value": "{{value}} l"
       },
       "trunkCircumference": {
