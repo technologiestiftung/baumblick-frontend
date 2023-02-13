@@ -138,7 +138,9 @@ const InfoList: FC<{
           rainValue ? (
             <DatavisIcon
               iconType="water-drops"
-              iconValue={Math.round(normalizeValue(rainValue, [0, 500]))}
+              iconValue={Math.round(
+                normalizeValue(rainValue, [0, 500], [0, 5])
+              )}
               valueLabel={t(`treeView.infoList.rainAmount.value`, {
                 value: rainValue.toFixed(1),
               })}
