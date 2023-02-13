@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import useTranslation from 'next-translate/useTranslation'
 import { FC } from 'react'
 import colors from 'src/style/colors'
-import { RootsIllustration } from './RootsIllustration'
+import { RootsIllustration } from '../RootsIllustration'
 
 const HorizontalLine: FC<{ className?: string }> = ({ className }) => (
   <hr
