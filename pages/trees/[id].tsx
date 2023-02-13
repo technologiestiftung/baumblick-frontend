@@ -34,6 +34,10 @@ import {
   useShadingData,
   useShadingDataReturnType,
 } from '@lib/hooks/useShadingData'
+import {
+  useWateringData,
+  useWateringDataReturnType,
+} from '@lib/hooks/useWateringData'
 
 interface TreePageComponentPropType {
   treeId: TreeDataType['id']
@@ -96,6 +100,9 @@ const InfoList: FC<{
   shadingData: useShadingDataReturnType['data']
   shadingIsLoading: useShadingDataReturnType['isLoading']
   shadingError: useShadingDataReturnType['error']
+  wateringData: useWateringDataReturnType['data']
+  wateringDataIsLoading: useWateringDataReturnType['isLoading']
+  wateringDataError: useWateringDataReturnType['error']
 }> = ({
   treeData,
   treeDataIsLoading,
@@ -103,6 +110,8 @@ const InfoList: FC<{
   rainIsLoading,
   shadingData,
   shadingIsLoading,
+  wateringData,
+  wateringDataIsLoading,
 }) => {
   const { t } = useTranslation('common')
 
@@ -111,6 +120,7 @@ const InfoList: FC<{
   const rainValue = !rainIsLoading && rainData
   const treeDiscValue = !treeDataIsLoading && treeData?.baumscheibe
   const trunkCircumferenceValue = !treeDataIsLoading && treeData?.stammumfg
+  const wateringValue = !wateringDataIsLoading && wateringData
 
   return (
     <ul className="relative z-10 bg-white">
@@ -154,15 +164,19 @@ const InfoList: FC<{
         title={t(`treeView.infoList.wateringAmount.label`)}
         subtitle={t(`treeView.infoList.wateringAmount.hint`)}
         datavisIcon={
-          <DatavisIcon
-            iconType="water-drops"
-            // TODO: [QTREES-449] Remove dummy data for wateringAmount
-            // Update when adding access to real data.
-            iconValue={Math.round(normalizeValue(25, [0, 500], [0, 5]))}
-            valueLabel={t(`treeView.infoList.wateringAmount.value`, {
-              value: 25,
-            })}
-          />
+          wateringValue ? (
+            <DatavisIcon
+              iconType="water-drops"
+              iconValue={Math.round(
+                normalizeValue(wateringValue, [0, 500], [0, 5])
+              )}
+              valueLabel={t(`treeView.infoList.wateringAmount.value`, {
+                value: wateringValue.toFixed(),
+              })}
+            />
+          ) : (
+            <NoDataIndicator />
+          )
         }
       />
       <DataListItem
@@ -238,6 +252,12 @@ const TreePage: TreePageWithLayout = ({ treeId, csrfToken }) => {
     error: rainError,
     isLoading: rainIsLoading,
   } = useTreeRainAmount(treeData?.id)
+
+  const {
+    data: wateringData,
+    error: wateringDataError,
+    isLoading: wateringDataIsLoading,
+  } = useWateringData(treeData?.id, csrfToken)
 
   if (treeDataError) {
     void push('/404')
@@ -392,6 +412,9 @@ const TreePage: TreePageWithLayout = ({ treeId, csrfToken }) => {
                     shadingData={shadingData}
                     shadingError={shadingError}
                     shadingIsLoading={shadingIsLoading}
+                    wateringData={wateringData}
+                    wateringDataError={wateringDataError}
+                    wateringDataIsLoading={wateringDataIsLoading}
                   />
                 ),
               },
