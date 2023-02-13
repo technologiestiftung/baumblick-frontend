@@ -29,6 +29,7 @@ import { mapRawQueryToState } from '@lib/utils/queryUtil'
 import { Head } from '@components/Head'
 import { DatavisIcon } from '@components/DatavisIcons/DatavisIcon'
 import { normalizeValue } from '@lib/utils/normalizeValue'
+import { ParkTreeHint } from '@components/ParkTreeHint'
 import {
   useShadingData,
   useShadingDataReturnType,
@@ -137,7 +138,9 @@ const InfoList: FC<{
           rainValue ? (
             <DatavisIcon
               iconType="water-drops"
-              iconValue={normalizeValue(rainValue, [0, 500])}
+              iconValue={Math.round(
+                normalizeValue(rainValue, [0, 500], [0, 5])
+              )}
               valueLabel={t(`treeView.infoList.rainAmount.value`, {
                 value: rainValue.toFixed(1),
               })}
@@ -155,7 +158,7 @@ const InfoList: FC<{
             iconType="water-drops"
             // TODO: [QTREES-449] Remove dummy data for wateringAmount
             // Update when adding access to real data.
-            iconValue={normalizeValue(25, [0, 500])}
+            iconValue={Math.round(normalizeValue(25, [0, 500], [0, 5]))}
             valueLabel={t(`treeView.infoList.wateringAmount.value`, {
               value: 25,
             })}
@@ -305,32 +308,38 @@ const TreePage: TreePageWithLayout = ({ treeId, csrfToken }) => {
               'shadow-[0_-12px_24px_-16px_rgba(0,0,0,0.3)]'
             )}
           >
-            <Carousel dotsClass="slick-dots w-2/6 md:w-1/4 mx-auto">
-              {!nowcastError && (
-                <GroundLayersViz
-                  depth30StatusId={
-                    nowcastData && nowcastData.depth30Row?.value
-                      ? mapSuctionTensionToStatus(nowcastData.depth30Row?.value)
-                          ?.id
-                      : undefined
-                  }
-                  depth60StatusId={
-                    nowcastData && nowcastData.depth60Row?.value
-                      ? mapSuctionTensionToStatus(nowcastData.depth60Row?.value)
-                          ?.id
-                      : undefined
-                  }
-                  depth90StatusId={
-                    nowcastData && nowcastData.depth90Row?.value
-                      ? mapSuctionTensionToStatus(nowcastData.depth90Row?.value)
-                          ?.id
-                      : undefined
-                  }
-                  averageStatusId={avgLevel}
-                />
-              )}
-              {!forecastError && <ForecastViz data={forecast} />}
-            </Carousel>
+            {treeData?.street_tree && (
+              <Carousel dotsClass="slick-dots w-2/6 md:w-1/4 mx-auto">
+                {!nowcastError && (
+                  <GroundLayersViz
+                    depth30StatusId={
+                      nowcastData && nowcastData.depth30Row?.value
+                        ? mapSuctionTensionToStatus(
+                            nowcastData.depth30Row?.value
+                          )?.id
+                        : undefined
+                    }
+                    depth60StatusId={
+                      nowcastData && nowcastData.depth60Row?.value
+                        ? mapSuctionTensionToStatus(
+                            nowcastData.depth60Row?.value
+                          )?.id
+                        : undefined
+                    }
+                    depth90StatusId={
+                      nowcastData && nowcastData.depth90Row?.value
+                        ? mapSuctionTensionToStatus(
+                            nowcastData.depth90Row?.value
+                          )?.id
+                        : undefined
+                    }
+                    averageStatusId={avgLevel}
+                  />
+                )}
+                {!forecastError && <ForecastViz data={forecast} />}
+              </Carousel>
+            )}
+            {!treeData?.street_tree && <ParkTreeHint />}
           </div>
           <TreeInfoHeader
             species={

@@ -1,5 +1,6 @@
 import { FC } from 'react'
 import classNames from 'classnames'
+import colors from './../../../style/colors'
 export interface ProgressClockPropType {
   progress: number
   strokeColorBackground?: string
@@ -9,8 +10,8 @@ export interface ProgressClockPropType {
 
 export const ProgressClock: FC<ProgressClockPropType> = ({
   progress,
-  strokeColorBackground = '#9EA3AE',
-  fillColor = '#111827',
+  strokeColorBackground = colors.gray['400'],
+  fillColor = colors.gray['900'],
   className,
 }) => (
   <div
