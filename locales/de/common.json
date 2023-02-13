@@ -126,7 +126,7 @@
         "other": "Vor {{count}} Jahren gepflanzt"
       }
     },
-    "parkTreeHint": "Dieser Baum steht in einer öffentlichen Grün- und Erholungsanlage. Seine Standortbedingungen weichen stark von denen eines Straßenbaumes ab und er ist daher nicht Teil des Vorhersagemodells.",
+    "parkTreeHint": "Dieser Baum ist ein Anlagenbaum. Anlagenbäume stehen oftmals in öffentlichen Grün- und Erholungsanlagen, weshalb die Standortbedingungen von denen von Straßenbäumen abweichen können. Daher gibt es für diesen Baum keine Informationen zur Wasserversorgung.",
     "infoList": {
       "waterSupply": {
         "label": "Wasserversorgung",
