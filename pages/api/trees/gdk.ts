@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY
-const SUPABASE_API_URL = process.env.SUPABASE_API_URL
+const SUPABASE_GDK_ANON_KEY = process.env.SUPABASE_GDK_ANON_KEY
+const SUPABASE_GDK_API_URL = process.env.SUPABASE_GDK_API_URL
 /**
  * Small wrapper to fetch the primary key id
  * from the giessdenkiez.de database API by looking it up
@@ -13,21 +13,21 @@ const SUPABASE_API_URL = process.env.SUPABASE_API_URL
  * `https://www.giessdenkiez.de/tree/_1234567`
  * @example
  * fetch('/api/trees/gdk?gmlid=00008100:000be766')
- * // returns { data: { id: "_1234567", gmlid: '00008100:000be766' } }
+ * // returns { data: [{ id: "_1234567", gmlid: '00008100:000be766' }] }
  * @example
  * $ curl "http://localhost:3000/api/trees/gdk?gmlid=00008100:000be766"
- * > { "data": { "id": "_1234567", "gmlid": "00008100:000be766" } }
+ * > { "data": [{ "id": "_1234567", "gmlid": "00008100:000be766" }] }
  */
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<void> {
-  if (!SUPABASE_ANON_KEY) {
+  if (!SUPABASE_GDK_ANON_KEY) {
     const error = new Error('env var SUPABASE_ANON_KEY is missing')
     console.error(error)
     return res.status(500).json({ error })
   }
-  if (!SUPABASE_API_URL) {
+  if (!SUPABASE_GDK_API_URL) {
     const error = new Error('env var SUPABASE_API_URL is missing')
     console.error(error)
     return res.status(500).json({ error })
@@ -49,13 +49,13 @@ export default async function handler(
   switch (req.method) {
     case 'GET': {
       const response = await fetch(
-        `${SUPABASE_API_URL}/rest/v1/trees?gmlid=eq.${
+        `${SUPABASE_GDK_API_URL}/rest/v1/trees?gmlid=eq.${
           searchParams.get('gmlid') as string
         }&select=id,gmlid`,
         {
           method: 'GET',
           headers: {
-            apikey: SUPABASE_ANON_KEY,
+            apikey: SUPABASE_GDK_ANON_KEY,
             'Content-Type': 'application/json',
           },
         }
