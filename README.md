@@ -104,7 +104,7 @@ Note that there are 3 requirements for running the script:
 - Docker (required for the Supabase command)
 - Setting `export DATABASE_URL="postgresql://user:password@your-postgrest-server.com/your-table"` (or any other way of managing your shell variables)
 
-> **Gotcha**: As of February 2023 the type genrator does not recognize database views, so you will have to type these yourself by inspecting a view and setting it accordingly wherever you make the request for it.
+> **Gotcha**: As of February 2023 the type generator does not recognize database views, so you will have to type these yourself by inspecting a view and setting its types accordingly wherever you make the request for it.
 
 ## Deployment
 
