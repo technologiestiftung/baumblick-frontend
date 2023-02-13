@@ -126,6 +126,7 @@
         "other": "Vor {{count}} Jahren gepflanzt"
       }
     },
+    "parkTreeHint": "Dieser Baum ist ein Anlagenbaum. Anlagenbäume stehen oftmals in öffentlichen Grün- und Erholungsanlagen, weshalb die Standortbedingungen von denen von Straßenbäumen abweichen können. Daher gibt es für diesen Baum keine Informationen zur Wasserversorgung.",
     "infoList": {
       "waterSupply": {
         "label": "Wasserversorgung",
@@ -168,7 +169,6 @@
     "modalCancel": "Abbrechen",
     "confirmationTitle": "Danke! Erfolgreich gemeldet!",
     "confirmationDescription": "Ab morgen kannst du wieder etwas melden",
-    "introduction": "Deine Meldungen können uns helfen, das KI-basierte Vorhersagemodell zu verbessern.",
     "loading": "Infos werden geladen...",
     "error": "Es ist beim Laden der Infos ein Fehler aufgetreten:"
   }

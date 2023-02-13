@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import colors from './../../../style/colors'
 
 export interface ProgressSquarePropType {
   progress: number
@@ -9,8 +10,8 @@ export interface ProgressSquarePropType {
 
 export const ProgressSquare: FC<ProgressSquarePropType> = ({
   progress,
-  strokeColorBackground = '#9EA3AE',
-  fillColor = '#111827',
+  strokeColorBackground = colors.gray['400'],
+  fillColor = colors.gray['900'],
   className,
 }) => {
   const hundredPercentArea = Math.pow(50, 2)
