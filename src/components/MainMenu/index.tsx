@@ -36,7 +36,7 @@ export const MainMenu: FC = () => {
     <div
       className={classNames(
         'bottom-0 lg:top-0',
-        'fixed left-1/2 -translate-x-1/2 h-16 z-50',
+        'fixed left-1/2 -translate-x-1/2 h-16',
         'w-full bg-white border-t border-gray-300',
         'flex gap-[1px] drop-shadow-lg'
       )}
