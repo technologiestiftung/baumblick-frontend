@@ -8,6 +8,7 @@ import { FC, useState } from 'react'
 interface FeedbackRequestsListPropType {
   treeData: TreeDataType | undefined
   csrfToken: string
+  className?: string
 }
 
 export const FeedbackRequestsList: FC<FeedbackRequestsListPropType> = ({
@@ -23,7 +24,7 @@ export const FeedbackRequestsList: FC<FeedbackRequestsListPropType> = ({
     useState<IssueTypeType | null>(null)
 
   return (
-    <div className="relative bg-white z-0 pt-8">
+    <div className="relative bg-white z-0">
       {!error &&
         issues?.map((issueType) => (
           <FeedbackReportForm
