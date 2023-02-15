@@ -135,7 +135,7 @@
       },
       "rainAmount": {
         "label": "Niederschlagsmenge",
-        "hint": "Letzte 14 Tage",
+        "hint": "In den letzten 14 Tagen",
         "value": "{{value}} l/qm"
       },
       "treeDisc": {
@@ -150,7 +150,7 @@
       },
       "wateringAmount": {
         "label": "Gießwassermenge",
-        "hint": "Letzte 14 Tage",
+        "hint": "In den letzten 60 Tagen",
         "value": "{{value}} l"
       },
       "trunkCircumference": {
