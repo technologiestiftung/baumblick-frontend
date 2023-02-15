@@ -77,7 +77,7 @@ export const TreeInfoList: FC<TreeInfoListType> = ({
             <DatavisIcon
               iconType="water-drops"
               iconValue={Math.round(
-                normalizeValue(rainValue, [0, 500], [0, 5])
+                normalizeValue(rainValue, [0, 250], [0, 5])
               )}
               valueLabel={t(`treeView.infoList.rainAmount.value`, {
                 value: rainValue.toFixed(1),
@@ -96,7 +96,7 @@ export const TreeInfoList: FC<TreeInfoListType> = ({
             <DatavisIcon
               iconType="water-drops"
               iconValue={Math.round(
-                normalizeValue(wateringValue, [0, 500], [0, 5])
+                normalizeValue(wateringValue, [0, 250], [0, 5])
               )}
               valueLabel={t(`treeView.infoList.wateringAmount.value`, {
                 value: wateringValue.toFixed(),
