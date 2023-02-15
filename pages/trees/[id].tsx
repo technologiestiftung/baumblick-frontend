@@ -1,11 +1,10 @@
-import { FC, ReactElement, ReactNode } from 'react'
+import { ReactElement, ReactNode } from 'react'
 import { MapLayout } from '@layouts/MapLayout'
 import classNames from 'classnames'
 import { GetServerSideProps, NextPage } from 'next'
 import { TreeDataType } from '@lib/requests/getTreeData'
 import { useNowcastData } from '@lib/hooks/useNowcastData'
 import { TreeInfoHeader } from '@components/TreeInfoHeader'
-import { DataListItem } from '@components/DataListItem'
 import { mapSuctionTensionToStatus } from '@lib/utils/mapSuctionTensionToStatus'
 import { GroundLayersViz } from '@components/GroundLayersViz'
 import { useRouter } from 'next/router'
@@ -22,18 +21,13 @@ import csrf from '@lib/api/csrf'
 import { useForecastData } from '@lib/hooks/useForecastData'
 import { combineNowAndForecastData } from '@lib/utils/forecastUtil/forecastUtil'
 import { useTreeRainAmount } from '@lib/hooks/useTreeRainAmount'
-import { TreeRainAmountType } from '@lib/requests/getTreeRainAmount'
-import { MappedNowcastRowsType } from '@lib/utils/mapRowsToDepths'
 import { useTreeData } from '@lib/hooks/useTreeData'
 import { mapRawQueryToState } from '@lib/utils/queryUtil'
 import { Head } from '@components/Head'
-import { DatavisIcon } from '@components/DatavisIcons/DatavisIcon'
-import { normalizeValue } from '@lib/utils/normalizeValue'
 import { ParkTreeHint } from '@components/ParkTreeHint'
-import {
-  useShadingData,
-  useShadingDataReturnType,
-} from '@lib/hooks/useShadingData'
+import { useShadingData } from '@lib/hooks/useShadingData'
+import { useWateringData } from '@lib/hooks/useWateringData'
+import { TreeInfoList } from '@components/TreeInfoList'
 
 interface TreePageComponentPropType {
   treeId: TreeDataType['id']
@@ -81,128 +75,6 @@ export const getServerSideProps: GetServerSideProps<
   }
 }
 
-const NoDataIndicator: FC = () => <span>–</span>
-
-const InfoList: FC<{
-  treeData: TreeDataType | null
-  treeDataIsLoading: boolean
-  treeDataError: Error | null
-  nowcastData: MappedNowcastRowsType | null
-  nowcastIsLoading: boolean
-  nowcastError: Error | null
-  rainData: TreeRainAmountType | null
-  rainIsLoading: boolean
-  rainError: Error | null
-  shadingData: useShadingDataReturnType['data']
-  shadingIsLoading: useShadingDataReturnType['isLoading']
-  shadingError: useShadingDataReturnType['error']
-}> = ({
-  treeData,
-  treeDataIsLoading,
-  rainData,
-  rainIsLoading,
-  shadingData,
-  shadingIsLoading,
-}) => {
-  const { t } = useTranslation('common')
-
-  // Original shadingData is between 0 - 1, so we multiply by 100:
-  const shadingValue = !shadingIsLoading && shadingData && shadingData * 100
-  const rainValue = !rainIsLoading && rainData
-  const treeDiscValue = !treeDataIsLoading && treeData?.baumscheibe
-  const trunkCircumferenceValue = !treeDataIsLoading && treeData?.stammumfg
-
-  return (
-    <ul className="relative z-10 bg-white">
-      <DataListItem
-        title={t(`treeView.infoList.shading.label`)}
-        subtitle={t(`treeView.infoList.shading.hint`)}
-        datavisIcon={
-          shadingValue ? (
-            <DatavisIcon
-              iconType="clock"
-              iconValue={normalizeValue(shadingValue, [0, 100])}
-              valueLabel={t(`treeView.infoList.shading.value`, {
-                value: shadingValue.toFixed(0),
-              })}
-            />
-          ) : (
-            <NoDataIndicator />
-          )
-        }
-      />
-      <DataListItem
-        title={t(`treeView.infoList.rainAmount.label`)}
-        subtitle={t(`treeView.infoList.rainAmount.hint`)}
-        datavisIcon={
-          rainValue ? (
-            <DatavisIcon
-              iconType="water-drops"
-              iconValue={Math.round(
-                normalizeValue(rainValue, [0, 500], [0, 5])
-              )}
-              valueLabel={t(`treeView.infoList.rainAmount.value`, {
-                value: rainValue.toFixed(1),
-              })}
-            />
-          ) : (
-            <NoDataIndicator />
-          )
-        }
-      />
-      <DataListItem
-        title={t(`treeView.infoList.wateringAmount.label`)}
-        subtitle={t(`treeView.infoList.wateringAmount.hint`)}
-        datavisIcon={
-          <DatavisIcon
-            iconType="water-drops"
-            // TODO: [QTREES-449] Remove dummy data for wateringAmount
-            // Update when adding access to real data.
-            iconValue={Math.round(normalizeValue(25, [0, 500], [0, 5]))}
-            valueLabel={t(`treeView.infoList.wateringAmount.value`, {
-              value: 25,
-            })}
-          />
-        }
-      />
-      <DataListItem
-        title={t(`treeView.infoList.treeDisc.label`)}
-        subtitle={t(`treeView.infoList.treeDisc.hint`)}
-        datavisIcon={
-          treeDiscValue ? (
-            <DatavisIcon
-              iconType="square"
-              iconValue={normalizeValue(treeDiscValue, [0, 10])}
-              valueLabel={t(`treeView.infoList.treeDisc.value`, {
-                value: treeData?.baumscheibe,
-              })}
-            />
-          ) : (
-            <NoDataIndicator />
-          )
-        }
-      />
-      <DataListItem
-        title={t(`treeView.infoList.trunkCircumference.label`)}
-        subtitle={t(`treeView.infoList.trunkCircumference.hint`)}
-        datavisIcon={
-          trunkCircumferenceValue ? (
-            <DatavisIcon
-              iconType="circle"
-              iconValue={normalizeValue(trunkCircumferenceValue, [0, 800])}
-              valueLabel={t(`treeView.infoList.trunkCircumference.value`, {
-                value: trunkCircumferenceValue,
-              })}
-            />
-          ) : (
-            <NoDataIndicator />
-          )
-        }
-      />
-    </ul>
-  )
-}
-
 const TreePage: TreePageWithLayout = ({ treeId, csrfToken }) => {
   const { t } = useTranslation('common')
   const { push } = useRouter()
@@ -238,6 +110,12 @@ const TreePage: TreePageWithLayout = ({ treeId, csrfToken }) => {
     error: rainError,
     isLoading: rainIsLoading,
   } = useTreeRainAmount(treeData?.id)
+
+  const {
+    data: wateringData,
+    error: wateringDataError,
+    isLoading: wateringDataIsLoading,
+  } = useWateringData(treeData?.id, csrfToken)
 
   if (treeDataError) {
     void push('/404')
@@ -379,7 +257,7 @@ const TreePage: TreePageWithLayout = ({ treeId, csrfToken }) => {
               {
                 name: t('treeView.tabs.0'),
                 content: (
-                  <InfoList
+                  <TreeInfoList
                     treeData={treeData}
                     treeDataIsLoading={treeDataLoading}
                     treeDataError={treeDataError}
@@ -392,6 +270,9 @@ const TreePage: TreePageWithLayout = ({ treeId, csrfToken }) => {
                     shadingData={shadingData}
                     shadingError={shadingError}
                     shadingIsLoading={shadingIsLoading}
+                    wateringData={wateringData}
+                    wateringDataError={wateringDataError}
+                    wateringDataIsLoading={wateringDataIsLoading}
                   />
                 ),
               },

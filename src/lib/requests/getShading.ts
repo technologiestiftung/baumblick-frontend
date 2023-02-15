@@ -10,6 +10,7 @@ export type ShadingType = Database['public']['Tables']['shading']['Row']
 /**
  * Fetches the current shading data for a tree.
  * @param treeId string
+ * @param csrfToken string
  * @returns Promise<number | undefined>
  */
 export const getShading = async (
