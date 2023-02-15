@@ -217,7 +217,7 @@ const TreePage: TreePageWithLayout = ({ treeId, csrfToken }) => {
                 {!forecastError && <ForecastViz data={forecast} />}
               </Carousel>
             )}
-            {!treeData?.street_tree && <ParkTreeHint />}
+            {!treeDataLoading && !treeData?.street_tree && <ParkTreeHint />}
           </div>
           <TreeInfoHeader
             species={
