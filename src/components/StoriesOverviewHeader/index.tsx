@@ -24,13 +24,13 @@ export const StoriesOverviewHeader: FC = () => {
         )}
         ref={headerRef}
       >
-        <Header compact={hasScrolledPastThreshold} />
+        <Header compact={hasScrolledPastThreshold} className="lg:hidden" />
         <h1
           className={classNames(
             'border-b border-gray-200 px-4',
             'md:border-r md:border-l',
             'transition-all',
-            hasScrolledPastThreshold ? 'pb-3 pt-0' : 'pb-6 pt-3',
+            hasScrolledPastThreshold ? 'pb-3 pt-0' : 'pb-6 pt-3 lg:pt-5',
             hasScrolledPastThreshold ? 'text-xl' : 'text-3xl',
             hasScrolledPastThreshold ? 'font-bold' : 'font-semibold'
           )}

@@ -68,12 +68,12 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => ({
 })
 
 export const Stories: FC = () => (
-  <>
+  <div className="max-w-screen-md mx-auto">
     <StoriesOverviewHeader />
     {Object.values(stories).map((story) => (
       <StoryLink {...story} key={story.path} />
     ))}
-  </>
+  </div>
 )
 
 export default Stories
