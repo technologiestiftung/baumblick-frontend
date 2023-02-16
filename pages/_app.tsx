@@ -8,6 +8,7 @@ import { useMatomo } from '@lib/hooks/useMatomo'
 import { MainMenu } from '@components/MainMenu'
 import type { AppProps as NextAppProps } from 'next/app'
 import classNames from 'classnames'
+import { useRouter } from 'next/router'
 interface PagePropsType extends Record<string, unknown> {
   title?: string
   query: ParsedUrlQuery
@@ -20,6 +21,7 @@ interface AppPropsType extends NextAppProps {
 
 const App: FC<AppPropsType> = ({ Component, pageProps }) => {
   useMatomo()
+  const { pathname } = useRouter()
 
   const getLayout = Component.getLayout ?? ((page) => <>{page}</>)
 
@@ -35,7 +37,12 @@ const App: FC<AppPropsType> = ({ Component, pageProps }) => {
           'overflow-x-hidden md:overflow-x-visible overflow-y-scroll '
         )}
       >
-        <div className="w-screen">
+        <div
+          className={classNames(
+            'w-screen',
+            !pathname.startsWith('/trees') && 'lg:mt-16'
+          )}
+        >
           {getLayout(<Component {...pageProps} />, pageProps)}
         </div>
       </main>

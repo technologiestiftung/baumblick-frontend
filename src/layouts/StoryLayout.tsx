@@ -56,7 +56,7 @@ const StoryLayoutWithoutTranslation: FC = ({ children }) => {
 
   return (
     <>
-      <Header className="border-b border-gray-200" />
+      <Header className="border-b border-gray-200 lg:hidden" />
       <StoryStickyHeader
         headings={headings}
         activeHeadingTitle={activeHeadingTitle}
@@ -66,7 +66,7 @@ const StoryLayoutWithoutTranslation: FC = ({ children }) => {
           showStickyTableOfContents
         }
       />
-      <section className="px-4 md:px-8 pt-6 pb-2">
+      <section className="max-w-screen-md mx-auto px-4 md:px-8 pt-6 pb-2">
         {backLink}
         <div className="grid grid-cols-[1fr,auto] gap-2">
           <Headline h1>{story.title}</Headline>
@@ -86,7 +86,7 @@ const StoryLayoutWithoutTranslation: FC = ({ children }) => {
           <LeadParagraph>{story.leadParagraph}</LeadParagraph>
         )}
       </section>
-      <nav className="mb-8">
+      <nav className="max-w-screen-md mx-auto mb-8">
         <TableOfContents chapters={headings} onChapterClick={scrollToHeading} />
       </nav>
       <div
@@ -122,10 +122,13 @@ const StoryLayoutWithoutTranslation: FC = ({ children }) => {
           </div>
         </div>
       </div>
-      <article className="px-4 md:px-8 prose font-serif pb-8" ref={contentRef}>
+      <article
+        className="!max-w-screen-md mx-auto px-4 md:px-8 prose font-serif pb-8"
+        ref={contentRef}
+      >
         {children}
       </article>
-      <div className="fixed w-full left-0 bottom-[4.5rem] pointer-events-none">
+      <div className="fixed w-full left-0 bottom-[4.5rem] lg:bottom-4 pointer-events-none">
         <div className="w-full max-w-3xl flex justify-end mx-auto">
           <Button
             className={classNames(
@@ -154,7 +157,7 @@ const StoryLayoutWithoutTranslation: FC = ({ children }) => {
           </Button>
         </div>
       </div>
-      <footer className="px-4 pb-12">
+      <footer className="max-w-screen-md mx-auto px-4 pb-12">
         <Paragraph className="italic text-gray-500">{story.author}</Paragraph>
         <br />
         <hr />

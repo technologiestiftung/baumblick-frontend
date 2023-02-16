@@ -2,6 +2,7 @@ import { Home, Map, News } from '@components/Icons'
 import { IconPropType } from '@components/Icons/IconPropType'
 import { InternalLink } from '@components/InternalLink'
 import classNames from 'classnames'
+import useTranslation from 'next-translate/useTranslation'
 import { useRouter } from 'next/router'
 import { FC } from 'react'
 
@@ -31,16 +32,32 @@ const links: LinkType[] = [
 
 export const MainMenu: FC = () => {
   const { pathname } = useRouter()
+  const { t } = useTranslation('common')
 
   return (
     <div
       className={classNames(
         'bottom-0 lg:top-0',
-        'fixed left-1/2 -translate-x-1/2 h-16 z-50',
+        'fixed left-1/2 -translate-x-1/2 h-16',
         'w-full bg-white border-t border-gray-300',
         'flex gap-[1px] drop-shadow-lg'
       )}
     >
+      <InternalLink
+        href="/"
+        className={classNames(
+          'px-1 inline-flex gap-2',
+          'text-gray-900',
+          'transition-colors focus:outline-none',
+          'focus:ring-2 focus:ring-gray-600',
+          'hover:text-gray-900 hover:underline',
+          'hidden lg:flex lg:items-center lg:px-7 hover:bg-gray-200',
+          'z-10'
+        )}
+      >
+        <img src="/logo.svg" alt="Baumblick Logo" className="h-6" />
+        <span className={'font-bold'}>{t('name.short')}</span>
+      </InternalLink>
       {links.map((link) => {
         const isActive =
           (pathname.startsWith('/trees') && link.path === '/trees') ||

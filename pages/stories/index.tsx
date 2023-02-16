@@ -49,9 +49,9 @@ export const stories: Record<string, StoryLinkPropType> = {
   },
   'qtrees-konsortium': {
     path: `/stories/qtrees-konsortium`,
-    title: `Das "Quantified Trees" Konsortium`,
-    author: `Julia Zimmermann`,
-    readingDurationInMinutes: 6,
+    title: `Das Team hinter der Baumblick App`,
+    author: `Technologiestiftung Berlin`,
+    readingDurationInMinutes: 4,
     excerpt: (
       <>Das Konsortium: wer steckt hinter Quantified Trees und Baumblick?</>
     ),
@@ -68,12 +68,12 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => ({
 })
 
 export const Stories: FC = () => (
-  <>
+  <div className="max-w-screen-md mx-auto">
     <StoriesOverviewHeader />
     {Object.values(stories).map((story) => (
       <StoryLink {...story} key={story.path} />
     ))}
-  </>
+  </div>
 )
 
 export default Stories
