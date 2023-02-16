@@ -37,8 +37,8 @@ export const stories: Record<string, StoryLinkPropType> = {
   'saugspannung-und-sensoren': {
     path: `/stories/saugspannung-und-sensoren`,
     title: `Über Saugspannung und Sensoren`,
-    author: `Arbor Revital`,
-    readingDurationInMinutes: 4,
+    author: `ARBOR revital`,
+    readingDurationInMinutes: 3,
     excerpt: (
       <>
         Was genau ist eine Saugspannung und welche Sensoren nutzt die Stadt
