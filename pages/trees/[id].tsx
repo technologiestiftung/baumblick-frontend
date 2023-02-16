@@ -8,7 +8,7 @@ import { TreeInfoHeader } from '@components/TreeInfoHeader'
 import { mapSuctionTensionToStatus } from '@lib/utils/mapSuctionTensionToStatus'
 import { GroundLayersViz } from '@components/GroundLayersViz'
 import { useRouter } from 'next/router'
-import { Cross as CrossIcon } from '@components/Icons'
+import { Cross as CrossIcon, Gdk as GdkIcon } from '@components/Icons'
 import { useHasScrolledPastThreshold } from '@lib/hooks/useHasScrolledPastThreshold'
 import { Carousel } from '@components/Carousel'
 import { Tabs } from '@components/Tabs'
@@ -28,6 +28,11 @@ import { ParkTreeHint } from '@components/ParkTreeHint'
 import { useShadingData } from '@lib/hooks/useShadingData'
 import { useWateringData } from '@lib/hooks/useWateringData'
 import { TreeInfoList } from '@components/TreeInfoList'
+import { Button } from '@components/Button'
+import { useGdkTreeId } from '@lib/hooks/useGdkTreeId'
+import { ImageCard } from '@components/ImageCard'
+import colors from 'src/style/colors'
+import { calculateAge } from '@lib/utils/calculateAge'
 
 interface TreePageComponentPropType {
   treeId: TreeDataType['id']
@@ -103,6 +108,10 @@ const TreePage: TreePageWithLayout = ({ treeId, csrfToken }) => {
   const { data: forecastData, error: forecastError } = useForecastData(
     treeData?.id,
     csrfToken
+  )
+
+  const { data: gdkTreeId, isLoading: gdkTreeIdIsLoading } = useGdkTreeId(
+    treeData?.id
   )
 
   const {
@@ -225,7 +234,7 @@ const TreePage: TreePageWithLayout = ({ treeId, csrfToken }) => {
                 ? t('loading')
                 : treeData?.art_dtsch || 'Unbekannte Art'
             }
-            age={treeData?.standalter}
+            age={calculateAge(treeData?.pflanzjahr)}
             height={treeData?.baumhoehe}
             statusBackgroundColor={circleColorClasses.bg}
             statusBorderColor={circleColorClasses.border}
@@ -245,7 +254,7 @@ const TreePage: TreePageWithLayout = ({ treeId, csrfToken }) => {
                   ? treeData?.art_dtsch || 'Unbekannte Art'
                   : '–'
               }
-              age={treeData?.standalter}
+              age={calculateAge(treeData?.pflanzjahr)}
               height={treeData?.baumhoehe}
               statusBackgroundColor={circleColorClasses.bg}
               statusBorderColor={circleColorClasses.border}
@@ -279,10 +288,31 @@ const TreePage: TreePageWithLayout = ({ treeId, csrfToken }) => {
               {
                 name: t('treeView.tabs.1'),
                 content: (
-                  <FeedbackRequestsList
-                    treeData={treeData || undefined}
-                    csrfToken={csrfToken}
-                  />
+                  <div className="pt-8 relative bg-white">
+                    {!gdkTreeIdIsLoading && gdkTreeId && (
+                      <ImageCard
+                        title={t('gdk.title')}
+                        description={t('gdk.description')}
+                        imageUrl="/images/giessdenkiez_watering.webp"
+                      >
+                        <Button
+                          primary
+                          href={`https://giessdenkiez.de/tree/${gdkTreeId}`}
+                        >
+                          <GdkIcon
+                            color1={colors.white}
+                            color2={colors.gray['700']}
+                          />
+                          {t('gdk.cta')}
+                        </Button>
+                      </ImageCard>
+                    )}
+                    <FeedbackRequestsList
+                      treeData={treeData || undefined}
+                      csrfToken={csrfToken}
+                      className="pl-6 pb-6"
+                    />
+                  </div>
                 ),
               },
             ]}
