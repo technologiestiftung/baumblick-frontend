@@ -89,9 +89,6 @@
 	}
 	
 	/* Prose styles (tailwindcss typography plugin) */
-	main .prose {
-		@apply max-w-full;
-	}
 	main .prose > p:not(.lead):first-of-type::first-letter {
 		@apply float-left mr-5 text-[5.5em] leading-[.9em];
 	}
