@@ -49,9 +49,9 @@ export const stories: Record<string, StoryLinkPropType> = {
   },
   'qtrees-konsortium': {
     path: `/stories/qtrees-konsortium`,
-    title: `Das "Quantified Trees" Konsortium`,
-    author: `Julia Zimmermann`,
-    readingDurationInMinutes: 6,
+    title: `Das Team hinter der Baumblick App`,
+    author: `Technologiestiftung Berlin`,
+    readingDurationInMinutes: 4,
     excerpt: (
       <>Das Konsortium: wer steckt hinter Quantified Trees und Baumblick?</>
     ),
