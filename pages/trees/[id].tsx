@@ -32,6 +32,7 @@ import { Button } from '@components/Button'
 import { useGdkTreeId } from '@lib/hooks/useGdkTreeId'
 import { ImageCard } from '@components/ImageCard'
 import colors from 'src/style/colors'
+import { calculateAge } from '@lib/utils/calculateAge'
 
 interface TreePageComponentPropType {
   treeId: TreeDataType['id']
@@ -233,7 +234,7 @@ const TreePage: TreePageWithLayout = ({ treeId, csrfToken }) => {
                 ? t('loading')
                 : treeData?.art_dtsch || 'Unbekannte Art'
             }
-            age={treeData?.standalter}
+            age={calculateAge(treeData?.pflanzjahr)}
             height={treeData?.baumhoehe}
             statusBackgroundColor={circleColorClasses.bg}
             statusBorderColor={circleColorClasses.border}
@@ -253,7 +254,7 @@ const TreePage: TreePageWithLayout = ({ treeId, csrfToken }) => {
                   ? treeData?.art_dtsch || 'Unbekannte Art'
                   : '–'
               }
-              age={treeData?.standalter}
+              age={calculateAge(treeData?.pflanzjahr)}
               height={treeData?.baumhoehe}
               statusBackgroundColor={circleColorClasses.bg}
               statusBorderColor={circleColorClasses.border}
