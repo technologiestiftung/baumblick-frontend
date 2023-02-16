@@ -160,6 +160,11 @@
       }
     }
   },
+  "gdk": {
+    "title": "Baum gießen",
+    "description": "Du hast den Baum gegossen oder möchtest wissen, wer im Kiez bei dir aktiv ist? Dann ab zu Gieß den Kiez.",
+    "cta": "Baum auf Gieß den Kiez öffnen"
+  },
   "feedback": {
     "imageAlt": "So kann/können „{{title}}“ aussehen",
     "reportButton": "{{title}} melden",
