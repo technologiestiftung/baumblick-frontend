@@ -69,7 +69,7 @@ export const SideBySideScrollAnimation = (): JSX.Element => {
   const offset = windowHeight ? windowHeight * 0.375 : 300
 
   return (
-    <div style={{ height: wrapperHeight }} ref={wrapperElement} id="story">
+    <div style={{ height: wrapperHeight }} ref={wrapperElement}>
       <div className="box-border w-full sticky top-0 p-4 !pt-16 h-[100vh] screen600:p-8">
         <div className="h-full absolute top-0 right-5 flex flex-col justify-center z-50">
           <ul className="m-0 list-none">

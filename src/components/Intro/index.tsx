@@ -24,6 +24,7 @@ export const Intro: FC = () => {
               )
             })}
           </div>
+          <div id="end-of-intro" className="lg:pb-8"></div>
         </GridDefault>
       </ContentGrid>
     </div>
