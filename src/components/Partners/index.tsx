@@ -10,7 +10,7 @@ export const Partners: FC = () => {
       <ContentGrid>
         <div
           className={classNames(
-            'w-full flex flex-col col-start-1 col-span-6',
+            'w-full flex flex-col gap-y-12 col-start-1 col-span-6',
             'md:col-start-4 md:col-span-6',
             'lg:col-start-1 lg:col-span-12 lg:flex-row lg:justify-between'
           )}
