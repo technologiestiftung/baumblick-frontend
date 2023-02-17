@@ -7,7 +7,7 @@ export const Intro: FC = () => {
   return (
     <div
       className="bg-turquoise py-[5.625rem] screen1200:py-[20vh]"
-      id="learn-more-anchor"
+      id="learn-more"
     >
       <ContentGrid>
         <GridDefault>

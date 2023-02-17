@@ -45,7 +45,7 @@ export const Hero: FC = () => {
             <Button href="/trees" primary className="w-full md:w-auto">
               {t('home.cta.findTree')}
             </Button>
-            <Button href="#learn-more-anchor" className="w-full md:w-auto">
+            <Button href="#learn-more" className="w-full md:w-auto">
               {t('home.cta.learnMore')}
             </Button>
           </div>
