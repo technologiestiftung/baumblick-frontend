@@ -9,9 +9,9 @@ export const Hero: FC = () => {
   return (
     <div
       className={classNames(
-        'w-full h-[calc(100vh-4rem)] px-8 pb-12',
+        'w-full h-[calc(100vh-4rem)] px-8 pt-4 pb-3 md:pb-12',
         'bg-orange',
-        'grid grid-cols-12 gap-8'
+        'grid grid-cols-12 gap-y-4 sm:gap-x-8'
       )}
     >
       <img
