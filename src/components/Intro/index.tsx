@@ -1,6 +1,5 @@
 import useTranslation from 'next-translate/useTranslation'
 import { FC } from 'react'
-import { Button } from '@components/Button'
 import { ContentGrid, GridDefault } from '@components/ContentGrid'
 
 export const Intro: FC = () => {
@@ -28,10 +27,6 @@ export const Intro: FC = () => {
               )
             })}
           </div>
-
-          <Button href="/trees" primary className="w-full">
-            {t('home.cta.findTree')}
-          </Button>
         </GridDefault>
       </ContentGrid>
     </div>
