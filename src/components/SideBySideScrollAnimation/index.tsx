@@ -70,7 +70,7 @@ export const SideBySideScrollAnimation = (): JSX.Element => {
 
   return (
     <div style={{ height: wrapperHeight }} ref={wrapperElement} id="story">
-      <div className="box-border w-full sticky top-0 p-4 h-[100vh] screen600:p-8">
+      <div className="box-border w-full sticky top-0 p-4 !pt-16 h-[100vh] screen600:p-8">
         <div className="h-full absolute top-0 right-5 flex flex-col justify-center z-50">
           <ul className="m-0 list-none">
             {keyframes.map((_, index: number) => {
