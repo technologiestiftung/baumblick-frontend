@@ -13,10 +13,10 @@ export const OUTDATED_NOWCAST_INDICATORS_LAYER_ID =
   'outdated_nowcast_indicators'
 
 /** Name of the source in the vector tileset */
-export const TREES_SOURCE_ID = 'outfull'
+export const TREES_SOURCE_ID = 'treesgeo'
 
 /** Name of the source layer in the vector tileset */
-export const TREES_SOURCE_LAYER_ID = 'outfull'
+export const TREES_SOURCE_LAYER_ID = 'treesgeo'
 
 const NOWCAST_AVERAGE_PROPERTY = 'nowcast_values_stamm'
 
