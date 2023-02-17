@@ -1,35 +1,54 @@
 import useTranslation from 'next-translate/useTranslation'
 import { FC } from 'react'
 import classNames from 'classnames'
+import { Button } from '@components/Button'
 
 export const Hero: FC = () => {
   const { t } = useTranslation('common')
+
   return (
     <div
       className={classNames(
-        'w-full h-screen grid grid-rows-[auto min-content] gap-0 bg-orange',
-        'screen1200:grid-rows-[auto] screen1200:grid-cols-[1fr_1fr] screen1200:gap-6 screen1200:px-14',
-        'screen1440:gap-8'
+        'w-full h-[calc(100vh-4rem)] px-8 pb-12',
+        'bg-orange',
+        'grid grid-cols-12 gap-8'
       )}
     >
-      <div className="w-full overflow-hidden">
-        <img
-          className="w-full h-full object-cover"
-          src="/images/hero-image-1200px.png"
-          alt=""
-          aria-hidden={true}
-        />
-      </div>
+      <img
+        className={classNames(
+          'col-span-12 sm:col-span-6',
+          'w-full h-full object-scale-down'
+        )}
+        src="/images/hero-illustration.svg"
+        alt=""
+        aria-hidden={true}
+      />
 
       <div
         className={classNames(
+          'col-span-12 sm:col-span-6 lg:col-span-4',
           'font-sans font-semibold text-gray-900',
-          'mt-2 mx-4 flex flex-col justify-center items-start pb-16'
+          'flex items-center'
         )}
       >
         <div>
-          <h1 className="text-4xl mb-2">{t('home.hero.title')}</h1>
-          <p className="text-base mb-20">{t('home.hero.text')}</p>
+          <h1 className="text-4xl lg:text-5xl font-bold">
+            {t('home.hero.title')}
+          </h1>
+          <p className="mt-3 lg:mt-4">{t('home.hero.text')}</p>
+          <div
+            className={classNames(
+              'mt-5 md:mt-6 lg:mt-8',
+              'flex flex-wrap gap-y-2.5 gap-x-4'
+            )}
+          >
+            <Button href="/trees" primary className="w-full md:w-auto">
+              {t('home.cta.findTree')}
+            </Button>
+            <Button href="#learn-more-anchor" className="w-full md:w-auto">
+              {t('home.cta.learnMore')}
+            </Button>
+          </div>
         </div>
       </div>
     </div>
