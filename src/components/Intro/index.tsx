@@ -5,17 +5,14 @@ import { ContentGrid, GridDefault } from '@components/ContentGrid'
 export const Intro: FC = () => {
   const { t } = useTranslation('common')
   return (
-    <div
-      className="bg-turquoise py-[5.625rem] screen1200:py-[20vh]"
-      id="learn-more"
-    >
+    <div className="bg-turquoise py-16 lg:py-20">
       <ContentGrid>
         <GridDefault>
           <img
             src="/images/berlin_trees.webp"
             alt="Straßenbäume in Berlin rund um eine U-Bahn-Station"
           />
-          <div className="mt-6 mb-12 screen1200:mt-12">
+          <div className="mt-6 screen1200:mt-12">
             {['home.intro.text.1', 'home.intro.text.2'].map((text, index) => {
               return (
                 <p
