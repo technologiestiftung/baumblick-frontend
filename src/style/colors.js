@@ -15,10 +15,10 @@ const colors = {
   scale: {
     good: '#70BB89',
     'good-dark': '#52AB6f',
-    medium: '#FEAC76',
-    'medium-dark': '#EB8A4A',
-    critical: '#FBF5C0',
-    'critical-dark': '#E0D77E',
+    medium: '#FBF5C0',
+    'medium-dark': '#E0D77E',
+    critical: '#FEAC76',
+    'critical-dark': '#EB8A4A',
   },
   gradient: {
     '1': '#70BB89',
