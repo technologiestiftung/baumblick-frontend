@@ -1,33 +1,38 @@
-import { FC, ReactElement, ReactNode } from 'react'
+import { ReactElement, ReactNode } from 'react'
 import { MapLayout } from '@layouts/MapLayout'
 import classNames from 'classnames'
 import { GetServerSideProps, NextPage } from 'next'
 import { TreeDataType } from '@lib/requests/getTreeData'
 import { useNowcastData } from '@lib/hooks/useNowcastData'
 import { TreeInfoHeader } from '@components/TreeInfoHeader'
-import { DataListItem } from '@components/DataListItem'
 import { mapSuctionTensionToStatus } from '@lib/utils/mapSuctionTensionToStatus'
 import { GroundLayersViz } from '@components/GroundLayersViz'
 import { useRouter } from 'next/router'
-import { Cross as CrossIcon } from '@components/Icons'
+import { Cross as CrossIcon, Gdk as GdkIcon } from '@components/Icons'
 import { useHasScrolledPastThreshold } from '@lib/hooks/useHasScrolledPastThreshold'
 import { Carousel } from '@components/Carousel'
 import { Tabs } from '@components/Tabs'
 import useTranslation from 'next-translate/useTranslation'
 import { getClassesByStatusId } from '@lib/utils/getClassesByStatusId'
 import { treeUrlSlugToId } from '@lib/utils/urlUtil'
-import { getStatusLabel } from '@lib/utils/getStatusLabel'
 import { ForecastViz } from '@components/ForecastViz'
 import { FeedbackRequestsList } from '@components/FeedbackRequestsList'
 import csrf from '@lib/api/csrf'
 import { useForecastData } from '@lib/hooks/useForecastData'
 import { combineNowAndForecastData } from '@lib/utils/forecastUtil/forecastUtil'
 import { useTreeRainAmount } from '@lib/hooks/useTreeRainAmount'
-import { TreeRainAmountType } from '@lib/requests/getTreeRainAmount'
-import { MappedNowcastRowsType } from '@lib/utils/mapRowsToDepths'
 import { useTreeData } from '@lib/hooks/useTreeData'
 import { mapRawQueryToState } from '@lib/utils/queryUtil'
 import { Head } from '@components/Head'
+import { ParkTreeHint } from '@components/ParkTreeHint'
+import { useShadingData } from '@lib/hooks/useShadingData'
+import { useWateringData } from '@lib/hooks/useWateringData'
+import { TreeInfoList } from '@components/TreeInfoList'
+import { Button } from '@components/Button'
+import { useGdkTreeId } from '@lib/hooks/useGdkTreeId'
+import { ImageCard } from '@components/ImageCard'
+import colors from 'src/style/colors'
+import { calculateAge } from '@lib/utils/calculateAge'
 
 interface TreePageComponentPropType {
   treeId: TreeDataType['id']
@@ -75,81 +80,6 @@ export const getServerSideProps: GetServerSideProps<
   }
 }
 
-const InfoList: FC<{
-  treeData: TreeDataType | null
-  nowcastData: MappedNowcastRowsType | null
-  nowcastIsLoading: boolean
-  nowcastError: Error | null
-  rainData: TreeRainAmountType | null
-  rainIsLoading: boolean
-  rainError: Error | null
-}> = ({ treeData, nowcastData, nowcastIsLoading, nowcastError, rainData }) => {
-  const { t } = useTranslation('common')
-  const averageStatusId =
-    nowcastData &&
-    !nowcastIsLoading &&
-    !nowcastError &&
-    nowcastData.depthAverageRow?.value &&
-    mapSuctionTensionToStatus(nowcastData.depthAverageRow?.value)?.id
-
-  return (
-    <ul className="relative z-10 bg-white">
-      <DataListItem
-        title={t(`treeView.infoList.waterSupply.label`)}
-        subtitle={t(`treeView.infoList.waterSupply.hint`)}
-        value={
-          averageStatusId
-            ? t(`treeView.infoList.waterSupply.value`, {
-                value: getStatusLabel(averageStatusId),
-              })
-            : '-'
-        }
-      />
-      <DataListItem
-        title={t(`treeView.infoList.rainAmount.label`)}
-        subtitle={t(`treeView.infoList.rainAmount.hint`)}
-        value={
-          rainData
-            ? t(`treeView.infoList.rainAmount.value`, {
-                value: rainData.toFixed(1),
-              })
-            : '–'
-        }
-      />
-      <DataListItem
-        title={t(`treeView.infoList.treeDisc.label`)}
-        subtitle={t(`treeView.infoList.treeDisc.hint`)}
-        // TODO: [QTREES-447] Remove dummy data for treeDisc
-        // Update when adding access to real data.
-        value={t(`treeView.infoList.treeDisc.value`, { value: 3.1 })}
-      />
-      <DataListItem
-        title={t(`treeView.infoList.shading.label`)}
-        subtitle={t(`treeView.infoList.shading.hint`)}
-        // TODO: [QTREES-448] Remove dummy data for shading
-        // Update when adding access to real data.
-        value={t(`treeView.infoList.shading.value`, { value: 65 })}
-      />
-      <DataListItem
-        title={t(`treeView.infoList.wateringAmount.label`)}
-        subtitle={t(`treeView.infoList.wateringAmount.hint`)}
-        // TODO: [QTREES-449] Remove dummy data for wateringAmount
-        // Update when adding access to real data.
-        value={t(`treeView.infoList.wateringAmount.value`, { value: 25 })}
-      />
-      {treeData?.stammumfg && (
-        <DataListItem
-          title={t(`treeView.infoList.trunkCircumference.label`)}
-          subtitle={t(`treeView.infoList.trunkCircumference.hint`)}
-          value={t(`treeView.infoList.trunkCircumference.value`, {
-            value: treeData.stammumfg,
-          })}
-        />
-      )}
-    </ul>
-  )
-}
-
 const TreePage: TreePageWithLayout = ({ treeId, csrfToken }) => {
   const { t } = useTranslation('common')
   const { push } = useRouter()
@@ -169,9 +99,19 @@ const TreePage: TreePageWithLayout = ({ treeId, csrfToken }) => {
     isLoading: nowcastIsLoading,
   } = useNowcastData(treeData?.id, csrfToken)
 
+  const {
+    data: shadingData,
+    error: shadingError,
+    isLoading: shadingIsLoading,
+  } = useShadingData(treeData?.id, csrfToken)
+
   const { data: forecastData, error: forecastError } = useForecastData(
     treeData?.id,
     csrfToken
+  )
+
+  const { data: gdkTreeId, isLoading: gdkTreeIdIsLoading } = useGdkTreeId(
+    treeData?.id
   )
 
   const {
@@ -179,6 +119,12 @@ const TreePage: TreePageWithLayout = ({ treeId, csrfToken }) => {
     error: rainError,
     isLoading: rainIsLoading,
   } = useTreeRainAmount(treeData?.id)
+
+  const {
+    data: wateringData,
+    error: wateringDataError,
+    isLoading: wateringDataIsLoading,
+  } = useWateringData(treeData?.id, csrfToken)
 
   if (treeDataError) {
     void push('/404')
@@ -204,7 +150,7 @@ const TreePage: TreePageWithLayout = ({ treeId, csrfToken }) => {
       <div
         className={classNames(
           'max-w-3xl mx-auto',
-          'grid grid-cols-1 grid-rows-[124px,1fr] gap-0'
+          'grid grid-cols-1 grid-rows-[148px,1fr] gap-0'
         )}
       >
         <button
@@ -223,7 +169,7 @@ const TreePage: TreePageWithLayout = ({ treeId, csrfToken }) => {
         >
           <div
             className={classNames(
-              'absolute top-2 right-2',
+              'absolute top-2 lg:top-[69px] right-2',
               'p-2 bg-white rounded-full shadow-md hover:bg-gray-100',
               'border border-gray-300',
               'group-focus:ring-2 group-focus:ring-gray-900 group-focus:ring-offset-2',
@@ -249,32 +195,38 @@ const TreePage: TreePageWithLayout = ({ treeId, csrfToken }) => {
               'shadow-[0_-12px_24px_-16px_rgba(0,0,0,0.3)]'
             )}
           >
-            <Carousel dotsClass="slick-dots w-2/6 md:w-1/4 mx-auto">
-              {!nowcastError && (
-                <GroundLayersViz
-                  depth30StatusId={
-                    nowcastData && nowcastData.depth30Row?.value
-                      ? mapSuctionTensionToStatus(nowcastData.depth30Row?.value)
-                          ?.id
-                      : undefined
-                  }
-                  depth60StatusId={
-                    nowcastData && nowcastData.depth60Row?.value
-                      ? mapSuctionTensionToStatus(nowcastData.depth60Row?.value)
-                          ?.id
-                      : undefined
-                  }
-                  depth90StatusId={
-                    nowcastData && nowcastData.depth90Row?.value
-                      ? mapSuctionTensionToStatus(nowcastData.depth90Row?.value)
-                          ?.id
-                      : undefined
-                  }
-                  averageStatusId={avgLevel}
-                />
-              )}
-              {!forecastError && <ForecastViz data={forecast} />}
-            </Carousel>
+            {treeData?.street_tree && (
+              <Carousel dotsClass="slick-dots w-2/6 md:w-1/4 mx-auto">
+                {!nowcastError && (
+                  <GroundLayersViz
+                    depth30StatusId={
+                      nowcastData && nowcastData.depth30Row?.value
+                        ? mapSuctionTensionToStatus(
+                            nowcastData.depth30Row?.value
+                          )?.id
+                        : undefined
+                    }
+                    depth60StatusId={
+                      nowcastData && nowcastData.depth60Row?.value
+                        ? mapSuctionTensionToStatus(
+                            nowcastData.depth60Row?.value
+                          )?.id
+                        : undefined
+                    }
+                    depth90StatusId={
+                      nowcastData && nowcastData.depth90Row?.value
+                        ? mapSuctionTensionToStatus(
+                            nowcastData.depth90Row?.value
+                          )?.id
+                        : undefined
+                    }
+                    averageStatusId={avgLevel}
+                  />
+                )}
+                {!forecastError && <ForecastViz data={forecast} />}
+              </Carousel>
+            )}
+            {!treeDataLoading && !treeData?.street_tree && <ParkTreeHint />}
           </div>
           <TreeInfoHeader
             species={
@@ -282,7 +234,7 @@ const TreePage: TreePageWithLayout = ({ treeId, csrfToken }) => {
                 ? t('loading')
                 : treeData?.art_dtsch || 'Unbekannte Art'
             }
-            age={treeData?.standalter}
+            age={calculateAge(treeData?.pflanzjahr)}
             height={treeData?.baumhoehe}
             statusBackgroundColor={circleColorClasses.bg}
             statusBorderColor={circleColorClasses.border}
@@ -302,7 +254,7 @@ const TreePage: TreePageWithLayout = ({ treeId, csrfToken }) => {
                   ? treeData?.art_dtsch || 'Unbekannte Art'
                   : '–'
               }
-              age={treeData?.standalter}
+              age={calculateAge(treeData?.pflanzjahr)}
               height={treeData?.baumhoehe}
               statusBackgroundColor={circleColorClasses.bg}
               statusBorderColor={circleColorClasses.border}
@@ -314,24 +266,53 @@ const TreePage: TreePageWithLayout = ({ treeId, csrfToken }) => {
               {
                 name: t('treeView.tabs.0'),
                 content: (
-                  <InfoList
+                  <TreeInfoList
                     treeData={treeData}
+                    treeDataIsLoading={treeDataLoading}
+                    treeDataError={treeDataError}
                     nowcastData={nowcastData}
                     nowcastError={nowcastError}
                     nowcastIsLoading={nowcastIsLoading}
                     rainData={rainData}
                     rainError={rainError}
                     rainIsLoading={rainIsLoading}
+                    shadingData={shadingData}
+                    shadingError={shadingError}
+                    shadingIsLoading={shadingIsLoading}
+                    wateringData={wateringData}
+                    wateringDataError={wateringDataError}
+                    wateringDataIsLoading={wateringDataIsLoading}
                   />
                 ),
               },
               {
                 name: t('treeView.tabs.1'),
                 content: (
-                  <FeedbackRequestsList
-                    treeData={treeData || undefined}
-                    csrfToken={csrfToken}
-                  />
+                  <div className="pt-8 relative bg-white">
+                    {!gdkTreeIdIsLoading && gdkTreeId && (
+                      <ImageCard
+                        title={t('gdk.title')}
+                        description={t('gdk.description')}
+                        imageUrl="/images/giessdenkiez_watering.webp"
+                      >
+                        <Button
+                          primary
+                          href={`https://giessdenkiez.de/tree/${gdkTreeId}`}
+                        >
+                          <GdkIcon
+                            color1={colors.white}
+                            color2={colors.gray['700']}
+                          />
+                          {t('gdk.cta')}
+                        </Button>
+                      </ImageCard>
+                    )}
+                    <FeedbackRequestsList
+                      treeData={treeData || undefined}
+                      csrfToken={csrfToken}
+                      className="pl-6 pb-6"
+                    />
+                  </div>
                 ),
               },
             ]}

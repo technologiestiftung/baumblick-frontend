@@ -90,6 +90,24 @@ You are now ready to start a local development server on http://localhost:3000 v
 npm run dev
 ```
 
+## Development
+
+### TypeScript
+
+Since this app uses TypeScript and the data ist stored in a PostgreSQL database, we need a way to ensure type-safety for the requested data. We do this by fetching the types from the database schema and converting them to TypeScript types, to be found in `./src/lib/types/database.ts`.
+
+For that to work we have a [PostgREST](https://postgrest.org/en/stable/) server running in front of the database. PostgREST is part of the [Supabase](https://supabase.com/) ecosystem which is why we can use the [supabase/cli](https://github.com/supabase/cli) for generating our types from the PostgREST server.
+
+Whenever we need to update the types because of a database schema change, we can so by running `npm run generate-types`.
+
+Note that there are 3 requirements for running the script:
+
+- the [Supabase CLI](https://supabase.com/docs/guides/cli) installed locally as it does the actual type generation
+- Docker (required for the Supabase command)
+- Making environment variable `DATABASE_URL="postgresql://<USER>:<PASSWORD>@<HOST>/<DATABASE>"` available for the script
+
+> **Gotcha**: As of February 2023 the type generator does not recognize database views, so you will have to type these yourself by inspecting a view and setting its types accordingly wherever you make the request for it.
+
 ## Deployment
 
 **QTrees – Baumblick** is deployed to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).

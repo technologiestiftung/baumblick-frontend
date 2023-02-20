@@ -1,13 +1,16 @@
-import { FeedbackReportForm } from '@components/FeedbackReportForm'
+import { Button } from '@components/Button'
 import { FeedbackReportModal } from '@components/FeedbackReportModal'
+import { ImageCard } from '@components/ImageCard'
 import { IssueTypeType, useFeedbackData } from '@lib/hooks/useFeedbackData'
 import { TreeDataType } from '@lib/requests/getTreeData'
 import useTranslation from 'next-translate/useTranslation'
 import { FC, useState } from 'react'
+import { FeedbackConfirmation } from './FeedbackConfirmation'
 
 interface FeedbackRequestsListPropType {
   treeData: TreeDataType | undefined
   csrfToken: string
+  className?: string
 }
 
 export const FeedbackRequestsList: FC<FeedbackRequestsListPropType> = ({
@@ -24,16 +27,22 @@ export const FeedbackRequestsList: FC<FeedbackRequestsListPropType> = ({
 
   return (
     <div className="relative bg-white z-0">
-      <p className="px-8 py-8 font-serif md:text-lg">
-        {t('feedback.introduction')}
-      </p>
       {!error &&
         issues?.map((issueType) => (
-          <FeedbackReportForm
+          <ImageCard
             key={issueType.id}
-            {...issueType}
-            onButtonClick={() => setOpenedIssueModal(issueType)}
-          />
+            title={issueType.title}
+            description={issueType.description}
+            imageUrl={issueType.imageUrl || ''}
+          >
+            {issueType.alreadyReported ? (
+              <FeedbackConfirmation />
+            ) : (
+              <Button primary onClick={() => setOpenedIssueModal(issueType)}>
+                {t('feedback.reportButton', { title: issueType.title })}
+              </Button>
+            )}
+          </ImageCard>
         ))}
       <FeedbackReportModal
         title={openedIssueModal?.title || ' '}

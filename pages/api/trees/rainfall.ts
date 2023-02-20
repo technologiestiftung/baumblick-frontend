@@ -23,22 +23,28 @@ export default async function handler(
             .status(400)
             .json({ error: 'Missing tree_id search parameter' })
         }
-        // TODO: Test rainfall function once it is implemented in the database
-        const { data: rainfalls, error } = await postgrest.rpc('rainfall', {
-          tree_id: searchParams.get('tree_id') as string,
-        })
+
+        const { data: rainfall, error } = await postgrest
+          .from('rainfall')
+          .select('tree_id,rainfall_in_mm')
+          .eq('tree_id', searchParams.get('tree_id') as string)
         if (error) {
           throw new Error(error.message)
         }
-        if (!rainfalls) {
+        if (!rainfall) {
           throw new Error('data is undefined')
         }
-        const initialValue = 0
-        const sum: number = rainfalls
-          .map((item) => item.rainfall_in_mm)
-          .reduce((prev: number, curr: number) => prev + curr, initialValue)
 
-        return res.status(200).json({ data: { sum_rainfall_in_mm: sum } })
+        // currently there are no type definitions for the materialized view
+        // that's why we just ignore the unsafe assignment for now
+        // and type it ourselves
+        const rainData = rainfall as {
+          tree_id: string
+          rainfall_in_mm: number
+        }[]
+        return res.status(200).json({
+          data: { sum_rainfall_in_mm: rainData[0].rainfall_in_mm },
+        })
       }
       default:
         return res

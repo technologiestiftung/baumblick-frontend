@@ -89,12 +89,19 @@ export const Button: FC<ButtonPropType> = (props) => {
       </InternalLink>
     )
   }
+  if (props.href?.startsWith('#')) {
+    return (
+      <a {...restProps} className={getStyles(props)} href={props.href}>
+        {renderChildren(props)}
+      </a>
+    )
+  }
   return (
     <a
+      {...restProps}
       className={getStyles(props)}
       rel="noreferrer noopener"
       target="_blank"
-      {...restProps}
     >
       {renderChildren(props)}
     </a>

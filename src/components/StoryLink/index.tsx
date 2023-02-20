@@ -32,7 +32,7 @@ export const StoryLink: FC<StoryLinkPropType> = ({
       className={classNames(
         'grid grid-cols-[auto,1fr] gap-4 px-4 pt-6 pb-3',
         'border-b border-gray-200',
-        'transition-colors last-of-type:border-b-0',
+        'transition-colors last-of-type:border-b-0 last-of-type:md:border-b md:border-x',
         'hover:bg-gray-100 active:bg-gray-200',
         'focus:outline-none focus:ring-4 ring-gray-900',
         'focus:bg-gray-100'

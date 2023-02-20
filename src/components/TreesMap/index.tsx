@@ -4,6 +4,7 @@ import maplibregl, {
   GeolocateControl,
   LngLatLike,
   Map,
+  MapGeoJSONFeature,
   NavigationControl,
 } from 'maplibre-gl'
 import { mapRawQueryToState } from '@lib/utils/queryUtil'
@@ -24,6 +25,7 @@ import {
   NEXT_PUBLIC_MAPTILER_BASEMAP_URL,
   NEXT_PUBLIC_MAPTILER_KEY,
 } from '@lib/utils/envUtil'
+import { TreeDataType } from '@lib/requests/getTreeData'
 
 interface OnSelectOutput {
   id: string
@@ -43,10 +45,11 @@ interface MapProps {
   }
   mapId: string
   mapStyle?: string
-  latitude?: number
-  longitude?: number
+  latitude?: TreeDataType['lat']
+  longitude?: TreeDataType['lng']
   treeIdToSelect?: string
   onSelect?: (treeData: OnSelectOutput) => void
+  onOutdatedNowcastChange?: (isOutdated: boolean) => void
   isMinimized?: boolean
 }
 
@@ -60,6 +63,17 @@ const transitionProps = {
   transitionEasing: easeInOutQuad,
 }
 
+const checkForOutdatedNowcasts = (
+  renderedFeatures: MapGeoJSONFeature[]
+): boolean => {
+  return (
+    renderedFeatures?.some(
+      (feature) =>
+        new Date(feature.properties.nowcast_timestamp_stamm) <= new Date()
+    ) || false
+  )
+}
+
 export const TreesMap: FC<MapProps> = ({
   initialViewportProps,
   staticViewportProps,
@@ -69,6 +83,7 @@ export const TreesMap: FC<MapProps> = ({
   longitude,
   treeIdToSelect,
   onSelect = () => undefined,
+  onOutdatedNowcastChange = () => undefined,
   isMinimized = false,
 }) => {
   const { replace, query, pathname } = useRouter()
@@ -177,7 +192,46 @@ export const TreesMap: FC<MapProps> = ({
     map.current.on('load', function () {
       if (!map.current) return
 
+      // This fires on every render (multiple times per second):
+      map.current.on('render', afterChangeComplete)
+
+      function afterChangeComplete(): void {
+        // If the map is not fully loaded, we return early:
+        if (!map.current?.loaded()) return
+
+        // But if the map is loaded:
+        // We check if there are outdated nowcasts and dispatch
+        // the onOutdatedNowcastChange function:
+        const renderedFeatures = map.current?.queryRenderedFeatures(undefined, {
+          layers: [TREES_LAYER_ID],
+        })
+
+        const viewportHasOutdatedNowcasts =
+          checkForOutdatedNowcasts(renderedFeatures)
+
+        onOutdatedNowcastChange(viewportHasOutdatedNowcasts)
+
+        // After the map has been fully loaded and the nowcast checked,
+        // we can remove the handler:
+        map.current.off('render', afterChangeComplete)
+      }
+
       map.current.on('moveend', (e) => {
+        // OUTDATED NOWCAST CHECK - start
+        // We want to constantly check whether outdated nowcasts are visible
+        // when the map is moved.
+        const renderedFeatures = map.current?.queryRenderedFeatures(undefined, {
+          layers: [TREES_LAYER_ID],
+        })
+
+        if (!renderedFeatures) return
+
+        const viewportHasOutdatedNowcasts =
+          checkForOutdatedNowcasts(renderedFeatures)
+
+        onOutdatedNowcastChange(viewportHasOutdatedNowcasts)
+        // OUTDATED NOWCAST CHECK - end
+
         debouncedViewportChange({
           latitude: e.target.transform._center.lat,
           longitude: e.target.transform._center.lng,
@@ -333,7 +387,7 @@ export const TreesMap: FC<MapProps> = ({
       <div
         id={mapId}
         className={classNames(
-          isMinimized ? 'h-[132px]' : 'h-full',
+          isMinimized ? 'h-[154px]' : 'h-full',
           'w-full inline-block',
           'bg-[#FBFBFC]'
         )}

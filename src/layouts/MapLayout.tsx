@@ -1,11 +1,14 @@
 import { TreesMap } from '@components/TreesMap'
 import { WaterSupplyLegend } from '@components/WaterSupplyLegend'
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { useHasScrolledPastThreshold } from '@lib/hooks/useHasScrolledPastThreshold'
 import classNames from 'classnames'
 import { InternalLink } from '@components/InternalLink'
 import { useTreeData } from '@lib/hooks/useTreeData'
-
+import { Modal } from '@components/Modal'
+import useTranslation from 'next-translate/useTranslation'
+import { Button } from '@components/Button'
+import { useHasMobileSize } from '@lib/hooks/useHasMobileSize'
 interface OnSelectOutput {
   id: string
   latitude: number
@@ -15,8 +18,7 @@ interface OnSelectOutput {
 export const MAP_CONFIG = {
   minZoom: 11.5,
   maxZoom: 22,
-  defaultZoom: 14,
-  defaultLatitude: 52.520952,
+  defaultLatitude: 52.51,
   defaultLongitude: 13.400033,
 }
 
@@ -43,6 +45,11 @@ export const MapLayout: FC<MapLayoutType> = ({
     threshold: 5,
     scrollParent: 'main',
   })
+  const { t } = useTranslation('common')
+
+  const [outdatedModalIsOpen, setOutdatedModalIsOpen] = useState(false)
+
+  const hasMobileSize = useHasMobileSize()
 
   return (
     <>
@@ -53,7 +60,7 @@ export const MapLayout: FC<MapLayoutType> = ({
         )}
       >
         {!isMinimized && (
-          <div className="fixed w-full left-0 top-2 md:top-4 pointer-events-none z-10">
+          <div className="fixed w-full left-0 top-2 pointer-events-none z-10">
             <div className="w-full max-w-3xl flex justify-end mx-auto">
               <InternalLink
                 href="/"
@@ -82,7 +89,7 @@ export const MapLayout: FC<MapLayoutType> = ({
           initialViewportProps={{
             latitude: data?.lat || latitude || MAP_CONFIG.defaultLatitude,
             longitude: data?.lng || longitude || MAP_CONFIG.defaultLongitude,
-            zoom: zoom || MAP_CONFIG.defaultZoom,
+            zoom: zoom || hasMobileSize ? 12 : 10,
           }}
           onSelect={onTreeSelect}
           latitude={latitude || data?.lat}
@@ -96,7 +103,21 @@ export const MapLayout: FC<MapLayoutType> = ({
             'transition-opacity',
             hasScrolledPastThreshold && 'opacity-0 pointer-events-none'
           )}
+          showNoDataItem={true} // TODO: We could think if we make this dependent on hasOutdatedNowcast and whether trees with no data aree visible
+          onNoDataItemClick={() => setOutdatedModalIsOpen(true)}
         />
+        {outdatedModalIsOpen && (
+          <Modal
+            title={t('legend.map.unknownLevelModal.title')}
+            description={t('legend.map.unknownLevelModal.description')}
+            footer={
+              <Button onClick={() => setOutdatedModalIsOpen(false)}>
+                {t('legend.map.unknownLevelModal.close')}
+              </Button>
+            }
+            onClose={() => setOutdatedModalIsOpen(false)}
+          />
+        )}
       </div>
       {children}
     </>

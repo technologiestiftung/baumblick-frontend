@@ -15,6 +15,6 @@ describe('MainMenu', () => {
 
     const links = screen.getAllByRole('link')
 
-    expect(links).toHaveLength(3)
+    expect(links).toHaveLength(4)
   })
 })
