@@ -6,11 +6,11 @@ import { ContentGrid } from '@components/ContentGrid'
 export const Partners: FC = () => {
   const { t } = useTranslation('common')
   return (
-    <div className="w-full py-[5.625rem] screen1200:py-[20vh]">
+    <div className="w-full py-16 lg:py-20">
       <ContentGrid>
         <div
           className={classNames(
-            'w-full flex flex-col col-start-1 col-span-6',
+            'w-full flex flex-col gap-y-12 col-start-1 col-span-6',
             'md:col-start-4 md:col-span-6',
             'lg:col-start-1 lg:col-span-12 lg:flex-row lg:justify-between'
           )}
@@ -71,11 +71,11 @@ export const Partners: FC = () => {
               <h4 className="font-sans text-base font-semibold tracking-normal text-left mb-6">
                 {column.title}
               </h4>
-              <div className="mb-[5.625rem] screen1200:mb-0">
+              <div>
                 {column.logos.map((logo, logoIndex) => (
                   <img
                     key={`logo-${logoIndex}`}
-                    className="mb-12"
+                    className="mb-12 last-of-type:mb-0"
                     src={logo.src}
                     alt={logo.alt}
                     style={{ width: logo.width }}

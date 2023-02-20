@@ -7,6 +7,7 @@ import useInViewProgress from '@lib/hooks/useElementInViewProgress'
 import { JSONValue } from '@lib/types/lottie'
 import animationImport from '../../../public/animation/TREES_newV2.json'
 import useTranslation from 'next-translate/useTranslation'
+import { Button } from '@components/Button'
 const animationData = animationImport as JSONValue
 
 export const SideBySideScrollAnimation = (): JSX.Element => {
@@ -69,7 +70,7 @@ export const SideBySideScrollAnimation = (): JSX.Element => {
 
   return (
     <div style={{ height: wrapperHeight }} ref={wrapperElement}>
-      <div className="box-border w-full sticky top-0 p-4 h-[100vh] screen600:p-8">
+      <div className="box-border w-full sticky top-0 p-4 !pt-16 h-[100vh] screen600:p-8">
         <div className="h-full absolute top-0 right-5 flex flex-col justify-center z-50">
           <ul className="m-0 list-none">
             {keyframes.map((_, index: number) => {
@@ -174,6 +175,13 @@ export const SideBySideScrollAnimation = (): JSX.Element => {
                   </div>
                 )
               })}
+              <Button
+                primary
+                href="/trees"
+                className="w-11/12 sm:w-1/3 md:w-1/2 xl:w-11/12 mt-8"
+              >
+                {t('home.cta.enterMap')}
+              </Button>
               <div style={{ height: '50vh' }} />
             </div>
           </div>
