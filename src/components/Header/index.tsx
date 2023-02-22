@@ -34,11 +34,11 @@ export const Header: FC<{
         </span>
         <span
           className={classNames(
-            'text-xs px-0.5 py-0.25 bg-scale-critical font-bold',
+            'text-xs px-0.5 py-0.25 bg-scale-critical font-bold uppercase',
             'absolute top-1/2 -right-1 translate-x-full -translate-y-1/2'
           )}
         >
-          BETA
+          Beta
         </span>
       </InternalLink>
       <a
