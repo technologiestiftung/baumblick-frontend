@@ -18,7 +18,7 @@
       "project": "Zur Projektwebsite"
     },
     "hero": {
-      "title": "Willkommen bei Baumblick",
+      "title": "Willkommen bei Baumblick<beta></beta>",
       "text": "Die App, die dir einen Ein- und Ausblick in den Zustand und die Wasserversorgung der Stadtbäume Berlins gibt."
     },
     "intro": {
@@ -63,7 +63,7 @@
         }
       }
     },
-    "outro":  {
+    "outro": {
       "headline": "Open Source Daten",
       "text": {
         "1": "Du möchtest Baumblick für eine andere Stadt umsetzen? Auch kein Problem, denn der komplette Quellcode ist Open Source Code und unser KI-Modell nutzt bis auf wenige Ausnahmen ausschließlich offene Daten. Schau in unserem Repo auf GitHub vorbei:",
