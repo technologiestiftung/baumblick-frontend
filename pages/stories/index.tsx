@@ -1,39 +1,10 @@
-import { Affiliate, News, Plant, WateringCan } from '@components/Icons'
+import { News, Plant } from '@components/Icons'
 import { StoriesOverviewHeader } from '@components/StoriesOverviewHeader'
 import { StoryLink, StoryLinkPropType } from '@components/StoryLink'
 import { GetServerSideProps } from 'next'
 import { FC } from 'react'
 
 export const stories: Record<string, StoryLinkPropType> = {
-  'wie-giesse-ich-richtig': {
-    path: `/stories/wie-giesse-ich-richtig`,
-    title: `Wie gieße ich richtig?`,
-    author: `Grünflächenamt Berlin-Mitte`,
-    readingDurationInMinutes: 3,
-    excerpt: (
-      <>
-        Baumblick zeigt dir den{' '}
-        <strong>Wasserstand der Berliner Stadtbäume</strong>.
-      </>
-    ),
-    leadParagraph:
-      'Gießen ist gut. Kann man aber auch falsch machen. Haste net gedacht, wat?',
-    Icon: WateringCan,
-  },
-  'ki-berechnung-wasserbedarf': {
-    path: `/stories/ki-berechnung-wasserbedarf`,
-    title: `Wie wird KI für die Berechnung des Wasserbedarfs eingesetzt?`,
-    author: `Marcus Voß`,
-    readingDurationInMinutes: 12,
-    excerpt: (
-      <>
-        Wie kann künstliche Intelligenz{' '}
-        <strong>Messwerte von Sensoren vorhersagen</strong> – auch wenn diese
-        gar nicht existieren?
-      </>
-    ),
-    Icon: Affiliate,
-  },
   'saugspannung-und-sensoren': {
     path: `/stories/saugspannung-und-sensoren`,
     title: `Über Saugspannung und Sensoren`,
