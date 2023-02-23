@@ -23,19 +23,19 @@
     },
     "intro": {
       "text": {
-        "1": "Die App Baumblick gibt dir spannende Einblicke in die Berlins Stadtbäume und ihrer Wasserversorgung. Die App wurde im Zuge des Forschungsprojekts Quantified Trees (QTrees) entwickelt und soll den direkten Auswirkungen des Klimawandels auf Stadtbäume entgegenwirken. Dabei stehen Stadtbäume diversen klimatischen und urbanen Herausforderungen gegenüber.",
-        "2": "Finde jetzt heraus, wie wir mit Hilfe eines KI-Vorhersagemodells den Stadtbäume helfen und wie du mitmachen kannst."
+        "1": "Die App Baumblick gibt dir spannende Einblicke in Berlins Stadtbäume und ihre Wasserversorgung. Stadtbäume stehen diversen klimatischen und urbanen Herausforderungen gegenüber. Baumblick wurde im Zuge des Forschungsprojekts Quantified Trees (QTrees) entwickelt und soll den direkten Auswirkungen des Klimawandels auf Stadtbäume entgegenwirken. Finde jetzt heraus, wie wir mit Hilfe eines KI-Vorhersagemodells den Stadtbäumen helfen und wie du mitmachen kannst.",
+        "2": "Finde jetzt heraus, wie wir mit Hilfe eines KI-Vorhersagemodells den Stadtbäumen helfen und wie du mitmachen kannst."
       }
     },
     "animation": {
       "steps": {
         "1": {
           "title": "Der Baum",
-          "text": "In Berlin gibt es insgesamt xx verschiedene Baumarten die sich allesamt nach Art, Alter, Größe, Kronendurchmesser und Stammumfang unterscheiden lassen. Die Stadt Berlin erfasst die Eigenschaften von über 800.000 Bäume bereits im öffentlichen Baumkataster."
+          "text": "In Berlin gibt es über 80 verschiedene Baumarten die sich allesamt nach Art, Alter, Größe, Kronendurchmesser und Stammumfang unterscheiden lassen. Die Stadt Berlin erfasst die Eigenschaften von über 800.000 Bäumen bereits im öffentlichen Baumkataster."
         },
         "2": {
           "title": "Umgebung",
-          "text": "Trotz aller Diversität haben diese Bäume alle etwas gemeinsam: sie stehen klimatischen und urbanen Herausforderungen gegenüber! Dabei beeinflussen die vielene Umgebungsparameter die Vitalität eines Baumes."
+          "text": "Trotz aller Diversität haben diese Bäume alle etwas gemeinsam: sie stehen klimatischen und urbanen Herausforderungen gegenüber! Dabei beeinflussen die vielen Umgebungsparameter die Vitalität eines Baumes."
         },
         "3": {
           "title": "Wetter",
@@ -43,7 +43,7 @@
         },
         "4": {
           "title": "Schatten",
-          "text": "Besonders hohe oder stark verspiegelte Gebäude, sowie dicht bebaute Kieze können eine besonders hohe Verschattung bzw. verstärkte UV-Strahlung mit sich bringen. Diese wiederum hat Einfluss auf die Evatranspiration eines Baumes."
+          "text": "Besonders hohe oder stark verspiegelte Gebäude, sowie dicht bebaute Kieze können eine besonders hohe Verschattung bzw. verstärkte UV-Strahlung mit sich bringen. Diese wiederum hat Einfluss auf die Evapotranspiration eines Baumes."
         },
         "5": {
           "title": "Bewässerung",
@@ -92,7 +92,7 @@
       },
       "unknownLevelModal": {
         "title": "Wasserversorgung unbekannt",
-        "description": "Bäume, die auf der Karte grau umrandet sind, sind Anlagenbäume und stehen in öffentlichen Grün- und Erholungsanlagen. Die Standortbedingungen dieser Bäume weichen stark von Straßenbäumen ab und sind daher nicht Teil des Vorhersagemodells.",
+        "description": "Bäume, die auf der Karte grau umrandet sind, sind Anlagenbäume und stehen oftmals in öffentlichen Grün- und Erholungsanlagen. Die Standortbedingungen dieser Bäume können teilweise stark von denen der Straßenbäumen abweichen. Sie sind daher nicht Teil der Prognose zur Wasserversorgung.",
         "close": "Zurück"
       }
     }
@@ -127,7 +127,7 @@
         "other": "Vor {{count}} Jahren gepflanzt"
       }
     },
-    "parkTreeHint": "Dieser Baum ist ein Anlagenbaum. Anlagenbäume stehen oftmals in öffentlichen Grün- und Erholungsanlagen, weshalb die Standortbedingungen von denen von Straßenbäumen abweichen können. Daher gibt es für diesen Baum keine Informationen zur Wasserversorgung.",
+    "parkTreeHint": "Dieser Baum ist ein Anlagenbaum. Anlagenbäume stehen oftmals in öffentlichen Grün- und Erholungsanlagen, weshalb ihre Standortbedingungen teilweise stark von denen der Straßenbäume abweichen können. Daher gibt es für diesen Baum keine Prognose zur Wasserversorgung.",
     "infoList": {
       "waterSupply": {
         "label": "Wasserversorgung",
