@@ -2,6 +2,7 @@ import useTranslation from 'next-translate/useTranslation'
 import { FC } from 'react'
 import classNames from 'classnames'
 import { Button } from '@components/Button'
+import Trans from 'next-translate/Trans'
 
 export const Hero: FC = () => {
   const { t } = useTranslation('common')
@@ -33,7 +34,16 @@ export const Hero: FC = () => {
       >
         <div>
           <h1 className="text-4xl lg:text-5xl font-bold">
-            {t('home.hero.title')}
+            <Trans
+              i18nKey="common:home.hero.title"
+              components={{
+                beta: (
+                  <span className="uppercase top-full left-1/2 -translate-x-1/2 text-xs font-bold px-1 pb-[1px] bg-scale-critical -translate-y-1/2 ml-2 align-super">
+                    Beta
+                  </span>
+                ),
+              }}
+            />
           </h1>
           <p className="mt-3 lg:mt-4">{t('home.hero.text')}</p>
           <div

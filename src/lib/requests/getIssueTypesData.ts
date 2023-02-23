@@ -6,7 +6,7 @@ const TABLE_NAME = 'issue_types'
 export const getIssueTypesData = async (): Promise<
   IssueTypesDataType[] | undefined
 > => {
-  const REQUEST_URL = `${getBaseUrl()}/api/ml-api-passthrough/${TABLE_NAME}`
+  const REQUEST_URL = `${getBaseUrl()}/api/ml-api-passthrough/${TABLE_NAME}?order=id`
 
   const response = await fetch(REQUEST_URL, {
     method: 'GET',

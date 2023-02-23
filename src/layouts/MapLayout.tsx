@@ -72,10 +72,13 @@ export const MapLayout: FC<MapLayoutType> = ({
                   'pointer-events-auto',
                   'transition-colors focus:outline-none',
                   'focus:ring-2 focus:ring-gray-600',
-                  'hover:text-gray-900 hover:underline'
+                  'hover:text-gray-900 hover:underline relative'
                 )}
               >
                 <img src="/logo.svg" alt="Baumblick Logo" className="h-6" />
+                <span className="uppercase absolute top-full left-1/2 -translate-x-1/2 text-xs font-bold px-1 pb-[1px] bg-scale-critical -translate-y-1/2">
+                  Beta
+                </span>
               </InternalLink>
             </div>
           </div>

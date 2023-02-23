@@ -8,17 +8,17 @@ export interface WaterSupplyStatusType {
 
 export const WATER_SUPPLY_STATUSES: WaterSupplyStatusType[] = [
   {
-    suctionTensionRange: [0, 25],
+    suctionTensionRange: [0, 33],
     label: 'Gut',
     id: 'good',
   },
   {
-    suctionTensionRange: [25, 62],
+    suctionTensionRange: [33, 81],
     label: 'Mäßig',
     id: 'medium',
   },
   {
-    suctionTensionRange: [62, 250],
+    suctionTensionRange: [81, 270],
     label: 'Kritisch',
     id: 'critical',
   },
