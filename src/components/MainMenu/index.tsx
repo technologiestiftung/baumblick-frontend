@@ -50,13 +50,23 @@ export const MainMenu: FC = () => {
           'text-gray-900',
           'transition-colors focus:outline-none',
           'focus:ring-2 focus:ring-gray-600',
-          'hover:text-gray-900 hover:underline',
+          'hover:text-gray-900 ',
           'hidden lg:flex lg:items-center lg:px-7 hover:bg-gray-200',
-          'z-10'
+          'z-10 relative group'
         )}
       >
         <img src="/logo.svg" alt="Baumblick Logo" className="h-6" />
-        <span className={'font-bold'}>{t('name.short')}</span>
+        <span className={'font-bold group-hover:underline'}>
+          {t('name.short')}
+        </span>
+        <span
+          className={classNames(
+            'text-xs px-0.5 pb-[1px] bg-scale-critical font-bold uppercase',
+            'group-hover:no-underline'
+          )}
+        >
+          Beta
+        </span>
       </InternalLink>
       {links.map((link) => {
         const isActive =
