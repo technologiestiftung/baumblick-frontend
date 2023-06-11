@@ -132,9 +132,10 @@ const TreePage: TreePageWithLayout = ({ treeId, csrfToken }) => {
   }
 
   const avgLevel =
-    nowcastData && nowcastData.depthAverageRow?.value
-      ? mapSuctionTensionToStatus(nowcastData.depthAverageRow?.value)?.id
+    nowcastData && nowcastData.averageNowcastValue
+      ? mapSuctionTensionToStatus(nowcastData.averageNowcastValue)?.id
       : undefined
+
   const circleColorClasses = getClassesByStatusId(avgLevel)
 
   const nowcastReady = forecastData && forecastData?.length > 0
