@@ -171,6 +171,8 @@
     "reportButton": "{{title}} melden",
     "proximityWord": "Nähe",
     "modalHelp": "Bitte bestätige, dass du beim Baum <bold>„{{treeName}}“</bold> {{address}} die Eigenschaft <bold>„{{title}}“</bold> erkannt hast.",
+    "modalDisclaimer": "Meldungen in Baumblick werden innerhalb des Förderprojektes QTrees auf ihren Nutzen getestet. Um eine Meldung an das zuständige Ordnungsamt zu senden, nutze <0>dieses offizielle Formular</0>.",
+    "modalDisclaimerAriaLabel": "Formular zur Meldung beim Ordnungsamt",
     "modalConfirm": "Melden",
     "modalCancel": "Abbrechen",
     "confirmationTitle": "Danke! Erfolgreich gemeldet!",
