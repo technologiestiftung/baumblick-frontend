@@ -49,6 +49,11 @@ export const Partners: FC = () => {
                   alt: 'Logo Arbor Revital',
                   width: 220,
                 },
+                {
+                  src: '/images/logos/logo-winterdienst.svg',
+                  alt: 'Logo Winterdienst im Norden',
+                  width: 220,
+                },
               ],
             },
             {
@@ -60,8 +65,8 @@ export const Partners: FC = () => {
                   width: 200,
                 },
                 {
-                  src: '/images/logos/logo-buns.png',
-                  alt: 'Logo Bundesministerium für Umwelt, Naturschutz und nukleare Sicherheit',
+                  src: '/images/logos/logo-bumv.svg',
+                  alt: 'Logo Bundesministerium für Umwelt, Naturschutz, nukleare Sicherheit und Verbraucherschutz',
                   width: 200,
                 },
               ],
