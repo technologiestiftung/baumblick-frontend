@@ -42,7 +42,7 @@ export const WaterSupplyLegend: FC<WaterSupplyLegendType> = ({
             className,
             'group ml-2 lg:ml-4 pointer-events-auto',
             'inline-block',
-            'w-[160px] min-w-[80px]',
+            'w-[176px] min-w-[80px]',
             'py-2 px-3',
             'bg-white',
             'rounded border border-gray-300',
@@ -51,9 +51,15 @@ export const WaterSupplyLegend: FC<WaterSupplyLegendType> = ({
             hasShadow && 'shadow-md'
           )}
         >
-          <h2 className="w-full text-sm font-semibold">
-            {t('legend.map.title')}
-          </h2>
+          <div className="w-full flex gap-x-2 items-baseline">
+            <h2 className="text-sm font-semibold">{t('legend.map.title')} </h2>
+            <Button
+              className="px-1 py-0 text-xs text-gray-500"
+              onClick={() => onNoDataItemClick()}
+            >
+              ?
+            </Button>
+          </div>
           <ul>
             {Object.entries(levels)
               .filter(([id]) => id !== 'unknown')
@@ -96,12 +102,6 @@ export const WaterSupplyLegend: FC<WaterSupplyLegendType> = ({
                 <span className="text-xs font-semibold text-gray-800">
                   {t('legend.map.levels.unknown')}
                 </span>
-                <Button
-                  className="px-1 py-0 text-xs text-gray-500"
-                  onClick={() => onNoDataItemClick()}
-                >
-                  ?
-                </Button>
               </li>
             )}
           </ul>
