@@ -11,8 +11,10 @@ import commoDE from '../../../locales/de/common.json'
 
 const NOW = new Date('2022-08-24T11:17:56.022Z')
 
-const getDateLabel = (date: Date, today: Date): string => {
-  return `${format(date, 'dd.MM.')}${isSameDay(date, today) ? ' (Heute)' : ''}`
+const getDateLabel = (date: Date, tomorrow: Date): string => {
+  return `${format(date, 'dd.MM.')}${
+    isSameDay(date, tomorrow) ? ' (Morgen)' : ''
+  }`
 }
 
 interface DataItem {
@@ -20,7 +22,7 @@ interface DataItem {
   date: Date
 }
 
-const fakeData: DataItem[] = Array.from(Array(15)).map((_, i) => {
+const fakeData: DataItem[] = Array.from(Array(13)).map((_, i) => {
   return {
     date: addDays(NOW, i),
     waterSupplyStatusId:
@@ -29,24 +31,24 @@ const fakeData: DataItem[] = Array.from(Array(15)).map((_, i) => {
 })
 
 describe('ForecastViz', () => {
-  test('should render 15 days without data', () => {
+  test('should render 13 days without data', () => {
     render(
       <I18nProvider lang={'de'} namespaces={{ common: commoDE }}>
-        <ForecastViz today={NOW} />
+        <ForecastViz startDate={NOW} />
       </I18nProvider>
     )
 
-    Array.from(Array(15)).forEach((_, i) => {
+    Array.from(Array(13)).forEach((_, i) => {
       const dateInXDays = getDateLabel(addDays(NOW, i), NOW)
       const labelInXDays = screen.getByLabelText(`${dateInXDays}: Unbekannt`)
       expect(labelInXDays).toBeInTheDocument()
     })
   })
 
-  test('should render 15 days with all data', () => {
+  test('should render 13 days with all data', () => {
     render(
       <I18nProvider lang={'de'} namespaces={{ common: commoDE }}>
-        <ForecastViz today={NOW} data={fakeData} />
+        <ForecastViz startDate={NOW} data={fakeData} />
       </I18nProvider>
     )
 
@@ -59,10 +61,10 @@ describe('ForecastViz', () => {
     })
   })
 
-  test('should render 15 days with some data', () => {
+  test('should render 13 days with some data', () => {
     render(
       <I18nProvider lang={'de'} namespaces={{ common: commoDE }}>
-        <ForecastViz today={NOW} data={fakeData.filter((_, i) => i % 2)} />
+        <ForecastViz startDate={NOW} data={fakeData.filter((_, i) => i % 2)} />
       </I18nProvider>
     )
 
@@ -79,11 +81,11 @@ describe('ForecastViz', () => {
     })
   })
 
-  test('should render 15 days with data out of 14 days range', () => {
+  test('should render 13 days with data out of 14 days range', () => {
     render(
       <I18nProvider lang={'de'} namespaces={{ common: commoDE }}>
         <ForecastViz
-          today={NOW}
+          startDate={NOW}
           data={fakeData.map((item) => ({
             ...item,
             date: addDays(item.date, 60),
@@ -92,7 +94,7 @@ describe('ForecastViz', () => {
       </I18nProvider>
     )
 
-    Array.from(Array(15)).forEach((_, i) => {
+    Array.from(Array(13)).forEach((_, i) => {
       const dateInXDays = getDateLabel(addDays(NOW, i), NOW)
       const labelInXDays = screen.getByLabelText(`${dateInXDays}: Unbekannt`)
       expect(labelInXDays).toBeInTheDocument()

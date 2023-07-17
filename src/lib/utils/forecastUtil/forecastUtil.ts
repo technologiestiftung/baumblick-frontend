@@ -5,12 +5,12 @@ import {
   WaterSupplyStatusType,
 } from '../mapSuctionTensionToStatus'
 
-interface CombinedNowAndForecastType {
+interface MapForecastDataToMinimumType {
   date: Date
   waterSupplyStatusId: WaterSupplyStatusType['id'] | undefined
 }
 
-interface nowAndForecastMinimumType {
+interface ForecastMinimumType {
   timestamp: string
   value: number
 }
@@ -21,19 +21,17 @@ const hasTimestampAndValue = (item?: NowcastDataType): boolean =>
 const mapFilteredData = ({
   timestamp,
   value,
-}: nowAndForecastMinimumType): CombinedNowAndForecastType => ({
+}: ForecastMinimumType): MapForecastDataToMinimumType => ({
   date: new Date(timestamp),
   waterSupplyStatusId: mapSuctionTensionToStatus(value)?.id,
 })
 
-export const combineNowAndForecastData = (
-  nowcastData: NowcastDataType[],
+export const mapForecastDataToMinimum = (
   forecastData: ForecastDataType[]
-): CombinedNowAndForecastType[] => {
-  const nowcastAvg = nowcastData.find(({ type_id }) => type_id === 4)
-  const combinedData = [nowcastAvg, ...forecastData]
+): MapForecastDataToMinimumType[] => {
+  const combinedData = [...forecastData]
   const filteredData = combinedData.filter(
     hasTimestampAndValue
-  ) as nowAndForecastMinimumType[]
+  ) as ForecastMinimumType[]
   return filteredData.map(mapFilteredData)
 }

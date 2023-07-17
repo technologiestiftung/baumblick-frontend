@@ -1,5 +1,5 @@
 import { getBaseUrl } from '@lib/utils/urlUtil'
-import { startOfDay } from 'date-fns'
+import { startOfYesterday } from 'date-fns'
 
 /**
  * According to the database schema all values except id are nullable.
@@ -28,8 +28,8 @@ const TYPE_ID_COLUMN_NAME = 'type_id'
 const TYPE_ID_FOR_AVERAGE = '4'
 
 const TIMESTAMP_COLUMN = 'timestamp'
-const TODAY = startOfDay(Date.now()).toISOString()
-const FORECAST_MAX_ROWS = 14
+const TODAY = startOfYesterday().toISOString()
+const FORECAST_MAX_ROWS = 13
 
 /**
  * Fetches the forecast data for a tree (maximum 14 days).
@@ -50,7 +50,7 @@ export const getForecastData = async (
     [TIMESTAMP_COLUMN]: `gte.${TODAY}`,
     order: `${TIMESTAMP_COLUMN}`,
     limit: `${FORECAST_MAX_ROWS}`,
-    offset: '0',
+    offset: '1',
   })
 
   const response = await fetch(`${REQUEST_URL}?${REQUEST_PARAMS.toString()}`, {
