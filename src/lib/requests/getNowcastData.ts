@@ -13,7 +13,8 @@ export type NowcastDataType = {
   /** 1 = value for 30cm depth.
    *  2 = value for 60cm depth.
    *  3 = value for 90cm depth.
-   *  4 = value for average.
+   *  4 = value for Mittelwert.
+   *  5 = value for Stamm.
    */
   type_id?: number
   timestamp?: string
