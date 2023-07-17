@@ -1,5 +1,5 @@
 import { WATER_SUPPLY_STATUSES } from '@lib/utils/mapSuctionTensionToStatus'
-import { startOfDay } from 'date-fns'
+import { startOfYesterday } from 'date-fns'
 import { LayerSpecification, SourceSpecification } from 'maplibre-gl'
 import colors from '../../style/colors'
 
@@ -53,7 +53,7 @@ const getColorScale = (idSuffix = ''): (string | number)[] => {
 const IS_OUTDATED_NOWCAST = [
   '<=',
   ['get', 'nowcast_timestamp_stamm'],
-  startOfDay(Date.now()).toISOString(),
+  startOfYesterday().toISOString(),
 ]
 
 export const TREES_LAYER: LayerSpecification = {
