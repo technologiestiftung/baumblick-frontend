@@ -9,6 +9,9 @@ import { Modal } from '@components/Modal'
 import useTranslation from 'next-translate/useTranslation'
 import { Button } from '@components/Button'
 import { useHasMobileSize } from '@lib/hooks/useHasMobileSize'
+import Trans from 'next-translate/Trans'
+import { Pill } from '@components/Pill'
+import { ScalePills } from '@components/ScalePills'
 interface OnSelectOutput {
   id: string
   latitude: number
@@ -47,7 +50,7 @@ export const MapLayout: FC<MapLayoutType> = ({
   })
   const { t } = useTranslation('common')
 
-  const [outdatedModalIsOpen, setOutdatedModalIsOpen] = useState(false)
+  const [legendModalIsOpen, setLegendModalIsOpen] = useState(false)
 
   const hasMobileSize = useHasMobileSize()
 
@@ -107,18 +110,46 @@ export const MapLayout: FC<MapLayoutType> = ({
             hasScrolledPastThreshold && 'opacity-0 pointer-events-none'
           )}
           showNoDataItem={true} // TODO: We could think if we make this dependent on hasOutdatedNowcast and whether trees with no data aree visible
-          onNoDataItemClick={() => setOutdatedModalIsOpen(true)}
+          onExplainLegend={() => setLegendModalIsOpen(true)}
         />
-        {outdatedModalIsOpen && (
+        {legendModalIsOpen && (
           <Modal
-            title={t('legend.map.unknownLevelModal.title')}
-            description={t('legend.map.unknownLevelModal.description')}
+            title={t('legend.map.legendModal.title')}
+            description={
+              <>
+                <span className="block">
+                  <Trans
+                    i18nKey="common:legend.map.legendModal.nowcastDescription"
+                    components={[
+                      <ScalePills key="fully-opaque-pills" />,
+                      <ScalePills
+                        pillClassNames="border-opacity-20 bg-opacity-40"
+                        key="half-transparent-pills"
+                      />,
+                    ]}
+                  />
+                </span>
+                <span className="block mt-4">
+                  <Trans
+                    i18nKey="common:legend.map.legendModal.noDataDescription"
+                    components={[
+                      <Pill
+                        key="no-data-pill"
+                        className={classNames(
+                          'border bg-white border-gray-400 translate-y-0.5'
+                        )}
+                      />,
+                    ]}
+                  />
+                </span>
+              </>
+            }
             footer={
-              <Button onClick={() => setOutdatedModalIsOpen(false)}>
-                {t('legend.map.unknownLevelModal.close')}
+              <Button onClick={() => setLegendModalIsOpen(false)}>
+                {t('legend.map.legendModal.close')}
               </Button>
             }
-            onClose={() => setOutdatedModalIsOpen(false)}
+            onClose={() => setLegendModalIsOpen(false)}
           />
         )}
       </div>

@@ -11,14 +11,14 @@ export interface WaterSupplyLegendType {
   hasShadow?: boolean
   className?: string
   showNoDataItem?: boolean
-  onNoDataItemClick?: () => void
+  onExplainLegend?: () => void
 }
 
 export const WaterSupplyLegend: FC<WaterSupplyLegendType> = ({
   hasShadow = false,
   className = '',
   showNoDataItem = false,
-  onNoDataItemClick = () => undefined,
+  onExplainLegend = () => undefined,
   children,
 }) => {
   const { t } = useTranslation('common')
@@ -55,7 +55,7 @@ export const WaterSupplyLegend: FC<WaterSupplyLegendType> = ({
             <h2 className="text-sm font-semibold">{t('legend.map.title')} </h2>
             <Button
               className="px-1 py-0 text-xs text-gray-500"
-              onClick={() => onNoDataItemClick()}
+              onClick={() => onExplainLegend()}
             >
               ?
             </Button>
