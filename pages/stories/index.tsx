@@ -5,7 +5,7 @@ import { GetServerSideProps } from 'next'
 import { FC } from 'react'
 
 export const stories: Record<string, StoryLinkPropType> = {
-  'verschattung': {
+  verschattung: {
     path: `/stories/verschattung`,
     title: `Die Verschattung als Einflussfaktor für das Vorhersagemodell`,
     author: `Birds on Mars`,
