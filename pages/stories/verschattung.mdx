@@ -1,0 +1,42 @@
+import { StoryLayout } from '@layouts/StoryLayout'
+
+Wie groß der Einfluss der Sonneneinstrahlung auf das Wohlbefinden und auch auf den Wasserbedarf einer Pflanze ist, wird bei der Suche nach einem geeigneten Standort für eine Zimmerpflanze schnell deutlich. Der Einfluss der Sonne am Standort ist auch ein entscheidender Parameter für das Prognosemodell des Bewässerungsbedarfs in Baumblick. 
+Hierfür berechnen wir Verschattungsindizes als Indikator. Diese können von unserem KI-Modell als Einflussfaktor genutzt werden. Doch was ist dieser Verschattungsindex genau und wie wird er berechnet? 
+
+## Was genau ist der Verschattungsindex? 
+Unser Schattenindex misst, wie viel Sonnenlicht ein Baum in einer städtischen Umgebung erhält und wie stark er verschattet ist.
+Er gibt das Verhältnis zwischen den tatsächlichen und den theoretischen Sonnenstunden an und ändert sich daher im Laufe des Jahres. 
+
+<img src="/images/verschattung_bw.jpg" alt="Verschattung auf Grundlage des Höhenprofils an einem Standort in Berlin" style={{maxHeight: '80vh', display: 'block', margin: 'auto', padding: '1em 0 1em 0'}}></img>
+
+Mit Hilfe von Schattenindizes können wir wertvolle Informationen über die Sonneneinstrahlung und die Verschattung der Berliner Baumstandorte gewinnen. In der Abbildung ist die berechnete Sonneneinstrahlung für das Gebiet um das Brandenburger Tor in Berlin zu sehen.
+
+## Warum sind Schattenindizes wichtig? 
+Durch Recherchen und Interviews mit Expert:innen hat unser Team mehrere wichtige Faktoren identifiziert, die den Wasserbedarf eines Stadtbaumes beeinflussen. Unter diesen Faktoren sind Verschattung und Sonneneinstrahlung besonders wichtig!
+Besonders in heißen Jahreszeiten ist es wichtig zu wissen, wie viel Zeit ein Baum im Schatten im Vergleich zur direkten Sonneneinstrahlung verbringt.
+Bäume, die im Schatten stehen, benötigen deutlich weniger Wasser, verglichen mit solchen, die ständig der direkten Sonneneinstrahlung ausgesetzt sind.
+In der Abbildung sieht man den Verlauf durchschnittlicher Sensorwerte für die Saugspannung in 30cm Tiefe für sonnige, schattige und halbschattige Standort. Man kann sehen, dass die Werte für den sonnigen Standort schneller ansteigen (d.h. es ist trockener) als für die schattigen und halbschattigen Standorte. 
+
+<img src="/images/verschattung_sensorwerte.png" alt="Sensorwerte in Neukölln für drei verschiedene Standorttypen." style={{maxHeight: '80vh', display: 'block', margin: 'auto', padding: '1em 0 1em 0'}}></img>
+
+## Wie berechnen und verwenden wir Schattenindizes? 
+Wir haben eine umfassende Methodik zur Berechnung von Verschattungsindizes entwickelt.
+Am Anfang stehen detaillierte Höhendaten von Berlin. Sie bilden die Grundlage für die Berechnungen. Anhand dieser Höhendaten erstellen wir Sonnenexpositionskarten, die die Menge an direktem Sonnenlicht an verschiedenen Standorten in ganz Berlin darstellen.
+Um die sich ständig ändernde Dynamik des Sonnenlichts im Jahresverlauf zu erfassen, berücksichtigen wir bestimmte Tage, die verschiedene Jahreszeiten repräsentieren. Genauer: den 21.3., 21.06., 23.09. und 21.12, die Tage der sogenannten Sonnenwende und Tagundnachtgleiche. 
+
+Mit Hilfe eines Filters berechnen wir für jeden Baum einen Mittelwert der Sonnenexposition in der Krone. Auf der Grundlage dieser verfeinerten Karten der Sonnenexposition berechnen wir dann die Schattenindizes für jeden einzelnen Baum in Berlin.
+Diese Indizes geben das Verhältnis der tatsächlichen zu den theoretischen Sonnenstunden an und liefern wertvolle Informationen über die spezifische Sonnenexposition des Baumes zu verschiedenen Jahreszeiten. 
+
+<img src="/images/verschattung_pixelfilter.jpg" alt="Pixelfilter ermöglicht die Berechnung des Schattenindizes" style={{maxHeight: '80vh', display: 'block', margin: 'auto', padding: '1em 0 1em 0'}}></img>
+
+Man würde erwarten, dass der Verschattungsindex für die Bäume in der Innenstadt höher ist als für die Bäume in den Außenbezirken. Um dies zu überprüfen, zeigt die folgende Abbildung den durchschnittlichen Verschattungsindex (hier für den Sommer) für jeden Berliner Stadtteil.
+Die Abbildung bestätigt, dass die Bäume in den inneren Stadtteilen wie Mitte, Friedrichshain oder Prenzlauerberg aufgrund der höheren Gebäude erwartungsgemäß im Durchschnitt stärker verschattet werden als Bäume in den Randbezirken wie Reinickendorf, Köpenick oder im südlichen Teil Neuköllns oder Tempelhof-Schönebergs.
+
+<img src="/images/verschattung_karte_sommer.png" alt="Durchschnittliche Verschattung im Sommer je Bezirk" style={{maxHeight: '60vh', display: 'block', margin: 'auto', padding: '1em 0 1em 0'}}></img>
+
+Was machen wir nun mit diesen Verschattungsindizes? Nun, sie werden zu einem wichtigen Eingabeparameter für das intelligente Vorhersagesystem von Baumblick.
+Dieses System nutzt maschinelles Lernen und eine Vielzahl von Daten, um frühzeitig von Trockenheit bedrohte Stadtbäume zu identifizieren.
+
+<img src="/images/logos/logo-birds-on-mars.png" alt="Logo Birds on Mars" style={{maxHeight: '12vh', display: 'block', margin: 'left', padding: '1em 0 1em 0'}}></img>
+
+export default ({ children }) => <StoryLayout>{children}</StoryLayout>
