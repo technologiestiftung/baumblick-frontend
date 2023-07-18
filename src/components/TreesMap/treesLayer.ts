@@ -56,6 +56,8 @@ const IS_OUTDATED_NOWCAST = [
   startOfYesterday().toISOString(),
 ]
 
+const PARTICIPATING_DISTRICTS = ['Mitte', 'Neukölln']
+
 export const TREES_LAYER: LayerSpecification = {
   id: TREES_LAYER_ID,
   type: 'circle',
@@ -89,6 +91,18 @@ export const TREES_LAYER: LayerSpecification = {
       ['all', ['has', NOWCAST_AVERAGE_PROPERTY], ['!', IS_OUTDATED_NOWCAST]],
       ['step', ['get', NOWCAST_AVERAGE_PROPERTY], ...getColorScale('-dark')],
       colors.gray[400],
+    ],
+    'circle-opacity': [
+      'case',
+      ['in', ['get', 'trees_bezirk'], ['literal', PARTICIPATING_DISTRICTS]],
+      1,
+      0.2,
+    ],
+    'circle-stroke-opacity': [
+      'case',
+      ['in', ['get', 'trees_bezirk'], ['literal', PARTICIPATING_DISTRICTS]],
+      1,
+      0.4,
     ],
     'circle-radius': [
       'interpolate',

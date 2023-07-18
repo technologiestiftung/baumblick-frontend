@@ -203,7 +203,7 @@ main button.maplibregl-ctrl-zoom-in span {
 }
 
 main .maplibregl-ctrl-attrib {
-	@apply !pb-0 !mb-0 lg:!left-44;
+	@apply !pb-0 !mb-0 lg:!left-48;
 }
 
 main .maplibregl-ctrl-attrib-inner {
