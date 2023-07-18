@@ -19,7 +19,7 @@ import { ForecastViz } from '@components/ForecastViz'
 import { FeedbackRequestsList } from '@components/FeedbackRequestsList'
 import csrf from '@lib/api/csrf'
 import { useForecastData } from '@lib/hooks/useForecastData'
-import { combineNowAndForecastData } from '@lib/utils/forecastUtil/forecastUtil'
+import { mapForecastDataToMinimum } from '@lib/utils/forecastUtil/forecastUtil'
 import { useTreeRainAmount } from '@lib/hooks/useTreeRainAmount'
 import { useTreeData } from '@lib/hooks/useTreeData'
 import { mapRawQueryToState } from '@lib/utils/queryUtil'
@@ -141,7 +141,7 @@ const TreePage: TreePageWithLayout = ({ treeId, csrfToken }) => {
   const forecastReady = nowcastData
   const forecast =
     nowcastReady && forecastReady
-      ? combineNowAndForecastData(Object.values(nowcastData), forecastData)
+      ? mapForecastDataToMinimum(forecastData)
       : undefined
 
   return (

@@ -90,10 +90,12 @@
         "critical": "Kritisch",
         "unknown": "Unbekannt"
       },
-      "unknownLevelModal": {
-        "title": "Wasserversorgung unbekannt",
-        "description": "Bäume, die auf der Karte grau umrandet sind, sind Anlagenbäume und stehen oftmals in öffentlichen Grün- und Erholungsanlagen. Die Standortbedingungen dieser Bäume können teilweise stark von denen der Straßenbäumen abweichen. Sie sind daher nicht Teil der Prognose zur Wasserversorgung.",
-        "close": "Zurück"
+      "legendModal": {
+        "title": "Wasserversorgung",
+        "nowcastDescription": "Diese Karte zeigt die mit Hilfe von KI berechnete Wasserversorgung der Berliner Straßenbäume auf einer Skala von <0></0> Gut, über <1></1> Mäßig bis <2></2> Kritisch. Bäume mit guter  bis mäßiger Wasserversorgung müssen in der Regel nicht gegossen werden.",
+        "districtsDescription": "Das KI-Vorhersagemodell wurde auf Sensordaten aus Mitte und Neukölln trainiert, weswegen die Wasserversorgung von Straßenbäumen aus den anderen zehn Bezirken ungenauer ist und deshalb leicht transparent <0></0> dargestellt wird.",
+        "noDataDescription": "Bäume, die auf der Karte <0></0> grau umrandet sind, sind Anlagenbäume und stehen oftmals in öffentlichen Grün- und Erholungsanlagen. Die Standortbedingungen dieser Bäume können teilweise stark von denen der Straßenbäumen abweichen. Sie sind daher nicht Teil der KI-Prognose zur Wasserversorgung.",
+        "close": "Schließen"
       }
     }
   },
@@ -171,6 +173,8 @@
     "reportButton": "{{title}} melden",
     "proximityWord": "Nähe",
     "modalHelp": "Bitte bestätige, dass du beim Baum <bold>„{{treeName}}“</bold> {{address}} die Eigenschaft <bold>„{{title}}“</bold> erkannt hast.",
+    "modalDisclaimer": "Meldungen in Baumblick werden innerhalb des Förderprojektes QTrees auf ihren Nutzen getestet. Um eine Meldung an das zuständige Ordnungsamt zu senden, nutze <0>dieses offizielle Formular</0>.",
+    "modalDisclaimerAriaLabel": "Formular zur Meldung beim Ordnungsamt",
     "modalConfirm": "Melden",
     "modalCancel": "Abbrechen",
     "confirmationTitle": "Danke! Erfolgreich gemeldet!",
