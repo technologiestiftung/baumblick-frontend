@@ -5,10 +5,8 @@ import { useHasScrolledPastThreshold } from '@lib/hooks/useHasScrolledPastThresh
 import classNames from 'classnames'
 import { InternalLink } from '@components/InternalLink'
 import { useTreeData } from '@lib/hooks/useTreeData'
-import { Modal } from '@components/Modal'
-import useTranslation from 'next-translate/useTranslation'
-import { Button } from '@components/Button'
 import { useHasMobileSize } from '@lib/hooks/useHasMobileSize'
+import { LegendModal } from '@components/LegendModal'
 interface OnSelectOutput {
   id: string
   latitude: number
@@ -45,9 +43,8 @@ export const MapLayout: FC<MapLayoutType> = ({
     threshold: 5,
     scrollParent: 'main',
   })
-  const { t } = useTranslation('common')
 
-  const [outdatedModalIsOpen, setOutdatedModalIsOpen] = useState(false)
+  const [legendModalIsOpen, setLegendModalIsOpen] = useState(false)
 
   const hasMobileSize = useHasMobileSize()
 
@@ -107,19 +104,10 @@ export const MapLayout: FC<MapLayoutType> = ({
             hasScrolledPastThreshold && 'opacity-0 pointer-events-none'
           )}
           showNoDataItem={true} // TODO: We could think if we make this dependent on hasOutdatedNowcast and whether trees with no data aree visible
-          onNoDataItemClick={() => setOutdatedModalIsOpen(true)}
+          onExplainLegend={() => setLegendModalIsOpen(true)}
         />
-        {outdatedModalIsOpen && (
-          <Modal
-            title={t('legend.map.unknownLevelModal.title')}
-            description={t('legend.map.unknownLevelModal.description')}
-            footer={
-              <Button onClick={() => setOutdatedModalIsOpen(false)}>
-                {t('legend.map.unknownLevelModal.close')}
-              </Button>
-            }
-            onClose={() => setOutdatedModalIsOpen(false)}
-          />
+        {legendModalIsOpen && (
+          <LegendModal onClose={() => setLegendModalIsOpen(false)} />
         )}
       </div>
       {children}
