@@ -1,10 +1,23 @@
-import { News, Plant } from '@components/Icons'
+import { News, Plant, Plus } from '@components/Icons'
 import { StoriesOverviewHeader } from '@components/StoriesOverviewHeader'
 import { StoryLink, StoryLinkPropType } from '@components/StoryLink'
 import { GetServerSideProps } from 'next'
 import { FC } from 'react'
 
 export const stories: Record<string, StoryLinkPropType> = {
+  verschattung: {
+    path: `/stories/verschattung`,
+    title: `Die Verschattung als Einflussfaktor für das Vorhersagemodell`,
+    author: `Birds on Mars`,
+    readingDurationInMinutes: 3,
+    excerpt: (
+      <>
+        Warum ist die Verschattung eines Baumes so wichtig für dessen
+        Wasserbedarf?
+      </>
+    ),
+    Icon: Plus,
+  },
   'saugspannung-und-sensoren': {
     path: `/stories/saugspannung-und-sensoren`,
     title: `Über Saugspannung und Sensoren`,
