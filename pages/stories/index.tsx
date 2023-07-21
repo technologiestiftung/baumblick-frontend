@@ -35,7 +35,7 @@ export const stories: Record<string, StoryLinkPropType> = {
     path: `/stories/richtig-giessen`,
     title: `Wie gieße ich einen Baum richtig?`,
     author: `Grünflächenamt Berlin Mitte`,
-    readingDurationInMinutes: 2,
+    readingDurationInMinutes: 3,
     excerpt: (
       // eslint-disable-next-line react/no-unescaped-entities
       <>Wie gieße ich eine Baum richtig und: kann ich auf 'falsch' gießen?</>
