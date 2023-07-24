@@ -59,14 +59,6 @@ export const MainMenu: FC = () => {
         <span className={'font-bold group-hover:underline'}>
           {t('name.short')}
         </span>
-        <span
-          className={classNames(
-            'text-xs px-0.5 pb-[1px] bg-scale-critical font-bold uppercase',
-            'group-hover:no-underline'
-          )}
-        >
-          Beta
-        </span>
       </InternalLink>
       {links.map((link) => {
         const isActive =

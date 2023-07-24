@@ -32,14 +32,6 @@ export const Header: FC<{
         <span className={compact ? 'font-medium' : 'font-bold'}>
           {t('name.short')}
         </span>
-        <span
-          className={classNames(
-            'text-xs px-1 pb-[1px] bg-scale-critical font-bold uppercase',
-            'absolute top-1/2 -right-1 translate-x-full -translate-y-1/2'
-          )}
-        >
-          Beta
-        </span>
       </InternalLink>
       <a
         className={classNames(
