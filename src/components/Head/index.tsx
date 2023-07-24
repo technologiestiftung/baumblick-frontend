@@ -22,6 +22,7 @@ interface HeadPropType {
   themeColor: string
   locales: string[]
   locale: string
+  authorLink: string
   twitterUsername: string
   socialThumbnail: string
 }
@@ -46,6 +47,7 @@ export const Head: FC<Partial<HeadPropType>> = ({
   themeColor = colors['scale']['medium'],
   locales = ['de'],
   locale = 'de',
+  authorLink = 'https://www.technologiestiftung-berlin.de/',
   twitterUsername = 'TSBBerlin',
   socialThumbnail = '',
 }) => {
@@ -106,7 +108,7 @@ export const Head: FC<Partial<HeadPropType>> = ({
 
       <link rel="manifest" href="/manifest.webmanifest" />
 
-      <link rel="author" href="https://odis-berlin.de" />
+      <link rel="author" href={authorLink} />
     </NextHead>
   )
 }

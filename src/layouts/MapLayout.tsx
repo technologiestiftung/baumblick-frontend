@@ -73,9 +73,6 @@ export const MapLayout: FC<MapLayoutType> = ({
                 )}
               >
                 <img src="/logo.svg" alt="Baumblick Logo" className="h-6" />
-                <span className="uppercase absolute top-full left-1/2 -translate-x-1/2 text-xs font-bold px-1 pb-[1px] bg-scale-critical -translate-y-1/2">
-                  Beta
-                </span>
               </InternalLink>
             </div>
           </div>
