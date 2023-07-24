@@ -43,7 +43,7 @@
     "react-use-measure": "2.1.1",
     "slick-carousel": "1.8.1",
     "swr": "1.3.0",
-    "use-debounce": "8.0.1"
+    "use-debounce": "9.0.4"
   },
   "devDependencies": {
     "@saithodev/semantic-release-backmerge": "2.1.2",
